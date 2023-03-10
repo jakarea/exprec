@@ -1,7 +1,7 @@
 <header class="header-section">
   <div class="container-fluid">
     <div class="row align-items-center">
-      <div class="col-12 col-md-12 col-lg-6 px-0">
+      <div class="col-6 col-md-6 col-lg-6 px-0">
         <div class="header-left-part">
           <!-- header logo @S -->
           <div class="header-logo-wrap">
@@ -13,13 +13,13 @@
  
         </div>
       </div>
-      <div class="col-12 col-md-12 col-lg-6 px-0">
-          <div class="header-start-menu-wrapper">
+      <div class="col-6 col-md-6 col-lg-6 px-0">
+          <div class="header-start-menu-wrapper justify-content-end">
             <!-- header navbar @S -->
             <div class="header-navbar-wrap">
-                <ul class="head-navbar"> 
+                <ul class="head-navbar justify-content-end"> 
                   @if (Route::has('login'))
-                    <li class="link-item">
+                    <li class="link-item me-3 me-md-0">
                         <a href="{{ url('/login') }}" class="link-click">Login</a>
                     </li>
                     @endif

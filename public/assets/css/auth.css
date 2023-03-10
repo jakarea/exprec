@@ -122,3 +122,8 @@
 }
 
 /* login css end */
+@media (min-width: 320px) and (max-width: 574px) {
+  .login-section {
+    padding-top: 6rem;
+  }
+}
