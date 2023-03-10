@@ -29,6 +29,11 @@ Auth::routes();
 // general page route
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
+    Route::get('/home', 'index');
+});
+
+Route::get('/home', function () {
+    return redirect('/');
 });
 
 // interest project route

@@ -17,13 +17,11 @@
         <label for="">Time</label> 
         <select name="" id="" class="form-custom">
           <option value="">All</option>
-          <option value="desc">Newest first</option>
-          <option value="aesc">Oldest first</option>
+          <option value="desc">Newest </option>
+          <option value="aesc">Oldest </option>
         </select>
         <i class="fas fa-angle-down"></i>
       </div>
-      
-           
          
       <div class="form-grp">
       <label for="">Categories</label> 
@@ -71,8 +69,8 @@
         <button type="submit" class="btn">Filter</button>
       </div>
 
-      <div class="form-grp-btn mt-4 float-end">
-        <a href="{{ url('admin/products/create') }}" class="btn">Add Product</button>
+      <div class="form-grp-btn mt-4 ms-auto">
+        <a href="{{ url('admin/products/create') }}" class="btn">Add Product</a>
       </div>
     </div>
     </form>
