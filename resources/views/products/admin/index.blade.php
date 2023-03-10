@@ -22,6 +22,9 @@
         </select>
         <i class="fas fa-angle-down"></i>
       </div>
+      
+           
+         
       <div class="form-grp">
       <label for="">Categories</label> 
           @php 
@@ -67,8 +70,13 @@
       <div class="form-grp-btn mt-4">
         <button type="submit" class="btn">Filter</button>
       </div>
+
+      <div class="form-grp-btn mt-4 float-end">
+        <a href="{{ url('admin/products/create') }}" class="btn">Add Product</button>
+      </div>
     </div>
     </form>
+   
   </div>
   <!-- product filter area @E -->
 

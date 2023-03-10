@@ -273,7 +273,7 @@
           @foreach($pro_urls as $key => $url)  
           @php $parse = parse_url($url) @endphp
          
-          <a href="{{$url}}">{{ $parse['host'] }}</a>
+          <a href="{{$url}}">{{ str_replace('www.','',$parse['host']) }}</a>
          
           @endforeach 
         </div>
@@ -286,31 +286,35 @@
         <hr>
       </div>
     </div>
-    @if($product->fb_ads)
+    
     <div class="col-lg-4">
       <div class="info-details-wrap">
         <h4>
           <img src="{{ asset('assets/images/f-icon.svg') }}" alt="Info" class="img-fluid"> Facebook Ads:
         </h4>
+        @if(is_image_exist($product->fb_ads))
         <a href="{{$product->fb_ads}}">
           <img src="{{ $product->fb_ads_img }}" alt="Facebook Ads Image Not Found" class="img-fluid">
         </a>
+        @endif
       </div>
     </div>
-    @endif
+   
     
-    @if($product->video_link)
+    
     <div class="col-lg-4">
       <div class="info-details-wrap">
         <h4>
           <img src="{{ asset('assets/images/f-icon.svg') }}" alt="Info" class="img-fluid"> Video:
         </h4>
+        @if(is_image_exist($product->video_link))
         <a href="{{ $product->video_link }}">
           <img src="{{ $product->video_link_img }}" alt="Video Image Not Found" class="img-fluid">
         </a>
+        @endif
       </div>
     </div>
-    @endif
+    
     <div class="col-12">
       <div class="custom-hrs">
         <hr>

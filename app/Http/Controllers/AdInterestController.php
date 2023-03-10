@@ -19,7 +19,7 @@ class AdInterestController extends Controller
 
         $q = null;
         $size = 0;
-        $access_token = 'EAAFhbhyZBEUwBAAvepri4O0icmbtrrHxiW6AZA6ZBglEnARMAJXFK8bjytZCEalHhiOY6JIZBnWWzKkkoJieuSxGOzCPmBQyZBP5m7MNVKhs86NGN8o2RbjNmld4GTgNXZC06z7wLZCKo5hMJmZCMnIcxcBTyFRylqUIF0tjlf9MR70AgypybdghZBCcaOs5XNrrMZD';
+        $access_token = env('FACEBOOK_ACCESS_TOKEN');
 
         $results = [];
 

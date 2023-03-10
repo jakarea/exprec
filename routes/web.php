@@ -48,6 +48,7 @@ Route::controller(AdInterestController::class)->group(function () {
 // product route
 Route::prefix('products')->controller(ProductController::class)->group(function () {      
     Route::get('/', 'index')->name('product_research');
+    Route::get('/ali/{id}','insert_product')->name('insert_product');
     Route::get('/{slug}/details', 'view')->name('product_research_details');
 });
 
