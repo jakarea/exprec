@@ -293,7 +293,7 @@
     @include m.box(1.2rem 2rem,0.625rem,v.$light);
     margin-top: 1.5rem;
     .d-flex{
-        padding-bottom: 2rem;
+        padding-bottom: 1rem;
         border-bottom: 1px solid v.$border;
         @include m.df(space-between);
         h6{
@@ -312,6 +312,10 @@
 .adspy-filter-box{
     margin-top: 1rem;
     @include m.df(flex-start);
+    input{
+        border: none;
+        font-size: 1rem;
+    }
     h6{
         @include m.para(1rem,600,v.$dark);
         margin-right: 1.3rem;
@@ -319,7 +323,7 @@
     p{
         @include m.para(1rem,400,v.$dark);
         @include m.df;
-        margin-right: 1rem;
+        margin-right: .5rem;
         img{
             margin-right: 0.4rem;
         }

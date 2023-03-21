@@ -45,8 +45,8 @@
                 </div>
                 <div class="adspy-filter-box">
                     <h6>Seen date:</h6>
-                    <p><img src="{{ asset('assets/images/calendar-icon.svg') }}" alt="" class="img-fluid"> 19/01/2023 - 26/01/2023</p>
-
+                    <p><img src="{{ asset('assets/images/calendar-icon.svg') }}" alt="" class="img-fluid"> <input type="date">&nbsp; - &nbsp; <input type="date"></p>
+    
                     <select name="" id="">
                         <option value="">Countries</option>
                         <option value="">Bangladesh</option>
@@ -80,7 +80,7 @@
                 </div>
                 <div class="adspy-filter-box">
                     <h6>First seen:</h6>
-                    <p><img src="{{ asset('assets/images/calendar-icon.svg') }}" alt="" class="img-fluid"> 19/01/2023 - 26/01/2023</p>
+                    <p><img src="{{ asset('assets/images/calendar-icon.svg') }}" alt="" class="img-fluid"> <input type="date">&nbsp; - &nbsp; <input type="date"></p>
 
                     <select name="" id="">
                         <option value="">Media Type</option>
@@ -102,11 +102,11 @@
                 </div>
                 <div class="adspy-filter-box">
                     <h6>Last seen:</h6>
-                    <p><img src="{{ asset('assets/images/calendar-icon.svg') }}" alt="" class="img-fluid"> 19/01/2023 - 26/01/2023</p> 
+                    <p><img src="{{ asset('assets/images/calendar-icon.svg') }}" alt="" class="img-fluid"> <input type="date">&nbsp; - &nbsp; <input type="date"></p> 
                 </div>
                 <div class="adspy-filter-box">
                     <h6>Creation date:</h6>
-                    <p><img src="{{ asset('assets/images/calendar-icon.svg') }}" alt="" class="img-fluid"> 19/01/2023 - 26/01/2023</p> 
+                    <p><img src="{{ asset('assets/images/calendar-icon.svg') }}" alt="" class="img-fluid"> <input type="date">&nbsp; - &nbsp; <input type="date"></p> 
                 </div>
             </div>
         </div>
