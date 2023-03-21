@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title') Addspy Facebook @endsection
+@section('title','Discover every ads on Facebook')
 
 @section('style') 
 <link href="{{ asset('assets/css/adspy.css') }}" rel="stylesheet" type="text/css" />  

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController; 
-use App\Http\Controllers\AdspyController; 
+
 use App\Http\Controllers\CourseController; 
 use App\Http\Controllers\ProductController; 
 use App\Http\Controllers\ProjectController; 
@@ -79,13 +79,7 @@ Route::prefix('email-marketing')->controller(EmailCampingController::class)->gro
 Route::get('/integrations', [EmailCampingController::class, 'integrations']);
 
 // adspy route
-Route::prefix('adspy')->controller(AdspyController::class)->group(function () {   
-    Route::get('/', 'index');      
-    Route::get('/facebook', 'facebook');      
-    Route::get('/pinterest', 'pinterest');      
-    Route::get('/tiktok', 'tiktok');      
-    Route::get('/mylist', 'mylist');      
-});
+
 
 // course route
 Route::prefix('elearning')->controller(CourseController::class)->group(function () {   
