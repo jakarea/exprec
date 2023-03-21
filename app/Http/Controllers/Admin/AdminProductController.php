@@ -13,6 +13,8 @@ use Str;
 use Auth;
 use File; 
 
+use Goutte\Client;
+
 class AdminProductController extends Controller
 {
     public function index()
@@ -235,4 +237,64 @@ class AdminProductController extends Controller
         $notification = session()->flash("success", "Product Deleted Successfully");
         return redirect()->route('admin_products_list')->with($notification);
     }
+
+    public function addProductFromAliExpress(){
+        return view('products/admin/create-ali-express');
+    }
+
+    public function storeProductFromAliExpress(Request $request){
+        $id = $request->aliexpress_id;
+
+        $request->validate([  
+            'aliexpress_id'     =>  "required|numeric"
+        ]);
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://ali-express1.p.rapidapi.com/categories",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => [
+                "X-RapidAPI-Host: ali-express1.p.rapidapi.com",
+                "X-RapidAPI-Key: ceafd87ee7msha72e8d739828a1ap1e7889jsnb0c7254f17a8"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+        if ($err) {
+            return "cURL Error #:" . $err;
+        } else {
+            echo "<pre>";
+            echo $response;
+            echo "</pre>";
+            return ;
+        }
+
+    }
 }
+
+// descriptionModule->descriptionUrl;
+// imageModule->imagePathList[]
+// imageModule->videoId
+// imageModule->videoUid
+// pageModule->description
+// pageModule->itemDetailUrl
+// pageModule->imagePath (thumb)
+// priceModule->discountRatioTips
+// priceModule->discount
+// specsModule->props[]->attrName 
+// specsModule->props[]->attrValue
+// storeModule->detailPageUrl
+// storeModule->storeURL
+// titleModule->feedbackRating->evarageStar
+// titleModule->feedbackRating->totalValidNum
+// titleModule->formatTradeCount (Order)

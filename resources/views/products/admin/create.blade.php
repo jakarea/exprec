@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','Home')
+@section('title','Aliexpress Product ')
 @section('style') 
 <link href="{{ asset('assets/css/product-researchs.css') }}" rel="stylesheet" type="text/css" />  
 @endsection
