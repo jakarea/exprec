@@ -367,7 +367,7 @@
   margin-top: 1.5rem;
 }
 .addspy-first-list .d-flex {
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid #dfe5f1;
   display: flex;
   align-items: center;
@@ -398,6 +398,10 @@
   align-items: center;
   justify-content: flex-start;
 }
+.adspy-filter-box input {
+  border: none;
+  font-size: 1rem;
+}
 .adspy-filter-box h6 {
   font-size: 1rem;
   font-weight: 600;
@@ -413,7 +417,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 }
 .adspy-filter-box p img {
   margin-right: 0.4rem;

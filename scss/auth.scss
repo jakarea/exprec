@@ -1,0 +1,105 @@
+@use './util/variabls' as v;
+@use './util/mixin' as m;
+@use './util/media-query' as q;
+
+// login css start
+
+.login-section { 
+    padding-top: 10rem;
+}
+
+.login-form-wrap {
+    width: 100%;
+    height: max-content;
+    padding: 1.2rem 2rem;
+    max-width: 410px;
+    background: v.$light;
+    box-shadow: 0px 2px 8px 5px v.$third;
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    h1 {
+        @include m.para(1.6rem,500,v.$btnbg); 
+        margin-bottom: 1rem;
+    }
+    .form-group {
+        margin-bottom: 0.8rem;
+        position: relative;
+        label {
+            @include m.para(1rem,400,v.$btnbg); 
+            margin-bottom: 8px;
+        }
+        .form-control {
+            @include m.para(1rem,400,v.$btnbg); 
+        }
+        i {
+            position: absolute;
+            right: 20px;
+            top: 41.5px;
+            cursor: pointer;
+        }
+    }
+    .form-check label {
+        @include m.para(0.9rem,400,v.$btnbg); 
+        margin-bottom: 0;
+    }
+    .d-flex {
+        align-items: center;
+        margin: 1.2rem 0;
+        a {
+            @include m.para(0.9rem,400,v.$primary); 
+        }
+    }
+    .form-check-input {
+        border: 1px solid v.$btnbg;
+        &:checked {
+            background-color: v.$btnbg;
+            border-color: v.$btnbg;
+        }
+    }
+    .form-bttn .btn-submit {
+        display: block;
+        width: 100%;
+        text-align: center;
+        @include m.button(1rem,v.$light,v.$gdbg);
+        &:hover{
+            opacity: .7
+        }
+    }
+    .login-logo-wrap p {
+        @include m.para(0.8rem,500,v.$btnbg); 
+        margin-top: 1rem;
+    }
+    h5 {
+        @include m.para(1rem,400,v.$btnbg);  
+        margin-bottom: 1.5rem;
+    }
+}
+
+.form-aggree {
+    margin-bottom: 1.5rem 0 1rem;
+    label.form-check-label {
+        @include m.para(0.8rem,400,v.$btnbg); 
+        margin-left: 12px;
+    }
+    label a {
+        color: v.$btnbg;
+        text-decoration: underline;
+    }
+}
+
+.login-header-section .header-logo-wrap{
+    margin-bottom: 0;
+}
+.registerr{
+    color: v.$primary;
+}
+/* login css end */
+
+
+// responsive css @S
+@include q.responsive(phone) {
+    .login-section {
+        padding-top: 6rem;
+    }
+}
