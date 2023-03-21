@@ -1,0 +1,481 @@
+@use './util/variabls' as v;
+@use './util/mixin' as m;
+@use './util/media-query' as q;
+
+.addspy-banner-wrap{
+    @include m.box(2rem 3rem,.7rem,#1F1F1F); 
+    margin-top: 2rem;
+    .media{
+        align-items: center;
+        .media-body{
+            .addspy-main-title{
+                @include m.para(3rem,500,v.$light);
+                span{
+                    color: v.$secondary;
+                }
+            }
+            p{
+                @include m.para(1rem,400,v.$light);
+                margin-bottom: 1rem;
+            }
+            a {
+                @include m.button(1rem,v.$light,v.$gdbg);
+                border-radius: 3rem;   
+                &:hover {
+                    background: v.$light;
+                    color: v.$dark;
+                }
+            }
+        }
+    }
+}
+
+.wining-product-wrapper{
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    h4{
+        @include m.para(1.4rem,400,v.$dark);
+        @include m.df;
+        margin-bottom: 1rem;
+        img{
+            margin-right: 0.6rem;
+        }
+    }
+    .wining-product-head{
+        @include m.df(space-between);
+        ul{
+            @include m.df;
+            li{
+                a{
+                    @include m.button(1rem,v.$fourth,v.$light);
+                    border: 1px solid v.$border;
+                    border-radius: 3rem;   
+                    margin-right: 1rem;
+                    &:hover {
+                        background: v.$dark;
+                        color: v.$light;
+                    }
+                }
+                a.active{
+                    background: v.$dark;
+                        color: v.$light;
+                }
+            }
+        }
+        .banner-arrow-box{
+            @include m.df;
+            a{
+                width: 3.4rem;
+                height: 3.4rem;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                background: v.$light;
+                border: 1px solid v.$border;
+                border-radius: 3rem;
+                color: v.$fourth;
+                font-size: 1.2rem;
+                margin-left: 1rem;
+                &:hover {
+                    background: v.$dark;
+                    color: v.$light;
+                }
+            }
+        }
+    }
+    .wining-products-box{
+        margin-top: 1.5rem;
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+    }
+}
+
+.wining-product-item{
+    @include m.box(.6rem,.7rem,v.$light);
+    margin-right: .7rem;
+    .wining-product-thumbnail{
+        position: relative;
+        img{
+            display: block;
+            width: 100%;
+        }
+        .player-img{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding-right: 1rem;
+        }
+    }
+    .wining-product-txt{
+        padding: .4rem 0;
+        h5{
+            @include m.para(1.3rem,500,v.$dark);
+            margin-bottom: 0.7rem;
+        }
+        ul{
+            @include m.df;
+            li{
+                a{
+                    @include m.df; 
+                    margin-right: 0.8rem;
+                    .fa-regular{
+                        font-size: 1.2rem;
+                        margin-right: 0.4rem;
+                        color: v.$fourth;
+                        &:hover{
+                            color: v.$primary;
+                        }
+                    }
+                    img{
+                        margin-right: 0.4rem; 
+                        width: 1.2rem;
+                    }
+                }
+            } 
+        }
+    }
+}
+
+.discover-potential-wrap{
+    margin: 1rem 0;
+    h4{
+        @include m.para(1.4rem,400,v.$dark);
+        @include m.df;
+        margin-bottom: 1rem;
+        img{
+            margin-right: 0.6rem;
+        }
+    }
+}
+
+
+.potential-item-box{
+    @include m.box(.8rem 1.2rem,0.7rem,v.$light);
+    @include m.df(space-between);
+    margin-bottom: 1rem;
+    .media{
+        align-items: center;
+        img{
+            margin-right: 1rem;
+        }
+        .media-body{
+            h6{
+                @include m.para(1.2rem,600,v.$dark);
+                
+            }
+            p{
+                @include m.para(1rem,400,v.$fourth);
+            } 
+        }
+        .fa-angle-right{
+            margin-left: 1rem;
+            font-size: 1.2rem;
+            color: v.$fourth;
+        }
+    }
+    h6{
+        @include m.para(1.2rem,400,v.$dark);  
+        @include m.df;
+        img{
+            margin-right: 0.7rem;
+        }
+        span{
+            color: v.$secondary;
+            margin-right: 0.4rem;
+        }
+    }
+}
+.verify-email-item{
+    position: relative;
+    .verify-email-boxs{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 99;
+        background-color: #1f1f1fe5;
+        border-radius: .7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        h6{
+            @include m.para(1.2rem,400,v.$light); 
+        }
+    }
+}
+
+.addspy-banner-two{
+    margin-bottom: 2rem;
+    background: v.$grn;
+    .addspy-main-title{
+        span{
+            font-weight: 700!important;
+            color: v.$light!important;
+            font-style: italic!important;
+        }
+    }
+    .media{
+        .media-body{
+            a{
+                background: v.$light!important;
+                color: v.$grn!important;
+                font-weight: 600;
+                &:hover{
+                    background: v.$dark!important;
+                    color: v.$light!important;
+                }
+            }
+        }
+    }
+}
+
+// addspy dashboard css @S
+.addspy-dash-head{
+    margin-bottom: 2rem;
+    h1{
+        @include m.para(2.4rem,700,v.$dark);
+        span{
+            color: v.$secondary;
+        }
+    }
+    p{
+        @include m.para(1rem,400,v.$dark); 
+    }
+}
+.discover-personalized-list{
+    margin-bottom: 2rem;
+    .media{
+        img{
+            margin-right: 1rem;
+        }
+        h5{
+            @include m.para(1.4rem,600,v.$dark); 
+        }
+        p{
+            @include m.para(1rem,400,v.$secondary);
+            text-decoration: underline; 
+            margin-top: 0.3rem;
+        }
+    }
+    a{
+        @include m.button(1rem,v.$light,v.$gdbg);
+        border-radius: 3rem;
+        &:hover{
+            opacity: .7;
+        }
+    }
+}
+
+.personalized-list-box{
+    @include m.box(1.4rem,.625rem,v.$light);
+    .d-flex{
+        @include m.df(space-between);
+        margin-bottom: 2rem;
+    }
+    h5{
+        @include m.para(1.4rem,600,v.$dark);  
+    }
+    p{
+        @include m.para(1rem,500,v.$dark);  
+        margin-top: .4rem;
+    }
+}
+
+.add-head{
+    p{
+        @include m.para(1rem,400,v.$secondary);
+        text-decoration: underline; 
+    }
+}
+
+.addspy-first-list{
+    @include m.box(1.2rem 2rem,0.625rem,v.$light);
+    margin-top: 1.5rem;
+    .d-flex{
+        padding-bottom: 2rem;
+        border-bottom: 1px solid v.$border;
+        @include m.df(space-between);
+        h6{
+            @include m.para(1.3rem,500,v.$dark);  
+        }
+        a{
+            @include m.para(1rem,500,#FFC2C2);
+            @include m.df;
+            img{
+                margin-left: .4rem;
+            }
+        }
+    }
+}
+
+.adspy-filter-box{
+    margin-top: 1rem;
+    @include m.df(flex-start);
+    h6{
+        @include m.para(1rem,600,v.$dark);
+        margin-right: 1.3rem;
+    }
+    p{
+        @include m.para(1rem,400,v.$dark);
+        @include m.df;
+        margin-right: 1rem;
+        img{
+            margin-right: 0.4rem;
+        }
+    }
+    select{
+        @include m.para(1rem,400,v.$dark);
+        border: 0;
+        background: transparent;
+        margin-right: 0.8rem;
+    }
+}
+
+.quick-query{
+    margin: 1.5rem 0;
+    @include m.df;
+    h6{
+        @include m.para(1rem,600,v.$dark);
+        margin-right: 1.5rem;
+    }
+    a{
+        @include m.button(1rem,v.$fourth,v.$light);
+        border-radius: 2.5rem;
+        border: 1.5px solid v.$border;
+        margin-right: 1rem;
+        &:hover{
+            background: v.$gdbg;
+            color: v.$light;
+        }
+        &:last-child{
+            background: transparent;
+            color: v.$primary;
+            border: 0;
+            @include m.df;
+            img{
+                margin-right: 0.4rem;
+            }
+        }
+    }
+}
+
+.addspy-multi-select{
+    margin: 1.5rem 0;
+    @include m.df(space-between);
+    .d-flex{
+        @include m.df(space-between);
+        h6{
+            @include m.para(1rem,600,v.$dark);
+            margin-right: 2rem;
+        }
+        p{
+            @include m.para(1rem,400,v.$fourth);
+            margin-right: 3rem;
+        }
+    }
+    a{
+        @include m.button(1rem,v.$primary,transparent);
+        border-radius: 2.5rem;
+        border: 1px solid v.$primary;
+        padding: .6rem 2rem;
+        img{
+            margin-right: 0.6rem;
+        }
+        i{
+            margin-left: 0.4rem;
+        }
+        &:hover{
+            background: v.$primary;
+            color: v.$light;
+            img{
+                filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+            }
+        }
+    }
+    .form-check-input:checked {
+        background-color:  v.$primary;
+        border-color:  v.$primary;
+    }
+}
+
+.adspy-filter-product{
+    .wining-product-txt{
+        h3{
+            @include m.para(1.3rem,700,v.$dark);
+            margin: 1rem 0;
+            text-align: center;
+        }
+        ul{
+            @include m.df(space-between);
+            li {
+                a{
+                    font-weight: 600;
+                }
+            }
+        }
+        table{
+            width: 100%;
+            tr{
+                td{
+                    @include m.para(.85rem,500,v.$dark);
+                    padding: .5rem 0;
+                    &:last-child{
+                        text-align: right;
+                    }
+                }
+            }
+        }
+    }
+    .wining-product-thumbnail{
+        img.main-img{
+            display: block;
+            width: 100%;
+        }
+    }
+}
+
+.adspy-filter-product-bttns{ 
+    a{
+        display: block;
+        width: 100%;
+        margin-top: 0.8rem;
+        @include m.button(1rem,v.$fourth,v.$light);
+        border-radius: 2.5rem;
+        border: 1.5px solid v.$border;
+        text-align: center;
+        &:hover{
+            background: v.$gdbg;
+            color: v.$light;
+        }
+        &:last-child{
+            background: v.$gdbg;
+            color: v.$light;
+            &:hover{
+                opacity: .7;
+            }
+        }
+    }
+}
+
+// responsive css @S
+@include q.responsive(phone) { 
+    .wining-product-wrapper .wining-products-box{
+        grid-template-columns: 1fr;
+    }
+}
+@include q.responsive(landphone) { 
+    .wining-product-wrapper .wining-products-box{
+        grid-template-columns: 1fr;
+    }
+}
+@include q.responsive(tablet) { 
+    .wining-product-wrapper .wining-products-box{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@include q.responsive(landtablet) { 
+    .wining-product-wrapper .wining-products-box{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
