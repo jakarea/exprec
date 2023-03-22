@@ -1,0 +1,107 @@
+@forward './base/index';
+@use './util/index' as m;
+@use './util/variabls' as v;
+@forward './pages/index';
+@use './util/media-query' as q;
+
+// main body css @S
+.main-body-wrapper { 
+    width: 100%; 
+    display: block;
+    
+    .main-page-wrapper {
+        background-color: v.$mainbg;  
+        transition: all linear .3s;
+    }
+    .main-page-width{ 
+        transition: all linear .3s;
+    }
+}
+main {
+	min-height: 100vh;  
+    padding: 6.188rem 1.5rem 1rem 17.588rem;
+}
+// main body css @E
+
+.interrest-search-wrap .interrest-search-box #spiner{
+    display: none;
+}
+
+.url-extra-field div {
+    position: relative;
+}
+.url-extra-field div a {
+    position: absolute;
+    right: 1rem;
+    top: 0.4rem; 
+    width: 1.5rem;
+    height: 1.5rem;
+    background: v.$fourth;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: v.$light!important;
+    cursor: pointer;
+}
+
+.product-item-wrap .product-bttn-box{
+    width: 100%;
+}
+
+// responsive css start
+@include q.responsive(phone) { 
+    .main-body-wrapper .main-page-wrapper {
+        padding-left: 0;
+        padding-top: 0;
+    }
+    main{
+        min-height: 100vh;
+        padding: 1rem!important;
+        padding-top: 7rem!important;
+    }
+    .main-page-wrapper {
+        padding-top: 75px;
+    } 
+    .d-flex.justify-content-center.align-items-center{
+        align-items: flex-start!important;
+        h1{
+            font-size: 2rem!important;
+        }
+    } 
+}
+@include q.responsive(landphone) {
+    .main-body-wrapper .main-page-wrapper {
+        padding-left: 0;
+        padding-top: 0;
+    }
+    main{
+        min-height: 100vh;
+        padding: 1rem!important;
+        padding-top: 9rem!important;
+    }
+}
+@include q.responsive(tablet) {
+    .main-body-wrapper .main-page-wrapper {
+        padding-left: 0;
+        padding-top: 0;
+    }
+    main{
+        min-height: 100vh;
+        padding: 1rem!important;
+        padding-top: 9rem!important;
+    }
+}
+@include q.responsive(landtablet) {
+    .main-body-wrapper .main-page-wrapper {
+        padding-left: 0;
+        padding-top: 0;
+    }
+    main{
+        min-height: 100vh;
+        padding: 1rem!important;
+        padding-top: 6rem!important;
+        padding-left: 7rem!important;
+    }
+}
