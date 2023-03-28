@@ -72,6 +72,11 @@
       <div class="form-grp-btn mt-4 ms-auto">
         <a href="{{ url('admin/products/create') }}" class="btn">Add Product</a>
       </div>
+
+      <div class="form-grp-btn mt-4 ms-auto">
+        <a href="{{ url('admin/products/create/ali-express') }}" class="btn">Add Product From Aliexpress</a>
+      </div>
+
     </div>
     </form>
    
@@ -94,6 +99,9 @@
                 Price
             </th>
             <th>
+                Sell Price
+            </th>
+            <th>
                 Fb Ads
             </th> 
             <th>
@@ -105,12 +113,21 @@
             </tr>
             <!-- task item start -->
             @foreach($products as $key => $product)
+            @php 
+            $text = $product->title;
+            $maxLength = 60;
+              if (strlen($text) > $maxLength) {
+                  $lastSpace = strpos($text, ' ', $maxLength);
+                  $text = $lastSpace !== false ? substr($text, 0, $lastSpace) . '...' : $text;
+              }
+          @endphp
             <tr> 
                 <td>
                     {{ $key +1 }}
                 </td> 
-                <td>{{ substr($product->title,0,40) }}</td>
-                <td>{{ $product->sell_price }}</td>
+                <td>{{ $text }}</td>
+                <td>Є {{ $product->buy_price }}</td>
+                <td> Є  {{ $product->sell_price }}</td>
 
                 <td>{{ substr($product->fb_ads,0,40) }}</td> 
 

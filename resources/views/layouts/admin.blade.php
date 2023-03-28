@@ -63,7 +63,3 @@
     @yield('script')
     </body>
 </html>
-
-https://video.aliexpress-media.com/play/u/ae_sg_item/2215134708437/p/1/e/6/t/10301/1100106937279.mp4
-https://video.aliexpress-media.com/play/u/ae_sg_item/2209986253799/p/1/e/6/t/10301/1100106518291.mp4
-https://video.aliexpress-media.com/play/u/ae_sg_item/2212187314293/p/1/e/6/t/10301/344688746613.mp4

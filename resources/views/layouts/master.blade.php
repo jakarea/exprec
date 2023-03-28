@@ -14,7 +14,7 @@
     <meta property="og:url" content="">
     <meta property="og:image" content="">
     <meta name="theme-color" content="#fafafa">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/images/fav.svg') }}">
 
@@ -57,6 +57,7 @@
   </div>
   <!-- ========= Main Root Wrapper @E ========= -->
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
     <script src="{{ asset('assets/js/ITool-handler.js') }}"></script>

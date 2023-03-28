@@ -17,7 +17,16 @@
     <div class="col-12">
       <div class="product-details-txt-wrap">
         <div class="d_flex">
-          <h1>{{$product->title }}</h1>
+          @php 
+            $text = $product->title;
+            $maxLength = 55;
+              if (strlen($text) > $maxLength) {
+                  $lastSpace = strpos($text, ' ', $maxLength);
+                  $text = $lastSpace !== false ? substr($text, 0, $lastSpace) . '...' : $text;
+              }
+          @endphp
+
+          <h1>{{$text }}</h1>
           <a href="#" class="big-cart-cion">
             <img src="{{asset('assets/images/cart-icon.svg')}}" alt="Cart" class="img-fluid">
           </a>
@@ -49,13 +58,13 @@
       @php $images = json_decode($product->images)  @endphp   
         <div class="main-thumb"> 
         @if($images)
-            <img src="{{ asset('assets/images/product/'.$images[0]) }}" alt="{{$product->slug}}" id="main-thumbnail" class="img-fluid" title="{{$product->slug}}">  
+            <img src="{{ $images[0] }}" alt="{{$product->slug}}" id="main-thumbnail" class="img-fluid" title="{{$product->slug}}">  
             @endif
         </div>
         <div class="products-bttm-small-preiview">
         @foreach(array_slice($images, 0, 4) as $image)
           <a href="javascript:void(0)">
-            <img src="{{ asset('assets/images/product/'.$image) }}" alt="{{$image}}" class="img-fluid">
+            <img src="{{ $image }}" alt="{{$image}}" class="img-fluid">
           </a> 
         @endforeach
         </div>
@@ -73,19 +82,19 @@
         <h5>Your Profits &amp; Costs</h5>
         <div class="d-flex">
           <div>
-            <h4>${{$product->sell_price }}</h4>
+            <h4>€{{(int)$product->sell_price }}</h4>
             <h6>Selling Price</h6>
           </div>
           <div>
-            <h4 style="color: #FF6262;">${{$product->buy_price }}</h4>
+            <h4 style="color: #FF6262;">€{{$product->buy_price }}</h4>
             <h6>Product Cost</h6>
           </div>
           <div>
-            <h4 style="color: #4CDE73;">${{ ((int)$product->sell_price - (int)$product->buy_price) }}</h4>
+            <h4 style="color: #4CDE73;">{{ (int)((((int)$product->sell_price - (int)$product->buy_price) / $product->sell_price) * 100) }}% </h4>
             <h6>Profit Margin</h6>
           </div>
           <div> 
-            <h4 style="color: #727DFF;">{{ ((int)$product->sell_price * (int)$product->buy_price) / 100 }}%</h4>
+            <h4 style="color: #727DFF;"> €{{ ((int)$product->sell_price - (int)$product->buy_price) }}</h4>
             <h6>Margin</h6>
           </div>
         </div>
