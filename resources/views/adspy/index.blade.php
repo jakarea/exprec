@@ -7,7 +7,6 @@
 
 @section('content') 
 <main class="addspy-dahboard-page">
-    
    <div class="container-fluid">
      <div class="row">
        <div class="col-12">

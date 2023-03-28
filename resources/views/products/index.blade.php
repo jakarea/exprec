@@ -94,11 +94,18 @@
           <div class="product-thumb-box">
             @php $images = json_decode($product->images)@endphp   
             @if($images)
-            <img src="{{ asset('assets/images/product/'.$images[0]) }}" alt="{{$product->slug}}" class="img-fluid" title="{{$product->slug}}"> 
+            <img src="{{ $images[0] }}" alt="{{$product->slug}}" class="img-fluid" title="{{$product->slug}}"> 
             @endif
           </div> 
           <div class="media-body">
-            <h4>{{$product->title}}</h4> 
+          @php 
+            $maxLength = 35;
+            $title = $product->title;
+            if (strlen($title) > $maxLength) {
+              $title = substr($title, 0, strpos($title, ' ', $maxLength)) . '...';
+            }
+          @endphp
+            <h4>{{$title}}</h4> 
               <h5> Posted {{$product->created_at->diffForHumans()}} </h5> 
             <div class="product-onfos">
               <h6>Available info</h6>

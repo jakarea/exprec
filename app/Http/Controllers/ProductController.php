@@ -87,6 +87,7 @@ if ($err) {
         public function view($slug)
         {
             $product = ProductResearch::where('slug', $slug)->first();
+           
             return view('products/view', compact('product'));
     }   
 }

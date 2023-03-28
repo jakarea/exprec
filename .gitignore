@@ -16,3 +16,4 @@ yarn-error.log
 database.sqlite
 .DS_Store
 composer.lock
+/public/assets/images/product

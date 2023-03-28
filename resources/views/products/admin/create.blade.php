@@ -33,6 +33,7 @@
                      <span class="invalid-feedback">@error('title'){{ $message }} @enderror</span> 
                    </div>
                  </div> 
+
                  <div class="col-md-12">
                    <div class="form-group">
                      <label for="categories">Categories</label>
@@ -99,8 +100,10 @@
                    <div class="form-group">
                      <label for="aliexpress_link">Aliexpress Link <sup class="text-danger">*</sup>
                      </label>
+                     <input type="hidden" id="aliexpress_product_id" name="aliexpress_product_id" value=""/>
                      <input type="url" placeholder="Enter Aliexpress link" name="aliexpress_link" class="form-control @error('aliexpress_link') is-invalid @enderror" value="{{ old('aliexpress_link')}}" id="aliexpress_link">
-                     <span class="invalid-feedback">@error('aliexpress_link'){{ $message }} @enderror</span>
+                     <span class="invalid-feedback" id="aliexpress_link_error">@error('aliexpress_link'){{ $message }} @enderror</span>
+                     <span class="invalid-feedback" >@error('aliexpress_product_id'){{ $message }} @enderror</span>
                    </div>
                  </div> 
                  <div class="col-md-4">
@@ -170,7 +173,7 @@
                      </div>
                    </div>
                  </div>  
-                 <div class="col-md-3">
+                 <div class="col-md-2">
                    <div class="form-group">
                      <label for="cpa">CPA <sup class="text-danger">*</sup>
                      </label>
@@ -178,7 +181,7 @@
                      <span class="invalid-feedback">@error('cpa'){{ $message }} @enderror</span>
                    </div>
                  </div>   
-                 <div class="col-md-3">
+                 <div class="col-md-2">
                    <div class="form-group">
                      <label for="net">NET <sup class="text-danger">*</sup>
                      </label>
@@ -196,12 +199,22 @@
                  </div> 
                  <div class="col-md-3">
                    <div class="form-group">
-                     <label for="review">Review on alibaba <sup class="text-danger">*</sup>
+                     <label for="total_review">Number of Review <sup class="text-danger">*</sup>
                      </label>
-                     <input type="text" placeholder="Between 1 to 5" name="review" class="form-control @error('review') is-invalid @enderror" value="{{ old('review')}}" id="review">
-                     <span class="invalid-feedback">@error('review'){{ $message }} @enderror</span>
+                     <input type="text" placeholder="Total review on aliexpress" name="total_review" class="form-control @error('total_review') is-invalid @enderror" value="{{ old('total_review')}}" id="total_review">
+                     <span class="invalid-feedback">@error('total_review'){{ $message }} @enderror</span>
+                   </div>
+                 </div>   
+                 <div class="col-md-2">
+                   <div class="form-group">
+                     <label for="avg_rating">Avarage Rating <sup class="text-danger">*</sup>
+                     </label>
+                     <input type="text" placeholder="Between 1 to 5" name="avg_rating" class="form-control @error('cpa') is-invalid @enderror" value="{{ old('avg_rating')}}" id="avg_rating">
+                     <span class="invalid-feedback">@error('avg_rating'){{ $message }} @enderror</span>
+                     
                    </div>
                  </div> 
+                 
                  <div class="col-12">
                   <div class="custom-hr">
                     <hr>
@@ -305,6 +318,9 @@
 <script>
   const urlBttn = document.querySelector('#url_increment');
   let extraFileds = document.querySelector('.url-extra-field');
+  const aliexpress_link = document.querySelector('#aliexpress_link');
+  const aliexpress_link_error = document.querySelector('#aliexpress_link_error');
+  const aliexpress_product_id = document.querySelector('#aliexpress_product_id')
 
   const createFiled = () => { 
     let div = document.createElement("div");
@@ -324,6 +340,23 @@
   }
 
   urlBttn.addEventListener('click',createFiled,true);
+
+
+  aliexpress_link.addEventListener('change',function(){
+    inputValue = aliexpress_link.value;
+    const regex = /^(?:https?:\/\/)?(?:www\.)?(?:.*\.)?aliexpress\.[a-z]{2,3}\/item\/(\d+)\.html(?:.*)?$/;
+    const match = regex.exec(inputValue);
+    if(!regex.test(inputValue)){
+      aliexpress_link_error.innerText="Please provide a valid Aliexpress product link!"
+      aliexpress_product_id.value="invalid"
+    }
+    if (match) {
+      const itemId = match[1];
+      aliexpress_link_error.innerText=""
+      aliexpress_product_id.value=itemId
+
+    }
+  })
 </script>
 
 @endsection
