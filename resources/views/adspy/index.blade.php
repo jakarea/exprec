@@ -37,7 +37,7 @@
                 <h6>Skip</h6>
                 <p>~30s</p>
               </div>
-              <i class="fas fa-angle-right"></i>
+              <a href="#"><i class="fas fa-angle-right"></i></a>
             </div>
           </div>
           <!-- item @E --> 
@@ -143,14 +143,14 @@
             <img src="{{ asset('assets/images/personalized-icon.svg') }}" alt="personalized-icon" class="img-fluid">
             <div class="media-body">
               <h5>Discover your personalized lists</h5>
-              <p>Discover our free lists of winning products</p>
+              <a href="#"><p>Discover our free lists of winning products</p></a>
             </div>
           </div>
         </div>
       </div>
       <div class="col-md-6">
         <div class="discover-personalized-list text-md-end">
-          <a href="#">Add New List <i class="fas fa-list"></i></a>
+          <a href="#" class="bttns">Add New List <i class="fas fa-list"></i></a>
         </div>
       </div>
       <div class="col-lg-6">

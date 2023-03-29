@@ -169,6 +169,7 @@ h6 {
   border-radius: 3rem;
   margin-left: 0.5rem;
   color: #8C8FAE;
+  border: 0;
   text-align: center;
 }
 .interrest-search-wrap .interrest-bttn-box button:first-child:hover,

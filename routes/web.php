@@ -71,9 +71,7 @@ Route::prefix('email-marketing')->controller(EmailCampingController::class)->gro
     Route::get('/dashboard', 'dashboard'); 
     Route::get('/flows', 'flows');  
     Route::get('/1', 'e_camping_1');     
-    Route::get('/2', 'e_camping_2');     
- 
-               
+    Route::get('/2', 'e_camping_2');              
 });
  
 Route::get('/integrations', [EmailCampingController::class, 'integrations']);
