@@ -333,8 +333,7 @@
 
     <div class="col-lg-4">
       <div class="info-details-wrap">
-        <h4>
-        Video:
+        <h4><img src="{{asset('assets/images/ali-preview.png')}}" alt="ali-express" class="img-fluid" width="27"> Video:
         </h4>
         @if($product->ali_video_link)
           <video controls width="100%" >

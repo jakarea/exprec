@@ -200,11 +200,13 @@
             }
             .product-tags-box{
                 @include m.df;
+                flex-wrap: wrap;
                 span{
                     display: inline-block;
                     @include m.box(.5rem 1.5rem,2rem,v.$third);
                     @include m.para(.9rem,500,v.$dark);
                     margin-right: .6rem;
+                    margin-bottom: 0.6rem;
                 }
             }
             .ali-express-bttn {

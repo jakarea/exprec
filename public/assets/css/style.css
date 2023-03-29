@@ -767,6 +767,7 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  flex-wrap: wrap;
 }
 .product-research-details-page-wrap .product-details-wrap .product-details-txt-wrap .product-tags-box span {
   display: inline-block;
@@ -778,6 +779,7 @@ h6 {
   color: #000000;
   line-height: 140%;
   margin-right: 0.6rem;
+  margin-bottom: 0.6rem;
 }
 .product-research-details-page-wrap .product-details-wrap .product-details-txt-wrap .ali-express-bttn {
   margin-top: 1.5rem;
@@ -942,6 +944,10 @@ main {
 
 .product-item-wrap .product-bttn-box {
   width: 100%;
+}
+
+.info-details-wrap video {
+  height: 20rem;
 }
 
 @media (min-width: 320px) and (max-width: 574px) {

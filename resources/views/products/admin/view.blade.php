@@ -90,7 +90,11 @@
             <h6>Product Cost</h6>
           </div>
           <div>
+            @if($product->sell_price)
             <h4 style="color: #4CDE73;">{{ (int)((((int)$product->sell_price - (int)$product->buy_price) / $product->sell_price) * 100) }}% </h4>
+            @else
+            <h4 style="color: #4CDE73;">0</h4>
+            @endif
             <h6>Profit Margin</h6>
           </div>
           <div> 

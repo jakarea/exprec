@@ -78,11 +78,9 @@ Route::get('/integrations', [EmailCampingController::class, 'integrations']);
 
 // adspy route
 
-
 // course route
 Route::prefix('elearning')->controller(CourseController::class)->group(function () {   
     Route::get('/', 'index');   
     Route::get('/mylearning', 'mylearning');   
     Route::get('/favorite', 'suggested');   
 });
-
