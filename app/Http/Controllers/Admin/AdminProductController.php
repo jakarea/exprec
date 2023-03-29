@@ -60,8 +60,7 @@ class AdminProductController extends Controller
     
     public function store(Request $request)
     {
-        // return $request->all(); 
-       // return $request->all();
+        // return $request->all();  
         $request->validate([  
             'title'             =>  "required|string|max:255|min:5", 
             'categories'        =>  "required|array|min:1",  

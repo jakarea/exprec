@@ -50,6 +50,12 @@ main {
     width: 100%;
 }
 
+.info-details-wrap{
+    video{
+        height: 20rem;
+    }
+}
+
 // responsive css start
 @include q.responsive(phone) { 
     .main-body-wrapper .main-page-wrapper {

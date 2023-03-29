@@ -24,7 +24,7 @@
           <div class="row">
              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                <div class="row"> 
-                 <div class="col-md-12">
+                 <div class="col-md-9">
                    <div class="form-group form-error">
                      <label for="title">Title <sup class="text-danger">*</sup>
                      </label>
@@ -32,6 +32,14 @@
                      <span class="invalid-feedback">@error('title'){{ $message }} @enderror</span> 
                    </div>
                  </div> 
+                 <div class="col-md-3">
+                 <div class="form-group form-error">
+                     <label for="title">Aliexpress Product ID <sup class="text-danger">*</sup>
+                     </label>
+                     <input type="text" disabled="true" placeholder="Aliexpress Product ID" name="title" class="form-control @error('aliexpress_id') is-invalid @enderror" value="{{ $product->aliexpress_id }}" id="aliexpress_id">
+                     <span class="invalid-feedback">@error('aliexpress_id'){{ $message }} @enderror</span> 
+                   </div>
+                 </div>
                  <div class="col-md-12">
                    <div class="form-group">
                     @php 
@@ -39,7 +47,7 @@
                     @endphp
                      <label for="categories">Categories</label>
                      <modular-behaviour name="Tags" src="https://cdn.jsdelivr.net/npm/bootstrap5-tags@1.4/tags.min.js" lazy>
-                      <select class="form-select @error('categories') is-invalid @enderror" id="categories" name="categories[]" multiple data-allow-clear="1">
+                      <select class="form-select @error('categories') is-invalid @enderror" id="categories" name="categories[]" multiple data-allow-clear="1" data-allow-new="true">
                         <option selected="selected" disabled hidden value="">Choose a categories...</option>
                         @foreach($categories as $key => $category)
                        <option value="{{$category->name}}" {{ in_array($category->name,$selectedCategories) ? "Selected" : ''}} >{{$category->name}}</option> 
@@ -50,7 +58,7 @@
                      <span class="invalid-feedback">@error('categories'){{ $message }} @enderror</span>
                    </div>
                  </div>
-                 <div class="col-md-6">
+                 <div class="col-md-4">
                    <div class="form-group">
                      <label for="buy_price">Buying price <sup class="text-danger">*</sup>
                      </label>
@@ -58,7 +66,7 @@
                      <span class="invalid-feedback">@error('buy_price'){{ $message }} @enderror</span>
                    </div>
                  </div>
-                 <div class="col-md-6">
+                 <div class="col-md-4">
                    <div class="form-group">
                      <label for="sell_price">Selling price <sup class="text-danger">*</sup>
                      </label>
@@ -66,6 +74,15 @@
                      <span class="invalid-feedback">@error('sell_price'){{ $message }} @enderror</span>
                    </div>
                  </div>  
+                 
+                 <div class="col-md-4">
+                   <div class="form-group">
+                     <label for="discount">Discount <sup class="text-danger">*</sup>
+                     </label>
+                     <input type="text" placeholder="Enter Discount" name="discount" class="form-control @error('discount') is-invalid @enderror" value="{{ $product->discount }}" id="discount">
+                     <span class="invalid-feedback">@error('discount'){{ $message }} @enderror</span>
+                   </div>
+                 </div> 
                  
                  <div class="col-md-12">
                    <div class="form-group">
@@ -81,7 +98,11 @@
                 <div class="imgThumbContainer">
                     <div class="IMGthumbnail">
                       <a href="javascript:void(0)" onclick="this.parentElement.parentElement.style.display = 'none';"><i class="fas fa-close"></i></a>
+                      @if ($product->aliexpress_id)
+                      <img src="{{ asset($image) }}" alt="{{$image}}" class="img-fluid">
+                      @else
                       <img src="{{ asset('assets/images/product/'.$image) }}" alt="{{$image}}" class="img-fluid">
+                      @endif
                     </div>
                   </div> 
                   @endforeach 
@@ -92,6 +113,13 @@
                     <label for="short_description">Short Description</label>
                     <textarea name="short_description" id="short_description" class="form-control @error('short_description') is-invalid @enderror" placeholder="Enter Short Description">{{ $product->short_description }}</textarea>
                     <span class="invalid-feedback">@error('short_description'){{ $message }} @enderror</span>
+                  </div>
+                </div> 
+                 <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="short_description">Description URL</label>
+                    <input type="url" placeholder="Enter Aliexpress link" name="description_url" class="form-control @error('description_url') is-invalid @enderror" value="{{ $product->description_url }}" id="description_url">
+                    <span class="invalid-feedback">@error('description_url'){{ $message }} @enderror</span>
                   </div>
                 </div> 
                  <div class="col-md-12">
@@ -132,7 +160,16 @@
 
                    </div>
                  </div> 
-                 <div class="col-md-6">
+                 <div class="col-md-4">
+                   <div class="form-group">
+                     <label for="video_link">Aliexpress Video Link 
+                     </label>
+                     <input type="url" placeholder="Enter Aliexpress Video Link" name="ali_video_link" class="form-control @error('ali_video_link') is-invalid @enderror" value="{{ $product->ali_video_link }}" id="ali_video_link">
+                     <span class="invalid-feedback">@error('ali_video_link'){{ $message }} @enderror</span>
+
+                   </div>
+                 </div> 
+                 <div class="col-md-4">
                    <div class="form-group">
                      <label for="fb_ads_img">Facebook ads Image Link <sup class="text-danger">*</sup>
                      </label>
@@ -140,7 +177,7 @@
                      <span class="invalid-feedback">@error('fb_ads_img'){{ $message }} @enderror</span>
                    </div>
                  </div> 
-                 <div class="col-md-6">
+                 <div class="col-md-4">
                    <div class="form-group">
                      <label for="video_link_img">Video Image Link </label>
                      <input type="url" placeholder="Enter Video Image Source" name="video_link_img" class="form-control @error('video_link_img') is-invalid @enderror" value="{{ $product->video_link_img }}" id="video_link_img">
@@ -185,7 +222,7 @@
                      </div>
                    </div>
                  </div>  
-                 <div class="col-md-3">
+                 <div class="col-md-4">
                    <div class="form-group">
                      <label for="cpa">CPA <sup class="text-danger">*</sup>
                      </label>
@@ -193,7 +230,7 @@
                      <span class="invalid-feedback">@error('cpa'){{ $message }} @enderror</span>
                    </div>
                  </div>   
-                 <div class="col-md-3">
+                 <div class="col-md-4">
                    <div class="form-group">
                      <label for="net">NET <sup class="text-danger">*</sup>
                      </label>
@@ -201,7 +238,7 @@
                      <span class="invalid-feedback">@error('net'){{ $message }} @enderror</span>
                    </div>
                  </div>  
-                 <div class="col-md-3">
+                 <div class="col-md-4">
                    <div class="form-group">
                      <label for="total_order">Total order on alibaba <sup class="text-danger">*</sup>
                      </label>
@@ -209,12 +246,28 @@
                      <span class="invalid-feedback">@error('total_order'){{ $message }} @enderror</span>
                    </div>
                  </div> 
-                 <div class="col-md-3">
+                 <div class="col-md-4">
                    <div class="form-group">
                      <label for="review">Review on alibaba <sup class="text-danger">*</sup>
                      </label>
                      <input type="text" placeholder="Between 1 to 5" name="review" class="form-control @error('review') is-invalid @enderror" value="{{ $product->review }}" id="review">
                      <span class="invalid-feedback">@error('review'){{ $message }} @enderror</span>
+                   </div>
+                 </div> 
+                 <div class="col-md-4">
+                   <div class="form-group">
+                     <label for="review">Total Review <sup class="text-danger">*</sup>
+                     </label>
+                     <input type="text" placeholder="Between 1 to 5" name="total_review" class="form-control @error('total_review') is-invalid @enderror" value="{{ $product->total_review }}" id="total_review">
+                     <span class="invalid-feedback">@error('total_review'){{ $message }} @enderror</span>
+                   </div>
+                 </div> 
+                 <div class="col-md-4">
+                   <div class="form-group">
+                     <label for="review">Avrage Rating <sup class="text-danger">*</sup>
+                     </label>
+                     <input type="text" placeholder="Between 1 to 5" name="avg_rating" class="form-control @error('avg_rating') is-invalid @enderror" value="{{ $product->avg_rating }}" id="avg_rating">
+                     <span class="invalid-feedback">@error('avg_rating'){{ $message }} @enderror</span>
                    </div>
                  </div> 
                  <div class="col-12">

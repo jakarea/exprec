@@ -69,11 +69,10 @@
         <button type="submit" class="btn">Filter</button>
       </div>
 
-      <div class="form-grp-btn mt-4 ms-auto">
-        <a href="{{ url('admin/products/create') }}" class="btn">Add Product</a>
-      </div>
+   
 
       <div class="form-grp-btn mt-4 ms-auto">
+      <a href="{{ url('admin/products/create') }}" class="btn me-3">Add Product</a>
         <a href="{{ url('admin/products/create/ali-express') }}" class="btn">Add Product From Aliexpress</a>
       </div>
 
