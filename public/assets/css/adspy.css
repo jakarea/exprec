@@ -679,6 +679,10 @@
   opacity: 0.7;
 }
 
+.no-border {
+  border: 0;
+}
+
 .no-more-ads {
   color: #FF6262;
   font-size: 1.3rem;

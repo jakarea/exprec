@@ -118,3 +118,7 @@
 </main>
 
 @endsection
+
+@section('script')
+<script src="{{ asset('assets/js/ITool-handler.js') }}"></script>
+@endsection

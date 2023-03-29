@@ -13,7 +13,17 @@ function custmBorder() {
 const settingToggle = document.querySelector("#settings-toggle");
 const settingBox = document.querySelector(".search-settings-main-wrap");
 
+if(settingBox){
+    settingBox.addEventListener("click", function(event) {
+        if (event.target == settingBox) {
+            settingBox.style.display = "none";
+        } 
+    });
+}
 
+if(settingToggle){
+    settingToggle.addEventListener("click", expandFunction)
+}
 
 function expandFunction(event) {
     event.preventDefault();
@@ -24,6 +34,7 @@ function expandFunction(event) {
 const copyBttn = document.querySelector("#copy-bttn");
 const selectionArea = document.querySelector(".selection-textbox");
 const checkIcon = selectionArea.querySelector(".fa-check");
+const project_details = document.getElementById('project_details')
 
 const selectionCopyFunction = () => {
     selectionArea.classList.add("selection-textbox-check");
@@ -67,7 +78,10 @@ const copyFunction = (e) => {
             return parsedItem.id !== selectedItem.id
         })
     }
-    document.getElementById('project_details').value = JSON.stringify(selectedData)
+    if(project_details){
+        project_details.value = JSON.stringify(selectedData)
+    }
+   
 }
 
 tableChecks.forEach((tableCheck) => {
@@ -95,7 +109,10 @@ const copyAllFunction = (e) => {
         mainselects(false);
         selectedData = [];
     }
-    document.getElementById('project_details').value = JSON.stringify(selectedData)
+    if(project_details){
+        project_details.value = JSON.stringify(selectedData)
+    }
+    
 }
 
 function mainselects(value) {
@@ -111,24 +128,37 @@ selectAll.addEventListener('change', copyAllFunction);
 
 // save project modal js
 const openModal = document.getElementById("save-modal");
-const projectModal = document.querySelector(".save-to-project-modal");
-const modalClose = projectModal.querySelector(".btn-closes");
+if(openModal)  {
+    const openModalFunction = () => {
+        projectModal.style.display = "block";
+    }
+    openModal.addEventListener("click", openModalFunction);
 
-const openModalFunction = () => {
-    projectModal.style.display = "block";
+
 }
-const closeModalFunction = () => {
-    projectModal.style.display = "none";
-}
- 
-modalClose.addEventListener("click", closeModalFunction);
-openModal.addEventListener("click", openModalFunction);
+const projectModal = document.querySelector(".save-to-project-modal");
+if(projectModal){
+    const modalClose = projectModal.querySelector(".btn-closes");
+    const closeModalFunction = () => {
+        projectModal.style.display = "none";
+    }
+    modalClose.addEventListener("click", closeModalFunction);
+    
 
 projectModal.addEventListener("click", function(event) {
     if (event.target == projectModal) {
         projectModal.style.display = "none";
     } 
 });
+}
+
+
+
+
+ 
+
+
+
 
 function handleClick(cb) {
     var target = cb.value;
@@ -246,22 +276,19 @@ function createCSV(csvData){
     link.click();
   }
 
-  settingBox.addEventListener("click", function(event) {
-    if (event.target == settingBox) {
-        settingBox.style.display = "none";
-    } 
-});
 
-settingToggle.addEventListener("click", expandFunction)
+const submitExplorer = document.getElementById("SubmitExplore")
 
-document.getElementById("SubmitExplore").addEventListener("click", function(event){
-    event.preventDefault()
-    document.getElementById('spiner').style.display = 'block'
-    document.getElementById("searchForm").submit();
-});
-
-document.getElementById("SubmitExplore").addEventListener("click", function(event){
-    event.preventDefault()
-    document.getElementById('spiner').style.display = 'block'
-    document.getElementById("searchForm").submit();
-});
+if(submitExplorer){
+    submitExplorer.addEventListener("click", function(event){
+        event.preventDefault()
+        document.getElementById('spiner').style.display = 'block'
+        document.getElementById("searchForm").submit();
+    });
+    
+    submitExplorer.addEventListener("click", function(event){
+        event.preventDefault()
+        document.getElementById('spiner').style.display = 'block'
+        document.getElementById("searchForm").submit();
+    });
+}

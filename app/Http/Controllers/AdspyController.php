@@ -47,7 +47,7 @@ class AdspyController extends Controller
             $countries[] = 'NL';
             $countries = "'" . implode ( "', '", $countries ) . "'";
             $limit = 6;
-            $api_url = 'https://graph.facebook.com/v15.0/ads_archive?fields=id,page_id,page_name,ad_creative_bodies,languages,currency,spend,bylines,publisher_platforms,impressions,estimated_audience_size,demographic_distribution,ad_snapshot_url,ad_creation_time,ad_creative_link_captions,ad_creative_link_descriptions,ad_creative_link_titles,ad_delivery_start_time,ad_delivery_stop_time,delivery_by_region&search_terms='.$search_terms.'&ad_reached_countries=['.$countries.']&limit='.$limit.'&access_token='.$this->access_token;
+            return $api_url = 'https://graph.facebook.com/v15.0/ads_archive?fields=id,page_id,page_name,ad_creative_bodies,languages,currency,spend,bylines,publisher_platforms,impressions,estimated_audience_size,demographic_distribution,ad_snapshot_url,ad_creation_time,ad_creative_link_captions,ad_creative_link_descriptions,ad_creative_link_titles,ad_delivery_start_time,ad_delivery_stop_time,delivery_by_region&search_terms='.$search_terms.'&ad_reached_countries=['.$countries.']&limit='.$limit.'&access_token='.$this->access_token;
             if($nextPage){
                 $api_url = $nextPage;
             }
