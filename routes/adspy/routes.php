@@ -8,6 +8,7 @@ Route::prefix('adspy')->controller(AdspyController::class)->group(function () {
     Route::get('/pinterest/{id}', 'pinterest');      
     Route::get('/tiktok', 'tiktok');      
     Route::get('/mylist', 'mylist');    
+    Route::get('/details/{id}', 'details');    
     
     Route::post('/load-more-data', 'loadMoreData');
     Route::post('/scrapAdBy/{id}', 'scrapAdById');

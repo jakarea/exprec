@@ -105,6 +105,10 @@ class AdspyController extends Controller
     {
         return view('adspy/mylist');
     }
+    public function details()
+    {
+        return view('adspy/details');
+    }
 }
 
 // link_url

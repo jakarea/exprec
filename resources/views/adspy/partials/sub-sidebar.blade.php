@@ -20,5 +20,9 @@
         <a href="{{ url('adspy/mylist') }}" class="{{ Request::is('adspy/mylist')  ? ' active' : '' }}">
           <img src="{{ asset('assets/images/Vector.svg') }}" alt="Dash" class="img-fluid">My lists </a>
       </li>
+      <li>
+        <a href="{{ url('adspy/details/1') }}" class="{{ Request::is('adspy/details*')  ? ' active' : '' }}">
+          <img src="{{ asset('assets/images/Vector.svg') }}" alt="Dash" class="img-fluid">Details </a>
+      </li>
     </ul> 
 <!-- inner submenu @E -->

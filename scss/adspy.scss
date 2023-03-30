@@ -2,25 +2,31 @@
 @use './util/mixin' as m;
 @use './util/media-query' as q;
 
-.addspy-banner-wrap{
-    @include m.box(2rem 3rem,.7rem,#1F1F1F); 
+.addspy-banner-wrap {
+    @include m.box(2rem 3rem, .7rem, #1F1F1F);
     margin-top: 2rem;
-    .media{
+
+    .media {
         align-items: center;
-        .media-body{
-            .addspy-main-title{
-                @include m.para(3rem,500,v.$light);
-                span{
+
+        .media-body {
+            .addspy-main-title {
+                @include m.para(3rem, 500, v.$light);
+
+                span {
                     color: v.$secondary;
                 }
             }
-            p{
-                @include m.para(1rem,400,v.$light);
+
+            p {
+                @include m.para(1rem, 400, v.$light);
                 margin-bottom: 1rem;
             }
+
             a {
-                @include m.button(1rem,v.$light,v.$gdbg);
-                border-radius: 3rem;   
+                @include m.button(1rem, v.$light, v.$gdbg);
+                border-radius: 3rem;
+
                 &:hover {
                     background: v.$light;
                     color: v.$dark;
@@ -30,41 +36,50 @@
     }
 }
 
-.wining-product-wrapper{
+.wining-product-wrapper {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
-    h4{
-        @include m.para(1.4rem,400,v.$dark);
+
+    h4 {
+        @include m.para(1.4rem, 400, v.$dark);
         @include m.df;
         margin-bottom: 1rem;
-        img{
+
+        img {
             margin-right: 0.6rem;
         }
     }
-    .wining-product-head{
+
+    .wining-product-head {
         @include m.df(space-between);
-        ul{
+
+        ul {
             @include m.df;
-            li{
-                a{
-                    @include m.button(1rem,v.$fourth,v.$light);
+
+            li {
+                a {
+                    @include m.button(1rem, v.$fourth, v.$light);
                     border: 1px solid v.$border;
-                    border-radius: 3rem;   
+                    border-radius: 3rem;
                     margin-right: 1rem;
+
                     &:hover {
                         background: v.$dark;
                         color: v.$light;
                     }
                 }
-                a.active{
+
+                a.active {
                     background: v.$dark;
-                        color: v.$light;
+                    color: v.$light;
                 }
             }
         }
-        .banner-arrow-box{
+
+        .banner-arrow-box {
             @include m.df;
-            a{
+
+            a {
                 width: 3.4rem;
                 height: 3.4rem;
                 display: inline-flex;
@@ -76,6 +91,7 @@
                 color: v.$fourth;
                 font-size: 1.2rem;
                 margin-left: 1rem;
+
                 &:hover {
                     background: v.$dark;
                     color: v.$light;
@@ -83,111 +99,134 @@
             }
         }
     }
-    .wining-products-box{
+
+    .wining-products-box {
         margin-top: 1.5rem;
         display: grid;
-        grid-template-columns: repeat(4,1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
-.wining-product-item{
-    @include m.box(.6rem,.7rem,v.$light);
+.wining-product-item {
+    @include m.box(.6rem, .7rem, v.$light);
     margin-right: .7rem;
-    .wining-product-thumbnail{
+
+    .wining-product-thumbnail {
         position: relative;
-        img{
+
+        img {
             display: block;
             width: 100%;
         }
-        .player-img{
+
+        .player-img {
             position: absolute;
             bottom: 0;
             left: 0;
             padding-right: 1rem;
         }
     }
-    .wining-product-txt{
+
+    .wining-product-txt {
         padding: .4rem 0;
-        h5{
-            @include m.para(1.3rem,500,v.$dark);
+
+        h5 {
+            @include m.para(1.3rem, 500, v.$dark);
             margin-bottom: 0.7rem;
         }
-        ul{
+
+        ul {
             @include m.df;
-            li{
-                a{
-                    @include m.df; 
+
+            li {
+                a {
+                    @include m.df;
                     margin-right: 0.8rem;
-                    .fa-regular{
+
+                    .fa-regular {
                         font-size: 1.2rem;
                         margin-right: 0.4rem;
                         color: v.$fourth;
-                        &:hover{
+
+                        &:hover {
                             color: v.$primary;
                         }
                     }
-                    img{
-                        margin-right: 0.4rem; 
+
+                    img {
+                        margin-right: 0.4rem;
                         width: 1.2rem;
                     }
                 }
-            } 
+            }
         }
     }
 }
 
-.discover-potential-wrap{
+.discover-potential-wrap {
     margin: 1rem 0;
-    h4{
-        @include m.para(1.4rem,400,v.$dark);
+
+    h4 {
+        @include m.para(1.4rem, 400, v.$dark);
         @include m.df;
         margin-bottom: 1rem;
-        img{
+
+        img {
             margin-right: 0.6rem;
         }
     }
 }
 
 
-.potential-item-box{
-    @include m.box(.8rem 1.2rem,0.7rem,v.$light);
+.potential-item-box {
+    @include m.box(.8rem 1.2rem, 0.7rem, v.$light);
     @include m.df(space-between);
     margin-bottom: 1rem;
-    .media{
+
+    .media {
         align-items: center;
-        img{
+
+        img {
             margin-right: 1rem;
         }
-        .media-body{
-            h6{
-                @include m.para(1.2rem,600,v.$dark);
-                
+
+        .media-body {
+            h6 {
+                @include m.para(1.2rem, 600, v.$dark);
+
             }
-            p{
-                @include m.para(1rem,400,v.$fourth);
-            } 
+
+            p {
+                @include m.para(1rem, 400, v.$fourth);
+            }
         }
-        .fa-angle-right{
+
+        .fa-angle-right {
             margin-left: 1rem;
             font-size: 1.2rem;
             color: v.$fourth;
         }
     }
-    h6{
-        @include m.para(1.2rem,400,v.$dark);  
+
+    h6 {
+        @include m.para(1.2rem, 400, v.$dark);
         @include m.df;
-        img{
+
+        img {
             margin-right: 0.7rem;
         }
-        span{
+
+        span {
             color: v.$secondary;
             margin-right: 0.4rem;
         }
     }
 }
-.verify-email-item{
+
+.verify-email-item {
     position: relative;
-    .verify-email-boxs{
+
+    .verify-email-boxs {
         position: absolute;
         left: 0;
         top: 0;
@@ -199,31 +238,35 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        h6{
-            @include m.para(1.2rem,400,v.$light); 
+
+        h6 {
+            @include m.para(1.2rem, 400, v.$light);
         }
     }
 }
 
-.addspy-banner-two{
+.addspy-banner-two {
     margin-bottom: 2rem;
     background: v.$grn;
-    .addspy-main-title{
-        span{
-            font-weight: 700!important;
-            color: v.$light!important;
-            font-style: italic!important;
+
+    .addspy-main-title {
+        span {
+            font-weight: 700 !important;
+            color: v.$light !important;
+            font-style: italic !important;
         }
     }
-    .media{
-        .media-body{
-            a{
-                background: v.$light!important;
-                color: v.$grn!important;
+
+    .media {
+        .media-body {
+            a {
+                background: v.$light !important;
+                color: v.$grn !important;
                 font-weight: 600;
-                &:hover{
-                    background: v.$dark!important;
-                    color: v.$light!important;
+
+                &:hover {
+                    background: v.$dark !important;
+                    color: v.$light !important;
                 }
             }
         }
@@ -231,290 +274,578 @@
 }
 
 // addspy dashboard css @S
-.addspy-dash-head{
+.addspy-dash-head {
     margin-bottom: 2rem;
-    h1{
-        @include m.para(2.4rem,700,v.$dark);
-        span{
+
+    h1 {
+        @include m.para(2.4rem, 700, v.$dark);
+
+        span {
             color: v.$secondary;
         }
     }
-    p{
-        @include m.para(1rem,400,v.$dark); 
+
+    p {
+        @include m.para(1rem, 400, v.$dark);
     }
 }
-.discover-personalized-list{
+
+.discover-personalized-list {
     margin-bottom: 2rem;
-    .media{
-        img{
+
+    .media {
+        img {
             margin-right: 1rem;
         }
-        h5{
-            @include m.para(1.4rem,600,v.$dark); 
+
+        h5 {
+            @include m.para(1.4rem, 600, v.$dark);
         }
-        p{
-            @include m.para(1rem,400,v.$secondary);
-            text-decoration: underline; 
+
+        p {
+            @include m.para(1rem, 400, v.$secondary);
+            text-decoration: underline;
             margin-top: 0.3rem;
         }
     }
-    a.bttns{
-        @include m.button(1rem,v.$light,v.$gdbg);
+
+    a.bttns {
+        @include m.button(1rem, v.$light, v.$gdbg);
         border-radius: 3rem;
-        &:hover{
+
+        &:hover {
             opacity: .7;
         }
-        i{
+
+        i {
             margin-left: 0.4rem;
         }
     }
 }
 
-.personalized-list-box{
-    @include m.box(1.4rem,.625rem,v.$light);
-    .d-flex{
+.personalized-list-box {
+    @include m.box(1.4rem, .625rem, v.$light);
+
+    .d-flex {
         @include m.df(space-between);
         margin-bottom: 2rem;
     }
-    h5{
-        @include m.para(1.4rem,600,v.$dark);  
+
+    h5 {
+        @include m.para(1.4rem, 600, v.$dark);
     }
-    p{
-        @include m.para(1rem,500,v.$dark);  
+
+    p {
+        @include m.para(1rem, 500, v.$dark);
         margin-top: .4rem;
     }
 }
 
-.add-head{
-    p{
-        @include m.para(1rem,400,v.$secondary);
-        text-decoration: underline; 
+.add-head {
+    p {
+        @include m.para(1rem, 400, v.$secondary);
+        text-decoration: underline;
     }
 }
 
-.addspy-first-list{
-    @include m.box(1.2rem 2rem,0.625rem,v.$light);
+.addspy-first-list {
+    @include m.box(1.2rem 2rem, 0.625rem, v.$light);
     margin-top: 1.5rem;
-    display: none; 
+    display: none;
     transition: all linear .3s;
-    .d-flex{
+
+    .d-flex {
         padding-bottom: 1rem;
         border-bottom: 1px solid v.$border;
         @include m.df(space-between);
-        h6{
-            @include m.para(1.3rem,500,v.$dark);  
+
+        h6 {
+            @include m.para(1.3rem, 500, v.$dark);
         }
-        a{
-            @include m.para(1rem,500,#FFC2C2);
+
+        a {
+            @include m.para(1rem, 500, #FFC2C2);
             @include m.df;
-            img{
+
+            img {
                 margin-left: .4rem;
             }
         }
     }
 }
 
-.list-active{
+.list-active {
     transition: all linear .3s;
-    display: block!important; 
+    display: block !important;
 }
 
-.adspy-filter-box{
+.adspy-filter-box {
     margin-top: 1rem;
     @include m.df(flex-start);
-    input{
-        border: 0; 
+
+    input {
+        border: 0;
         font-size: 1rem;
         max-width: 8rem;
     }
-    h6{
-        @include m.para(1rem,600,v.$dark);
+
+    h6 {
+        @include m.para(1rem, 600, v.$dark);
         margin-right: 1.3rem;
     }
-    p{
-        @include m.para(1rem,400,v.$dark);
+
+    p {
+        @include m.para(1rem, 400, v.$dark);
         @include m.df;
         margin-right: .5rem;
-        img{
+
+        img {
             margin-right: 0.4rem;
         }
     }
-    select{
-        @include m.para(1rem,400,v.$dark);
+
+    select {
+        @include m.para(1rem, 400, v.$dark);
         border: 0;
         background: transparent;
         margin-right: 0.8rem;
     }
 }
 
-.quick-query{
+.quick-query {
     margin: 1.5rem 0;
     @include m.df;
-    h6{
-        @include m.para(1rem,600,v.$dark);
+
+    h6 {
+        @include m.para(1rem, 600, v.$dark);
         margin-right: 1.5rem;
     }
-    a{
-        @include m.button(1rem,v.$fourth,v.$light);
+
+    a {
+        @include m.button(1rem, v.$fourth, v.$light);
         border-radius: 2.5rem;
         border: 1.5px solid v.$border;
         margin-right: 1rem;
-        &:hover{
+
+        &:hover {
             background: v.$gdbg;
             color: v.$light;
         }
-        &:last-child{
+
+        &:last-child {
             background: transparent;
             color: v.$primary;
             border: 0;
             @include m.df;
-            img{
+
+            img {
                 margin-right: 0.4rem;
             }
         }
     }
 }
 
-.addspy-multi-select{
+.addspy-multi-select {
     margin: 1.5rem 0;
     @include m.df(space-between);
-    .d-flex{
+
+    .d-flex {
         @include m.df(space-between);
-        h6{
-            @include m.para(1rem,600,v.$dark);
+
+        h6 {
+            @include m.para(1rem, 600, v.$dark);
             margin-right: 2rem;
         }
-        p{
-            @include m.para(1rem,400,v.$fourth);
+
+        p {
+            @include m.para(1rem, 400, v.$fourth);
             margin-right: 3rem;
         }
     }
-    a{
-        @include m.button(1rem,v.$primary,transparent);
+
+    a {
+        @include m.button(1rem, v.$primary, transparent);
         border-radius: 2.5rem;
         border: 1px solid v.$primary;
         padding: .6rem 2rem;
-        img{
+
+        img {
             margin-right: 0.6rem;
         }
-        i{
+
+        i {
             margin-left: 0.4rem;
         }
-        &:hover{
+
+        &:hover {
             background: v.$primary;
             color: v.$light;
-            img{
+
+            img {
                 filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
             }
         }
     }
-    .multiple-sort{
+
+    .multiple-sort {
         position: relative;
-        img{
+
+        img {
             position: absolute;
             left: 1rem;
             top: 13px;
         }
-        select{
-            @include m.button(1rem,v.$primary,transparent);
+
+        select {
+            @include m.button(1rem, v.$primary, transparent);
             border-radius: 2.5rem;
             border: 1px solid v.$primary;
-            padding: .6rem 3rem; 
+            padding: .6rem 3rem;
             appearance: none;
-            option{
+
+            option {
                 color: v.$dark;
             }
         }
-        i{
+
+        i {
             position: absolute;
             right: 1rem;
             top: 13px;
             color: v.$primary;
         }
     }
+
     .form-check-input:checked {
-        background-color:  v.$primary;
-        border-color:  v.$primary;
+        background-color: v.$primary;
+        border-color: v.$primary;
     }
 }
 
-.adspy-filter-product{
-    .wining-product-txt{
-        h3{
-            @include m.para(1.3rem,700,v.$dark);
+.adspy-filter-product {
+    .wining-product-txt {
+        h3 {
+            @include m.para(1.3rem, 700, v.$dark);
             margin: 1rem 0;
             text-align: center;
         }
-        ul{
+
+        ul {
             @include m.df(space-between);
+
             li {
-                a{
+                a {
                     font-weight: 600;
                 }
             }
         }
-        table{
+
+        table {
             width: 100%;
-            tr{
-                td{
-                    @include m.para(.85rem,500,v.$dark);
+
+            tr {
+                td {
+                    @include m.para(.85rem, 500, v.$dark);
                     padding: .5rem 0;
-                    &:last-child{
+
+                    &:last-child {
                         text-align: right;
                     }
                 }
             }
         }
     }
-    .wining-product-thumbnail{
-        img.main-img{
+
+    .wining-product-thumbnail {
+        img.main-img {
             display: block;
             width: 100%;
         }
     }
 }
 
-.adspy-filter-product-bttns{ 
-    a{
+.adspy-filter-product-bttns {
+    a {
         display: block;
         width: 100%;
         margin-top: 0.8rem;
-        @include m.button(1rem,v.$fourth,v.$light);
+        @include m.button(1rem, v.$fourth, v.$light);
         border-radius: 2.5rem;
         border: 1.5px solid v.$border;
         text-align: center;
-        &:hover{
+
+        &:hover {
             background: v.$gdbg;
             color: v.$light;
         }
-        &:last-child{
+
+        &:last-child {
             background: v.$gdbg;
             color: v.$light;
-            &:hover{
+
+            &:hover {
                 opacity: .7;
             }
         }
     }
 }
 
+// details page css @S
+.about-add-box-wrap {
+    @include m.box(1rem, .7rem, v.$light);
+    border: 1px solid v.$third;
+
+    .d-flex {
+        justify-content: space-between;
+        align-items: center;
+
+        a {
+            color: v.$fourth;
+            font-size: 1rem;
+        }
+    }
+
+    .media {
+        align-items: center;
+
+        img {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            border: 3px solid v.$primary;
+            margin-right: 1rem;
+        }
+
+        .media-body {
+            h6 {
+                @include m.para(1.2rem, 500, v.$dark);
+                margin-bottom: 0.2rem;
+            }
+
+            p {
+                @include m.para(0.8rem, 400, v.$fourth);
+            }
+        }
+    }
+
+    .details {
+        margin: 1rem 0;
+
+        p {
+            @include m.para(0.9rem, 400, v.$fourth);
+
+            a {
+                color: v.$blu;
+            }
+        }
+    }
+
+    .ads-thumbnail-wrap {
+        img {
+            display: block;
+            width: 100%;
+            border: 1px solid v.$third;
+            border-radius: 0.725rem;
+        }
+    }
+
+    .ads-slider-wrap {
+        position: relative;
+
+        .add-slider-arrows { 
+            a {
+                position: absolute;
+                top: 50%;
+                justify-content: center;
+                background: v.$fourth;
+                color: v.$light;
+                width: 2rem;
+                height: 2rem;
+                border-radius: .2rem;
+                display: inline-flex;
+                align-items: center;
+                z-index: 99;
+                transform: translateY(-50%); 
+                &:first-child {
+                    left: 0.5rem;
+                }
+
+                &:last-child {
+                    right: 0.5rem;
+                }
+
+                i {
+                    font-size: 1rem;
+                }
+            } 
+        }
+
+        .add-slider {
+            img {
+                display: block;
+                width: 100%;
+            }
+        } 
+
+    }
+
+    .ads-video-wrap {
+        video {
+            border-radius: 0.7rem;
+            height: 250px;
+        }
+    }
+
+    .ads-ftr-cta-bttn {
+        margin-top: 0.5rem;
+
+        a {
+            @include m.para(0.9rem, 500, v.$fourth);
+        }
+
+        h6 {
+            @include m.para(1rem, 500, v.$fourth);
+            margin: 0.4rem 0;
+        }
+
+        p {
+            @include m.para(1rem, 400, v.$newbrdr);
+            margin-bottom: 0.5rem;
+        }
+
+        a.cta-button {
+            display: block;
+            width: 100%;
+            margin-top: 0.8rem;
+            @include m.button(1rem, v.$light, v.$btnbg);
+            border-radius: 2.5rem;
+            border: 1.5px solid v.$third;
+            text-align: center;
+
+            &:hover {
+                background: v.$gdbg;
+                color: v.$light;
+            }
+        }
+    }
+}
+
+.about-page-header-wrap{
+    @include m.box(1.5rem, .7rem, v.$light);
+    border: 1px solid v.$third;
+
+    .d-flex {
+        justify-content: space-between;
+        align-items: center;
+
+        a {
+            color: v.$fourth;
+            font-size: 1.4rem;
+        }
+    }
+
+    .media {
+        align-items: center;
+
+        img {
+            width: 4.5rem;
+            height: 4.5rem;
+            border-radius: 50%;
+            border: 3px solid v.$primary;
+            margin-right: 1rem;
+        }
+
+        .media-body {
+            h5 {
+                @include m.para(1.3rem, 500, v.$dark);
+                margin-bottom: 0.2rem;
+            }
+
+            h6 {
+                @include m.para(1rem, 400, v.$fourth);
+            }
+        }
+    }
+    .page-details-wrap{
+        margin-top: 0.4rem;
+        margin-left: 1rem;
+        .social-site{
+            i{
+                font-size: 3rem;
+                margin-right: 1.7rem;
+                color: v.$blu;
+            }
+            .fa-instagram{
+                color: v.$primary; 
+            }
+        }
+        .media-body{
+            p{
+                @include m.para(0.9rem,500,v.$btnbg);
+                margin-bottom: 0.5rem;
+                i{
+                    font-size: 0.91rem;
+                    margin-right: 0.4rem;
+                    color: v.$fourth;
+                }
+            }
+        }
+    }
+}
+.page-more-info{
+    padding-top: 0.6rem;
+    margin-top: 0.6rem;
+    border-top: 1px solid v.$third;
+    h4{
+        @include m.para(1.3rem,600,v.$btnbg);
+        margin-bottom: 0.1rem;
+    }
+    p{
+        @include m.para(0.9rem,500,v.$fourth);
+        margin-top: 0.5rem;
+    }
+}
+
 // responsive css @S
-@include q.responsive(phone) { 
-    .wining-product-wrapper .wining-products-box{
+@include q.responsive(phone) {
+    .wining-product-wrapper .wining-products-box {
+        grid-template-columns: 1fr;
+    }
+    .about-add-box-wrap{
+        margin-bottom: 1.5rem;
+    }
+    .about-page-header-wrap{
+        padding: 1rem;
+    }
+    .about-page-header-wrap .d-flex{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .about-page-header-wrap .media .media-body h5{
+        font-size: 1.1rem;
+    }
+    .about-page-header-wrap .d-flex a{
+        display: none;
+    }
+    .about-page-header-wrap .page-details-wrap{
+        margin-left: 0;
+    }
+}
+
+@include q.responsive(landphone) {
+    .wining-product-wrapper .wining-products-box {
         grid-template-columns: 1fr;
     }
 }
-@include q.responsive(landphone) { 
-    .wining-product-wrapper .wining-products-box{
-        grid-template-columns: 1fr;
-    }
-}
-@include q.responsive(tablet) { 
-    .wining-product-wrapper .wining-products-box{
+
+@include q.responsive(tablet) {
+    .wining-product-wrapper .wining-products-box {
         grid-template-columns: 1fr 1fr;
     }
 }
-@include q.responsive(landtablet) { 
-    .wining-product-wrapper .wining-products-box{
+
+@include q.responsive(landtablet) {
+    .wining-product-wrapper .wining-products-box {
         grid-template-columns: 1fr 1fr 1fr;
     }
 }
