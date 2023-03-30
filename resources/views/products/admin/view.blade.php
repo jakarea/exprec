@@ -43,7 +43,7 @@
           @endforeach
         </div>
         <div class="ali-express-bttn">
-          <a href="{{$product->aliexpress_link}}">
+          <a href="{{$product->aliexpress_link}}" target="_blank">
             <img src="{{asset('assets/images/ali-express-icon.png')}}" alt="ali-express" class="img-fluid"> See on Aliexpress </a>
         </div>
         <div class="product-description">
@@ -58,13 +58,13 @@
       @php $images = json_decode($product->images)  @endphp   
         <div class="main-thumb"> 
         @if($images)
-            <img src="{{ $images[0] }}" alt="{{$product->slug}}" id="main-thumbnail" class="img-fluid" title="{{$product->slug}}">  
+            <img src="{{ $images[0] }}" alt="{{$product->title}}" id="main-thumbnail" class="img-fluid" title="{{$product->title}}">  
             @endif
         </div>
         <div class="products-bttm-small-preiview">
         @foreach(array_slice($images, 0, 4) as $image)
           <a href="javascript:void(0)">
-            <img src="{{ $image }}" alt="{{$image}}" class="img-fluid">
+            <img src="{{ $image }}" alt="{{$product->title}}" class="img-fluid">
           </a> 
         @endforeach
         </div>
@@ -229,7 +229,13 @@
             <tr>
               <td>Total Reviews </td>
               <td style="color: #F37F14;">
-                <i class="fa fa-star"></i> {{ $product->review }}
+                {{ $product->total_review }}
+              </td>
+            </tr>
+            <tr>
+              <td>Rating </td>
+              <td style="color: #F37F14;">
+                <i class="fa fa-star"></i> {{ $product->avg_rating }}
               </td>
             </tr>
             <tr>

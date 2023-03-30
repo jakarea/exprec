@@ -45,7 +45,7 @@
           @endforeach
         </div>
         <div class="ali-express-bttn">
-          <a href="{{$product->aliexpress_link}}">
+          <a href="{{$product->aliexpress_link}}" target="_blank">
             <img src="{{asset('assets/images/ali-express-icon.png')}}" alt="ali-express" class="img-fluid"> See on Aliexpress </a>
         </div>
         <div class="product-description">

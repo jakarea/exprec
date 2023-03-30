@@ -46,7 +46,7 @@ class AdminProductController extends Controller
             $products->where('sell_price','like','%'.trim($sell_price).'%');
         }
 
-        $products = $products->paginate(2);
+        $products = $products->paginate(12);
         $categories = Category::orderby('id', 'desc')->get();
          
         return view('products/admin/index',compact('products','categories'));
@@ -70,17 +70,17 @@ class AdminProductController extends Controller
             'short_description' =>  "required|string|max:455",
             'aliexpress_link'   =>  "required|string",  
             'url'               =>  "required|array|min:1",
-            'eng_heart'         =>  "required|numeric",
-            'eng_comment'       =>  "required|numeric",
-            'eng_reaction'      =>  "required|numeric",
-            'cpa'               =>  "required|string|max:255",
-            'net'               =>  "required|string|max:255",
-            'total_order'       =>  "required|numeric",
-            'country'           =>  "required|string|max:25",
-            'gender'            =>  "required|string|max:25",
-            'age'               =>  "required|string|max:100",
-            'audience'          =>  "required|string|max:100",
-            'interests'         =>  "required|string|min:1",
+            'eng_heart'         =>  "numeric",
+            'eng_comment'       =>  "numeric",
+            'eng_reaction'      =>  "numeric",
+            'cpa'               =>  "string|max:255",
+            'net'               =>  "string|max:255",
+            'total_order'       =>  "numeric",
+            'country'           =>  "string|max:25",
+            'gender'            =>  "string|max:25",
+            'age'               =>  "string|max:100",
+            'audience'          =>  "string|max:100",
+            'interests'         =>  "string|min:1",
             'images'            =>  "required|array|min:1",
         ],[
             'aliexpress_product_id.numeric' => 'This is not a vallid link contains product ID!',
@@ -289,9 +289,15 @@ class AdminProductController extends Controller
         curl_close($curl);
         if ($err) {
             return "cURL Error #:" . $err;
+            $notification = session()->flash("error", "Server Error:" . $err);
+            return redirect()->back()->with($notification);
         } else {
-           
             $jsonProduct = json_decode($response);
+            if(isset($jsonProduct->info)){
+                $notification = session()->flash("error", "Product Not Found");
+                return redirect()->back()->with($notification);
+            }
+
             $categories = [];
             $origin = '';
             if(isset($jsonProduct->specsModule)){
@@ -338,17 +344,32 @@ class AdminProductController extends Controller
             $sell_price = (mt_rand(240, 300) / 100) *  $buy_price;
 
             $product = ProductResearch::firstWhere('aliexpress_id', $id);
-
+            $message    = "Product Updated Successfully";
             if (!$product) {
                 $product = new ProductResearch;
+                $message = "Product Added Successfully";
             }
     
+           
+            
+            // $images = $jsonProduct->imageModule->imagePathList;
+
+            // foreach($images as $image){
+            //     $name = $slug .'-'.md5(rand(1000, 10000)) . '.jpg';
+            //     $image = file_get_contents($image);
+            //     file_put_contents('assets/images/product/'.$name, $image);
+            //     $imageNames [] = asset('assets/images/product/'.$name);
+            // }
+            // $product->images                =   json_encode($imageNames);
+
             $product->images                =   json_encode($jsonProduct->imageModule->imagePathList);
+
             if(isset($jsonProduct->imageModule->videoUid) && isset($jsonProduct->imageModule->videoId)) {
                 $product->ali_video_link            =   "https://video.aliexpress-media.com/play/u/ae_sg_item/{$jsonProduct->imageModule->videoUid}/p/1/e/6/t/10301/{$jsonProduct->imageModule->videoId}.mp4";
             }
             $product->short_description     =   $jsonProduct->pageModule->description; 
             $product->description_url       =   $jsonProduct->descriptionModule->descriptionUrl;
+            $product->description           =   $jsonProduct->pageModule->description;
             $product->aliexpress_link       =   $jsonProduct->pageModule->itemDetailUrl; 
            
             $product->total_order           =   $jsonProduct->titleModule->formatTradeCount; 
@@ -369,7 +390,7 @@ class AdminProductController extends Controller
             $product->slug = $slug.'-'.$product->id;
             $product->save();
 
-            $notification = session()->flash("success", "Product Create Successfully");
+            $notification = session()->flash("success", $message);
 
             return redirect()->route('admin_products_list')->with($notification);
         }

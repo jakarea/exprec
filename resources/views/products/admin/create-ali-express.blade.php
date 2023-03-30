@@ -7,6 +7,7 @@
 <!-- === product research page @S === -->
 <main class="product-research-form">
     <!-- research create page start  -->
+    @include('partials/session-message')
     <div class="product-research-create-wrap">
         <div class="row">
             <div class="col-lg-12">
