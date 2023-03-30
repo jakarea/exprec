@@ -950,6 +950,20 @@ main {
   height: 20rem;
 }
 
+.product-details-long p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #000000;
+  line-height: 140%;
+  line-height: 160%;
+  margin: 0.6rem 0;
+}
+.product-details-long img {
+  display: block;
+  width: 75%;
+  margin: 1rem auto;
+}
+
 @media (min-width: 320px) and (max-width: 574px) {
   .main-body-wrapper .main-page-wrapper {
     padding-left: 0;
@@ -969,11 +983,17 @@ main {
   .d-flex.justify-content-center.align-items-center h1 {
     font-size: 2rem !important;
   }
+  .product-details-long img {
+    width: 95%;
+  }
 }
 @media (min-width: 574px) and (max-width: 767px) {
   .main-body-wrapper .main-page-wrapper {
     padding-left: 0;
     padding-top: 0;
+  }
+  .product-details-long img {
+    width: 95%;
   }
   main {
     min-height: 100vh;
