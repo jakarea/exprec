@@ -185,7 +185,11 @@ class AdminProductController extends Controller
 
         $product = ProductResearch::firstWhere('slug', $slug); 
         $slug = Str::slug($request->title);
-  
+
+        if($request->aliexpress_id){
+            $product->aliexpress_id     =   $request->aliexpress_id; 
+        }
+
         $product->title             =   $request->title; 
         $product->slug              =   $slug;
         $product->categories        =   isset($request->categories) ? implode(",",$request->categories) : '';

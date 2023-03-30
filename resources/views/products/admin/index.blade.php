@@ -134,6 +134,9 @@
                         <a href="{{ url('admin/products/'.$product->slug) }}">
                             <i class="fas fa-eye text-info me-2"></i>
                         </a> 
+                        <a href="{{ url('admin/products/'.$product->slug.'/edit') }}">
+                            <i class="fas fa-pen text-success me-2"></i>
+                        </a> 
                        
                         <a href="{{ url('admin/products/'.$product->slug.'/destroy') }}">
                             <i class="fas fa-trash text-danger"></i>

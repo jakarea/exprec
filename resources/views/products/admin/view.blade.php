@@ -319,8 +319,6 @@
       </div>
     </div>
    
-    
-    
     <div class="col-lg-4">
       <div class="info-details-wrap">
         <h4>
@@ -366,6 +364,19 @@
             @endforeach
           </h5>
         </div>
+      </div>
+    </div>
+    @if($product->description_url)
+    <div class="col-12">
+      <div class="custom-hrs">
+        <hr>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="info-details-wrap product-details-long">
+        <h4> Details: </h4>
+          @php echo file_get_contents($product->description_url); @endphp
+        @endif
       </div>
     </div>
   </div>
