@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController; 
 
 use App\Http\Controllers\CourseController; 
-use App\Http\Controllers\ProductController; 
 use App\Http\Controllers\ProjectController; 
 use App\Http\Controllers\AdInterestController; 
 use App\Http\Controllers\EmailCampingController; 
