@@ -126,6 +126,9 @@
 
                             <p>MODEL SALON mission: WE MAKE A DIFFERENCE! Everyday, we strive to deliver high-quality products with.MODEL SALON mission: WE MAKE A DIFFERENCE! Everyday, we strive to deliver high-quality products with.MODEL SALON mission: WE MAKE A DIFFERENCE! Everyday, we strive to deliver high-quality products with</p>
                         </div>
+                        <div class="page-graph-wrap">
+                          <div id="ColumnChart"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -140,4 +143,60 @@
 @section('script')
 <script src="{{asset('assets/js/slick.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/slider-config.js')}}" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+<script>
+  // setup apex charts for #LineChartTwo type line chart
+  var options = {
+          series: [{
+          name: 'Male',
+          data: [44, 55, 57, 56, 61, 58, 63]
+        }, {
+          name: 'Female',
+          data: [76, 85, 101, 98, 87, 105, 91]
+        }],
+        colors: ['#FF6262', '#727DFF'],
+          chart: {
+          type: 'bar',
+          height: 350
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            columnWidth: '75%',
+            endingShape: 'rounded'
+          },
+        },
+        dataLabels: {
+          enabled: true
+        },
+        stroke: {
+          show: true,
+          width: 1,
+          colors: ['transparent']
+        },
+        xaxis: {
+          categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+        },
+        yaxis: {
+          title: {
+            text: '$ (thousands)'
+          }
+        },
+        fill: {
+          opacity: 1
+        },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return "$ " + val + " thousands"
+            }
+          }
+        }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#ColumnChart"), options);
+        chart.render();
+         
+</script>
 @endsection
