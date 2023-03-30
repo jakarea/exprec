@@ -8,7 +8,7 @@
 <!-- === product research page @S === -->
 <main class="product-research-details-page-wrap">
 <div class="back-bttn">
-  <a href="{{ url('/products') }}">
+  <a href="{{ url('admin/products') }}">
     <i class="fas fa-arrow-left"></i> Back </a>
 </div> 
 <!-- product details wrap @S -->
@@ -17,24 +17,22 @@
     <div class="col-12">
       <div class="product-details-txt-wrap">
         <div class="d_flex">
-        @php 
+          @php 
             $text = $product->title;
-            $maxLength = 50;
+            $maxLength = 55;
               if (strlen($text) > $maxLength) {
                   $lastSpace = strpos($text, ' ', $maxLength);
                   $text = $lastSpace !== false ? substr($text, 0, $lastSpace) . '...' : $text;
               }
-              
           @endphp
 
-          <h1>{{ $text }}</h1>
+          <h1>{{$text }}</h1>
           <a href="#" class="big-cart-cion">
             <img src="{{asset('assets/images/cart-icon.svg')}}" alt="Cart" class="img-fluid">
           </a>
         </div>
       </div>
     </div>
-
     <div class="col-12 col-sm-12 col-md-12 col-lg-8">
       <div class="product-details-txt-wrap">  
         <h3> Posted {{$product->created_at->diffForHumans()}} </h3>
@@ -49,7 +47,7 @@
             <img src="{{asset('assets/images/ali-express-icon.png')}}" alt="ali-express" class="img-fluid"> See on Aliexpress </a>
         </div>
         <div class="product-description">
-           
+            {!! $product->description !!}
           <p>Please Note: {{$product->short_description }}</p> 
           
         </div>
@@ -57,20 +55,18 @@
     </div>
     <div class="col-12 col-sm-12 col-md-12 col-lg-4">
       <div class="product-img-preview-box mt-4">
-
-      
-      @php $images = json_decode($product->images)  @endphp  
+      @php $images = json_decode($product->images)  @endphp   
         <div class="main-thumb"> 
-          @if($images)
-            <img src="{{ $images[0] }}" alt="{{$product->slug}}" id="main-thumbnail" class="img-fluid" title="{{$product->slug}}">  
-          @endif
+        @if($images)
+            <img src="{{ $images[0] }}" alt="{{$product->title}}" id="main-thumbnail" class="img-fluid" title="{{$product->title}}">  
+            @endif
         </div>
         <div class="products-bttm-small-preiview">
-          @foreach(array_slice($images, 1, 4) as $image)
-            <a href="javascript:void(0)">
-              <img src="{{ $image }}" alt="{{$image}}" class="img-fluid">
-            </a> 
-          @endforeach
+        @foreach(array_slice($images, 0, 4) as $image)
+          <a href="javascript:void(0)">
+            <img src="{{ $image }}" alt="{{$product->title}}" class="img-fluid">
+          </a> 
+        @endforeach
         </div>
       </div>
     </div>
@@ -86,7 +82,7 @@
         <h5>Your Profits &amp; Costs</h5>
         <div class="d-flex">
           <div>
-            <h4>€{{ (int)$product->sell_price }}</h4>
+            <h4>€{{(int)$product->sell_price }}</h4>
             <h6>Selling Price</h6>
           </div>
           <div>
@@ -94,11 +90,15 @@
             <h6>Product Cost</h6>
           </div>
           <div>
+            @if($product->sell_price)
             <h4 style="color: #4CDE73;">{{ (int)((((int)$product->sell_price - (int)$product->buy_price) / $product->sell_price) * 100) }}% </h4>
+            @else
+            <h4 style="color: #4CDE73;">0</h4>
+            @endif
             <h6>Profit Margin</h6>
           </div>
           <div> 
-            <h4 style="color: #727DFF;">€{{ ((int)$product->sell_price - (int)$product->buy_price) }}</h4>
+            <h4 style="color: #727DFF;"> €{{ ((int)$product->sell_price - (int)$product->buy_price) }}</h4>
             <h6>Margin</h6>
           </div>
         </div>
@@ -227,12 +227,13 @@
               <td> {{ $product->total_order }} </td>
             </tr> 
             <tr>
-              <td>Total Review </td>
-              <td> {{ $product->total_review }} </td>
-            </tr> 
-
+              <td>Total Reviews </td>
+              <td style="color: #F37F14;">
+                {{ $product->total_review }}
+              </td>
+            </tr>
             <tr>
-              <td>Average Rating </td>
+              <td>Rating </td>
               <td style="color: #F37F14;">
                 <i class="fa fa-star"></i> {{ $product->avg_rating }}
               </td>
@@ -280,7 +281,6 @@
       </div>
     </div>
     <div class="col-lg-2">
-     
     @if($product->url)
       <div class="info-details-wrap">
         <h4>
@@ -289,13 +289,16 @@
         <div class="engage-box">
           
          @php $pro_urls = explode(",",$product->url) @endphp
-          @foreach($pro_urls as  $url)  
-            <a href="{{$url}}">{{ explode('.', parse_url($url, PHP_URL_HOST))[count(explode('.', parse_url($url, PHP_URL_HOST))) - 2] }}</a>
+          @foreach($pro_urls as $key => $url)  
+          @php $parse = parse_url($url) @endphp
+         
+          <a href="{{$url}}">{{ str_replace('www.','',$parse['host']) }}</a>
+         
           @endforeach 
         </div>
       </div>
       @endif
-
+      
     </div>
     <div class="col-12">
       <div class="custom-hrs">
@@ -309,15 +312,13 @@
           <img src="{{ asset('assets/images/f-icon.svg') }}" alt="Info" class="img-fluid"> Facebook Ads:
         </h4>
         @if(is_image_exist($product->fb_ads))
-          <a href="{{$product->fb_ads}}">
-            <img src="{{ is_image_exist($product->fb_ads_img) ? $product->fb_ads_img :'https://nightgalaxy.sellware.net/img/Noimage.jpg'}}" alt="Facebook Ads Image Not Found" class="img-fluid">
-          </a>
+        <a href="{{$product->fb_ads}}">
+          <img src="{{ $product->fb_ads_img }}" alt="Facebook Ads Image Not Found" class="img-fluid">
+        </a>
         @endif
       </div>
     </div>
-    
-    
-    
+   
     <div class="col-lg-4">
       <div class="info-details-wrap">
         <h4>
@@ -325,21 +326,8 @@
         </h4>
         @if(is_image_exist($product->video_link))
         <a href="{{ $product->video_link }}">
-          <img src="{{ is_image_exist($product->fb_ads_img) ? $product->fb_ads_img :'https://nightgalaxy.sellware.net/img/Noimage.jpg'}}" alt="Video Image Not Found" class="img-fluid">
+          <img src="{{ $product->video_link_img }}" alt="Video Image Not Found" class="img-fluid">
         </a>
-        @endif
-      </div>
-    </div>
-
-    <div class="col-lg-4">
-      <div class="info-details-wrap">
-        <h4><img src="{{asset('assets/images/ali-preview.png')}}" alt="ali-express" class="img-fluid" width="27"> Video:
-        </h4>
-        @if($product->ali_video_link)
-          <video controls width="100%" >
-            <source src="{{$product->ali_video_link}}" type="video/mp4">
-            <p>Your browser does not support the video tag.</p>
-	      </video>
         @endif
       </div>
     </div>
@@ -376,6 +364,19 @@
             @endforeach
           </h5>
         </div>
+      </div>
+    </div>
+    @if($product->description_url)
+    <div class="col-12">
+      <div class="custom-hrs">
+        <hr>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="info-details-wrap product-details-long">
+        <h4> Details: </h4>
+          @php echo file_get_contents($product->description_url); @endphp
+        @endif
       </div>
     </div>
   </div>

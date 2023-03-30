@@ -88,6 +88,6 @@ if ($err) {
         {
             $product = ProductResearch::where('slug', $slug)->first();
            
-            return view('products/view', compact('product'));
+            return view('products/admin/view', compact('product'));
     }   
 }
