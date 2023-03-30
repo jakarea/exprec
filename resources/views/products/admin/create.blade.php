@@ -260,9 +260,13 @@
                  <div class="col-md-12">
                    <div class="form-group">
                      <label for="tag-input1">Interests</label> 
- 
 
-                     <input type="text" placeholder="Enter Interests" name="interests" class="form-control @error('interests') is-invalid @enderror" value="{{ old('interests')}}" id="tag-input1">
+                     <modular-behaviour name="Interests" src="https://cdn.jsdelivr.net/npm/bootstrap5-tags@1.4/tags.min.js" lazy>
+                      <select class="form-select @error('interests') is-invalid @enderror" id="interests" name="interests[]" multiple data-allow-clear="1" data-allow-new="true" data-separator=" |,|  ">
+                        <option selected="selected" disabled hidden value="">Choose a interests...</option> 
+                        <option value=""></option>
+                      </select>
+                    </modular-behaviour>  
 
                      <span class="invalid-feedback">@error('interests'){{ $message }} @enderror</span>
                    </div>

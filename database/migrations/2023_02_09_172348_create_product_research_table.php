@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('product_research', function (Blueprint $table) {
             $table->id(); 
+            $table->string('aliexpress_id')->nullable();
             $table->string('title');
             $table->string('slug');
             $table->string('categories'); 
@@ -38,9 +39,12 @@ return new class extends Migration
             $table->string('country')->nullable(); 
             $table->string('gender')->nullable(); 
             $table->string('age')->nullable(); 
+            $table->string('ali_video_link')->nullable(); 
+            $table->string('description_url')->nullable(); 
+            $table->string('discount')->nullable(); 
             $table->string('audience')->nullable(); 
             $table->string('interests')->nullable(); 
-            $table->string('short_description');
+            $table->longText('short_description');
             $table->longText('description')->nullable();
             $table->string('status',10); 
             $table->text('images');

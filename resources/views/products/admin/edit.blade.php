@@ -36,7 +36,7 @@
                  <div class="form-group form-error">
                      <label for="title">Aliexpress Product ID <sup class="text-danger">*</sup>
                      </label>
-                     <input type="text" disabled="true" placeholder="Aliexpress Product ID" name="title" class="form-control @error('aliexpress_id') is-invalid @enderror" value="{{ $product->aliexpress_id }}" id="aliexpress_id">
+                     <input type="text" placeholder="Aliexpress Product ID" name="aliexpress_id" class="form-control @error('aliexpress_id') is-invalid @enderror" value="{{ $product->aliexpress_id }}" id="aliexpress_id">
                      <span class="invalid-feedback">@error('aliexpress_id'){{ $message }} @enderror</span> 
                    </div>
                  </div>
@@ -47,10 +47,10 @@
                     @endphp
                      <label for="categories">Categories</label>
                      <modular-behaviour name="Tags" src="https://cdn.jsdelivr.net/npm/bootstrap5-tags@1.4/tags.min.js" lazy>
-                      <select class="form-select @error('categories') is-invalid @enderror" id="categories" name="categories[]" multiple data-allow-clear="1" data-allow-new="true">
+                      <select class="form-select @error('categories') is-invalid @enderror" id="categories" name="categories[]" multiple data-allow-clear="1" data-allow-new="true" data-separator=" |,|  ">
                         <option selected="selected" disabled hidden value="">Choose a categories...</option>
-                        @foreach($categories as $key => $category)
-                       <option value="{{$category->name}}" {{ in_array($category->name,$selectedCategories) ? "Selected" : ''}} >{{$category->name}}</option> 
+                        @foreach($selectedCategories as $key => $category)
+                       <option value="{{$category}}" {{ in_array($category,$selectedCategories) ? "Selected" : ''}} >{{$category}}</option> 
                        @endforeach
                       </select>
                     </modular-behaviour> 
@@ -77,7 +77,7 @@
                  
                  <div class="col-md-4">
                    <div class="form-group">
-                     <label for="discount">Discount <sup class="text-danger">*</sup>
+                     <label for="discount">Discount 
                      </label>
                      <input type="text" placeholder="Enter Discount" name="discount" class="form-control @error('discount') is-invalid @enderror" value="{{ $product->discount }}" id="discount">
                      <span class="invalid-feedback">@error('discount'){{ $message }} @enderror</span>
@@ -97,12 +97,8 @@
                 @foreach($images as $key=> $image)
                 <div class="imgThumbContainer">
                     <div class="IMGthumbnail">
-                      <a href="javascript:void(0)" onclick="this.parentElement.parentElement.style.display = 'none';"><i class="fas fa-close"></i></a>
-                      @if ($product->aliexpress_id)
-                      <img src="{{ asset($image) }}" alt="{{$image}}" class="img-fluid">
-                      @else
-                      <img src="{{ asset('assets/images/product/'.$image) }}" alt="{{$image}}" class="img-fluid">
-                      @endif
+                      <a href="javascript:void(0)" onclick="this.parentElement.parentElement.style.display = 'none';"><i class="fas fa-close"></i></a> 
+                      <img src="{{ asset($image) }}" alt="{{$image}}" class="img-fluid"> 
                     </div>
                   </div> 
                   @endforeach 
@@ -137,7 +133,7 @@
                  </div> 
                  <div class="col-md-4">
                    <div class="form-group">
-                     <label for="aliexpress_link">Aliexpress Link <sup class="text-danger">*</sup>
+                     <label for="aliexpress_link">Aliexpress Link 
                      </label>
                      <input type="url" placeholder="Enter Aliexpress link" name="aliexpress_link" class="form-control @error('aliexpress_link') is-invalid @enderror" value="{{ $product->aliexpress_link }}" id="aliexpress_link">
                      <span class="invalid-feedback">@error('aliexpress_link'){{ $message }} @enderror</span>
@@ -145,7 +141,7 @@
                  </div> 
                  <div class="col-md-4">
                    <div class="form-group">
-                     <label for="fb_ads">Facebook ads Link <sup class="text-danger">*</sup>
+                     <label for="fb_ads">Facebook ads Link 
                      </label>
                      <input type="url" placeholder="Enter Facebook Ads Link" name="fb_ads" class="form-control @error('fb_ads') is-invalid @enderror" value="{{ $product->fb_ads }}" id="fb_ads">
                      <span class="invalid-feedback">@error('fb_ads'){{ $message }} @enderror</span>
@@ -171,7 +167,7 @@
                  </div> 
                  <div class="col-md-4">
                    <div class="form-group">
-                     <label for="fb_ads_img">Facebook ads Image Link <sup class="text-danger">*</sup>
+                     <label for="fb_ads_img">Facebook ads Image Link 
                      </label>
                      <input type="url" placeholder="Enter Facebook Ads Image Source" name="fb_ads_img" class="form-control @error('fb_ads_img') is-invalid @enderror" value="{{ $product->fb_ads_img }}" id="fb_ads_img">
                      <span class="invalid-feedback">@error('fb_ads_img'){{ $message }} @enderror</span>
@@ -186,7 +182,7 @@
                  </div> 
                  <div class="col-md-12">
                    <div class="form-group">
-                     <label for="url">Links <sup class="text-danger">*</sup>
+                     <label for="url">Links 
                      </label>
                      @php $urls = explode(",",$product->url)  @endphp
                      <div class="url-extra-field">
@@ -200,7 +196,7 @@
                  </div> 
                  <div class="col-md-12">
                    <div class="form-group">
-                     <label for="">Engagement of the add <sup class="text-danger">*</sup>
+                     <label for="">Engagement of the add 
                      </label>
                      <div class="row">
                       <div class="col-md-3">
@@ -224,7 +220,7 @@
                  </div>  
                  <div class="col-md-4">
                    <div class="form-group">
-                     <label for="cpa">CPA <sup class="text-danger">*</sup>
+                     <label for="cpa">CPA 
                      </label>
                      <input type="text" placeholder="Enter CPA" name="cpa" class="form-control @error('cpa') is-invalid @enderror" value="{{ $product->cpa }}" id="cpa">
                      <span class="invalid-feedback">@error('cpa'){{ $message }} @enderror</span>
@@ -232,7 +228,7 @@
                  </div>   
                  <div class="col-md-4">
                    <div class="form-group">
-                     <label for="net">NET <sup class="text-danger">*</sup>
+                     <label for="net">NET 
                      </label>
                      <input type="text" placeholder="Enter NET" name="net" class="form-control @error('net') is-invalid @enderror" value="{{ $product->net }}" id="net">
                      <span class="invalid-feedback">@error('net'){{ $message }} @enderror</span>
@@ -240,23 +236,15 @@
                  </div>  
                  <div class="col-md-4">
                    <div class="form-group">
-                     <label for="total_order">Total order on alibaba <sup class="text-danger">*</sup>
+                     <label for="total_order">Total order on alibaba 
                      </label>
                      <input type="text" placeholder="Total Order" name="total_order" class="form-control @error('total_order') is-invalid @enderror" value="{{ $product->total_order }}" id="total_order">
                      <span class="invalid-feedback">@error('total_order'){{ $message }} @enderror</span>
                    </div>
-                 </div> 
+                 </div>  
                  <div class="col-md-4">
                    <div class="form-group">
-                     <label for="review">Review on alibaba <sup class="text-danger">*</sup>
-                     </label>
-                     <input type="text" placeholder="Between 1 to 5" name="review" class="form-control @error('review') is-invalid @enderror" value="{{ $product->review }}" id="review">
-                     <span class="invalid-feedback">@error('review'){{ $message }} @enderror</span>
-                   </div>
-                 </div> 
-                 <div class="col-md-4">
-                   <div class="form-group">
-                     <label for="review">Total Review <sup class="text-danger">*</sup>
+                     <label for="review">Review on alibaba 
                      </label>
                      <input type="text" placeholder="Between 1 to 5" name="total_review" class="form-control @error('total_review') is-invalid @enderror" value="{{ $product->total_review }}" id="total_review">
                      <span class="invalid-feedback">@error('total_review'){{ $message }} @enderror</span>
@@ -264,7 +252,7 @@
                  </div> 
                  <div class="col-md-4">
                    <div class="form-group">
-                     <label for="review">Avrage Rating <sup class="text-danger">*</sup>
+                     <label for="review">Avrage Rating 
                      </label>
                      <input type="text" placeholder="Between 1 to 5" name="avg_rating" class="form-control @error('avg_rating') is-invalid @enderror" value="{{ $product->avg_rating }}" id="avg_rating">
                      <span class="invalid-feedback">@error('avg_rating'){{ $message }} @enderror</span>
@@ -278,7 +266,7 @@
                  </div>
                  <div class="col-md-6">
                    <div class="form-group">
-                     <label for="country">Country <sup class="text-danger">*</sup>
+                     <label for="country">Country 
                      </label>
                      <input type="text" placeholder="Enter Country name" name="country" class="form-control @error('country') is-invalid @enderror" value="{{ $product->country }}" id="country">
                      <span class="invalid-feedback">@error('country'){{ $message }} @enderror</span>
@@ -300,7 +288,7 @@
                  </div>
                  <div class="col-md-6">
                    <div class="form-group">
-                     <label for="age">Age <sup class="text-danger">*</sup>
+                     <label for="age">Age 
                      </label>
                      <input type="text" placeholder="Enter age" name="age" class="form-control @error('age') is-invalid @enderror" value="{{ $product->age }}" id="age">
                      <span class="invalid-feedback">@error('age'){{ $message }} @enderror</span>
@@ -308,7 +296,7 @@
                  </div>  
                  <div class="col-md-6">
                    <div class="form-group">
-                     <label for="audience">Audience <sup class="text-danger">*</sup>
+                     <label for="audience">Audience 
                      </label>
                      <input type="text" placeholder="Enter audience" name="audience" class="form-control @error('audience') is-invalid @enderror" value="{{ $product->audience }}" id="audience">
                      <span class="invalid-feedback">@error('audience'){{ $message }} @enderror</span>
@@ -316,9 +304,20 @@
                  </div>  
                  <div class="col-md-12">
                    <div class="form-group">
+                   @php 
+                      $selectedinterests = explode(",",$product->interests); 
+                    @endphp
                      <label for="tag-input1">Interests</label> 
- 
-                     <input type="text" placeholder="Enter Interests" name="interests" class="form-control @error('interests') is-invalid @enderror" value="{{ $product->interests }}">
+
+                     <modular-behaviour name="Interests" src="https://cdn.jsdelivr.net/npm/bootstrap5-tags@1.4/tags.min.js" lazy>
+                      <select class="form-select @error('interests') is-invalid @enderror" id="interests" name="interests[]" multiple data-allow-clear="1" data-allow-new="true" data-separator=" |,|  ">
+                        <option selected="selected" disabled hidden value="">Choose a interests...</option>
+                        @foreach($selectedinterests as $key => $category)
+                       <option value="{{$category}}" {{ in_array($category,$selectedinterests) ? "Selected" : ''}} >{{$category}}</option> 
+                       @endforeach
+                      </select>
+                    </modular-behaviour> 
+  
                      <span class="invalid-feedback">@error('interests'){{ $message }} @enderror</span>
                    </div>
                  </div>
