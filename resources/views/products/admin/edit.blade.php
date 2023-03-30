@@ -35,8 +35,9 @@
                  <div class="col-md-3">
                  <div class="form-group form-error">
                      <label for="title">Aliexpress Product ID <sup class="text-danger">*</sup>
-                     </label>
-                     <input type="text" placeholder="Aliexpress Product ID" name="aliexpress_id" class="form-control @error('aliexpress_id') is-invalid @enderror" value="{{ $product->aliexpress_id }}" id="aliexpress_id">
+                     </label> 
+                     <input type="text" placeholder="Aliexpress Product ID" name="aliexpress_id" class="form-control @error('aliexpress_id') is-invalid @enderror" value="{{ $product->aliexpress_id }}" id="aliexpress_id" @if($product->aliexpress_id) disabled @endif> 
+                     
                      <span class="invalid-feedback">@error('aliexpress_id'){{ $message }} @enderror</span> 
                    </div>
                  </div>
