@@ -49,12 +49,6 @@ Route::controller(AdInterestController::class)->group(function () {
     Route::post('/add-interest', '_adInterest')->name('post_add_interest');
 });
 
-// product route
-Route::prefix('products')->controller(ProductController::class)->group(function () {      
-    Route::get('/', 'index')->name('product_research');
-    Route::get('/ali/{id}','insert_product')->name('insert_product');
-    Route::get('/{slug}/details', 'view')->name('product_research_details');
-});
 
 // email camping route 
 Route::prefix('email-marketing')->controller(EmailCampingController::class)->group(function () {       

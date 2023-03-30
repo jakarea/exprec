@@ -139,7 +139,7 @@
           </div>
         </div>
         <div class="product-bttn-box">
-          <a href="{{ url('products/'.$product->slug.'/details') }}">Show me the details</a>
+          <a href="{{ url('products/'.$product->slug) }}">Show me the details</a>
           <a href="#">
             <img src="{{ asset('assets/images/cart-icon.svg') }}" alt="Cart" class="img-fluid">
           </a>

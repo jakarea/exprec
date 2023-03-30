@@ -101,14 +101,12 @@
                 Sell Price
             </th>
             <th>
-                Fb Ads
+                Aliexpress ID
             </th> 
             <th>
                 Status
             </th>
-            <th>
-                Action
-            </th>
+           
             </tr>
             <!-- task item start -->
             @foreach($products as $key => $product)
@@ -128,23 +126,15 @@
                 <td>Є {{ $product->buy_price }}</td>
                 <td> Є  {{ $product->sell_price }}</td>
 
-                <td>{{ substr($product->fb_ads,0,40) }}</td> 
+                <td><a href="{{ $product->aliexpress_link }}" target="_blank">{{ $product->aliexpress_id }}</a></td> 
 
-                <td>
-                @if( $product->status == "Active")
-                <span class="badge rounded-pill text-bg-success">Active</span>
-                @elseif($product->status == "Inactive")
-                <span class="badge rounded-pill text-bg-danger">Inactive</span>
-                @endif
-                </td>
+               
                 <td>
                     <div class="action-bttn">
-                        <a href="{{ url('admin/products/'.$product->slug.'/details') }}">
+                        <a href="{{ url('admin/products/'.$product->slug) }}">
                             <i class="fas fa-eye text-info me-2"></i>
                         </a> 
-                        <a href="{{ url('admin/products/'.$product->slug.'/edit') }}">
-                            <i class="fas fa-pen text-primary me-2"></i>
-                        </a> 
+                       
                         <a href="{{ url('admin/products/'.$product->slug.'/destroy') }}">
                             <i class="fas fa-trash text-danger"></i>
                         </a> 
