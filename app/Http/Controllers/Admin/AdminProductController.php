@@ -113,7 +113,7 @@ class AdminProductController extends Controller
         $product->gender            =   $request->gender; 
         $product->age               =   $request->age; 
         $product->audience          =   $request->audience; 
-        $product->interests         =   $request->interests;
+        $product->interests         =   isset($request->interests) ? implode(",",$request->interests) : '';
         $product->short_description =   $request->short_description; 
         $product->description       =   $request->description; 
         $product->status            =   $request->status;   
@@ -167,19 +167,19 @@ class AdminProductController extends Controller
             'buy_price'         =>  "required|numeric",
             'sell_price'        =>  "required|numeric",
             'short_description' =>  "required|string|max:455",
-            'aliexpress_link'   =>  "required|string",  
-            'url'               =>  "required|array|min:1",
-            'eng_heart'         =>  "required|numeric",
-            'eng_comment'       =>  "required|numeric",
-            'eng_reaction'      =>  "required|numeric",
-            'cpa'               =>  "required|string|max:255",
-            'net'               =>  "required|string|max:255",
-            'total_order'       =>  "required|numeric",
-            'country'           =>  "required|string|max:25",
-            'gender'            =>  "required|string|max:25",
-            'age'               =>  "required|string|max:100",
-            'audience'          =>  "required|string|max:100",
-            'interests'         =>  "required|string|min:1", 
+            // 'aliexpress_link'   =>  "required|string",  
+            // 'url'               =>  "required|array|min:1",
+            // 'eng_heart'         =>  "required|numeric",
+            // 'eng_comment'       =>  "required|numeric",
+            // 'eng_reaction'      =>  "required|numeric",
+            // 'cpa'               =>  "required|string|max:255",
+            // 'net'               =>  "required|string|max:255",
+            // 'total_order'       =>  "required|numeric",
+            // 'country'           =>  "required|string|max:25",
+            // 'gender'            =>  "required|string|max:25",
+            // 'age'               =>  "required|string|max:100",
+            // 'audience'          =>  "required|string|max:100",
+            // 'interests'         =>  "required|string|min:1", 
         ]);
 
 
@@ -204,12 +204,12 @@ class AdminProductController extends Controller
         $product->cpa               =   $request->cpa; 
         $product->net               =   $request->net; 
         $product->total_order       =   $request->total_order; 
-        $product->review            =   $request->review; 
+        $product->total_review      =   $request->total_review; 
         $product->country           =   $request->country; 
         $product->gender            =   $request->gender; 
         $product->age               =   $request->age; 
         $product->audience          =   $request->audience; 
-        $product->interests         =   $request->interests;
+        $product->interests         =   isset($request->interests) ? implode(",",$request->interests) : '';
         $product->short_description =   $request->short_description; 
         $product->description       =   $request->description; 
         $product->status            =   $request->status;   
