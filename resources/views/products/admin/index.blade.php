@@ -86,6 +86,7 @@
   <div class="row">
     <div class="col-12">
     <div class="productss-list-box">
+    @if(count($products) > 0)
         <table>
             <tr> 
             <th width="5%">
@@ -109,6 +110,7 @@
            
             </tr>
             <!-- task item start -->
+           
             @foreach($products as $key => $product)
             @php 
             $text = $product->title;
@@ -147,6 +149,9 @@
             @endforeach
             <!-- task item end -->  
         </table>
+        @else 
+              <p class="p-4 text-center">No Products Found!</p>
+            @endif
         </div>
     </div>
   </div>
