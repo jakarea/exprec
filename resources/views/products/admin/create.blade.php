@@ -7,8 +7,6 @@
 
 <!-- === product research page @S === -->
 <main class="product-research-form">
-
- 
  <!-- research create page start  -->
  <div class="product-research-create-wrap">
    <div class="row">
@@ -36,9 +34,9 @@
 
                  <div class="col-md-12">
                    <div class="form-group">
-                     <label for="categories">Categories</label>
+                     <label for="categories">Categories <sup class="text-danger">*</sup></label>
                      <modular-behaviour name="Tags" src="https://cdn.jsdelivr.net/npm/bootstrap5-tags@1.4/tags.min.js" lazy>
-                      <select class="form-select @error('categories') is-invalid @enderror" id="categories" name="categories[]" multiple data-allow-clear="1" data-allow-new="true">
+                      <select class="form-select @error('categories') is-invalid @enderror" id="categories" name="categories[]" multiple data-allow-clear="1" data-allow-new="true" data-separator=" |,|  ">
                         <option selected="selected" disabled hidden value="">Choose a categories...</option>
                         @foreach($categories as $key => $category)
                        <option value="{{$category->name}}">{{$category->name}}</option> 
@@ -68,7 +66,7 @@
                  
                  <div class="col-md-12">
                    <div class="form-group">
-                     <label for="files">FIlE</label>
+                     <label for="files">FIlE <sup class="text-danger">*</sup></label>
                      <input type="file" name="images[]" id="files" class="form-control  @error('images') is-invalid @enderror" multiple>
                      <span class="invalid-feedback">@error('images'){{ $message }} @enderror</span>
                    </div>
@@ -78,7 +76,7 @@
                 </div>
                  <div class="col-md-12">
                   <div class="form-group">
-                    <label for="short_description">Short Description</label>
+                    <label for="short_description">Short Description <sup class="text-danger">*</sup></label>
                     <textarea name="short_description" id="short_description" class="form-control @error('short_description') is-invalid @enderror" placeholder="Enter Short Description">{{ old('short_description')}}</textarea>
                     <span class="invalid-feedback">@error('short_description'){{ $message }} @enderror</span>
                   </div>
@@ -98,7 +96,7 @@
                  </div> 
                  <div class="col-md-4">
                    <div class="form-group">
-                     <label for="aliexpress_link">Aliexpress Link <sup class="text-danger">*</sup>
+                     <label for="aliexpress_link">Aliexpress Link 
                      </label>
                      <input type="hidden" id="aliexpress_product_id" name="aliexpress_product_id" value=""/>
                      <input type="url" placeholder="Enter Aliexpress link" name="aliexpress_link" class="form-control @error('aliexpress_link') is-invalid @enderror" value="{{ old('aliexpress_link')}}" id="aliexpress_link">
@@ -108,7 +106,7 @@
                  </div> 
                  <div class="col-md-4">
                    <div class="form-group">
-                     <label for="fb_ads">Facebook ads Link <sup class="text-danger">*</sup>
+                     <label for="fb_ads">Facebook ads Link 
                      </label>
                      <input type="url" placeholder="Enter Facebook Ads Link" name="fb_ads" class="form-control @error('fb_ads') is-invalid @enderror" value="{{ old('fb_ads')}}" id="fb_ads">
                      <span class="invalid-feedback">@error('fb_ads'){{ $message }} @enderror</span>
@@ -125,7 +123,7 @@
                  </div> 
                  <div class="col-md-6">
                    <div class="form-group">
-                     <label for="fb_ads_img">Facebook ads Image Link <sup class="text-danger">*</sup>
+                     <label for="fb_ads_img">Facebook ads Image Link 
                      </label>
                      <input type="url" placeholder="Enter Facebook Ads Image Source" name="fb_ads_img" class="form-control @error('fb_ads_img') is-invalid @enderror" value="{{ old('fb_ads_img')}}" id="fb_ads_img">
                      <span class="invalid-feedback">@error('fb_ads_img'){{ $message }} @enderror</span>
@@ -140,7 +138,7 @@
                  </div> 
                  <div class="col-md-12">
                    <div class="form-group">
-                     <label for="url">Links <sup class="text-danger">*</sup>
+                     <label for="url">Links 
                      </label>
                      <input type="url" placeholder="Enter URL" name="url[]" class="form-control @error('url') is-invalid @enderror"  id="url" multiple>
                      <div class="url-extra-field">
@@ -151,7 +149,7 @@
                  </div> 
                  <div class="col-md-12">
                    <div class="form-group">
-                     <label for="">Engagement of the add <sup class="text-danger">*</sup>
+                     <label for="">Engagement of the add 
                      </label>
                      <div class="row">
                       <div class="col-md-3">
@@ -175,7 +173,7 @@
                  </div>  
                  <div class="col-md-2">
                    <div class="form-group">
-                     <label for="cpa">CPA <sup class="text-danger">*</sup>
+                     <label for="cpa">CPA 
                      </label>
                      <input type="text" placeholder="Enter CPA" name="cpa" class="form-control @error('cpa') is-invalid @enderror" value="{{ old('cpa')}}" id="cpa">
                      <span class="invalid-feedback">@error('cpa'){{ $message }} @enderror</span>
@@ -183,7 +181,7 @@
                  </div>   
                  <div class="col-md-2">
                    <div class="form-group">
-                     <label for="net">NET <sup class="text-danger">*</sup>
+                     <label for="net">NET 
                      </label>
                      <input type="text" placeholder="Enter NET" name="net" class="form-control @error('net') is-invalid @enderror" value="{{ old('net')}}" id="net">
                      <span class="invalid-feedback">@error('net'){{ $message }} @enderror</span>
@@ -191,7 +189,7 @@
                  </div>  
                  <div class="col-md-3">
                    <div class="form-group">
-                     <label for="total_order">Total order on alibaba <sup class="text-danger">*</sup>
+                     <label for="total_order">Total order on alibaba 
                      </label>
                      <input type="text" placeholder="Total Order" name="total_order" class="form-control @error('total_order') is-invalid @enderror" value="{{ old('total_order')}}" id="total_order">
                      <span class="invalid-feedback">@error('total_order'){{ $message }} @enderror</span>
@@ -199,7 +197,7 @@
                  </div> 
                  <div class="col-md-3">
                    <div class="form-group">
-                     <label for="total_review">Number of Review <sup class="text-danger">*</sup>
+                     <label for="total_review">Number of Review 
                      </label>
                      <input type="text" placeholder="Total review on aliexpress" name="total_review" class="form-control @error('total_review') is-invalid @enderror" value="{{ old('total_review')}}" id="total_review">
                      <span class="invalid-feedback">@error('total_review'){{ $message }} @enderror</span>
@@ -207,7 +205,7 @@
                  </div>   
                  <div class="col-md-2">
                    <div class="form-group">
-                     <label for="avg_rating">Avarage Rating <sup class="text-danger">*</sup>
+                     <label for="avg_rating">Avarage Rating 
                      </label>
                      <input type="text" placeholder="Between 1 to 5" name="avg_rating" class="form-control @error('cpa') is-invalid @enderror" value="{{ old('avg_rating')}}" id="avg_rating">
                      <span class="invalid-feedback">@error('avg_rating'){{ $message }} @enderror</span>
@@ -223,7 +221,7 @@
                  </div>
                  <div class="col-md-6">
                    <div class="form-group">
-                     <label for="country">Country <sup class="text-danger">*</sup>
+                     <label for="country">Country 
                      </label>
                      <input type="text" placeholder="Enter Country name" name="country" class="form-control @error('country') is-invalid @enderror" value="{{ old('country')}}" id="country">
                      <span class="invalid-feedback">@error('country'){{ $message }} @enderror</span>
@@ -245,7 +243,7 @@
                  </div>
                  <div class="col-md-6">
                    <div class="form-group">
-                     <label for="age">Age <sup class="text-danger">*</sup>
+                     <label for="age">Age 
                      </label>
                      <input type="text" placeholder="Enter age" name="age" class="form-control @error('age') is-invalid @enderror" value="{{ old('age')}}" id="age">
                      <span class="invalid-feedback">@error('age'){{ $message }} @enderror</span>
@@ -253,7 +251,7 @@
                  </div>  
                  <div class="col-md-6">
                    <div class="form-group">
-                     <label for="audience">Audience <sup class="text-danger">*</sup>
+                     <label for="audience">Audience 
                      </label>
                      <input type="text" placeholder="Enter audience" name="audience" class="form-control @error('audience') is-invalid @enderror" value="{{ old('audience')}}" id="audience">
                      <span class="invalid-feedback">@error('audience'){{ $message }} @enderror</span>
@@ -262,7 +260,10 @@
                  <div class="col-md-12">
                    <div class="form-group">
                      <label for="tag-input1">Interests</label> 
+ 
+
                      <input type="text" placeholder="Enter Interests" name="interests" class="form-control @error('interests') is-invalid @enderror" value="{{ old('interests')}}" id="tag-input1">
+
                      <span class="invalid-feedback">@error('interests'){{ $message }} @enderror</span>
                    </div>
                  </div>
