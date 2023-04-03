@@ -4,7 +4,8 @@
 @section('style') 
 <link href="{{ asset('assets/css/adspy.css') }}" rel="stylesheet" type="text/css" />  
 <link href="{{ asset('assets/css/email-camping.css') }}" rel="stylesheet" type="text/css" /> 
-<link href="//code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" /> 
+<link href="//code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />  
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" />  
 
 @endsection
 
@@ -130,23 +131,30 @@ $languages = array(
 								<option value="Male">Male</option>
 								<option value="Female">Female</option>
 							</select>
-							<select name="languages" id="languages">
-								<option value="">Language</option>
-								@foreach ($languages as $code => $name)
-								<option value="{{ $code }}">{{ $name }}</option>
-								@endforeach
-							</select>
-							<select name="ad_reached_countries[]" id="ad_reached_countries">
-								<option value="">Countries</option>
-								@foreach ($countries as $code => $name)
-								<option value="{{$code}}">{{$name}}</option>
-								@endforeach
-							</select>
-							<select name="_cta_type" id="_cta_type">
-								<option value="">CTA Type</option>
-								<option value="learn_more">Learn More</option>
-								<option value="send_message">Send Message</option>
-							</select>
+							<div class="customselect-wrap">
+								<select class="selectpicker" multiple aria-label="Default select example" data-live-search="true" name="languages" id="languages">
+								<option value="">Languages</option>
+									@foreach ($languages as $code => $name)
+										
+										<option value="{{ $code }}">{{ $name }}</option>
+									@endforeach
+								</select>
+							</div>
+							<div class="customselect-wrap">
+								<select class="selectpicker" multiple aria-label="Default select example" data-live-search="true" name="ad_reached_countries[]" id="ad_reached_countries">
+									<option value="">Countries</option>
+									@foreach ($countries as $code => $name)
+									<option value="{{$code}}">{{$name}}</option>
+									@endforeach
+								</select>
+							</div> 
+							<div class="customselect-wrap">
+								<select class="selectpicker" multiple aria-label="Default select example" data-live-search="true" name="_cta_type" id="_cta_type">
+									<option value="">CTA Type</option>
+									<option value="learn_more">Learn More</option>
+									<option value="send_message">Send Message</option>
+								</select>
+							</div>  
 							<select name="ad_active_status" id="ad_active_status">
 								<option value="">Status</option>
 								<option value="ACTIVE">Active</option>
@@ -212,8 +220,8 @@ $languages = array(
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div id="ad-container" class="d-flex justify-content-center">
+		<div class="rows">
+			<div id="ad-container" class="row">
 				<!-- Data will be loaded here -->
 			</div>
 			<div class="d-flex align-items-center justify-content-center img-fluid d-none" id="ad-container-preloader">
@@ -227,7 +235,10 @@ $languages = array(
 @section('script')
 <script src="{{ asset('assets/js/facebook.js') }}"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script> 
+
+ 
 
 <script>
      $(function() {
