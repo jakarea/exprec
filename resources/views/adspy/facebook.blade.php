@@ -133,8 +133,9 @@ $languages = array(
 							</select>
 							<div class="customselect-wrap">
 								<select class="selectpicker" multiple aria-label="Default select example" data-live-search="true" name="languages" id="languages">
+								<option value="">Languages</option>
 									@foreach ($languages as $code => $name)
-										<option value="">Languages</option>
+										
 										<option value="{{ $code }}">{{ $name }}</option>
 									@endforeach
 								</select>
