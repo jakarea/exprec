@@ -374,7 +374,6 @@
     </div>
     <div class="col-lg-12">
       <div class="info-details-wrap product-details-long">
-        <h4> Details: </h4>
           @php echo file_get_contents($product->description_url); @endphp
         @endif
       </div>

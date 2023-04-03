@@ -4,12 +4,11 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController; 
-
+use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\CourseController; 
 use App\Http\Controllers\ProjectController; 
 use App\Http\Controllers\AdInterestController; 
-use App\Http\Controllers\EmailCampingController; 
-
+use App\Http\Controllers\EmailCampingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,3 +76,16 @@ Route::prefix('elearning')->controller(CourseController::class)->group(function 
     Route::get('/mylearning', 'mylearning');   
     Route::get('/favorite', 'suggested');   
 });
+
+
+ 
+Route::get('/facebook/auth/redirect', function () {
+    return Socialite::driver('facebook')->redirect();
+});
+ 
+Route::get('/facebook/auth/callback', function () {
+    $user = Socialite::driver('facebook')->user();
+ 
+    // $user->token
+});
+

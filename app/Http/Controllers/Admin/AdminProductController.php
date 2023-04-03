@@ -354,22 +354,20 @@ class AdminProductController extends Controller
                 $message = "Product Added Successfully";
             }
     
-           
-            
-            // $images = $jsonProduct->imageModule->imagePathList;
+             $images = $jsonProduct->imageModule->imagePathList;
 
-            // foreach($images as $image){
-            //     $name = $slug .'-'.md5(rand(1000, 10000)) . '.jpg';
-            //     $image = file_get_contents($image);
-            //     file_put_contents('assets/images/product/'.$name, $image);
-            //     $imageNames [] = asset('assets/images/product/'.$name);
-            // }
-            // $product->images                =   json_encode($imageNames);
+            foreach($images as $image){
+                $name = $slug .'-'.md5(rand(1000, 10000)) . '.jpg';
+                $image = file_get_contents($image);
+                file_put_contents('assets/images/product/'.$name, $image);
+                $imageNames [] = asset('assets/images/product/'.$name);
+            }
+            $product->images             =   json_encode($imageNames);
 
-            $product->images                =   json_encode($jsonProduct->imageModule->imagePathList);
+            //$product->images                =   json_encode($jsonProduct->imageModule->imagePathList);
 
             if(isset($jsonProduct->imageModule->videoUid) && isset($jsonProduct->imageModule->videoId)) {
-                $product->ali_video_link            =   "https://video.aliexpress-media.com/play/u/ae_sg_item/{$jsonProduct->imageModule->videoUid}/p/1/e/6/t/10301/{$jsonProduct->imageModule->videoId}.mp4";
+                $product->ali_video_link    =   "https://video.aliexpress-media.com/play/u/ae_sg_item/{$jsonProduct->imageModule->videoUid}/p/1/e/6/t/10301/{$jsonProduct->imageModule->videoId}.mp4";
             }
             $product->short_description     =   $jsonProduct->pageModule->description; 
             $product->description_url       =   $jsonProduct->descriptionModule->descriptionUrl;
@@ -391,7 +389,7 @@ class AdminProductController extends Controller
             $product->status                =   'Active'; 
         
             $product->save();
-            $product->slug = $slug.'-'.$product->id;
+            $product->slug                  = $slug.'-'.$product->id;
             $product->save();
 
             $notification = session()->flash("success", $message);
@@ -412,8 +410,6 @@ class AdminProductController extends Controller
 // priceModule->discountRatioTips
 // priceModule->discount
 
-
-
 // specsModule->props[]->attrName  Item Type , Origin , Feature , Style, Brand name , Category , Type
 // specsModule->props[]->attrValue
 // storeModule->storeURL
@@ -422,34 +418,24 @@ class AdminProductController extends Controller
 
 // pageModule->imagePath (thumb)
 
+// $api_key = '373ee3b1643744ac81c440e0c5782b21'; // Replace with your own API key
+// $from_currency = 'USD';
+// $to_currency = 'EUR';
+// $url = "https://openexchangerates.org/api/latest.json?app_id=$api_key&base=$from_currency&symbols=$to_currency";
 
+// $ch = curl_init();
+// curl_setopt($ch, CURLOPT_URL, $url);
+// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+// $response = curl_exec($ch);
+// curl_close($ch);
 
+// if ($response) {
+//     $data = json_decode($response, true);
+//     $exchange_rate = $data['rates'][$to_currency];
+// } else {
+//     echo "Error: Unable to retrieve exchange rate data.";
+// }
 
-        // $api_key = '373ee3b1643744ac81c440e0c5782b21'; // Replace with your own API key
-        // $from_currency = 'USD';
-        // $to_currency = 'EUR';
-        // $url = "https://openexchangerates.org/api/latest.json?app_id=$api_key&base=$from_currency&symbols=$to_currency";
+// Item Type , Origin , Feature , Style, Brand name , Category , Type
 
-        // $ch = curl_init();
-        // curl_setopt($ch, CURLOPT_URL, $url);
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        // $response = curl_exec($ch);
-        // curl_close($ch);
-
-        // if ($response) {
-        //     $data = json_decode($response, true);
-        //     $exchange_rate = $data['rates'][$to_currency];
-        // } else {
-        //     echo "Error: Unable to retrieve exchange rate data.";
-        // }
-
-
-     
-       
-
-        // Item Type , Origin , Feature , Style, Brand name , Category , Type
-
-        // return $product;
-       
-
-        
+// return $product;

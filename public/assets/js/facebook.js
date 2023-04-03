@@ -1,3 +1,4 @@
+const baseUrl = document.querySelector('meta[name="base-url"]').getAttribute('content');
 var searchButton = document.getElementById("searchBtn");
 var adsDiv = document.getElementById("ad-container");
 var adContainerPreloader = document.getElementById("ad-container-preloader");
@@ -5,13 +6,34 @@ var isLoading = false;
 var nextPage = '';
 var ads = [];
 var ids = [];
-var searchTerms = '';
+var search_terms = '';
 var htmlAds = ''
 
-searchBtn.addEventListener('click', function () {
-    search_terms = document.getElementById("search_terms").value;
+searchButton.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    // search_type = document.getElementById("search_type").value;
+    // search_terms = document.getElementById("search_terms").value;
+    // publisher_platforms = document.getElementById("publisher_platforms").value;
+    // media_type = document.getElementById("media_type").value;
+    // languages = document.getElementById("languages").value;
+    // ad_reached_countries = document.getElementById("ad_reached_countries").value;
+    // ad_active_status = document.getElementById("ad_active_status").value;
+    // ad_delivery_date_min = document.getElementById("ad_delivery_date_min").value;
+    // ad_delivery_date_max = document.getElementById("ad_delivery_date_max").value;
+    // search_page_ids = document.getElementById("search_page_ids").value;
+
+    // _sex = document.getElementById("_sex").value;
+    // _cta_type = document.getElementById("_cta_type").value;
+    // _creation_date_start = document.getElementById("_creation_date_start").value;
+    // _creation_date_end = document.getElementById("_creation_date_end").value;
+    // _first_seen_start = document.getElementById("_first_seen_start").value;
+    // _first_seen_end = document.getElementById("_first_seen_end").value;
+    // _last_seen_start = document.getElementById("_last_seen_start").value;
+    // _last_seen_end = document.getElementById("_last_seen_end").value;
+
     nextPage = ''; // Clear the pagination
-    document.getElementById("search_terms").value = '';
+    //document.getElementById("search_terms").value = '';
     adsDiv.innerHTML = '';
     makeAjaxRequest();
 });
@@ -29,6 +51,8 @@ function loadMoreData() {
         makeAjaxRequest();
     }, 2000);
 }
+
+
 document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener('scroll', function () {
         if (window.innerHeight + window.scrollY + 1 >= document.body.offsetHeight) {
@@ -61,19 +85,34 @@ function getDateFormated(dateStr) {
     });
     return formattedDate;
 }
+
+function createJsonFromFields(fields) {
+    let data = {
+        nextPage: nextPage,
+    };
+    fields.forEach(function (field) {
+        let fieldValue = document.getElementById(field).value;
+        if (fieldValue) {
+            data[field] = fieldValue;
+        }
+    });
+    return data;
+}
+
 function makeAjaxRequest() {
+    isLoading = true;
+    adContainerPreloader.classList.remove("d-none");
+    let fields = ["search_type", "search_terms", "publisher_platforms", "media_type", "languages", "ad_reached_countries", "ad_active_status", "ad_delivery_date_min", "ad_delivery_date_max", "search_page_ids", "_sex", "_cta_type", "_creation_date_start", "_creation_date_end", "_first_seen_start", "_first_seen_end", "_last_seen_start", "_last_seen_end"];
+    let jsonData = createJsonFromFields(fields);
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
     $.ajax({
-        url: "{{ url('/adspy/load-more-data')}}",
-        type: 'POST',
-        data: {
-            search_terms,
-            nextPage
-        },
+        url: baseUrl + '/adspy/load-more-data',
+        type: 'GET',
+        data: jsonData,
         success: function (data) {
             search_terms = '';
             nextPage = data.nextPage
@@ -81,7 +120,7 @@ function makeAjaxRequest() {
             isLoading = false;
             adContainerPreloader.classList.add("d-none");
             htmlAds = ''
-
+            console.log({ ads });
             let title = ''
             if (ads.length === 0) {
                 adsDiv.insertAdjacentHTML('beforeend', `<p class="col-12 text-center no-more-ads">The available ads seems to have reached its end, with no more left to access.</p>`);
@@ -94,23 +133,23 @@ function makeAjaxRequest() {
                 htmlAds += `<div class="col-lg-4" id="ad_${ad.id}">
                                 <div class="wining-product-item adspy-filter-product">
                                     <div class="wining-product-thumbnail">
-                                        <img id="img_${ad.id}" src="{{ asset('assets/images/preloader2.gif') }}" alt="${title}" class="img-fluid main-img">
-                                        <img id="player_${ad.id}"src="{{ asset('assets/images/play-icon.png') }}" alt="Line" class="img-fluid player-img d-none">
+                                        <img id="img_${ad.id}" src="${baseUrl}/assets/images/preloader2.gif" alt="${title}" class="img-fluid main-img">
+                                        <img id="player_${ad.id}"src="${baseUrl}/assets/images/play-icon.png" alt="Line" class="img-fluid player-img d-none">
                                     </div>
                                     <div class="wining-product-txt">
                                         <h5>${title}</h5>
                                         <h3>${getDayDiff(ad.ad_delivery_start_time, ad.ad_delivery_stop_time)} Days</h3>
                                         <ul>
-                                        <li><a href="#"><img src="{{ asset('assets/images/tag-icon.svg') }}" alt="Comment" class="img-fluid"> ${humanReadableFormat(ad.estimated_audience_size.lower_bound)}</a></li>
-                                        <li><a href="#"><img src="{{ asset('assets/images/pin-icon.svg') }}" alt="Comment" class="img-fluid"> ${humanReadableFormat(ad.impressions.lower_bound)}</a></li>
+                                        <li><a href="#"><img src="${baseUrl}/assets/images/tag-icon.svg" alt="Comment" class="img-fluid"> ${humanReadableFormat(ad.estimated_audience_size.lower_bound)}</a></li>
+                                        <li><a href="#"><img src="${baseUrl}/assets/images/pin-icon.svg" alt="Comment" class="img-fluid"> ${humanReadableFormat(ad.impressions.lower_bound)}</a></li>
                                         </ul>
                                         <table>
                                             <tr>
-                                                <td><img src="{{ asset('assets/images/calendar-clr-icon.svg') }}" alt="Comment" class="img-fluid"> First Seen</td>
+                                                <td><img src="${baseUrl}/assets/images/calendar-clr-icon.svg" alt="Comment" class="img-fluid"> First Seen</td>
                                                 <td>${getDateFormated(ad.ad_delivery_start_time)}</td>
                                             </tr>
                                             <tr>
-                                                <td><img src="{{ asset('assets/images/calendar-clr-icon.svg') }}" alt="Comment" class="img-fluid"> Last Seen</td>
+                                                <td><img src="${baseUrl}/assets/images/calendar-clr-icon.svg" alt="Comment" class="img-fluid"> Last Seen</td>
                                                 <td>${getDateFormated(ad.ad_delivery_stop_time)}</td>
                                             </tr>
                                         </table> 
@@ -136,10 +175,10 @@ async function getImagesByIds(ids) {
     try {
         while (ids.length > 0) {
             const id = ids.shift();
-            const url = `{{ url('/adspy/scrapAdBy/${id}') }}`;
+            const url = baseUrl + '/adspy/scrapAdBy/' + id;
             const data = await $.ajax({
                 url,
-                type: 'POST'
+                type: 'GET'
             });
 
             const {
