@@ -82,7 +82,8 @@ class AdspyController extends Controller
             foreach ($results['data'] as $ad) {
                 $exists = false;
                 foreach ($uniqueAds as $uniqueAd) {
-                    if ($uniqueAd["page_id"] == $ad["page_id"] && $uniqueAd["ad_delivery_start_time"] == $ad["ad_delivery_start_time"] && $uniqueAd["ad_delivery_stop_time"] == $ad["ad_delivery_stop_time"]) {
+                    if ($uniqueAd["page_id"] == $ad["page_id"] && $uniqueAd["ad_delivery_start_time"] == $ad["ad_delivery_start_time"] && 
+                        (isset($uniqueAd["ad_delivery_stop_time"]) && isset($ad["ad_delivery_stop_time"]) && $uniqueAd["ad_delivery_stop_time"] == $ad["ad_delivery_stop_time"]) ) {
                         $exists = true;
                         break;
                     }

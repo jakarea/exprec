@@ -150,7 +150,7 @@ function makeAjaxRequest() {
                                             </tr>
                                             <tr>
                                                 <td><img src="${baseUrl}/assets/images/calendar-clr-icon.svg" alt="Comment" class="img-fluid"> Last Seen</td>
-                                                <td>${getDateFormated(ad.ad_delivery_stop_time)}</td>
+                                                <td>${ad.ad_delivery_stop_time ? getDateFormated(ad.ad_delivery_stop_time) : ''}</td>
                                             </tr>
                                         </table> 
                                         <div class="adspy-filter-product-bttns">
