@@ -130,7 +130,7 @@ function makeAjaxRequest() {
 
                 ids.push(ad.id);
                 title = ad.ad_creative_link_titles ? ad.ad_creative_link_titles[0] : ''
-                htmlAds += `<div class="col-lg-4" id="ad_${ad.id}">
+                htmlAds += `<div class="col-lg-4 col-md-6 col-sm-6" id="ad_${ad.id}">
                                 <div class="wining-product-item adspy-filter-product">
                                     <div class="wining-product-thumbnail">
                                         <img id="img_${ad.id}" src="${baseUrl}/assets/images/preloader2.gif" alt="${title}" class="img-fluid main-img">
