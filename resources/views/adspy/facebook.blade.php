@@ -226,7 +226,7 @@ $languages = array(
 			</div>
 			<div class="d-flex align-items-center justify-content-center img-fluid d-none" id="ad-container-preloader">
 				<img src="{{ asset('assets/images/preloader3.gif') }}" alt=""  style="width:25%">
-			</div>
+			</div> 
 		</div>
 	</div>
 </main>
