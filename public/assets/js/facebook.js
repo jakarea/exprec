@@ -170,6 +170,9 @@ function makeAjaxRequest() {
 
             adsDiv.insertAdjacentHTML('beforeend', htmlAds);
             getImagesByIds(ids);
+            $('.row').masonry({
+                percentPosition: true
+            });
 
         },
         error: function (xhr, status, error) {
