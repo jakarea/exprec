@@ -594,7 +594,23 @@
 .about-add-box-wrap {
     @include m.box(1rem, .7rem, v.$light);
     border: 1px solid v.$third;
-
+    .social-site{ 
+        display: inline-block;
+        margin-right: 0.3rem;
+        i.facebook-messenger,
+        i.fa-facebook{
+            color: v.$blu;
+        }
+        i.fa-instagram{
+            color: v.$primary;
+        }
+        i.fa-twitter{
+            color: v.$secondary;
+        }
+        i.fa-whatsapp{
+            color: v.$grn;
+        }
+    }
     .d-flex {
         justify-content: space-between;
         align-items: center;
@@ -803,15 +819,29 @@
     padding-top: 0.6rem;
     margin-top: 0.6rem;
     border-top: 1px solid v.$third;
-
+    margin-bottom: 1rem;
+    ul{
+        li{
+            margin: .65rem 0;
+            @include m.df;
+            i{
+                font-size: 0.4rem;
+                color: v.$third;
+                margin-right: 0.7rem;
+            }
+        }
+    }
     h4 {
-        @include m.para(1.3rem, 600, v.$btnbg);
+        @include m.para(1.2rem, 600, v.$btnbg);
         margin-bottom: 0.1rem;
     }
 
     p {
-        @include m.para(0.9rem, 500, v.$fourth);
-        margin-top: 0.5rem;
+        @include m.para(0.9rem, 400, v.$fourth); 
+        span{
+            color: v.$btnbg;
+            font-weight: 500;
+        }
     }
 }
 

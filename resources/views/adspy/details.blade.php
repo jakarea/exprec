@@ -34,24 +34,16 @@
                             <div class="media-body">
                                 <h6>{{ $ad->page_name}}</h6>
                                 <p>ID: {{$ad->id}}</p>
-                                @foreach($ad->publisher_platforms as $platform)
-                    <div class="social-site">
-                        <i class="fa-brands fa-{{$platform}}"></i>
-                    </div>
-                    
-                    @endforeach
+                                @foreach($ad->publisher_platforms as $platform) 
+                                <a href="#" class="social-site"> <i class="fa-brands fa-{{$platform}}"></i></a>
+                                @endforeach
                             </div>
-                           
                         </div>
                         <a href="#"><i class="fas fa-copy"></i></a>
-                        
                     </div>
                   
-                   
-                   
-
                     <div class="details">
-                        <p>{{ $ad->title}}</a></p>
+                        <p>{{ isset($ad->title) ? $ad->title : "" }}</a></p>
                     </div>
                     <!-- add thumbnail @S -->
                     @if(count($ad->images) > 0)
@@ -62,16 +54,16 @@
                     <!-- add thumbnail @E -->
                     <!-- add slider @S -->
                     <!-- <div class="ads-slider-wrap">
-            <div class="add-slider-arrows">
-                <a href="javascript:void(0)" class="prev"><i class="fas fa-angle-left"></i></a>
-                <a href="javascript:void(0)" class="next"><i class="fas fa-angle-right"></i></a>
-            </div>
-            <div class="add-slider">
-                <img src="{{asset('assets/images/post-02.png')}}" alt="post-image" class="img-fluid">
-                <img src="{{asset('assets/images/post-01.png')}}" alt="post-image" class="img-fluid">
-                <img src="{{asset('assets/images/post-03.png')}}" alt="post-image" class="img-fluid">
-            </div>
-          </div> -->
+                        <div class="add-slider-arrows">
+                            <a href="javascript:void(0)" class="prev"><i class="fas fa-angle-left"></i></a>
+                            <a href="javascript:void(0)" class="next"><i class="fas fa-angle-right"></i></a>
+                        </div>
+                        <div class="add-slider">
+                            <img src="{{asset('assets/images/post-02.png')}}" alt="post-image" class="img-fluid">
+                            <img src="{{asset('assets/images/post-01.png')}}" alt="post-image" class="img-fluid">
+                            <img src="{{asset('assets/images/post-03.png')}}" alt="post-image" class="img-fluid">
+                        </div>
+                    </div> -->
                     <!-- add slider @E -->
                     @if(count($ad->videos) > 0)
                     <!-- add video @S -->
@@ -151,11 +143,33 @@
                             <div class="col-12">
                                 <div class="page-more-info">
                                     <h4>More info</h4>
-                                  Spend: {{ $ad->spend->lower_bound }} - {{ $ad->spend->upper_bound }} 
-                                  Currency: {{ $ad->currency }}
-                                  Paid By: {{ $ad->byline }}
-                                  impressions: {{ $ad->impressions->lower_bound }} - {{ isset($ad->impressions->upper_bound) ? $ad->impressions->upper_bound : ''  }}'}}
-                                  Audiencen: {{ $ad->estimated_audience_size->lower_bound }} - {{ isset($ad->estimated_audience_size->upper_bound) ?$ad->estimated_audience_size->upper_bound : ''  }}
+                                    <ul> 
+                                        <li>
+                                            <i class="fas fa-circle"></i>
+                                            <p><span>Spend:</span> 
+                                            {{ isset($ad->spend->lower_bound) ? $ad->spend->lower_bound : "--" }} - {{ isset($ad->spend->upper_bound) ? $ad->spend->upper_bound : "--" }} 
+                                            </p>
+                                        </li> 
+
+                                        <li>
+                                            <i class="fas fa-circle"></i> 
+                                            <p><span>Currency:</span> 
+                                                {{ isset($ad->currency) ? $ad->currency : "--" }}
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-circle"></i>
+                                            <p><span>Paid By:</span> 
+                                                {{ isset($ad->byline) ? $ad->byline : "--" }} 
+                                            </p>
+                                        </li>
+                                        <li><i class="fas fa-circle"></i>
+                                         <p><span>Impressions:</span> 
+                                         {{ isset($ad->impressions->lower_bound) ? $ad->impressions->lower_bound : "--" }} - {{ isset($ad->impressions->upper_bound) ? $ad->impressions->upper_bound : '--'  }} </p></li>
+                                        <li><i class="fas fa-circle"></i> <p><span>Audiencen</span>: 
+                                        {{ isset($ad->estimated_audience_size->lower_bound) ? $ad->estimated_audience_size->lower_bound : "--" }} - {{ isset($ad->estimated_audience_size->upper_bound) ?$ad->estimated_audience_size->upper_bound : '--'  }} </p></li>
+                                    </ul> 
+                                  
                                 </div>
                                 <div class="page-graph-wrap">
 
