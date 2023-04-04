@@ -12,10 +12,7 @@ Route::prefix('adspy')->controller(AdspyController::class)->group(function () {
     
     Route::get('/load-more-data', 'loadMoreData');
     Route::get('/scrapAdBy/{id}', 'scrapAdById');
-
-    Route::get('/facebook2/login', 'redirectToFacebook');
-    Route::get('/facebook2/callback', 'facebookCallback');
-
+    Route::post('/facebook2/save-ad2/yes', 'saveAd');
 
 });
 

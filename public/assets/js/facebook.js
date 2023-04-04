@@ -8,6 +8,10 @@ var ads = [];
 var ids = [];
 var search_terms = '';
 var htmlAds = ''
+var i = 0;
+var savedAds = [];
+var savedAdsContent = [];
+var saveAdAndOpenElements = document.querySelectorAll('.saveAdAndOpen');
 
 searchButton.addEventListener('click', function (e) {
     e.preventDefault();
@@ -120,15 +124,16 @@ function makeAjaxRequest() {
             isLoading = false;
             adContainerPreloader.classList.add("d-none");
             htmlAds = ''
-            console.log({ ads });
             let title = ''
+
             if (ads.length === 0) {
                 adsDiv.insertAdjacentHTML('beforeend', `<p class="col-12 text-center no-more-ads">The available ads seems to have reached its end, with no more left to access.</p>`);
                 return;
             }
-            ads.forEach(function (ad, i) {
 
+            ads.forEach(function (ad) {
                 ids.push(ad.id);
+                savedAds.push(ad)
                 title = ad.ad_creative_link_titles ? ad.ad_creative_link_titles[0] : ''
                 htmlAds += `<div class="col-lg-4 col-md-6 col-sm-6" id="ad_${ad.id}">
                                 <div class="wining-product-item adspy-filter-product">
@@ -140,8 +145,8 @@ function makeAjaxRequest() {
                                         <h5>${title}</h5>
                                         <h3>${getDayDiff(ad.ad_delivery_start_time, ad.ad_delivery_stop_time)} Days</h3>
                                         <ul>
-                                        <li><a href="#"><img src="${baseUrl}/assets/images/tag-icon.svg" alt="Comment" class="img-fluid"> ${humanReadableFormat(ad.estimated_audience_size.lower_bound)}</a></li>
-                                        <li><a href="#"><img src="${baseUrl}/assets/images/pin-icon.svg" alt="Comment" class="img-fluid"> ${humanReadableFormat(ad.impressions.lower_bound)}</a></li>
+                                        <li><a href="#"><img src="${baseUrl}/assets/images/tag-icon.svg" alt="Comment" class="img-fluid"> ${ad.estimated_audience_size && ad.estimated_audience_size.lower_bound ? humanReadableFormat(ad.estimated_audience_size.lower_bound) : ''}</a></li>
+                                        <li><a href="#"><img src="${baseUrl}/assets/images/pin-icon.svg" alt="Comment" class="img-fluid"> ${ad.impressions && ad.impressions.lower_bound ? humanReadableFormat(ad.impressions.lower_bound) : ''}</a></li>
                                         </ul>
                                         <table>
                                             <tr>
@@ -154,15 +159,18 @@ function makeAjaxRequest() {
                                             </tr>
                                         </table> 
                                         <div class="adspy-filter-product-bttns">
-                                            <a href="#">See Pinterest ad</a>
-                                            <a href="#">Add to a list</a>
+                                            <a href="#" data-id="${i}" class="saveAdAndOpen">See ad details</a>
+                                            <a href="#" data-id="${i}" class="saveAd">Add to a list</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>`
+                i++;
             })
+
             adsDiv.insertAdjacentHTML('beforeend', htmlAds);
             getImagesByIds(ids);
+
         },
         error: function (xhr, status, error) {
             console.error(error);
@@ -171,6 +179,7 @@ function makeAjaxRequest() {
         }
     })
 }
+
 async function getImagesByIds(ids) {
     try {
         while (ids.length > 0) {
@@ -186,7 +195,7 @@ async function getImagesByIds(ids) {
                 videos,
                 cards
             } = data;
-
+            savedAdsContent.push(data);
             let [image, video_image, video_url] = ['', '', ''];
             if (images.length) {
                 image = images[0].resized_image_url;
@@ -215,6 +224,39 @@ async function getImagesByIds(ids) {
                 myImg.src = image;
             }
         }
+    } catch (error) {
+        console.error(error);
+    }
+
+}
+
+
+document.addEventListener('click', function (event) {
+    event.preventDefault();
+    // Check if clicked element has class "saveAdAndOpen"
+    if (event.target.classList.contains('saveAdAndOpen')) {
+        // Get data-id attribute from clicked element
+        var adId = event.target.getAttribute('data-id');
+        saveAd(adId, 1)
+    }
+});
+
+async function saveAd(adId, addToList = false) {
+    const mergedAd = Object.assign({}, savedAds[adId], savedAdsContent[adId], { addToList });
+
+    try {
+        const url = baseUrl + '/adspy/facebook2/save-ad2/yes';
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            body: JSON.stringify(mergedAd)
+        });
+        const data = await response.json();
+        console.log(data.ad_id); // log the response from the server
+        window.open(baseUrl + '/adspy/facebook/' + data.ad_id, '_blank');
     } catch (error) {
         console.error(error);
     }

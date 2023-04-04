@@ -6,7 +6,7 @@ use Facebook\Exceptions\FacebookSDKException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Facebook\Facebook;
-
+use App\Models\Ads;
 class AdspyController extends Controller
 {
     protected $access_token;
@@ -80,6 +80,7 @@ class AdspyController extends Controller
             $results = Http::get($api_url); 
             $uniqueAds = array();
             foreach ($results['data'] as $ad) {
+               
                 $exists = false;
                 foreach ($uniqueAds as $uniqueAd) {
                     if ($uniqueAd["page_id"] == $ad["page_id"] && $uniqueAd["ad_delivery_start_time"] == $ad["ad_delivery_start_time"] && 
@@ -131,9 +132,25 @@ class AdspyController extends Controller
     {
         return view('adspy/mylist');
     }
-    public function details()
+    public function details($id)
     {
-        return view('adspy/details');
+        $ad = Ads::where('ad_id', $id)->first();
+        if(!$ad){
+            return redirect('adspy/facebook');
+        }
+        $ad = json_decode($ad->data);
+        return view('adspy/details', compact('ad'));
+    }
+
+    public function saveAd(Request $request){
+        $allInputs = $request->all();
+        $ad = new Ads();
+        $ad->data = json_encode($allInputs);
+        $ad->is_saved = $allInputs['addToList'];
+        $ad->ad_id = $allInputs['page_id'].'_'.$allInputs['id'];
+        $ad->save();
+        return response()->json($ad);
+
     }
 
     public function redirectToFacebook()
