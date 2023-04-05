@@ -76,7 +76,9 @@
                         <a href="{{$ad->link_url}}">{{$ad->caption}}</a>
                         <h6>{{ $ad->title}}</h6>
                         <p>{{ $ad->link_description}}</p>
+                        @if($ad->cta_text)
                         <a href="//{{ $ad->caption }}" class="cta-button">{{$ad->cta_text}}</a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -135,8 +137,7 @@
                                     </div>
                                 </div>
                             </div>
-
-
+ 
 
                         </div>
                         <div class="row">
