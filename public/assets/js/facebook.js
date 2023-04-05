@@ -138,23 +138,23 @@ function makeAjaxRequest() {
                 htmlAds += `<div class="col-lg-4 col-md-6 col-sm-6" id="ad_${ad.id}">
                                 <div class="wining-product-item adspy-filter-product">
                                     <div class="wining-product-thumbnail">
-                                        <img id="img_${ad.id}" src="${baseUrl}/assets/images/preloader2.gif" alt="${title}" class="img-fluid main-img">
-                                        <img id="player_${ad.id}"src="${baseUrl}/assets/images/play-icon.png" alt="Line" class="img-fluid player-img d-none">
+                                        <img id="img_${ad.id}" src="${baseUrl}/public/assets/images/preloader2.gif" alt="${title}" class="img-fluid main-img">
+                                        <img id="player_${ad.id}"src="${baseUrl}/public/assets/images/play-icon.png" alt="Line" class="img-fluid player-img d-none">
                                     </div>
                                     <div class="wining-product-txt">
                                         <h5>${title}</h5>
                                         <h3>${getDayDiff(ad.ad_delivery_start_time, ad.ad_delivery_stop_time)} Days</h3>
                                         <ul>
-                                        <li><a href="#"><img src="${baseUrl}/assets/images/tag-icon.svg" alt="Comment" class="img-fluid"> ${ad.estimated_audience_size && ad.estimated_audience_size.lower_bound ? humanReadableFormat(ad.estimated_audience_size.lower_bound) : ''}</a></li>
-                                        <li><a href="#"><img src="${baseUrl}/assets/images/pin-icon.svg" alt="Comment" class="img-fluid"> ${ad.impressions && ad.impressions.lower_bound ? humanReadableFormat(ad.impressions.lower_bound) : ''}</a></li>
+                                        <li><a href="#"><img src="${baseUrl}/public/assets/images/tag-icon.svg" alt="Comment" class="img-fluid"> ${ad.estimated_audience_size && ad.estimated_audience_size.lower_bound ? humanReadableFormat(ad.estimated_audience_size.lower_bound) : ''}</a></li>
+                                        <li><a href="#"><img src="${baseUrl}/public/assets/images/pin-icon.svg" alt="Comment" class="img-fluid"> ${ad.impressions && ad.impressions.lower_bound ? humanReadableFormat(ad.impressions.lower_bound) : ''}</a></li>
                                         </ul>
                                         <table>
                                             <tr>
-                                                <td><img src="${baseUrl}/assets/images/calendar-clr-icon.svg" alt="Comment" class="img-fluid"> First Seen</td>
+                                                <td><img src="${baseUrl}/public/assets/images/calendar-clr-icon.svg" alt="Comment" class="img-fluid"> First Seen</td>
                                                 <td>${getDateFormated(ad.ad_delivery_start_time)}</td>
                                             </tr>
                                             <tr>
-                                                <td><img src="${baseUrl}/assets/images/calendar-clr-icon.svg" alt="Comment" class="img-fluid"> Last Seen</td>
+                                                <td><img src="${baseUrl}/public/assets/images/calendar-clr-icon.svg" alt="Comment" class="img-fluid"> Last Seen</td>
                                                 <td>${ad.ad_delivery_stop_time ? getDateFormated(ad.ad_delivery_stop_time) : ''}</td>
                                             </tr>
                                         </table> 

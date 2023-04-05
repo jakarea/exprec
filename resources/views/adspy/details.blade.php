@@ -147,27 +147,27 @@
                                         <li>
                                             <i class="fas fa-circle"></i>
                                             <p><span>Spend:</span> 
-                                            {{ isset($ad->spend->lower_bound) ? $ad->spend->lower_bound : "--" }} - {{ isset($ad->spend->upper_bound) ? $ad->spend->upper_bound : "--" }} 
+                                            {{ isset($ad->spend->lower_bound) ? $ad->spend->lower_bound : "" }}{{ isset($ad->spend->upper_bound) ?  ' ~ ' . $ad->spend->upper_bound : "" }} 
                                             </p>
                                         </li> 
 
                                         <li>
                                             <i class="fas fa-circle"></i> 
                                             <p><span>Currency:</span> 
-                                                {{ isset($ad->currency) ? $ad->currency : "--" }}
+                                                {{ isset($ad->currency) ? $ad->currency : "" }}
                                             </p>
                                         </li>
                                         <li>
                                             <i class="fas fa-circle"></i>
                                             <p><span>Paid By:</span> 
-                                                {{ isset($ad->byline) ? $ad->byline : "--" }} 
+                                                {{ isset($ad->byline) ? $ad->byline : "" }} 
                                             </p>
                                         </li>
                                         <li><i class="fas fa-circle"></i>
                                          <p><span>Impressions:</span> 
-                                         {{ isset($ad->impressions->lower_bound) ? $ad->impressions->lower_bound : "--" }} - {{ isset($ad->impressions->upper_bound) ? $ad->impressions->upper_bound : '--'  }} </p></li>
+                                         {{ isset($ad->impressions->lower_bound) ? $ad->impressions->lower_bound : "" }}  {{ isset($ad->impressions->upper_bound) ? '~' . $ad->impressions->upper_bound : ''  }} </p></li>
                                         <li><i class="fas fa-circle"></i> <p><span>Audiencen</span>: 
-                                        {{ isset($ad->estimated_audience_size->lower_bound) ? $ad->estimated_audience_size->lower_bound : "--" }} - {{ isset($ad->estimated_audience_size->upper_bound) ?$ad->estimated_audience_size->upper_bound : '--'  }} </p></li>
+                                        {{ isset($ad->estimated_audience_size->lower_bound) ? $ad->estimated_audience_size->lower_bound : "" }} {{ isset($ad->estimated_audience_size->upper_bound) ?'~' . $ad->estimated_audience_size->upper_bound : ''  }} </p></li>
                                     </ul> 
                                   
                                 </div>
