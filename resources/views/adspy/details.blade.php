@@ -113,14 +113,15 @@
                                         <p><i class="fa-solid fa-id-badge"></i>: ID: {{ $ad->page_id }}</p>
                                         <p><i class="fas fa-thumbs-up"></i>: {{$ad->page_like_count}} likes</p>
                                         @php
-                                        $obj = $ad->page_categories;
-                                        $obj = json_encode($obj);
+                                          $category = '';
+                                          $obj = $ad->page_categories;
+                                          $obj = json_encode($obj);
 
-                                        $pattern = '/"(\d+)":"([^"]+)"/';
+                                          $pattern = '/"(\d+)":"([^"]+)"/';
 
-                                        if (preg_match($pattern, $obj, $matches)) {
-                                        $category = isset($matches[2]) ? $matches[2] :'';
-                                        }
+                                          if (preg_match($pattern, $obj, $matches)) {
+                                            $category = $matches[2] ;
+                                          }
                                         @endphp
                                         <p><i class="fas fa-globe"></i> {{ $category }}</p>
                                     </div>

@@ -11,7 +11,6 @@ var htmlAds = ''
 var i = 0;
 var savedAds = [];
 var savedAdsContent = [];
-var saveAdAndOpenElements = document.querySelectorAll('.saveAdAndOpen');
 
 searchButton.addEventListener('click', function (e) {
     e.preventDefault();
@@ -138,29 +137,29 @@ function makeAjaxRequest() {
                 htmlAds += `<div class="col-lg-4 col-md-6 col-sm-6" id="ad_${ad.id}">
                                 <div class="wining-product-item adspy-filter-product">
                                     <div class="wining-product-thumbnail">
-                                        <img id="img_${ad.id}" src="${baseUrl}/public/assets/images/preloader2.gif" alt="${title}" class="img-fluid main-img">
-                                        <img id="player_${ad.id}"src="${baseUrl}/public/assets/images/play-icon.png" alt="Line" class="img-fluid player-img d-none">
+                                        <img id="img_${ad.id}" src="${baseUrl}/assets/images/preloader2.gif" alt="${title}" class="img-fluid main-img">
+                                        <img id="player_${ad.id}"src="${baseUrl}/assets/images/play-icon.png" alt="Line" class="img-fluid player-img d-none">
                                     </div>
                                     <div class="wining-product-txt">
                                         <h5>${title}</h5>
                                         <h3>${getDayDiff(ad.ad_delivery_start_time, ad.ad_delivery_stop_time)} Days</h3>
                                         <ul>
-                                        <li><a href="#"><img src="${baseUrl}/public/assets/images/tag-icon.svg" alt="Comment" class="img-fluid"> ${ad.estimated_audience_size && ad.estimated_audience_size.lower_bound ? humanReadableFormat(ad.estimated_audience_size.lower_bound) : ''}</a></li>
-                                        <li><a href="#"><img src="${baseUrl}/public/assets/images/pin-icon.svg" alt="Comment" class="img-fluid"> ${ad.impressions && ad.impressions.lower_bound ? humanReadableFormat(ad.impressions.lower_bound) : ''}</a></li>
+                                        <li><a href="#"><img src="${baseUrl}/assets/images/tag-icon.svg" alt="Comment" class="img-fluid"> ${ad.estimated_audience_size && ad.estimated_audience_size.lower_bound ? humanReadableFormat(ad.estimated_audience_size.lower_bound) : ''}</a></li>
+                                        <li><a href="#"><img src="${baseUrl}/assets/images/pin-icon.svg" alt="Comment" class="img-fluid"> ${ad.impressions && ad.impressions.lower_bound ? humanReadableFormat(ad.impressions.lower_bound) : ''}</a></li>
                                         </ul>
                                         <table>
                                             <tr>
-                                                <td><img src="${baseUrl}/public/assets/images/calendar-clr-icon.svg" alt="Comment" class="img-fluid"> First Seen</td>
+                                                <td><img src="${baseUrl}/assets/images/calendar-clr-icon.svg" alt="Comment" class="img-fluid"> First Seen</td>
                                                 <td>${getDateFormated(ad.ad_delivery_start_time)}</td>
                                             </tr>
                                             <tr>
-                                                <td><img src="${baseUrl}/public/assets/images/calendar-clr-icon.svg" alt="Comment" class="img-fluid"> Last Seen</td>
+                                                <td><img src="${baseUrl}/assets/images/calendar-clr-icon.svg" alt="Comment" class="img-fluid"> Last Seen</td>
                                                 <td>${ad.ad_delivery_stop_time ? getDateFormated(ad.ad_delivery_stop_time) : ''}</td>
                                             </tr>
                                         </table> 
                                         <div class="adspy-filter-product-bttns">
-                                            <a href="#" data-id="${i}" class="saveAdAndOpen">See ad details</a>
-                                            <a href="#" data-id="${i}" class="saveAd">Add to a list</a>
+                                            <a href="#" data-id="${i}" class="preventDefault saveAdAndOpen">See ad details</a>
+                                            <a href="#" data-id="${i}" class="preventDefault saveAd">Add to a list</a>
                                         </div>
                                     </div>
                                 </div>
@@ -170,10 +169,6 @@ function makeAjaxRequest() {
 
             adsDiv.insertAdjacentHTML('beforeend', htmlAds);
             getImagesByIds(ids);
-            $('.row').masonry({
-                percentPosition: true
-            });
-
         },
         error: function (xhr, status, error) {
             console.error(error);
@@ -226,21 +221,34 @@ async function getImagesByIds(ids) {
             if (image) {
                 myImg.src = image;
             }
+
         }
     } catch (error) {
         console.error(error);
     }
-
+    // $('.row').masonry({
+    //     percentPosition: true
+    // });
 }
 
 
 document.addEventListener('click', function (event) {
-    event.preventDefault();
+
     // Check if clicked element has class "saveAdAndOpen"
-    if (event.target.classList.contains('saveAdAndOpen')) {
+    if (event.target.classList.contains('preventDefault')) {
+        event.preventDefault();
+        let save = 0;
+        let message = '';
         // Get data-id attribute from clicked element
         var adId = event.target.getAttribute('data-id');
-        saveAd(adId, 1)
+        if (event.target.classList.contains('saveAd')) {
+            save = 1;
+            message = 'Ad added to your list';
+            $("#tostMessage").html(message);
+        }
+        saveAd(adId, save)
+    } else {
+        event.defaultPrevented = false;
     }
 });
 
@@ -258,8 +266,9 @@ async function saveAd(adId, addToList = false) {
             body: JSON.stringify(mergedAd)
         });
         const data = await response.json();
-        console.log(data.ad_id); // log the response from the server
-        window.open(baseUrl + '/adspy/facebook/' + data.ad_id, '_blank');
+        if (!addToList) {
+            window.open(baseUrl + '/adspy/facebook/' + data.ad_id, '_blank');
+        }
     } catch (error) {
         console.error(error);
     }

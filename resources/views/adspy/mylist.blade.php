@@ -55,72 +55,34 @@
       </div>
       <div class="wining-products-box">
         <!-- Item @S -->
+        @foreach($ads as $ad)
+        @php 
+          $ad = json_decode($ad->data);
+        @endphp
+       
         <div class="wining-product-item">
           <div class="wining-product-thumbnail">
-            <img src="{{asset('assets/images/post-01.png')}}" alt="Product" class="img-fluid">
-            <img src="{{asset('assets/images/play-icon.png')}}" alt="Line" class="img-fluid player-img">
+            @if(count($ad->images) > 0)
+                <img src="{{ $ad->images[0]->original_image_url}}" alt="post-image" class="img-fluid">
+            @endif
+
+            @if(count($ad->videos) > 0)
+              <video controlslist="nodownload" height="100%" loop="" poster="{{$ad->videos[0]->video_preview_image_url}}" src="{{$ad->videos[0]->video_hd_url}}" width="100%" controls=""></video>
+              <img src="{{asset('assets/images/play-icon.png')}}" alt="Line" class="img-fluid player-img">
+            @endif
           </div>
           <div class="wining-product-txt">
-            <h5>Buy 1 Get 1 FREE</h5>
+            <h5><a href="">{{ isset($ad->title) ? $ad->title : "" }}</a></h5>
 
             <ul>
-              <li><a href="#"><i class="fa-regular fa-heart"></i> 23K</a></li>
+              <li><a href="#"><i class="fa-regular fa-heart"></i>  {{ $ad->estimated_audience_size && $ad->estimated_audience_size->lower_bound ? $ad->estimated_audience_size->lower_bound : ''}}</a></li>
               <li><a href="#"><img src="{{asset('assets/images/comment-icon.svg')}}" alt="Comment" class="img-fluid"> 12K</a></li>
-              <li><a href="#"><img src="{{asset('assets/images/submit-icon.svg')}}" alt="Comment" class="img-fluid"> 15K</a></li>
+              <li><a href="#"><img src="{{asset('assets/images/submit-icon.svg')}}" alt="Comment" class="img-fluid"> {{ $ad->impressions && $ad->impressions->lower_bound ? $ad->impressions->lower_bound : ''}}</a></li>
             </ul>
           </div>
         </div>
-        <!-- Item @E -->
-        <!-- Item @S -->
-        <div class="wining-product-item">
-          <div class="wining-product-thumbnail">
-            <img src="{{asset('assets/images/post-01.png')}}" alt="Product" class="img-fluid">
-            <img src="{{asset('assets/images/play-icon.png')}}" alt="Line" class="img-fluid player-img">
-          </div>
-          <div class="wining-product-txt">
-            <h5>Buy 1 Get 1 FREE</h5>
 
-            <ul>
-              <li><a href="#"><i class="fa-regular fa-heart"></i> 23K</a></li>
-              <li><a href="#"><img src="{{asset('assets/images/comment-icon.svg')}}" alt="Comment" class="img-fluid"> 12K</a></li>
-              <li><a href="#"><img src="{{asset('assets/images/submit-icon.svg')}}" alt="Comment" class="img-fluid"> 15K</a></li>
-            </ul>
-          </div>
-        </div>
-        <!-- Item @E -->
-        <!-- Item @S -->
-        <div class="wining-product-item">
-          <div class="wining-product-thumbnail">
-          <img src="{{asset('assets/images/post-01.png')}}" alt="Product" class="img-fluid">
-            <img src="{{asset('assets/images/play-icon.png')}}" alt="Line" class="img-fluid player-img">
-          </div>
-          <div class="wining-product-txt">
-            <h5>Buy 1 Get 1 FREE</h5>
-
-            <ul>
-              <li><a href="#"><i class="fa-regular fa-heart"></i> 23K</a></li>
-              <li><a href="#"><img src="{{asset('assets/images/comment-icon.svg')}}" alt="Comment" class="img-fluid"> 12K</a></li>
-              <li><a href="#"><img src="{{asset('assets/images/submit-icon.svg')}}" alt="Comment" class="img-fluid"> 15K</a></li>
-            </ul>
-          </div>
-        </div>
-        <!-- Item @E -->
-        <!-- Item @S -->
-        <div class="wining-product-item">
-          <div class="wining-product-thumbnail">
-          <img src="{{asset('assets/images/post-01.png')}}" alt="Product" class="img-fluid">
-            <img src="{{asset('assets/images/play-icon.png')}}" alt="Line" class="img-fluid player-img">
-          </div>
-          <div class="wining-product-txt">
-            <h5>Buy 1 Get 1 FREE</h5>
-
-            <ul>
-              <li><a href="#"><i class="fa-regular fa-heart"></i> 23K</a></li>
-              <li><a href="#"><img src="{{asset('assets/images/comment-icon.svg')}}" alt="Comment" class="img-fluid"> 12K</a></li>
-              <li><a href="#"><img src="{{asset('assets/images/submit-icon.svg')}}" alt="Comment" class="img-fluid"> 15K</a></li>
-            </ul>
-          </div>
-        </div>
+        @endforeach
         <!-- Item @E -->
       </div>
     </div>
