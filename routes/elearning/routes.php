@@ -13,7 +13,7 @@ use App\Http\Controllers\Elearning\LessonController;
 
 Route::prefix('admin/elearning/courses')->controller(CourseController::class)->group(function () {   
     Route::get('/', 'courses');
-    Route::get('/create', 'createCourse'); 
+    Route::get('/create', 'createCourse')->name('course_store'); 
     Route::post('/create', 'storeCourse');
     Route::get('/{id}', 'showCourse');
     Route::get('/{id}/edit', 'editCourse');
@@ -31,9 +31,6 @@ Route::prefix('admin/elearning/modules')->controller(ModuleController::class)->g
     Route::post('/{id}/edit', 'updateModule');
     Route::delete('/{id}', 'deleteModule');
 });
-
-
-
 
 Route::prefix('admin/elearning/lessons')->controller(LessonController::class)->group(function () {   
     Route::get('/', 'lessons');

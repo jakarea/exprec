@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Lesson;
+use Illuminate\Support\Str;
 use App\Models\Module;
 
 class CourseController extends Controller
@@ -13,29 +14,32 @@ class CourseController extends Controller
     //create a method to show all courses withe its modules and lessons
     public function courses()
     {
-        $courses = Course::orderBy('order', 'desc')->get();
-        return view('elearning/courses/index', compact('courses'));
+        // $courses = Course::orderBy('order', 'desc')->get();
+        $courses = Course::orderby('id', 'desc')->paginate(12);
+        return view('elearning/courses/index', compact('courses')); 
     }
 
     // Create a method to show create course form
     public function createCourse()
     {
-        return view('elearning/courses/create', compact('courses'));
+        return view('elearning/courses/create');
     }
 
     // Create a method to store course in database using course model and follow the validation rules from migration file, generate unique slug from title and appending its id after save the course
     public function storeCourse(Request $request)
     {
+        // return $request->all();
+
         //validate thumbnail
         $request->validate([
             'title' => 'required',
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         //save course
         $course = new Course([
             'title' => $request->title,
-            'slug' => Str::slug($request->slug),
+            'slug' => Str::slug($request->title),
             'duration' => $request->duration,
             'short_description' => $request->short_description,
             'long_description' => $request->long_description,
@@ -46,19 +50,19 @@ class CourseController extends Controller
             'number_of_attachment' => $request->number_of_attachment,
             'number_of_video' => $request->number_of_video,
             'status' => $request->status,
-        ]);
+        ]); 
         $course->save();
         $course->slug = $course->slug . '-' . $course->id;
          //if thumbnail is valid then save it
         if ($request->hasFile('thumbnail')) {
             $image = $request->file('thumbnail');
             $name = $course->slug.'.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/images');
+            $destinationPath = public_path('/assets/courses/images');
             $image->move($destinationPath, $name);
         }
         $course->thumbnail = $name;
         $course->save();
-        return redirect('/elearning/courses')->with('success', 'Course saved!');
+        return redirect('admin/elearning/courses')->with('success', 'Course saved!');
     }
 
     // Create a method to show edit course form and make sure course is exist by slug
