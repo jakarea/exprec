@@ -12,7 +12,7 @@
      <div class="col-lg-12">
        <div class="create-form-wrap">
          <div class="create-form-head">
-           <h6>Create a new Course</h6>
+           <h6>Update Course</h6>
            <a href="{{url('admin/elearning/courses')}}">
              <i class="fa-solid fa-list"></i> All Courses </a>
          </div>
@@ -57,6 +57,14 @@
                    </div>
                  </div>   
                  <div class="col-md-6">
+                   <div class="form-group">
+                     <label for="order">Order <sup class="text-danger">*</sup>
+                     </label>
+                     <input type="number" placeholder="Enter Course Order" name="order" class="form-control @error('order') is-invalid @enderror" value="{{ $course->order }}" id="order">
+                     <span class="invalid-feedback">@error('order'){{ $message }} @enderror</span>
+                   </div>
+                 </div> 
+                 <div class="col-md-12">
                    <div class="form-group">
                      <label for="files">Thumbnail <sup class="text-danger">*</sup></label>
                      <input type="file" name="thumbnail" id="files" class="form-control  @error('thumbnail') is-invalid @enderror">

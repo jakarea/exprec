@@ -24,12 +24,12 @@ Route::prefix('admin/elearning/courses')->controller(CourseController::class)->g
 
 Route::prefix('admin/elearning/modules')->controller(ModuleController::class)->group(function () {   
     Route::get('/', 'modules');
-    Route::get('/create', 'createModule'); 
-    Route::post('/create', 'storeModule');
+    Route::get('/create', 'createModule')->name('module_create'); 
+    Route::post('/create', 'storeModule')->name('module_store');
     Route::get('/{id}', 'showModule');
-    Route::get('/{id}/edit', 'editModule');
-    Route::post('/{id}/edit', 'updateModule');
-    Route::delete('/{id}', 'deleteModule');
+    Route::get('/{slug}/edit', 'editModule')->name('module_edit');
+    Route::post('/{slug}/edit', 'updateModule')->name('module_update');
+    Route::delete('/{id}/destroy', 'deleteModule');
 });
 
 Route::prefix('admin/elearning/lessons')->controller(LessonController::class)->group(function () {   

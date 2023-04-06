@@ -13,9 +13,8 @@ class CourseController extends Controller
 {
     //create a method to show all courses withe its modules and lessons
     public function courses()
-    {
-        // $courses = Course::orderBy('order', 'desc')->get();
-        $courses = Course::orderby('id', 'desc')->paginate(12);
+    { 
+        $courses = Course::orderby('order', 'desc')->paginate(12);
         return view('elearning/courses/index', compact('courses')); 
     }
 

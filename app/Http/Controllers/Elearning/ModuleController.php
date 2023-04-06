@@ -12,7 +12,7 @@ class ModuleController extends Controller
 {
     public function modules()
     {
-        $modules = Module::orderBy('order', 'desc')->get();
+        $modules = Module::orderBy('order', 'desc')->paginate(12);
         return view('elearning/modules/index', compact('modules'));
     }
     // create module to show a single module and its related lessons
@@ -22,7 +22,6 @@ class ModuleController extends Controller
         $lessons = Lesson::where('module_id', $id)->orderBy('order', 'desc')->get();
         return view('elearning/modules/show', compact('module', 'lessons'));
     }
-
     
     // Create a method to show create module form
     public function createModule()
@@ -34,14 +33,18 @@ class ModuleController extends Controller
     // Create a method to store module in database using module model and validate the data from module migration file, some field are nullable and slug should be generate from title and appending its id
     public function storeModule(Request $request)
     {
+        // return $request->all();
+
         $request->validate([
             'title' => 'required',
             'course_id' => 'required',
         ]);
+
         $module = new Module([
-            $module->course_id = $request->course_id,
+            // $module->course_id = $request->course_id,
+            'course_id' => $request->course_id,
             'title' => $request->title,
-            'slug' => Str::slug($request->slug),
+            'slug' => Str::slug($request->title),
             'duration' => $request->duration,
             'number_of_lesson' => $request->number_of_lesson,
             'number_of_quiz' => $request->number_of_quiz,
@@ -51,25 +54,29 @@ class ModuleController extends Controller
             'status' => $request->status,
         ]);
         $module->save();
-        return redirect('/elearning/modules')->with('success', 'Module saved!');
+        return redirect('admin/elearning/modules')->with('success', 'Module saved!');
     }
 // Create a method to show edit module form
-    public function editModule($id)
-    {
-        $module = Module::find($id);
+    public function editModule($slug)
+    { 
+        // $module = Module::find($slug);
+        $module = Module::where('slug', $slug)->first();
         $courses = Course::orderBy('order', 'desc')->get();
         return view('elearning/modules/edit', compact('module', 'courses'));
     }
 
     // Create a method to update module in database using module model and validate the data from module migration file, some field are nullable and slug should be generate from title and appending its id
-    public function updateModule(Request $request, $id)
+    public function updateModule(Request $request, $slug)
     {
+        // return $request->all();
+
         $request->validate([
             'title' => 'required',
             'course_id' => 'required'
         ]);
-        $module = Module::find($id);
-        $module->course_id = $request->course_id;
+        // $module = Module::find($slug);
+        $module = Module::where('slug', $slug)->first();
+        $module->course_id = $request->course_id; 
         $module->title = $request->title;
         $module->slug = Str::slug($request->slug);
         $module->duration = $request->duration;
@@ -80,13 +87,12 @@ class ModuleController extends Controller
         $module->order = $request->order;
         $module->status = $request->status;
         $module->save();
-        return redirect('/elearning/modules')->with('success', 'Module updated!');
+        return redirect('admin/elearning/modules')->with('success', 'Module updated!');
     }
     // Create a method to delete module in database, before delete check the module is exist and it has any lesson or not, if lesson is present then delete the lesson first then delete the module
-    public function deleteModule($id)
-    {
-        $module = Module::find($id);
-        $module->delete();
-        return redirect('/elearning/modules')->with('success', 'Module deleted!');
+    public function deleteModule($slug)
+    { 
+        $module = Module::where('slug', $slug)->delete(); 
+        return redirect('admin/elearning/modules')->with('success', 'Module deleted!');
     }
 }

@@ -49,8 +49,16 @@
                      <input type="text" placeholder="Enter Duration" name="duration" class="form-control @error('duration') is-invalid @enderror" value="{{ old('duration')}}" id="duration">
                      <span class="invalid-feedback">@error('duration'){{ $message }} @enderror</span>
                    </div>
-                 </div>   
+                 </div>  
                  <div class="col-md-6">
+                   <div class="form-group">
+                     <label for="order">Order <sup class="text-danger">*</sup>
+                     </label>
+                     <input type="number" placeholder="Enter Course Order" name="order" class="form-control @error('order') is-invalid @enderror" value="{{ old('order')}}" id="order">
+                     <span class="invalid-feedback">@error('order'){{ $message }} @enderror</span>
+                   </div>
+                 </div>   
+                 <div class="col-md-12">
                    <div class="form-group">
                      <label for="files">Thumbnail <sup class="text-danger">*</sup></label>
                      <input type="file" name="thumbnail" id="files" class="form-control  @error('thumbnail') is-invalid @enderror">
