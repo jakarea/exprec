@@ -34,11 +34,11 @@ Route::prefix('admin/elearning/modules')->controller(ModuleController::class)->g
 
 Route::prefix('admin/elearning/lessons')->controller(LessonController::class)->group(function () {   
     Route::get('/', 'lessons');
-    Route::get('/create', 'createLesson');
-    Route::post('/create', 'storeLesson');
-    Route::get('/{id}', 'showLesson');
-    Route::get('/{id}/edit', 'editLesson');
-    Route::post('/{id}/edit', 'updateLesson');
-    Route::delete('/{id}', 'deleteLesson');
+    Route::get('/create', 'createLesson')->name('lesson_create');
+    Route::post('/create', 'storeLesson')->name('lesson_store');
+    Route::get('/{slug}', 'showLesson');
+    Route::get('/{slug}/edit', 'editLesson')->name('lesson_edit');
+    Route::post('/{slug}/edit', 'updateLesson')->name('lesson_update');
+    Route::delete('/{slug}/destroy', 'deleteLesson');
     
 });

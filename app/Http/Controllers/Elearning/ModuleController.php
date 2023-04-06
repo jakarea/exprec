@@ -78,7 +78,7 @@ class ModuleController extends Controller
         $module = Module::where('slug', $slug)->first();
         $module->course_id = $request->course_id; 
         $module->title = $request->title;
-        $module->slug = Str::slug($request->slug);
+        $module->slug = Str::slug($request->title);
         $module->duration = $request->duration;
         $module->number_of_lesson = $request->number_of_lesson;
         $module->number_of_quiz = $request->number_of_quiz;
