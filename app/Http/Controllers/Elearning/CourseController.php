@@ -72,13 +72,15 @@ class CourseController extends Controller
         if ($course) {
             return view('elearning/courses/edit', compact('course'));
         } else {
-            return redirect('/elearning/courses')->with('error', 'Course not found!');
+            return redirect('admin/elearning/courses')->with('error', 'Course not found!');
         }
     }
 
     // Create a method to update course
     public function updateCourse(Request $request, $slug)
     {
+        // return $request->all();
+
         //validate thumbnail
         $request->validate([
             'title' => 'required'
@@ -112,20 +114,21 @@ class CourseController extends Controller
             $destinationPath = public_path('/images');
             $image->move($destinationPath, $name);
         }
-        $course->thumbnail = $name;
+        // $course->thumbnail = $name;
         $course->save();
-        return redirect('/elearning/courses')->with('success', 'Course saved!');
+        return redirect('admin/elearning/courses')->with('success', 'Course Updated!');
     }
     // show single course with joining its module and lessons
     public function showCourse($slug)
     {
         $course = Course::where('slug', $slug)->first();
-        $modules = Module::where('course_id', $course->id)->get();
-        $lessons = Lesson::where('course_id', $course->id)->get();
+        // $modules = Module::where('course_id', $course->id)->get();
+        // $lessons = Lesson::where('course_id', $course->id)->get();
         if ($course) {
-            return view('elearning/courses/show', compact('course', 'modules', 'lessons'));
+            // return view('elearning/courses/show', compact('course', 'modules', 'lessons'));
+            return view('elearning/courses/show', compact('course'));
         } else {
-            return redirect('/elearning/courses')->with('error', 'Course not found!');
+            return redirect('admin/elearning/courses')->with('error', 'Course not found!');
         }
     }
 
@@ -135,7 +138,7 @@ class CourseController extends Controller
         $course = Course::where('slug', $slug)->first();
         if ($course) {
             //delete thumbnail
-            $oldThumbnail = public_path('/images/'.$course->thumbnail);
+            $oldThumbnail = public_path('/assets/courses/images/'.$course->thumbnail);
             if (file_exists($oldThumbnail)) {
                 @unlink($oldThumbnail);
             }
@@ -160,9 +163,9 @@ class CourseController extends Controller
                 $module->delete();
             }
             $course->delete();
-            return redirect('/elearning/courses')->with('success', 'Course deleted!');
+            return redirect('admin/elearning/courses')->with('success', 'Course deleted!');
         } else {
-            return redirect('/elearning/courses')->with('error', 'Course not found!');
+            return redirect('admin/elearning/courses')->with('error', 'Course not found!');
         }
     }
 }

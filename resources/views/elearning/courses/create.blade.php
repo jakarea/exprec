@@ -41,15 +41,7 @@
                      <i class="fa-solid fa-angle-down"></i>
                      <span class="invalid-feedback">@error('categories'){{ $message }} @enderror</span>
                    </div>
-                 </div>
-                 <div class="col-md-6">
-                   <div class="form-group">
-                     <label for="order">Order <sup class="text-danger">*</sup>
-                     </label>
-                     <input type="text" placeholder="Enter Order" name="order" class="form-control @error('order') is-invalid @enderror" value="{{ old('order')}}" id="order">
-                     <span class="invalid-feedback">@error('order'){{ $message }} @enderror</span>
-                   </div>
-                 </div>
+                 </div> 
                  <div class="col-md-6">
                    <div class="form-group">
                      <label for="duration">Duration <sup class="text-danger">*</sup>
@@ -58,7 +50,7 @@
                      <span class="invalid-feedback">@error('duration'){{ $message }} @enderror</span>
                    </div>
                  </div>   
-                 <div class="col-md-12">
+                 <div class="col-md-6">
                    <div class="form-group">
                      <label for="files">Thumbnail <sup class="text-danger">*</sup></label>
                      <input type="file" name="thumbnail" id="files" class="form-control  @error('thumbnail') is-invalid @enderror">

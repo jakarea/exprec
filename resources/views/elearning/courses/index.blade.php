@@ -39,16 +39,22 @@
                 Title
             </th>
             <th>
-                Duration
+                Total Lesson
             </th>
             <th>
-                Short Description
+                Total Quiz
+            </th>
+            <th>
+                Total Video
+            </th>
+            <th>
+                Categories
             </th>
             <th>
                 Thumbnail
             </th> 
             <th>
-                Status
+                Actions
             </th>
            
             </tr>
@@ -68,26 +74,34 @@
                     {{ $key +1 }}
                 </td> 
                 <td>{{ $text }}</td>
-                <td>{{ $course->duration }}</td>
-                <td>{{ $course->short_description }}</td>
-
+                <td>{{ $course->number_of_lesson }}</td>
+                <td>{{ $course->number_of_quiz }}</td>
+                <td>{{ $course->number_of_video }}</td>
+                <td>
+                    @if($course->categories)
+                        @php $cateogires = explode(",",$course->categories)  @endphp
+                        @foreach($cateogires as $key => $category)
+                        <span class="badge text-bg-primary">{{$category}}</span>
+                        @endforeach 
+                    @endif 
+                </td>
                 <td>
                     <img src="{{asset('assets/courses/images/'. $course->thumbnail)}}" alt="{{ $course->thumbnail }}" class="img-fluid" width="60">
                 </td> 
-
-               
-                <td>
+                <td width="10%">
                     <div class="action-bttn">
-                        <a href="{{ url('admin/courses/'.$course->slug) }}">
+                        <a href="{{ url('admin/elearning/courses/'.$course->slug) }}">
                             <i class="fas fa-eye text-info me-2"></i>
                         </a> 
-                        <a href="{{ url('admin/courses/'.$course->slug.'/edit') }}">
-                            <i class="fas fa-pen text-success me-2"></i>
-                        </a> 
-                       
-                        <a href="{{ url('admin/courses/'.$course->slug.'/destroy') }}">
-                            <i class="fas fa-trash text-danger"></i>
-                        </a> 
+                        <a href="{{ url('admin/elearning/courses/'.$course->slug.'/edit') }}">
+                            <i class="fas fa-pen text-primary me-2"></i>
+                        </a>  
+                        <form method="post" class="d-inline" action="{{ url('admin/elearning/courses/'.$course->slug.'/destroy') }}">
+                            @csrf 
+                            @method("DELETE")
+                            <button type="submit" class="btn p-0"><i class="fas fa-trash text-danger"></i></button>
+                        </form>
+                        
                     </div>
                 </td>
             </tr>
