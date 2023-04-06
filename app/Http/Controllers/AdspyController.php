@@ -43,7 +43,6 @@ class AdspyController extends Controller
 
     public function loadMoreData(Request $request)
         {
-          
             $allInputs = $request->all();
 
             // Separate fields starting with an underscore
@@ -130,7 +129,8 @@ class AdspyController extends Controller
 
     public function mylist()
     {
-        return view('adspy/mylist');
+        $ads = Ads::where('is_saved', 1)->get();
+        return view('adspy/mylist', compact('ads'));
     }
     public function details($id)
     {
@@ -144,10 +144,17 @@ class AdspyController extends Controller
 
     public function saveAd(Request $request){
         $allInputs = $request->all();
-        $ad = new Ads();
+        $ad_id = $allInputs['page_id'].'_'.$allInputs['id'];
+        $ad = Ads::where('ad_id', $ad_id)->first();
+        if(!$ad){
+            $ad = new Ads();
+            $ad->ad_id = $ad_id;
+        }
+
+        if($allInputs['addToList']){
+            $ad->is_saved = $allInputs['addToList'];
+        }
         $ad->data = json_encode($allInputs);
-        $ad->is_saved = $allInputs['addToList'];
-        $ad->ad_id = $allInputs['page_id'].'_'.$allInputs['id'];
         $ad->save();
         return response()->json($ad);
 
