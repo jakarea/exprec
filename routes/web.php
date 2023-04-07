@@ -9,7 +9,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProjectController; 
 use App\Http\Controllers\AdInterestController; 
 use App\Http\Controllers\EmailCampingController;
-
+use Vimeo\Vimeo;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -74,7 +74,17 @@ Route::get('/integrations', [EmailCampingController::class, 'integrations']);
 Route::prefix('elearning')->controller(CourseController::class)->group(function () {   
     Route::get('/', 'index');   
     Route::get('/mylearning', 'mylearning');   
-    Route::get('/favorite', 'suggested');   
+    Route::get('/favorite', 'suggested'); 
+    
+    Route::get('/testing', function () {
+
+        $client = new Vimeo('{{ f3422373260b837a0326c40abd507e0ae721707a }}', '{{ /lcNhvt0rlnETwlrhPa/fmpWw0SU3wqLajoj9wu5QAkCgd+QkTUj9lPYpjOA5XP+pxZt4kIkBnSgH50cZqgKAJ/li0pSyLtVLA4mGTQlUJ3i8ayYvqC6g0LGh7HvYyu5 }}');
+        
+        $client->setToken('{{ 64ac29221733a4e2943345bf6c079948 }}');
+        
+        $video = $client->request('/videos/815578316', [], 'GET');
+        dd($video);
+    });
 });
 
 

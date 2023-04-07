@@ -11,6 +11,7 @@ var htmlAds = ''
 var i = 0;
 var savedAds = [];
 var savedAdsContent = [];
+var saveAdAndOpenElements = document.querySelectorAll('.saveAdAndOpen');
 
 searchButton.addEventListener('click', function (e) {
     e.preventDefault();
@@ -158,8 +159,8 @@ function makeAjaxRequest() {
                                             </tr>
                                         </table> 
                                         <div class="adspy-filter-product-bttns">
-                                            <a href="#" data-id="${i}" class="preventDefault saveAdAndOpen">See ad details</a>
-                                            <a href="#" data-id="${i}" class="preventDefault saveAd">Add to a list</a>
+                                            <a href="#" data-id="${i}" class="saveAdAndOpen">See ad details</a>
+                                            <a href="#" data-id="${i}" class="saveAd">Add to a list</a>
                                         </div>
                                     </div>
                                 </div>
@@ -169,6 +170,10 @@ function makeAjaxRequest() {
 
             adsDiv.insertAdjacentHTML('beforeend', htmlAds);
             getImagesByIds(ids);
+            $('.row').masonry({
+                percentPosition: true
+            });
+
         },
         error: function (xhr, status, error) {
             console.error(error);
@@ -221,34 +226,20 @@ async function getImagesByIds(ids) {
             if (image) {
                 myImg.src = image;
             }
-
         }
     } catch (error) {
         console.error(error);
     }
-    // $('.row').masonry({
-    //     percentPosition: true
-    // });
 }
 
 
 document.addEventListener('click', function (event) {
-
+    event.preventDefault();
     // Check if clicked element has class "saveAdAndOpen"
-    if (event.target.classList.contains('preventDefault')) {
-        event.preventDefault();
-        let save = 0;
-        let message = '';
+    if (event.target.classList.contains('saveAdAndOpen')) {
         // Get data-id attribute from clicked element
         var adId = event.target.getAttribute('data-id');
-        if (event.target.classList.contains('saveAd')) {
-            save = 1;
-            message = 'Ad added to your list';
-            $("#tostMessage").html(message);
-        }
-        saveAd(adId, save)
-    } else {
-        event.defaultPrevented = false;
+        saveAd(adId, 1)
     }
 });
 
@@ -266,9 +257,8 @@ async function saveAd(adId, addToList = false) {
             body: JSON.stringify(mergedAd)
         });
         const data = await response.json();
-        if (!addToList) {
-            window.open(baseUrl + '/adspy/facebook/' + data.ad_id, '_blank');
-        }
+        console.log(data.ad_id); // log the response from the server
+        window.open(baseUrl + '/adspy/facebook/' + data.ad_id, '_blank');
     } catch (error) {
         console.error(error);
     }
