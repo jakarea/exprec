@@ -76,7 +76,7 @@
                 <div class="imgThumbContainer">
                     <div class="IMGthumbnail">
                       <a href="javascript:void(0)" onclick="this.parentElement.parentElement.style.display = 'none';"><i class="fas fa-close"></i></a> 
-                      <img src="{{ asset('assets/courses/images/'.$course->thumbnail) }}" alt="{{$course->thumbnail}}" class="img-fluid"> 
+                      <img src="{{ asset('assets/images/course/'.$course->thumbnail) }}" alt="{{$course->thumbnail}}" class="img-fluid"> 
                     </div>
                   </div>  
                 </div>

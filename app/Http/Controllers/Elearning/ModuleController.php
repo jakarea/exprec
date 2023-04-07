@@ -6,27 +6,28 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Module;
 use App\Models\Course;
+use App\Models\Lesson;
 use Illuminate\Support\Str;
 
 class ModuleController extends Controller
 {
     public function modules()
     {
-        $modules = Module::orderBy('order', 'desc')->paginate(12);
+        $modules = Module::orderBy('order', 'asc')->paginate(12);
         return view('elearning/modules/index', compact('modules'));
     }
     // create module to show a single module and its related lessons
     public function showModule($id)
     {
         $module = Module::find($id);
-        $lessons = Lesson::where('module_id', $id)->orderBy('order', 'desc')->get();
+        $lessons = Lesson::where('module_id', $id)->orderBy('order', 'asc')->get();
         return view('elearning/modules/show', compact('module', 'lessons'));
     }
     
     // Create a method to show create module form
     public function createModule()
     {
-        $courses = Course::orderBy('order', 'desc')->get();
+        $courses = Course::orderBy('id', 'desc')->get();
         return view('elearning/modules/create', compact('courses'));
     }
 
@@ -54,6 +55,12 @@ class ModuleController extends Controller
             'status' => $request->status,
         ]);
         $module->save();
+        $module->slug = $module->slug . '-' . $module->id;
+        if(empty($request->order)){
+            $module->order = $module->id;
+        }
+
+        $module->save();
         return redirect('admin/elearning/modules')->with('success', 'Module saved!');
     }
 // Create a method to show edit module form
@@ -61,7 +68,7 @@ class ModuleController extends Controller
     { 
         // $module = Module::find($slug);
         $module = Module::where('slug', $slug)->first();
-        $courses = Course::orderBy('order', 'desc')->get();
+        $courses = Course::orderBy('id', 'desc')->get();
         return view('elearning/modules/edit', compact('module', 'courses'));
     }
 

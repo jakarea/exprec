@@ -86,7 +86,7 @@
                     @endif 
                 </td>
                 <td>
-                    <img src="{{asset('assets/courses/images/'. $course->thumbnail)}}" alt="{{ $course->thumbnail }}" class="img-fluid" width="60">
+                    <img src="{{asset('assets/images/course/'. $course->thumbnail)}}" alt="{{ $course->thumbnail }}" class="img-fluid" width="60">
                 </td> 
                 <td width="10%">
                     <div class="action-bttn">

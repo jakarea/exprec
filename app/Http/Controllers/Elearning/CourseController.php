@@ -14,7 +14,7 @@ class CourseController extends Controller
     //create a method to show all courses withe its modules and lessons
     public function courses()
     { 
-        $courses = Course::orderby('order', 'desc')->paginate(12);
+        $courses = Course::orderby('id', 'desc')->paginate(12);
         return view('elearning/courses/index', compact('courses')); 
     }
 
@@ -56,7 +56,7 @@ class CourseController extends Controller
         if ($request->hasFile('thumbnail')) {
             $image = $request->file('thumbnail');
             $name = $course->slug.'.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/assets/courses/images');
+            $destinationPath = public_path('/assets/images/course');
             $image->move($destinationPath, $name);
         }
         $course->thumbnail = $name;
@@ -137,7 +137,7 @@ class CourseController extends Controller
         $course = Course::where('slug', $slug)->first();
         if ($course) {
             //delete thumbnail
-            $oldThumbnail = public_path('/assets/courses/images/'.$course->thumbnail);
+            $oldThumbnail = public_path('/assets/images/course/'.$course->thumbnail);
             if (file_exists($oldThumbnail)) {
                 @unlink($oldThumbnail);
             }
