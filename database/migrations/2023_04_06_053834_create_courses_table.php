@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('categories')->nullable();
             $table->string('thumbnail')->nullable()->default("avatar.png");
             $table->string('duration')->nullable();
-            $table->string('short_description')->nullable();
-            $table->string('long_description')->nullable();
+            $table->text('short_description')->nullable();
+            $table->longText('long_description')->nullable();
             $table->string('number_of_module')->nullable();
             $table->string('number_of_lesson')->nullable();
             $table->string('number_of_quiz')->nullable();   

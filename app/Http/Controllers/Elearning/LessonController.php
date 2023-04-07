@@ -13,15 +13,15 @@ class LessonController extends Controller
     //show all lessons
     public function lessons()
     { 
-        $lessons = Lesson::orderBy('order', 'desc')->paginate(12);
+        $lessons = Lesson::orderBy('order', 'asc')->paginate(12);
         return view('elearning/lessons/index', compact('lessons'));
     }
 
    // create a method to show create lesson form
     public function createLesson()
     {
-        $courses = Course::orderBy('order', 'desc')->get();
-        $modules = Module::orderBy('order', 'desc')->get();
+        $courses = Course::orderBy('id', 'desc')->get();
+        $modules = Module::orderBy('order', 'asc')->get();
         return view('elearning/lessons/create', compact('courses','modules'));
     }
 
@@ -55,10 +55,13 @@ class LessonController extends Controller
         if ($request->hasFile('attachment')) {
             $image = $request->file('attachment');
             $name = $lesson->slug.'.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/assets/lesson/images');
+            $destinationPath = public_path('/assets/images/lesson');
             $image->move($destinationPath, $name);
+            $lesson->attachment = $name;
         }
-        $lesson->attachment = $name;
+        
+        $lesson->save();
+        $lesson->slug = $lesson->slug . '-' . $lesson->id;
         $lesson->save();
         return redirect('admin/elearning/lessons')->with('success', 'Lesson saved!');
     }
@@ -68,8 +71,8 @@ class LessonController extends Controller
     {
         // $lesson = Lesson::find($id);
         $lesson = Lesson::where('slug', $slug)->first();
-        $courses = Course::orderBy('order', 'desc')->get();
-        $modules = Module::orderBy('order', 'desc')->get();
+        $courses = Course::orderBy('id', 'desc')->get();
+        $modules = Module::orderBy('order', 'asc')->get();
         return view('elearning/lessons/edit', compact('lesson','modules','courses'));
     }
     //create a method to update lesson on database

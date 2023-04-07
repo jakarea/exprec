@@ -153,7 +153,7 @@
         <div class="mylearning-video-content-box custom-margin-top">
             <div class="video-iframe-vox">
                 <a href="#">
-                    <img src="{{asset('assets/courses/images/'. $course->thumbnail)}}" alt="{{ $course->thumbnail }}" class="img-fluid">
+                    <img src="{{asset('assets/images/course/'. $course->thumbnail)}}" alt="{{ $course->thumbnail }}" class="img-fluid">
                 </a>
             </div>
             <div class="content-txt-box">
