@@ -55,7 +55,7 @@ class LessonController extends Controller
         if ($request->hasFile('attachment')) {
             $image = $request->file('attachment');
             $name = $lesson->slug.'.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/assets/lesson/images');
+            $destinationPath = public_path('/assets/images/lesson');
             $image->move($destinationPath, $name);
             $lesson->attachment = $name;
         }

@@ -17,3 +17,6 @@ database.sqlite
 .DS_Store
 composer.lock
 /public/assets/images/product
+/public/assets/images/module
+/public/assets/images/lesson
+/public/assets/images/course
