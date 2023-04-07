@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug');
-            $table->string('categories');
-            $table->string('thumbnail')->nullable();
+            $table->string('slug'); 
+            $table->string('categories')->nullable();
+            $table->string('thumbnail')->nullable()->default("avatar.png");
             $table->string('duration')->nullable();
             $table->string('short_description')->nullable();
             $table->string('long_description')->nullable();
@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('number_of_quiz')->nullable();   
             $table->string('number_of_attachment')->nullable();
             $table->string('number_of_video')->nullable();
+            $table->string('order')->default(0);
             $table->string('status')->default('draft');
             $table->timestamps();
         });
