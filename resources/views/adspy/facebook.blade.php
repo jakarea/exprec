@@ -80,10 +80,10 @@ $languages = array(
 						<h1>Discover every ads on Facebook <img src="{{ asset('assets/images/personalized-icon.svg') }}" alt="a" class="img-fluid"> </h1>
 						<a href="#">
 							<p>Tell me how does it works?</p>
-							<p style="float:right; position: fixed; z-index:9999" id="tostMessage"> 
-							<script>
-								toastr.info('Toaster test Message')
-							</script> </p>
+							 <script>
+								toastr.success({<p style="float:right; position: fixed; z-index:9999" id="tostMessage"> 
+							 </p>})
+							</script>
 						</a>
 					</div>
 					<!-- page search area @S -->
@@ -244,25 +244,7 @@ $languages = array(
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"></script> 
-<!-- <script>
-	toastr.options = {
-  "closeButton": false,
-  "debug": false,
-  "newestOnTop": false,
-  "progressBar": false,
-  "positionClass": "toast-top-right",
-  "preventDuplicates": false,
-  "onclick": null,
-  "showDuration": "300",
-  "hideDuration": "1000",
-  "timeOut": "5000",
-  "extendedTimeOut": "1000",
-  "showEasing": "swing",
-  "hideEasing": "linear",
-  "showMethod": "fadeIn",
-  "hideMethod": "fadeOut"
-}
-</script> -->
+
  
 <script>
      $(function() {
