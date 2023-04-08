@@ -4,7 +4,10 @@
 <link href="{{ asset('assets/css/product-researchs.css') }}" rel="stylesheet" type="text/css" />  
 @endsection
 @section('content') 
-
+@php 
+  $course_id = isset($_GET['course']) ? $_GET['course'] : '';
+  $module_id = isset($_GET['module']) ? $_GET['module'] : '';
+@endphp
 <!-- === course create page @S === -->
 <main class="product-research-form"> 
  <div class="product-research-create-wrap">
@@ -29,11 +32,11 @@
                       <select name="course_id" id="course_id" class="form-control">
                         <option value="" hidden>Select Course</option>
                         @foreach($courses as $course)
-                        <option value="{{$course->id}}">{{$course->title}}</option>
+                        <option value="{{$course->id}}" {{ $course->id == $course_id ? 'selected' : ''}}>{{$course->title}}</option>
                         @endforeach
                       </select>
                      <i class="fa-solid fa-angle-down"></i>
-                     <span class="invalid-feedback">@error('categories'){{ $message }} @enderror</span>
+                     <span class="invalid-feedback">@error('course_id'){{ $message }} @enderror</span>
                    </div>
                  </div> 
                  <div class="col-md-12">
@@ -42,11 +45,11 @@
                       <select name="module_id" id="module_id" class="form-control">
                         <option value="" hidden>Select Course</option>
                         @foreach($modules as $module)
-                        <option value="{{$module->id}}">{{$module->title}}</option>
+                        <option value="{{$module->id}}"  {{ $module->id == $module_id ? 'selected' : ''}}>{{$module->title}}</option>
                         @endforeach
                       </select>
                      <i class="fa-solid fa-angle-down"></i>
-                     <span class="invalid-feedback">@error('categories'){{ $message }} @enderror</span>
+                     <span class="invalid-feedback">@error('module_id'){{ $message }} @enderror</span>
                    </div>
                  </div> 
                  <div class="col-md-12">
@@ -74,13 +77,21 @@
                    </div>
                  </div>   
                    
-                 <div class="col-md-12">
+                 <div class="col-md-6">
                    <div class="form-group">
                      <label for="files">Attachment <sup class="text-danger">*</sup></label>
                      <input type="file" name="attachment" id="files" class="form-control  @error('attachment') is-invalid @enderror">
                      <span class="invalid-feedback">@error('attachment'){{ $message }} @enderror</span>
                    </div>
                  </div>
+                 <div class="col-md-6">
+                   <div class="form-group">
+                     <label for="attachment_name">Attachment Name
+                     </label>
+                     <input type="text" placeholder="Enter Attachment Name" name="attachment_name" class="form-control @error('attachment_name') is-invalid @enderror" value="{{ old('attachment_name')}}" id="attachment_name">
+                     <span class="invalid-feedback">@error('attachment_name'){{ $message }} @enderror</span>
+                   </div>
+                 </div>   
                  <div class="col-12">
                 <div id="imgThumbnailPreview"></div>
                 </div>
@@ -108,14 +119,7 @@
                      <span class="invalid-feedback">@error('video_url'){{ $message }} @enderror</span>
                    </div>
                  </div> 
-                 <div class="col-md-6">
-                   <div class="form-group">
-                     <label for="attachment_name">Attachment Name
-                     </label>
-                     <input type="text" placeholder="Enter Attachment Name" name="attachment_name" class="form-control @error('attachment_name') is-invalid @enderror" value="{{ old('attachment_name')}}" id="attachment_name">
-                     <span class="invalid-feedback">@error('attachment_name'){{ $message }} @enderror</span>
-                   </div>
-                 </div>   
+                 
                  <div class="col-12">
                   <div class="custom-hr">
                     <hr>
