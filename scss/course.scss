@@ -50,6 +50,8 @@
             width: 100%;
             display: block;
             border-radius: 0.625rem;
+            aspect-ratio: 3/2;
+            object-fit: cover;
         }
     }
 
@@ -181,10 +183,10 @@
                 justify-content: center;
                 border-radius: 50%;
                 border: 3.6px solid v.$newbrdr;
-                font-size: 12px;
+                font-size: 0.9rem;
                 font-weight: 600;
                 background: v.$mainbg;
-                color: v.$newbrdr;;
+                color: v.$newbrdr;
             }
 
             span.numbering.active {
