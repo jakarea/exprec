@@ -8,6 +8,7 @@ use App\Models\Module;
 use App\Models\Course;
 use Illuminate\Support\Str;
 use App\Models\Lesson;
+use Vimeo\Laravel\Facades\Vimeo;
 class LessonController extends Controller
 {
     //show all lessons
@@ -28,21 +29,20 @@ class LessonController extends Controller
     //create a method to store lesson on database
     public function storeLesson(Request $request)
     {
-        // return $request->all();
-
         $request->validate([
             'title' => 'required',
             'module_id' => 'required',
             'course_id' => 'required',
-            'video_url' => 'required',
             'duration' => 'required',
+            'video_file' => 'required|mimetypes:video/mp4|max:5000000', // max 5MB
         ]);
+        // return $request->all();     
+
         $lesson = new Lesson([
             'title' => $request->title,
             'slug' => Str::slug($request->title),
             'module_id' => $request->module_id,
             'course_id' => $request->course_id,
-            'video_url' => $request->video_url,
             'duration' => $request->duration, 
             'attachment_name' => $request->attachment_name,
             'short_description' => $request->short_description,
@@ -59,6 +59,22 @@ class LessonController extends Controller
             $image->move($destinationPath, $name);
             $lesson->attachment = $name;
         }
+
+        if ($request->hasFile('video_file')) {
+            // upload video into vimeo through API
+            $response = Vimeo::upload(
+                $request->file('video_file')->getPathname(),
+                [
+                    'name' => $request->file('video_file')->getClientOriginalName(),
+                    'description' => 'Uploaded from my Laravel application',
+                    'privacy' => [
+                        'view' => 'nobody',
+                    ],
+                ]
+            );
+            
+            $lesson->video_url = $response;
+        } 
         
         $lesson->save();
         $lesson->slug = $lesson->slug . '-' . $lesson->id;
