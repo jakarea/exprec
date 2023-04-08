@@ -98,8 +98,12 @@
                   </div>
                  </div>   
                  <div class="col-md-6">
-                   <div class="form-group">
-                     <label for="video_url">Video URL </label>
+                  <div class="form-group">
+                  <label for="video_url">Video File </label>
+                    <input type="file" name="video_file"  class="form-control @error('video_file') is-invalid @enderror" value="{{ old('video_file')}}"/>
+                    <small> This is support only video! </small>
+                  </div>
+                   <div class="form-group d-none">
                      <input type="url" placeholder="Enter total lesson length" name="video_url" class="form-control @error('video_url') is-invalid @enderror" value="{{ old('video_url')}}" id="video_url">
                      <span class="invalid-feedback">@error('video_url'){{ $message }} @enderror</span>
                    </div>

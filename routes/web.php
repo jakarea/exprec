@@ -9,7 +9,6 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProjectController; 
 use App\Http\Controllers\AdInterestController; 
 use App\Http\Controllers\EmailCampingController;
-use Vimeo\Vimeo;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,6 +70,15 @@ Route::get('/integrations', [EmailCampingController::class, 'integrations']);
 // adspy route
 
 // course route
+Route::get('/apitest', function () {
+    $video_id = '815578316'; // Replace with the Vimeo video ID you want to retrieve
+
+    $response = Vimeo::request("/videos/{$video_id}", [], 'GET');
+    
+    $video_data_json = json_encode($response);
+    return response()->json($video_data_json);
+    
+});
 
 Route::get('/facebook/auth/redirect', function () {
     return Socialite::driver('facebook')->redirect();
