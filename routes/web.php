@@ -72,9 +72,6 @@ Route::get('/integrations', [EmailCampingController::class, 'integrations']);
 
 // course route
 
-
-
- 
 Route::get('/facebook/auth/redirect', function () {
     return Socialite::driver('facebook')->redirect();
 });

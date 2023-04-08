@@ -12,7 +12,8 @@ use Vimeo\Vimeo;
 // });
 
 Route::prefix('elearning')->controller(ElearningController::class)->group(function () {   
-    Route::get('/', 'index');   
+    Route::get('/', 'index');  
+    Route::get('/courses/{slug}', 'course');
     Route::get('/mylearning', 'mylearning');   
     Route::get('/favorite', 'suggested');   
 });

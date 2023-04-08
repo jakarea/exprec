@@ -20,17 +20,7 @@
         <form action="{{route('module_store')}}" method="POST" class="create-form-box">
           @csrf 
           <div class="row">
-             <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-               <div class="row"> 
-                 <div class="col-md-12">
-                   <div class="form-group form-error">
-                     <label for="title">Title <sup class="text-danger">*</sup>
-                     </label>
-                     <input type="text" placeholder="Enter Module Title" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title')}}" id="title">
-                     <span class="invalid-feedback">@error('title'){{ $message }} @enderror</span> 
-                   </div>
-                 </div>  
-                 <div class="col-md-12">
+          <div class="col-md-12">
                    <div class="form-group">
                      <label for="course_id">Select Course <sup class="text-danger">*</sup></label>
                       <select name="course_id" id="course_id" class="form-control">
@@ -43,6 +33,18 @@
                      <span class="invalid-feedback">@error('categories'){{ $message }} @enderror</span>
                    </div>
                  </div> 
+                 
+             <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+               <div class="row"> 
+                 <div class="col-md-12">
+                   <div class="form-group form-error">
+                     <label for="title">Title <sup class="text-danger">*</sup>
+                     </label>
+                     <input type="text" placeholder="Enter Module Title" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title')}}" id="title">
+                     <span class="invalid-feedback">@error('title'){{ $message }} @enderror</span> 
+                   </div>
+                 </div>  
+                 
                  <div class="col-md-6">
                    <div class="form-group">
                      <label for="duration">Duration <sup class="text-danger">*</sup>
@@ -108,7 +110,7 @@
                      <select name="status" id="status" class="form-control @error('status') is-invalid @enderror">
                        <option value="" disabled>Select Below</option>
                        <option value="Active">Active</option>
-                       <option value="Inactive">Inactive</option>
+                       <option value="Draft">Draft</option>
                      </select>
                      <i class="fa-solid fa-angle-down"></i>
                      <span class="invalid-feedback">@error('status'){{ $message }} @enderror</span>
