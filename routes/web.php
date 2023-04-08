@@ -9,7 +9,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProjectController; 
 use App\Http\Controllers\AdInterestController; 
 use App\Http\Controllers\EmailCampingController;
-
+use Vimeo\Vimeo;
 /*
 |--------------------------------------------------------------------------
 | Web Routes

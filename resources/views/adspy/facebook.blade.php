@@ -79,8 +79,8 @@ $languages = array(
 						<h1>Discover every ads on Facebook <img src="{{ asset('assets/images/personalized-icon.svg') }}" alt="a" class="img-fluid"> </h1>
 						<a href="#">
 							<p>Tell me how does it works?</p>
+							<p style="float:right; position: fixed; z-index:9999" id="tostMessage"></p>
 						</a>
-						<p style="float:right; position: fixed; z-index:9999" id="tostMessage"></p>
 					</div>
 					<!-- page search area @S -->
 					<div class="interrest-search-wrap email-camp-search mb-0">
@@ -241,7 +241,7 @@ $languages = array(
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script> 
 
 <script>
-	$(function() {
+     $(function() {
         $( "#ad_delivery_date_min" ).datepicker({  dateFormat: 'yy-mm-dd'});
         $( "#ad_delivery_date_max" ).datepicker({  dateFormat: 'yy-mm-dd'});
         $( "#_first_seen_start" ).datepicker({  dateFormat: 'yy-mm-dd'});
@@ -254,11 +254,13 @@ $languages = array(
 </script>
 
 <script>
-	const listToggle = document.getElementById('first-list-toggle');
+   const listToggle = document.getElementById('first-list-toggle');
     const firstList = document.getElementById('first-lists');
+
     const toggleLists = () => {
         firstList.classList.toggle("list-active");
     }
+
     listToggle.addEventListener('click',toggleLists);
 </script>
 @endsection

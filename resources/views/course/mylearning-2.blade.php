@@ -251,6 +251,22 @@
    <!-- my learning page @E -->
    
 </main>
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script>
+    var options = {
+        id: '{{ 815578316 }}',
+        access_token: '{{ "64ac29221733a4e2943345bf6c079948" }}',
+        autoplay: true,
+        loop: true,
+        width:  500,
+    };
+    var player = new Vimeo.Player(document.querySelector('.vimeo-player'), options);
+    // play video on load
+    player.on('ended', function() {
+        player.setCurrentTime(0); // Set current time to 0 seconds
+        player.play();
+    });
+</script>
 
 @endsection
 @section('script')

@@ -11,6 +11,7 @@ var htmlAds = ''
 var i = 0;
 var savedAds = [];
 var savedAdsContent = [];
+var saveAdAndOpenElements = document.querySelectorAll('.saveAdAndOpen');
 
 searchButton.addEventListener('click', function (e) {
     e.preventDefault();
@@ -158,8 +159,8 @@ function makeAjaxRequest() {
                                             </tr>
                                         </table> 
                                         <div class="adspy-filter-product-bttns">
-                                            <a href="#" data-id="${i}" class="preventDefault saveAdAndOpen">See ad details</a>
-                                            <a href="#" data-id="${i}" class="preventDefault saveAd">Add to a list</a>
+                                            <a href="#" data-id="${i}" class="saveAdAndOpen preventDefault">See ad details</a>
+                                            <a href="#" data-id="${i}" class="saveAd preventDefault">Add to a list</a>
                                         </div>
                                     </div>
                                 </div>
@@ -169,6 +170,10 @@ function makeAjaxRequest() {
 
             adsDiv.insertAdjacentHTML('beforeend', htmlAds);
             getImagesByIds(ids);
+            // $('.row').masonry({
+            //     percentPosition: true
+            // });
+
         },
         error: function (xhr, status, error) {
             console.error(error);
@@ -221,19 +226,14 @@ async function getImagesByIds(ids) {
             if (image) {
                 myImg.src = image;
             }
-
         }
     } catch (error) {
         console.error(error);
     }
-    // $('.row').masonry({
-    //     percentPosition: true
-    // });
 }
 
 
 document.addEventListener('click', function (event) {
-
     // Check if clicked element has class "saveAdAndOpen"
     if (event.target.classList.contains('preventDefault')) {
         event.preventDefault();
