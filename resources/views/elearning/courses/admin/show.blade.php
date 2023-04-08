@@ -10,7 +10,7 @@
     $i = 0;
     $key = getenv('ENC_KEY');
     $algo = getenv('ENC_ALGO');
-    $course_id =$course->id;
+    $course_id =$course->id; 
 @endphp
 <!-- course details page @S -->
 <main class="course-page-wrap">
@@ -57,14 +57,16 @@
                                         @endphp
                                     @endforeach
                                 </ul>
-                                <a href=""> add Lesson button </a> 
+                               <div class="text-center">
+                                    <a href="{{ url('admin/elearning/lessons/create?course='. $course_id.'&module='.$module->id) }}" class="add_lesson_bttn">Add Lesson</a> 
+                               </div>
                             </div>
                         </div>
                     </div>
                     @endforeach
                 </div>
             </div>
-            <a href="{{ url('admin/elearning/modules/create?course='. $course_id) }}"> add Module </a> 
+            <a href="{{ url('admin/elearning/modules/create?course='. $course_id) }}" class="add_module_bttn">Add Module </a> 
         </div>
         <div class="col-12 col-sm-12 col-md-7 col-lg-8">
             <div class="mylearning-video-content-box custom-margin-top">
@@ -76,7 +78,7 @@
                 <div class="content-txt-box">
                     <div class="d-flex">
                         <h3>{{$course->title}}</h3>
-                        <a href="#">Continue Learning</a>
+                        <a href="#" class="min_width">Continue</a>
                     </div>
                     {!! $course->long_description !!} 
                 </div>

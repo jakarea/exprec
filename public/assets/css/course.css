@@ -247,6 +247,41 @@
   margin-top: -2rem;
 }
 
+.add_module_bttn {
+  padding: 10px 15px;
+  border-radius: 1.6rem;
+  background: linear-gradient(98.03deg, #FF6262 18.68%, #F37F14 88.52%);
+  color: #ffffff;
+  display: block;
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 0.3rem;
+}
+.add_module_bttn:hover {
+  background-color: #141736;
+  color: #ffffff;
+}
+
+.add_lesson_bttn {
+  padding: 7px 15px;
+  border-radius: 1.4rem;
+  background-color: #727DFF;
+  color: #ffffff;
+  margin-top: 0.3rem;
+  display: inline-block;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.add_lesson_bttn:hover {
+  background-color: #141736;
+  color: #ffffff;
+}
+
+.course-outline-box .accordion .accordion-item:last-child:before {
+  height: 0;
+}
+
 .content-txt-box .d-flex {
   justify-content: space-between;
   align-items: center;
@@ -264,6 +299,11 @@
 }
 .content-txt-box .d-flex a:hover {
   opacity: 0.7;
+}
+.content-txt-box .d-flex a.min_width {
+  min-width: 10rem;
+  text-align: center;
+  margin-left: 0.5rem;
 }
 .content-txt-box h3 {
   font-size: 2rem;

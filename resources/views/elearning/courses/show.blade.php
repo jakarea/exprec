@@ -72,7 +72,7 @@
                 <div class="content-txt-box">
                     <div class="d-flex">
                         <h3>{{$course->title}}</h3>
-                        <a href="#">Continue Learning</a>
+                        <a href="#" class="min_width">Continue</a>
                     </div>
                     {!! $course->long_description !!} 
                 </div>
