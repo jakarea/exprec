@@ -1,8 +1,9 @@
 <?php
-use App\Http\Controllers\ElearingController;
+use App\Http\Controllers\Elearning\ElearningController;
 use App\Http\Controllers\Elearning\CourseController;
 use App\Http\Controllers\Elearning\ModuleController;
 use App\Http\Controllers\Elearning\LessonController;
+use Vimeo\Vimeo;
 
 // Route::prefix('elearning')->controller(ElearingController::class)->group(function () {   
 //     Route::get('/', 'index');   
@@ -10,6 +11,21 @@ use App\Http\Controllers\Elearning\LessonController;
 //     Route::get('/favorite', 'suggested');   
 // });
 
+Route::prefix('elearning')->controller(ElearningController::class)->group(function () {   
+    Route::get('/', 'index');   
+    Route::get('/mylearning', 'mylearning');   
+    Route::get('/favorite', 'suggested');   
+});
+
+Route::get('/admin/testing', function () {
+
+    $client = new Vimeo('{{ f3422373260b837a0326c40abd507e0ae721707a }}', '{{ /lcNhvt0rlnETwlrhPa/fmpWw0SU3wqLajoj9wu5QAkCgd+QkTUj9lPYpjOA5XP+pxZt4kIkBnSgH50cZqgKAJ/li0pSyLtVLA4mGTQlUJ3i8ayYvqC6g0LGh7HvYyu5 }}');
+
+    $client->setToken('{{ 64ac29221733a4e2943345bf6c079948 }}');
+
+    $video = $client->request('/videos/815578316', [], 'GET');
+    dd($video);
+});
 
 Route::prefix('admin/elearning/courses')->controller(CourseController::class)->group(function () {   
     Route::get('/', 'courses');
