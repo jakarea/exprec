@@ -77,9 +77,9 @@
                 <td>{{ $module->number_of_video }}</td>  
                 <td width="10%">
                     <div class="action-bttn">
-                        <a href="{{ url('admin/elearning/module/'.$module->slug) }}">
+                        <!-- <a href="{{ url('admin/elearning/module/'.$module->slug) }}">
                             <i class="fas fa-eye text-info me-2"></i>
-                        </a> 
+                        </a>  -->
                         <a href="{{ url('admin/elearning/modules/'.$module->slug.'/edit') }}">
                             <i class="fas fa-pen text-primary me-2"></i>
                         </a>  

@@ -244,7 +244,8 @@ document.addEventListener('click', function (event) {
         if (event.target.classList.contains('saveAd')) {
             save = 1;
             message = 'Ad added to your list';
-            $("#tostMessage").html(message);
+            // $("#tostMessage").html(message); 
+	        toastr.success(message);
         }
         saveAd(adId, save)
     } else {
