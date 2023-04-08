@@ -38,7 +38,6 @@ Route::prefix('admin/elearning/courses')->controller(CourseController::class)->g
     Route::delete('/{id}/destroy', 'deleteCourse');
 });
 
-
 Route::prefix('admin/elearning/modules')->controller(ModuleController::class)->group(function () {   
     Route::get('/', 'modules');
     Route::get('/create', 'createModule')->name('module_create'); 

@@ -5,6 +5,9 @@
 @endsection
 @section('content') 
 
+@php
+  $course_id = isset($_GET['course']) ? $_GET['course'] : '';
+@endphp
 <!-- === course create page @S === -->
 <main class="product-research-form"> 
  <div class="product-research-create-wrap">
@@ -26,7 +29,7 @@
                       <select name="course_id" id="course_id" class="form-control">
                         <option value="" hidden>Select Course</option>
                         @foreach($courses as $course)
-                        <option value="{{$course->id}}">{{$course->title}}</option>
+                        <option value="{{$course->id}}" {{ $course->id == $course_id ? 'selected' : '' }}>{{$course->title}}</option>
                         @endforeach
                       </select>
                      <i class="fa-solid fa-angle-down"></i>

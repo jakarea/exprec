@@ -121,11 +121,9 @@ class CourseController extends Controller
     public function showCourse($slug)
     {
         $course = Course::where('slug', $slug)->first();
-        // $modules = Module::where('course_id', $course->id)->get();
-        // $lessons = Lesson::where('course_id', $course->id)->get();
         if ($course) {
             // return view('elearning/courses/show', compact('course', 'modules', 'lessons'));
-            return view('elearning/courses/show', compact('course'));
+            return view('elearning/courses/admin/show', compact('course'));
         } else {
             return redirect('admin/elearning/courses')->with('error', 'Course not found!');
         }
