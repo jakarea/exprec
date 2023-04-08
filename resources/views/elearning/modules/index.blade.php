@@ -35,6 +35,9 @@
                 Title
             </th>
             <th>
+                Course
+            </th>
+            <th>
                 Duration
             </th>
             <th>
@@ -55,18 +58,19 @@
            
             @foreach($modules as $key => $module)
             @php 
-            $text = $module->title;
+            $title = $module->title;
             $maxLength = 60;
-              if (strlen($text) > $maxLength) {
-                  $lastSpace = strpos($text, ' ', $maxLength);
-                  $text = $lastSpace !== false ? substr($text, 0, $lastSpace) . '...' : $text;
+              if (strlen($title) > $maxLength) {
+                  $lastSpace = strpos($title, ' ', $maxLength);
+                  $title = $lastSpace !== false ? substr($title, 0, $lastSpace) . '...' : $title;
               }
           @endphp
             <tr> 
                 <td>
                     {{ $key +1 }}
                 </td> 
-                <td>{{ $text }}</td>
+                <td>{{ $title }}</td>
+                <td>{{ $module->course->title }}</td>
                 <td>{{ $module->duration }}</td>
                 <td>{{ $module->number_of_lesson }}</td>
                 <td>{{ $module->number_of_quiz }}</td>

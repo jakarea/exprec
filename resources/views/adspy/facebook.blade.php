@@ -79,6 +79,7 @@ $languages = array(
 						<h1>Discover every ads on Facebook <img src="{{ asset('assets/images/personalized-icon.svg') }}" alt="a" class="img-fluid"> </h1>
 						<a href="#">
 							<p>Tell me how does it works?</p>
+							<p style="float:right; position: fixed; z-index:9999" id="tostMessage"></p>
 						</a>
 					</div>
 					<!-- page search area @S -->

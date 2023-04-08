@@ -170,10 +170,6 @@
     <div class="col-12 col-sm-12 col-md-7 col-lg-8">
         <div class="mylearning-video-content-box custom-margin-top">
             <div class="video-iframe-vox">
-                <!-- <a href="#">
-                    <img src="{{asset('assets/images/course/video-placeholder.png')}}" alt="Place" class="img-fluid">
-                </a> -->
-                <!-- Vimeo Player -->
                 <div class="vimeo-player w-100" data-vimeo-url="https://vimeo.com/815578316" data-vimeo-width="1000" data-vimeo-height="360"></div>
             </div>
             <div class="content-txt-box">
@@ -272,4 +268,22 @@
     });
 </script>
 
+@endsection
+@section('script')
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script>
+    var options = {
+        id: '{{ 815578316 }}',
+        access_token: '{{ "64ac29221733a4e2943345bf6c079948" }}',
+        autoplay: true,
+        loop: true,
+        width:  500,
+    };
+    var player = new Vimeo.Player(document.querySelector('.vimeo-player'), options);
+    // play video on load
+    player.on('ended', function() {
+        player.setCurrentTime(0); // Set current time to 0 seconds
+        player.play();
+    });
+</script>
 @endsection

@@ -23,4 +23,9 @@ class Course extends Model
         'number_of_video',
         'status',
     ];
+    public function modules()
+    {
+        return $this->hasMany(Module::class);
+    }
+    
 }

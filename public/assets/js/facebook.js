@@ -159,8 +159,8 @@ function makeAjaxRequest() {
                                             </tr>
                                         </table> 
                                         <div class="adspy-filter-product-bttns">
-                                            <a href="#" data-id="${i}" class="saveAdAndOpen">See ad details</a>
-                                            <a href="#" data-id="${i}" class="saveAd">Add to a list</a>
+                                            <a href="#" data-id="${i}" class="saveAdAndOpen preventDefault">See ad details</a>
+                                            <a href="#" data-id="${i}" class="saveAd preventDefault">Add to a list</a>
                                         </div>
                                     </div>
                                 </div>
@@ -170,9 +170,9 @@ function makeAjaxRequest() {
 
             adsDiv.insertAdjacentHTML('beforeend', htmlAds);
             getImagesByIds(ids);
-            $('.row').masonry({
-                percentPosition: true
-            });
+            // $('.row').masonry({
+            //     percentPosition: true
+            // });
 
         },
         error: function (xhr, status, error) {
@@ -234,12 +234,21 @@ async function getImagesByIds(ids) {
 
 
 document.addEventListener('click', function (event) {
-    event.preventDefault();
     // Check if clicked element has class "saveAdAndOpen"
-    if (event.target.classList.contains('saveAdAndOpen')) {
+    if (event.target.classList.contains('preventDefault')) {
+        event.preventDefault();
+        let save = 0;
+        let message = '';
         // Get data-id attribute from clicked element
         var adId = event.target.getAttribute('data-id');
-        saveAd(adId, 1)
+        if (event.target.classList.contains('saveAd')) {
+            save = 1;
+            message = 'Ad added to your list';
+            $("#tostMessage").html(message);
+        }
+        saveAd(adId, save)
+    } else {
+        event.defaultPrevented = false;
     }
 });
 
@@ -257,8 +266,9 @@ async function saveAd(adId, addToList = false) {
             body: JSON.stringify(mergedAd)
         });
         const data = await response.json();
-        console.log(data.ad_id); // log the response from the server
-        window.open(baseUrl + '/adspy/facebook/' + data.ad_id, '_blank');
+        if (!addToList) {
+            window.open(baseUrl + '/adspy/facebook/' + data.ad_id, '_blank');
+        }
     } catch (error) {
         console.error(error);
     }

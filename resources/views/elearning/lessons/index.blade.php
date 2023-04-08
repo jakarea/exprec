@@ -35,11 +35,12 @@
                 Title
             </th>
             <th>
-                Course Id
+                Module 
             </th>
             <th>
-                Module Id
+                Course
             </th>
+           
             <th>
                Video URL
             </th> 
@@ -52,20 +53,21 @@
            
             @foreach($lessons as $key => $lesson)
             @php 
-            $text = $lesson->title;
+            $title = $lesson->title;
             $maxLength = 60;
-              if (strlen($text) > $maxLength) {
-                  $lastSpace = strpos($text, ' ', $maxLength);
-                  $text = $lastSpace !== false ? substr($text, 0, $lastSpace) . '...' : $text;
+              if (strlen($title) > $maxLength) {
+                  $lastSpace = strpos($title, ' ', $maxLength);
+                  $title = $lastSpace !== false ? substr($title, 0, $lastSpace) . '...' : $title;
               }
           @endphp
             <tr> 
                 <td>
                     {{ $key +1 }}
                 </td> 
-                <td>{{ $text }}</td>
-                <td>{{ $lesson->course_id   }}</td>  
-                <td>{{ $lesson->module_id  }}</td>  
+                <td>{{ $title }}</td>
+                <td>{{ $lesson->module->title  }}</td>  
+                <td>{{ $lesson->course->title   }}</td>  
+                
                 <td><a href="{{ $lesson->video_url }}" target="_blank">{{ $lesson->video_url  }}</a></td>  
                
                 <td width="10%">
