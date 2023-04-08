@@ -71,7 +71,33 @@ $languages = array(
 );
 
 @endphp
-<main class="addspy-dahboard-page">
+<main class="addspy-dahboard-page adspy-facebook-page-wrap">`
+	<!-- save to project modal @S -->
+	<div class="save-to-project-modal" id="adspy-modal">
+		<div class="saveto-modal-txt">
+			<h4>Save to project</h4>
+			<form action="{{route('test_store')}}" method="POST">
+				@csrf
+				<div class="form-group">
+					<label for="">Save to an existing project</label>
+					<select name="previous_project" id="" class="form-control">
+						<option value="">Select Below</option>
+						<option value="">Project 01</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="">Save to a new project</label>
+					<input type="text" placeholder="Name your project" name="name" class="form-control"> 
+				</div>
+				<input type="hidden" name="adData" id="ad-data" value="">
+				<div class="form-groups"> 
+					<button type="button" class="btn btn-closes" id="close-adspy-modal">Close</button>
+					<button type="submit" class="btn btn-submits">Save</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- save to project modal @E -->
 	<div class="container-fluid">
 		<form id="search-form">
 			<div class="row">
@@ -79,9 +105,7 @@ $languages = array(
 					<div class="addspy-dash-head add-head">
 						<h1>Discover every ads on Facebook <img src="{{ asset('assets/images/personalized-icon.svg') }}" alt="a" class="img-fluid"> </h1>
 						<a href="#">
-							<p>Tell me how does it works?</p>
-							<p style="float:right; position: fixed; z-index:9999" id="tostMessage"> 
-							 </p>
+							<p>Tell me how does it works?</p> 
 						</a>
 					</div>
 					<!-- page search area @S -->
