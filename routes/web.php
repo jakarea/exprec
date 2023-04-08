@@ -9,7 +9,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProjectController; 
 use App\Http\Controllers\AdInterestController; 
 use App\Http\Controllers\EmailCampingController;
-
+use Vimeo\Vimeo;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -68,13 +68,6 @@ Route::prefix('email-marketing')->controller(EmailCampingController::class)->gro
  
 Route::get('/integrations', [EmailCampingController::class, 'integrations']);
 
-// adspy route
-
-// course route
-
-
-
- 
 Route::get('/facebook/auth/redirect', function () {
     return Socialite::driver('facebook')->redirect();
 });
