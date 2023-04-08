@@ -47,7 +47,7 @@
                         <img src="{{asset('assets/images/course/'. $course->thumbnail)}}" alt="{{ $course->slug}}" class="img-fluid">
                     </div>
                     <div class="course-txt-box">
-                        <h3> <a href="{{url('elearning/'.$course->slug )}}">{{ $course->title }} </a></h3>
+                        <h3> <a href="{{url('elearning/courses/'.$course->slug )}}">{{ $course->title }} </a></h3>
                         <ul>
                             <li><a href="#">{{ $course->number_of_lesson}} LESSONS</a></li>
                             <li><a href="#">{{ $course->number_of_module}} MODULES</a></li>
