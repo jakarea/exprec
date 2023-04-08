@@ -23,19 +23,19 @@
         <form action="{{route('module_store')}}" method="POST" class="create-form-box">
           @csrf 
           <div class="row">
-          <div class="col-md-12">
-                   <div class="form-group">
-                     <label for="course_id">Select Course <sup class="text-danger">*</sup></label>
-                      <select name="course_id" id="course_id" class="form-control">
-                        <option value="" hidden>Select Course</option>
-                        @foreach($courses as $course)
-                        <option value="{{$course->id}}" {{ $course->id == $course_id ? 'selected' : '' }}>{{$course->title}}</option>
-                        @endforeach
-                      </select>
-                     <i class="fa-solid fa-angle-down"></i>
-                     <span class="invalid-feedback">@error('categories'){{ $message }} @enderror</span>
-                   </div>
-                 </div> 
+            <div class="col-md-12">
+                <div class="form-group">
+                  <label for="course_id">Select Course <sup class="text-danger">*</sup></label>
+                  <select name="course_id" id="course_id" class="form-control">
+                    <option value="" hidden>Select Course</option>
+                    @foreach($courses as $course)
+                    <option value="{{$course->id}}" {{ $course->id == $course_id ? 'selected' : '' }}>{{$course->title}}</option>
+                    @endforeach
+                  </select>
+                  <i class="fa-solid fa-angle-down"></i>
+                  <span class="invalid-feedback">@error('categories'){{ $message }} @enderror</span>
+                </div>
+              </div> 
                  
              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                <div class="row"> 

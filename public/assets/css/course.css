@@ -56,6 +56,9 @@
   width: 100%;
   display: block;
   border-radius: 0.625rem;
+  aspect-ratio: 3/2;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .course-box-wrap .course-content-box .course-txt-box {
   margin-top: 0.4rem;
@@ -194,7 +197,7 @@
   justify-content: center;
   border-radius: 50%;
   border: 3.6px solid #A5B4CB;
-  font-size: 12px;
+  font-size: 0.9rem;
   font-weight: 600;
   background: #F4F8FC;
   color: #A5B4CB;

@@ -6,7 +6,7 @@
 <link href="{{ asset('assets/css/email-camping.css') }}" rel="stylesheet" type="text/css" /> 
 <link href="//code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />  
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" /> 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" rel="stylesheet" type="text/css" /> 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" type="text/css" /> 
 
 @endsection
 
@@ -80,10 +80,8 @@ $languages = array(
 						<h1>Discover every ads on Facebook <img src="{{ asset('assets/images/personalized-icon.svg') }}" alt="a" class="img-fluid"> </h1>
 						<a href="#">
 							<p>Tell me how does it works?</p>
-							 <script>
-								toastr.success({<p style="float:right; position: fixed; z-index:9999" id="tostMessage"> 
-							 </p>})
-							</script>
+							<p style="float:right; position: fixed; z-index:9999" id="tostMessage"> 
+							 </p>
 						</a>
 					</div>
 					<!-- page search area @S -->
@@ -243,8 +241,7 @@ $languages = array(
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"></script> 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> 
  
 <script>
      $(function() {
