@@ -160,7 +160,7 @@ function makeAjaxRequest() {
                                         </table> 
                                         <div class="adspy-filter-product-bttns">
                                             <a href="#" data-id="${i}" class="saveAdAndOpen preventDefault">See ad details</a>
-                                            <a href="#" data-id="${i}" class="saveAd preventDefault">Add to a list</a>
+                                            <a href="#" data-id="${i}" data-select='${JSON.stringify(ad)}' class="saveAd preventDefault">Add to a list</a>
                                         </div>
                                     </div>
                                 </div>
@@ -232,20 +232,28 @@ async function getImagesByIds(ids) {
     }
 }
 
+const adspyModal = document.getElementById("adspy-modal");
+const closeAdspyModal = document.getElementById("close-adspy-modal");
+const setAdId = document.getElementById("ad-data");
+
+const closeModal = () => {
+    adspyModal.style.display = "none";
+}
+
+closeAdspyModal.addEventListener("click",closeModal);
 
 document.addEventListener('click', function (event) {
     // Check if clicked element has class "saveAdAndOpen"
     if (event.target.classList.contains('preventDefault')) {
         event.preventDefault();
-        let save = 0;
-        let message = '';
+        let save = 0; 
         // Get data-id attribute from clicked element
         var adId = event.target.getAttribute('data-id');
         if (event.target.classList.contains('saveAd')) {
-            save = 1;
-            message = 'Ad added to your list';
-            // $("#tostMessage").html(message); 
-	        toastr.success(message);
+            save = 1;  
+	        // toastr.success(message);
+            adspyModal.style.display = "block"; 
+            setAdId.value = event.target.getAttribute("data-select");
         }
         saveAd(adId, save)
     } else {
