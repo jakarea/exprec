@@ -864,10 +864,12 @@
     }
 }
 
-// .custom-box-container{
-//     display: grid;
-//     grid-template-columns: 1fr 1fr 1fr;
-// }
+.adspy-facebook-page-wrap{
+    position: relative;
+    .save-to-project-modal{ 
+        z-index: 9;
+    }
+}
 
 // responsive css @S
 @include q.responsive(phone) {

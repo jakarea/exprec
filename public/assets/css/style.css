@@ -393,7 +393,8 @@ h6 {
   position: relative;
   transition: all linear 0.3s;
 }
-.interrest-tool-page-wrap .save-to-project-modal {
+
+.save-to-project-modal {
   position: absolute;
   left: 50%;
   top: 0;
@@ -404,7 +405,7 @@ h6 {
   transform: translateX(-50%);
   transition: all linear 0.3s;
 }
-.interrest-tool-page-wrap .save-to-project-modal .saveto-modal-txt {
+.save-to-project-modal .saveto-modal-txt {
   max-width: 30%;
   width: 90%;
   margin: 0 auto;
@@ -413,32 +414,32 @@ h6 {
   padding: 1.4rem;
   border-radius: 0.6rem;
 }
-.interrest-tool-page-wrap .save-to-project-modal .saveto-modal-txt h4 {
+.save-to-project-modal .saveto-modal-txt h4 {
   font-size: 1.8rem;
   font-weight: 500;
   color: #000000;
   line-height: 140%;
 }
-.interrest-tool-page-wrap .save-to-project-modal .saveto-modal-txt .form-group {
+.save-to-project-modal .saveto-modal-txt .form-group {
   margin-top: 1rem;
 }
-.interrest-tool-page-wrap .save-to-project-modal .saveto-modal-txt .form-group label {
+.save-to-project-modal .saveto-modal-txt .form-group label {
   font-size: 1rem;
   font-weight: 400;
   color: #8C8FAE;
   line-height: 140%;
   margin-bottom: 0.5rem;
 }
-.interrest-tool-page-wrap .save-to-project-modal .saveto-modal-txt .form-group .form-control {
+.save-to-project-modal .saveto-modal-txt .form-group .form-control {
   font-size: 1rem;
   font-weight: 400;
   color: #8C8FAE;
   line-height: 140%;
 }
-.interrest-tool-page-wrap .save-to-project-modal .saveto-modal-txt .form-groups {
+.save-to-project-modal .saveto-modal-txt .form-groups {
   margin-top: 1.6rem;
 }
-.interrest-tool-page-wrap .save-to-project-modal .saveto-modal-txt .form-groups .btn-submits {
+.save-to-project-modal .saveto-modal-txt .form-groups .btn-submits {
   font-size: 1rem;
   font-weight: 500;
   color: #ffffff;
@@ -448,7 +449,7 @@ h6 {
   padding: 0.85rem 1.5rem;
   padding: 0.5rem 2rem;
 }
-.interrest-tool-page-wrap .save-to-project-modal .saveto-modal-txt .form-groups .btn-closes {
+.save-to-project-modal .saveto-modal-txt .form-groups .btn-closes {
   font-size: 1rem;
   font-weight: 500;
   color: #ffffff;
