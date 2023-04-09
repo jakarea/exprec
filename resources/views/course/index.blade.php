@@ -56,10 +56,16 @@
                     </div> 
                 </div>
                 <div class="course-ftr">
-                    <h5><i class="fas fa-play"></i> Overview </h5>
-                    <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-bar w-75"></div>
-                    </div>
+                    <!-- course->enrollments->user_id is equal to logged in user id then show bought this course else buy now -->
+                    @if($course->enrollments->where('user_id', Auth::user()->id)->where('course_id', $course->id)->count() > 0)
+                        <!-- <a href="{{url('elearning/courses/'.$course->slug )}}" class="btn btn-primary">Already Purchased</a> -->
+                        <h5><i class="fas fa-play"></i> Overview </h5>
+                        <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar w-75"></div>
+                        </div>
+                    @else
+                        <a href="javascript:void(0)" class="btn btn-primary enroll__btn" data-course="{{ $course->id }}"  data-user="{{ Auth::user()->id }}">Enroll Now</a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -92,5 +98,31 @@
     <!-- all courses @E -->
    
 </main>
-
+@endsection
+@section('script')
+<script>
+    jQuery(document).ready(function(){
+        jQuery('.enroll__btn').click(function(){
+           // Ask for confirmation
+              if(confirm('Are you sure you want to enroll this course?')){
+                // Send ajax request
+                jQuery.ajax({
+                     url: "{{ route('enrollment.store') }}",
+                     method: "POST",
+                     data: {
+                          _token: "{{ csrf_token() }}",
+                          course_id: jQuery(this).data('course'),
+                          user_id: jQuery(this).data('user')
+                     },
+                     success: function(response){
+                          if(response){
+                            // Reload the page
+                            location.reload();
+                          }
+                     }
+                });
+              }
+        });
+    });
+</script>
 @endsection

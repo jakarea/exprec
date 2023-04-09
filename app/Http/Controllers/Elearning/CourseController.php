@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Elearning;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Lesson;
-use Illuminate\Support\Str;
 use App\Models\Module;
+use App\Models\Courselog;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Models\CourseActivity;
+use App\Http\Controllers\Controller;
 
 class CourseController extends Controller
 {
@@ -23,6 +25,49 @@ class CourseController extends Controller
     {
         return view('elearning/courses/create');
     }
+
+    // Course lesson finish ajax request
+    public function ajaxFinishLesson(Request $request)
+    {
+        $activitesi = CourseActivity::where('course_id', $request->course_id)->where('module_id', $request->module_id)->where('lesson_id', $request->lesson_id)->where('user_id', auth()->user()->id)->first();
+        if ($activitesi) {
+            $activitesi->is_completed = true;
+            $activitesi->save();
+        } else {
+            $activitesi = new CourseActivity();
+            $activitesi->course_id = $request->course_id;
+            $activitesi->module_id = $request->module_id;
+            $activitesi->lesson_id = $request->lesson_id;
+            $activitesi->user_id = auth()->user()->id;
+            $activitesi->is_completed = true;
+            $activitesi->save();
+        }
+
+        return response()->json(['success' => 'Lesson finished!']);
+    }
+
+    // Courselog ajax request
+    public function ajaxLogCourse(Request $request)
+    {
+        $log = Courselog::where('course_id', $request->course_id)->where('module_id', $request->module_id)->where('lesson_id', $request->lesson_id)->where('user_id', auth()->user()->id)->first();
+        if ($log) {
+            $log->course_id = $request->course_id;
+            $log->module_id = $request->module_id;
+            $log->lesson_id = $request->lesson_id;
+            $log->user_id = auth()->user()->id;
+            $log->save();
+        } else {
+            $log = new Courselog();
+            $log->course_id = $request->course_id;
+            $log->module_id = $request->module_id;
+            $log->lesson_id = $request->lesson_id;
+            $log->user_id = auth()->user()->id;
+            $log->save();
+        }
+
+        return response()->json(['success' => 'Lesson finished!']);
+    }
+
 
     // Create a method to store course in database using course model and follow the validation rules from migration file, generate unique slug from title and appending its id after save the course
     public function storeCourse(Request $request)

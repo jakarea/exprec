@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Enrollment;
+use App\Models\CourseActivity;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Course extends Model
 {
@@ -26,6 +28,14 @@ class Course extends Model
     public function modules()
     {
         return $this->hasMany(Module::class);
+    }
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class, 'course_id', 'id');
+    }
+    public function courseActivities()
+    {
+        return $this->hasMany(CourseActivity::class, 'course_id', 'id');
     }
     
 }
