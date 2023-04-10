@@ -37,14 +37,4 @@ class Enrollment extends Model
     {
         $this->attributes['progress'] = $value;
     }
-
-    // count courselog by user_id and course_id and return progress
-    public function getProgress($user_id, $course_id)
-    {
-        $courselogs = Courselog::where('user_id', $user_id)->where('course_id', $course_id)->get();
-        $total = $courselogs->count();
-        $completed = $courselogs->where('is_completed', 1)->count();
-        $progress = $completed / $total * 100;
-        return $progress;
-    }
 }

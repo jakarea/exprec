@@ -60,8 +60,8 @@
                     @if($course->enrollments->where('user_id', Auth::user()->id)->where('course_id', $course->id)->count() > 0)
                         <!-- <a href="{{url('elearning/courses/'.$course->slug )}}" class="btn btn-primary">Already Purchased</a> -->
                         <h5><i class="fas fa-play"></i> Overview </h5>
-                        <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar w-75"></div>
+                        <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="{{ \App\Models\Course::getProgress(Auth::user()->id, $course->id) }}" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar w-{{ \App\Models\Course::getProgress(Auth::user()->id, $course->id) }}"></div>
                         </div>
                     @else
                         <a href="javascript:void(0)" class="btn btn-primary enroll__btn" data-course="{{ $course->id }}"  data-user="{{ Auth::user()->id }}">Enroll Now</a>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Courselog;
 use App\Models\Enrollment;
 use App\Models\CourseActivity;
 use Illuminate\Database\Eloquent\Model;
@@ -37,5 +38,27 @@ class Course extends Model
     {
         return $this->hasMany(CourseActivity::class, 'course_id', 'id');
     }
+
+    public static function getProgress($user_id, $course_id)
+    {
+        $courselogs = CourseActivity::where('user_id', $user_id)
+                                     ->where('course_id', $course_id)
+                                     ->where('is_completed', 1)
+                                     ->count();
+        $total = Courselog::where('course_id', $course_id)->count();
+        if ($total == 0) {
+            return 0;
+        }
+
+        $enrollment = Enrollment::where('user_id', $user_id)
+                                ->where('course_id', $course_id)
+                                ->first();
+        if ($enrollment) {
+            $enrollment->progress = round(($courselogs / $total) * 100);
+            $enrollment->save();
+        }
+
+        return round(($courselogs / $total) * 100);
+    }    
     
 }
