@@ -898,17 +898,44 @@
 }
 .adspy-facebook-page-wrap .save-to-project-modal {
   z-index: 9;
+  position: fixed;
+  margin-left: 130px;
+}
+.adspy-facebook-page-wrap .save-to-project-modal .saveto-modal-txt {
+  margin: 0 auto;
+  margin-top: 10rem;
+}
+
+.main-page-width .save-to-project-modal {
+  margin-left: 22px !important;
 }
 
 @media (min-width: 320px) and (max-width: 574px) {
   .wining-product-wrapper .wining-products-box {
     grid-template-columns: 1fr;
   }
+  .adspy-facebook-page-wrap .save-to-project-modal {
+    margin-left: 0;
+  }
+  .save-to-project-modal .saveto-modal-txt {
+    max-width: 100%;
+  }
+  .adspy-facebook-page-wrap {
+    padding: 0.5rem !important;
+    padding-top: 6rem !important;
+  }
   .about-add-box-wrap {
     margin-bottom: 1.5rem;
   }
+  .addspy-multi-select, .quick-query {
+    margin: 1.5rem 0 !important;
+  }
   .about-page-header-wrap {
     padding: 1rem;
+  }
+  .addspy-multi-select .d-flex {
+    width: 100%;
+    margin-bottom: 1rem;
   }
   .about-page-header-wrap .d-flex {
     flex-direction: column;
@@ -923,19 +950,60 @@
   .about-page-header-wrap .page-details-wrap {
     margin-left: 0;
   }
+  .main-page-width .save-to-project-modal {
+    margin-left: 0px !important;
+  }
 }
 @media (min-width: 574px) and (max-width: 767px) {
   .wining-product-wrapper .wining-products-box {
     grid-template-columns: 1fr;
+  }
+  .adspy-facebook-page-wrap .save-to-project-modal {
+    margin-left: 0;
+  }
+  .save-to-project-modal .saveto-modal-txt {
+    max-width: 100%;
+  }
+  .adspy-facebook-page-wrap {
+    padding: 0.5rem !important;
+    padding-top: 6rem !important;
+  }
+  .about-add-box-wrap {
+    margin-bottom: 1.5rem;
+  }
+  .addspy-multi-select, .quick-query {
+    margin: 1.5rem 0 !important;
+  }
+  .about-page-header-wrap {
+    padding: 1rem;
+  }
+  .addspy-multi-select .d-flex {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .main-page-width .save-to-project-modal {
+    margin-left: 0px !important;
   }
 }
 @media (min-width: 767px) and (max-width: 992px) {
   .wining-product-wrapper .wining-products-box {
     grid-template-columns: 1fr 1fr;
   }
+  .main-page-width .save-to-project-modal {
+    margin-left: 0px !important;
+  }
+  .adspy-facebook-page-wrap .save-to-project-modal {
+    margin-left: 0;
+  }
+  .save-to-project-modal .saveto-modal-txt {
+    max-width: 50%;
+  }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   .wining-product-wrapper .wining-products-box {
     grid-template-columns: 1fr 1fr 1fr;
+  }
+  .save-to-project-modal .saveto-modal-txt {
+    max-width: 60%;
   }
 }
