@@ -1,4 +1,6 @@
 const baseUrl = document.querySelector('meta[name="base-url"]').getAttribute('content');
+const projectForm = document.getElementById('projectForm');
+
 var searchButton = document.getElementById("searchBtn");
 var adsDiv = document.getElementById("ad-container");
 var adContainerPreloader = document.getElementById("ad-container-preloader");
@@ -12,6 +14,7 @@ var i = 0;
 var savedAds = [];
 var savedAdsContent = [];
 var saveAdAndOpenElements = document.querySelectorAll('.saveAdAndOpen');
+var adData = document.getElementById('adData');
 
 searchButton.addEventListener('click', function (e) {
     e.preventDefault();
@@ -160,7 +163,7 @@ function makeAjaxRequest() {
                                         </table> 
                                         <div class="adspy-filter-product-bttns">
                                             <a href="#" data-id="${i}" class="saveAdAndOpen preventDefault">See ad details</a>
-                                            <a href="#" data-id="${i}" data-select='${JSON.stringify(ad)}' class="saveAd preventDefault">Add to a list</a>
+                                            <a href="#" data-id="${i}" data-select='${JSON.stringify(ad)}' class="saveAdToList preventDefault">Add to a list</a>
                                         </div>
                                     </div>
                                 </div>
@@ -240,24 +243,48 @@ const closeModal = () => {
     adspyModal.style.display = "none";
 }
 
-closeAdspyModal.addEventListener("click",closeModal);
+closeAdspyModal.addEventListener("click", closeModal);
 
 document.addEventListener('click', function (event) {
-    // Check if clicked element has class "saveAdAndOpen"
     if (event.target.classList.contains('preventDefault')) {
         event.preventDefault();
-        let save = 0; 
+        let save = 0;
         // Get data-id attribute from clicked element
         var adId = event.target.getAttribute('data-id');
-        if (event.target.classList.contains('saveAd')) {
-            save = 1;  
-	        // toastr.success(message);
-            adspyModal.style.display = "block"; 
-            setAdId.value = event.target.getAttribute("data-select");
+        if (event.target.classList.contains('saveAdToList')) {
+            save = 1;
+            adspyModal.style.display = "block";
+            adData.value = JSON.stringify(savedAds[adId]);
         }
-        saveAd(adId, save)
-    } else {
-        event.defaultPrevented = false;
+        if (event.target.classList.contains('saveAdAndOpen')) {
+            save = 0;
+            saveAd(adId, save)
+        }
+    }
+});
+
+projectForm.addEventListener('submit', async function (event) {
+    event.preventDefault();
+    let project_id = document.getElementById("project_id").value;
+    let project_name = document.getElementById("project_name").value;
+    let adData = JSON.parse(document.getElementById("adData").value);
+
+    try {
+        const url = baseUrl + '/adspy/facebook2/save-ad2/save-project';
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            body: JSON.stringify({ project_id, project_name, adData })
+        });
+        const data = await response.json();
+        if (!addToList) {
+            window.open(baseUrl + '/adspy/facebook/' + data.ad_id, '_blank');
+        }
+    } catch (error) {
+        console.error(error);
     }
 });
 

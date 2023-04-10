@@ -6,6 +6,7 @@ use Facebook\Exceptions\FacebookSDKException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Facebook\Facebook;
+use App\Models\Project;
 use App\Models\Ads;
 class AdspyController extends Controller
 {
@@ -23,7 +24,8 @@ class AdspyController extends Controller
 
     public function facebook()
     {
-        return view('adspy/facebook');
+        $projects = Project::orderBy('id', 'desc')->get();
+        return view('adspy/facebook',compact('projects'));
     } 
 
     public function getAdFromFacebook(Request $request){
@@ -43,7 +45,6 @@ class AdspyController extends Controller
 
     public function loadMoreData(Request $request)
         {
-          
             $allInputs = $request->all();
 
             // Separate fields starting with an underscore
@@ -119,7 +120,6 @@ class AdspyController extends Controller
 
     public function pinterest($id)
     {
-        
         return view('adspy/pinterest');
     } 
 
@@ -214,6 +214,37 @@ class AdspyController extends Controller
 
         return redirect()->to('/home');
     }
+
+    public function saveAdInProject(Request $request){
+
+        $allInputs = $request->all();
+        $project_name = $allInputs['project_name'];
+        $project_id = $allInputs['project_id'];
+        $adData = $allInputs['adData'];
+        if(!$project_id){
+            $project = new Project();
+            $project->name = $project_name;
+            $project->save();
+            $project_id = $project->id;
+        }
+        $this->saveAdToProject($project_id, $adData);
+    }
+
+
+    public function saveAdToProject($project_id, $adData){
+        $ad_id = $adData['page_id'].'_'.$adData['id'];
+        $ad = Ads::where('ad_id', $ad_id)->first();
+        if(!$ad){
+            $ad = new Ads();
+            $ad->ad_id = $ad_id;
+        }
+        $ad->project_id = $project_id;
+        $ad->data = json_encode($adData);
+        $ad->save();
+        return response()->json($ad);
+    }
+
+
 }
 
 // link_url
