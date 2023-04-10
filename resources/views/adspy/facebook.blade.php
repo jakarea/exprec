@@ -76,20 +76,21 @@ $languages = array(
 	<div class="save-to-project-modal" id="adspy-modal">
 		<div class="saveto-modal-txt">
 			<h4>Save to project</h4>
-			<form action="{{route('test_store')}}" method="POST">
-				@csrf
+			<form id="projectForm" name="projectForm" method="post">
 				<div class="form-group">
 					<label for="">Save to an existing project</label>
-					<select name="previous_project" id="" class="form-control">
+					<select name="previous_project" id="project_id" class="form-control">
 						<option value="">Select Below</option>
-						<option value="">Project 01</option>
+						@foreach($projects as $project) 
+						<option name="project_id" value="{{$project['id']}}">{{$project['name']}}</option>
+						@endforeach
 					</select>
 				</div>
 				<div class="form-group">
 					<label for="">Save to a new project</label>
-					<input type="text" placeholder="Name your project" name="name" class="form-control"> 
+					<input type="text" placeholder="Name your project" name="project_name" id="project_name" class="form-control"> 
 				</div>
-				<input type="hidden" name="adData" id="ad-data" value="">
+				<input type="hidden" name="adData" id="adData" value="">
 				<div class="form-groups"> 
 					<button type="button" class="btn btn-closes" id="close-adspy-modal">Close</button>
 					<button type="submit" class="btn btn-submits">Save</button>
