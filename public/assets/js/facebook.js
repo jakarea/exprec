@@ -280,13 +280,30 @@ projectForm.addEventListener('submit', async function (event) {
             body: JSON.stringify({ project_id, project_name, adData })
         });
         const data = await response.json();
-        if (!addToList) {
-            window.open(baseUrl + '/adspy/facebook/' + data.ad_id, '_blank');
+
+        if (data) {
+            let status = data[1];
+            let projects = data[0];
+            document.getElementById("project_name").value = '';
+            closeModal();
+            project_id = '';
+            project_name = '';
+            adData = '';
+            var selectElement = document.getElementById("project_id");
+
+            // Remove all existing options
+            selectElement.innerHTML = "";
+
+            projects.forEach(project => {
+                let option = new Option(project.name, project.id);
+                selectElement.add(option);
+            })
         }
     } catch (error) {
         console.error(error);
     }
 });
+
 
 async function saveAd(adId, addToList = false) {
     const mergedAd = Object.assign({}, savedAds[adId], savedAdsContent[adId], { addToList });
