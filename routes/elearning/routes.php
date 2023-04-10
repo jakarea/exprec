@@ -1,9 +1,10 @@
 <?php
-use App\Http\Controllers\Elearning\ElearningController;
-use App\Http\Controllers\Elearning\CourseController;
-use App\Http\Controllers\Elearning\ModuleController;
-use App\Http\Controllers\Elearning\LessonController;
 use Vimeo\Vimeo;
+use App\Http\Controllers\EnrollmentsController;
+use App\Http\Controllers\Elearning\CourseController;
+use App\Http\Controllers\Elearning\LessonController;
+use App\Http\Controllers\Elearning\ModuleController;
+use App\Http\Controllers\Elearning\ElearningController;
 
 // Route::prefix('elearning')->controller(ElearingController::class)->group(function () {   
 //     Route::get('/', 'index');   
@@ -15,8 +16,10 @@ Route::prefix('elearning')->controller(ElearningController::class)->group(functi
     Route::get('/', 'index');  
     Route::get('/courses/{slug}', 'course');
     Route::get('/mylearning', 'mylearning');   
-    Route::get('/favorite', 'suggested');   
+    Route::get('/favorite', 'suggested');
 });
+
+Route::resource('enrollment', EnrollmentsController::class);
 
 Route::get('/admin/testing', function () {
 
@@ -36,6 +39,8 @@ Route::prefix('admin/elearning/courses')->controller(CourseController::class)->g
     Route::get('/{id}/edit', 'editCourse')->name('course_edit');
     Route::post('/{id}/edit', 'updateCourse')->name('course_update');
     Route::delete('/{id}/destroy', 'deleteCourse');
+    Route::post('/ajax/finish/lesson', 'ajaxFinishLesson')->name('ajax_finish_lesson');
+    Route::post('/ajax/log/course', 'ajaxLogCourse')->name('ajax_course_log');
 });
 
 Route::prefix('admin/elearning/modules')->controller(ModuleController::class)->group(function () {   

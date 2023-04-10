@@ -10,13 +10,14 @@ class ElearningController extends Controller
 {
     public function index()
     {
-        $courses = Course::orderBy('id', 'desc')->paginate(12);
+        $courses = Course::orderBy('id', 'desc')->with('enrollments')->paginate(12);
         return view('course/index', compact('courses'));
     }
 
     public function course($slug)
     {
-        $course = Course::where('slug', $slug)->first();
+        $course = Course::where('slug', $slug)->with('enrollments', 'courseActivities')->first();
+        // return $course;
         return view('elearning/courses/show', compact('course'));
     }
     public function mylearning()
