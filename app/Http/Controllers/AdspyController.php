@@ -216,7 +216,6 @@ class AdspyController extends Controller
     }
 
     public function saveAdInProject(Request $request){
-
         $allInputs = $request->all();
         $project_name = $allInputs['project_name'];
         $project_id = $allInputs['project_id'];
@@ -227,24 +226,28 @@ class AdspyController extends Controller
             $project->save();
             $project_id = $project->id;
         }
-        $this->saveAdToProject($project_id, $adData);
+        $result = $this->saveAdToProject($project_id, $adData);
+        $projects = Project::orderBy('id', 'desc')->get();
+        if($result){
+            return response()->json([$projects, 'success' => 1]);
+        }else{
+            
+            return response()->json([$projects, 'success' => 0]);
+        }
     }
-
 
     public function saveAdToProject($project_id, $adData){
         $ad_id = $adData['page_id'].'_'.$adData['id'];
-        $ad = Ads::where('ad_id', $ad_id)->first();
+        $ad = Ads::where(['ad_id' => $ad_id, 'project_id' => $project_id])->first();
         if(!$ad){
             $ad = new Ads();
             $ad->ad_id = $ad_id;
         }
         $ad->project_id = $project_id;
         $ad->data = json_encode($adData);
-        $ad->save();
-        return response()->json($ad);
+        return $ad->save();
+        exit;
     }
-
-
 }
 
 // link_url
