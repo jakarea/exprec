@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title') Course @endsection
+@section('title') My Courses @endsection
 @section('style') 
 <link href="{{ asset('assets/css/course.css') }}" rel="stylesheet" type="text/css" />  
 @endsection
@@ -26,10 +26,10 @@
     <!-- all courses @S -->
     <div class="row me-lg-3"> 
         <!-- item @S -->
-        @foreach($courses as $course)
+        @foreach($enrolments as $enrolment)
 
         @php    
-        $desc = $course->short_description;
+        $desc = $enrolment->course->short_description;
             $max_length = 105;
             if (strlen($desc) > $max_length) {
                 $short_description = substr($desc, 0, $max_length);
@@ -44,30 +44,28 @@
             <div class="course-box-wrap">
                 <div class="course-content-box">
                     <div class="course-thumbnail">
-                        <img src="{{asset('assets/images/course/'. $course->thumbnail)}}" alt="{{ $course->slug}}" class="img-fluid">
+                        <img src="{{asset('assets/images/course/'. $enrolment->course->thumbnail)}}" alt="{{ $enrolment->course->slug}}" class="img-fluid">
                     </div>
                     <div class="course-txt-box">
-                        <h3> <a href="{{url('elearning/courses/'.$course->slug )}}">{{ $course->title }} </a></h3>
+                        <h3> <a href="{{url('elearning/courses/'.$enrolment->course->slug )}}">{{ $enrolment->course->title }} </a></h3>
                         <ul>
-                            <li><a href="#">{{ $course->number_of_lesson}} LESSONS</a></li>
-                            <li><a href="#">{{ $course->number_of_module}} MODULES</a></li>
+                            <li><a href="#">{{ $enrolment->course->number_of_lesson}} LESSONS</a></li>
+                            <li><a href="#">{{ $enrolment->course->number_of_module}} MODULES</a></li>
                         </ul>
                         <p>{{ $short_description}}</p>
                     </div> 
                 </div>
                 <div class="course-ftr">
+
                     <!-- course->enrollments->user_id is equal to logged in user id then show bought this course else buy now -->
-                    @if($course->enrollments->where('user_id', Auth::user()->id)->where('course_id', $course->id)->count() > 0)
-                        <!-- <a href="{{url('elearning/courses/'.$course->slug )}}" class="btn btn-primary">Already Purchased</a> -->
+                   
+                        <!-- <a href="{{url('elearning/courses/'.$enrolment->course->slug )}}" class="btn btn-primary">Already Purchased</a> -->
                         <h5><i class="fas fa-play"></i> Overview </h5>
-                
+
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{ \App\Models\Course::getProgress(Auth::user()->id, $course->id) }}%">
+                            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{$enrolment->progress}};">
                             </div>
                         </div>
-                    @else
-                        <a href="javascript:void(0)" class="btn btn-exprec enroll__btn" data-course="{{ $course->id }}"  data-user="{{ Auth::user()->id }}">Enroll Now</a>
-                    @endif
                 </div>
             </div>
         </div>

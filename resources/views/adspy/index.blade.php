@@ -64,30 +64,27 @@
           </div>
           <div class="wining-products-box">
             <!-- Item @S -->
-            <div class="wining-product-item">
-              <div class="wining-product-thumbnail">
-                <img src="{{ asset('assets/images/post-01.png') }}" alt="Product" class="img-fluid">
-                <img src="{{ asset('assets/images/play-icon.png') }}" alt="Line" class="img-fluid player-img">
-              </div>
-              <div class="wining-product-txt">
-                <h5>Buy 1 Get 1 FREE</h5>
-
-                <ul>
-                  <li><a href="#"><i class="fa-regular fa-heart"></i> 23K</a></li>
-                  <li><a href="#"><img src="{{ asset('assets/images/comment-icon.svg') }}" alt="Comment" class="img-fluid"> 12K</a></li>
-                  <li><a href="#"><img src="{{ asset('assets/images/submit-icon.svg') }}" alt="Comment" class="img-fluid"> 15K</a></li>
-                </ul>
-              </div>
-            </div>
+            
             <!-- Item @E -->
             <!-- Item @S -->
+            @foreach($ads as $ad)
+            @php
+              $ad = json_decode($ad->data);
+            @endphp
             <div class="wining-product-item">
               <div class="wining-product-thumbnail">
-                <img src="{{ asset('assets/images/post-02.png') }}" alt="Product" class="img-fluid">
-                <img src="{{ asset('assets/images/play-icon.png') }}" alt="Line" class="img-fluid player-img">
+              @if(isset($ad->images) && count($ad->images) > 0)
+              <img src="{{ $ad->images[0]->original_image_url}}" alt="post-image" class="img-fluid">
+              @endif
+              @if(isset($ad->videos) && count($ad->videos) > 0)
+              <video controlslist="nodownload" height="100%" loop="" poster="{{$ad->videos[0]->video_preview_image_url}}"  width="100%" controls="">
+                            <source src="{{$ad->videos[0]->video_hd_url ? $ad->videos[0]->video_hd_url : $ad->videos[0]->video_sd_url}}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+              @endif
               </div>
               <div class="wining-product-txt">
-                <h5>Buy 1 Get 1 FREE</h5>
+                <h5>{{ isset($ad->title) ? $ad->title : '' }}</h5>
 
                 <ul>
                   <li><a href="#"><i class="fa-regular fa-heart"></i> 23K</a></li>
@@ -96,40 +93,13 @@
                 </ul>
               </div>
             </div>
+            @endforeach
             <!-- Item @E -->
             <!-- Item @S -->
-            <div class="wining-product-item">
-              <div class="wining-product-thumbnail">
-                <img src="{{ asset('assets/images/post-03.png') }}" alt="Product" class="img-fluid">
-                <img src="{{ asset('assets/images/play-icon.png') }}" alt="Line" class="img-fluid player-img">
-              </div>
-              <div class="wining-product-txt">
-                <h5>Buy 1 Get 1 FREE</h5>
-
-                <ul>
-                  <li><a href="#"><i class="fa-regular fa-heart"></i> 23K</a></li>
-                  <li><a href="#"><img src="{{ asset('assets/images/comment-icon.svg') }}" alt="Comment" class="img-fluid"> 12K</a></li>
-                  <li><a href="#"><img src="{{ asset('assets/images/submit-icon.svg') }}" alt="Comment" class="img-fluid"> 15K</a></li>
-                </ul>
-              </div>
-            </div>
+           
             <!-- Item @E --> 
             <!-- Item @S -->
-            <div class="wining-product-item">
-              <div class="wining-product-thumbnail">
-              <img src="{{ asset('assets/images/post-01.png') }}" alt="Product" class="img-fluid">
-                <img src="{{ asset('assets/images/play-icon.png') }}" alt="Line" class="img-fluid player-img">
-              </div>
-              <div class="wining-product-txt">
-                <h5>Buy 1 Get 1 FREE</h5>
-
-                <ul>
-                  <li><a href="#"><i class="fa-regular fa-heart"></i> 23K</a></li>
-                  <li><a href="#"><img src="{{ asset('assets/images/comment-icon.svg') }}" alt="Comment" class="img-fluid"> 12K</a></li>
-                  <li><a href="#"><img src="{{ asset('assets/images/submit-icon.svg') }}" alt="Comment" class="img-fluid"> 15K</a></li>
-                </ul>
-              </div>
-            </div>
+            
             <!-- Item @E --> 
           </div>
         </div>

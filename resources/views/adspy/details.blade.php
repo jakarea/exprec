@@ -30,7 +30,10 @@
                 <div class="about-add-box-wrap">
                     <div class="d-flex">
                         <div class="media">
-                            <img src="{{ $ad->page_profile_picture_url}}" alt="shopify-image" class="img-fluid">
+                            @if(isset($ad->page_profile_picture_url))
+                                <img src="{{ $ad->page_profile_picture_url}}" alt="shopify-image" class="img-fluid">
+                            @endif
+                            
                             <div class="media-body">
                                 <h6>{{ $ad->page_name}}</h6>
                                 <p>ID: {{$ad->id}}</p>
@@ -46,7 +49,7 @@
                         <p>{{ isset($ad->title) ? $ad->title : "" }}</a></p>
                     </div>
                     <!-- add thumbnail @S -->
-                    @if(count($ad->images) > 0)
+                    @if(isset($ad->images) && count($ad->images) > 0)
                     <div class="ads-thumbnail-wrap">
                         <img src="{{ $ad->images[0]->original_image_url}}" alt="post-image" class="img-fluid">
                     </div>
@@ -65,7 +68,7 @@
                         </div>
                     </div> -->
                     <!-- add slider @E -->
-                    @if(count($ad->videos) > 0)
+                    @if(isset($ad->videos) &&  count($ad->videos) > 0)
                     <!-- add video @S -->
                     <div class="ads-video-wrap">
                         <video controlslist="nodownload" height="100%" loop="" poster="{{$ad->videos[0]->video_preview_image_url}}"  width="100%" controls="">
@@ -77,10 +80,17 @@
 
                     <!-- add video @E -->
                     <div class="ads-ftr-cta-bttn">
-                        <a href="{{$ad->link_url}}">{{$ad->caption}}</a>
+                        @if(isset($ad->caption))
+                        <a href="{{isset($ad->link_url) && $ad->link_url ? $ad->link_url : '#'}}">{{$ad->caption}}</a>
+                        @endif
+                        @if(isset($ad->title))
                         <h6>{{ $ad->title}}</h6>
+                        @endif
+                        @if(isset($ad->link_description))
                         <p>{{ $ad->link_description}}</p>
-                        @if($ad->cta_text)
+                        @endif
+                        @if(isset($ad->cta_text))
+
                         <a href="//{{ $ad->caption }}" class="cta-button">{{$ad->cta_text}}</a>
                         @endif
                     </div>
@@ -97,14 +107,18 @@
                 <div class="about-page-header-wrap">
                     <div class="d-flex">
                         <div class="media">
-                            <img src="{{ $ad->page_profile_picture_url}}" alt="{{ $ad->page_name . 'profile picture'}}" class="img-fluid">
+                            @if(isset($ad->page_profile_picture_url))
+                                <img src="{{ $ad->page_profile_picture_url}}" alt="{{ $ad->page_name . 'profile picture'}}" class="img-fluid">
+                            @endif
                             <div class="media-body">
                                 <h5>{{ $ad->page_name}}</h5>
                                 <h6>ID: {{$ad->page_id}}</h6>
                             </div>
 
                         </div>
+                        @if(isset($ad->page_profile_uri))
                         <a href="{{ $ad->page_profile_uri}}"><i class="fas fa-link"></i></a>
+                        @endif
                     </div>
                     <div class="page-details-wrap">
                         <div class="row">
@@ -115,10 +129,12 @@
                                     </div>
                                     <div class="media-body">
                                         <p><i class="fa-solid fa-id-badge"></i>: ID: {{ $ad->page_id }}</p>
+                                        @if(isset($ad->page_like_count))
                                         <p><i class="fas fa-thumbs-up"></i>: {{$ad->page_like_count}} likes</p>
+                                        @endif
                                         @php
                                             $category = '';
-                                            $obj = $ad->page_categories;
+                                            $obj = isset($ad->page_categories) ? $ad->page_categories : '';
                                             $obj = json_encode($obj);
                                             $pattern = '/"(\d+)":"([^"]+)"/';
                                             if (preg_match($pattern, $obj, $matches)) {
@@ -134,10 +150,12 @@
                                     <div class="social-site">
                                         <i class="fa-brands fa-instagram"></i>
                                     </div>
+                                    @if(isset($ad->instagram_actor_name))
                                     <div class="media-body">
                                         <p><i class="fa-solid fa-check"></i>: {{ $ad->instagram_actor_name}}</p>
 
                                     </div>
+                                    @endif
                                 </div>
                             </div>
  

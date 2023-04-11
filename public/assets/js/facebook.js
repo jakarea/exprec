@@ -140,18 +140,18 @@ function makeAjaxRequest() {
                 title = ad.ad_creative_link_titles ? ad.ad_creative_link_titles[0] : ''
                 htmlAds += `<div class="col-lg-4 col-md-6 col-sm-6" id="ad_${ad.id}">
                                 <div class="wining-product-item adspy-filter-product">
-                                    <div class="wining-product-thumbnail image_${ad.id}">
+                                    <div class="wining-product-thumbnail" id="image_${ad.id}">
                                         <img id="img_${ad.id}" src="${baseUrl}/assets/images/preloader2.gif" alt="${title}" class="img-fluid main-img">
                                     </div>
 
-                                    <div class="wining-product-thumbnail video_${ad.id} d-none">
-                                        <video id="player_${ad.id}" controlslist="nodownload" height="100%" loop="" poster="https://www.w3schools.com/html/pic_trulli.jpg"  width="100%" controls="">
-                                            <source id="source_${ad.id}" src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                                    <div class="wining-product-thumbnail d-none" id="video_div_${ad.id}">
+                                        <video id="player_${ad.id}" controlslist="nodownload" height="100%" loop="" poster=""  width="100%" controls="">
+                                            <source id="source_${ad.id}" src="" type="video/mp4">
                                             Your browser does not support the video tag.
                                         </video>
                                     </div>
                                     <div class="wining-product-txt">
-                                        <h5>${title}</h5>
+                                        <h5>${title.substring(0, 25)}</h5>
                                         <h3>${getDayDiff(ad.ad_delivery_start_time, ad.ad_delivery_stop_time)} Days</h3>
                                         <ul>
                                         <li><a href="#"><img src="${baseUrl}/assets/images/tag-icon.svg" alt="Comment" class="img-fluid"> ${ad.estimated_audience_size && ad.estimated_audience_size.lower_bound ? humanReadableFormat(ad.estimated_audience_size.lower_bound) : ''}</a></li>
@@ -208,36 +208,47 @@ async function getImagesByIds(ids) {
                 cards
             } = data;
             savedAdsContent.push(data);
-            let [image, video_image, video_url] = ['', '', ''];
-            if (images.length) {
+            let [video_hd_url, video_sd_url, video_preview_image_url, image, video_url] = ['', '', '', ''];
+
+            console.log({ images, videos, cards })
+            if (images && images.length) {
                 image = images[0].resized_image_url;
             }
-            if (videos.length || cards.length) {
-                const {
-                    video_preview_image_url,
-                    video_hd_url,
-                    video_sd_url
-                } = videos.length ? videos[0] : (cards.length ? cards[0] : {});
-                video_image = video_preview_image_url || '';
+
+            if (videos && videos.length) {
+                video_hd_url = videos[0].video_hd_url;
+                video_sd_url = videos[0].video_sd_url;
+                video_preview_image_url = videos[0].video_preview_image_url;
                 video_url = video_hd_url || video_sd_url || '';
-                if (!images.length && cards.length) {
+            }
+
+            if (cards && cards.length) {
+                video_preview_image_url = cards[0].video_preview_image_url || '';
+                video_url = cards[0].video_hd_url || cards[0].video_sd_url || '';
+                if (!images.length) {
                     image = cards[0].resized_image_url;
                 }
             }
 
             let myImg = document.getElementById("img_" + id);
-            let myVideoDiv = document.getElementById("video_" + id);
+            let myImage = document.getElementById("image_" + id);
             let myPlayer = document.getElementById("player_" + id);
-            let mySouce = document.getElementById("source_" + id);
+            let mySource = document.getElementById("source_" + id);
+            let video_div = document.getElementById("video_div_" + id);
 
-            if (video_image) {
-                myPlayer.poster = video_image;
-                myVideoDiv.classList.remove("d-none");
-                mySouce.src = video_url;
+            if (video_preview_image_url) {
+                video_div.classList.remove("d-none");
+                myImage.classList.add("d-none");
+                myPlayer.poster = video_preview_image_url;
+                mySource.src = video_url;
             }
 
             if (image) {
                 myImg.src = image;
+            }
+            if (!image && !video_preview_image_url) {
+                myImage.classList.add("d-none");
+                myImg.classList.add("d-none");
             }
         }
     } catch (error) {

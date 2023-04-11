@@ -62,11 +62,11 @@
        
         <div class="wining-product-item">
           <div class="wining-product-thumbnail">
-            @if(count($ad->images) > 0)
+            @if(isset($ad->images) && count($ad->images) > 0)
                 <img src="{{ $ad->images[0]->original_image_url}}" alt="post-image" class="img-fluid">
             @endif
 
-            @if(count($ad->videos) > 0)
+            @if(isset($ad->videos) && count($ad->videos) > 0)
               <video controlslist="nodownload" height="100%" loop="" poster="{{$ad->videos[0]->video_preview_image_url}}" src="{{$ad->videos[0]->video_hd_url}}" width="100%" controls=""></video>
               <img src="{{asset('assets/images/play-icon.png')}}" alt="Line" class="img-fluid player-img">
             @endif
@@ -75,7 +75,7 @@
             <h5><a href="">{{ isset($ad->title) ? $ad->title : "" }}</a></h5>
 
             <ul>
-              <li><a href="#"><i class="fa-regular fa-heart"></i>  {{ $ad->estimated_audience_size && $ad->estimated_audience_size->lower_bound ? $ad->estimated_audience_size->lower_bound : ''}}</a></li>
+              <li><a href="#"><i class="fa-regular fa-heart"></i>  {{ isset($ad->estimated_audience_size) && $ad->estimated_audience_size->lower_bound ? $ad->estimated_audience_size->lower_bound : ''}}</a></li>
               <li><a href="#"><img src="{{asset('assets/images/comment-icon.svg')}}" alt="Comment" class="img-fluid"> 12K</a></li>
               <li><a href="#"><img src="{{asset('assets/images/submit-icon.svg')}}" alt="Comment" class="img-fluid"> {{ $ad->impressions && $ad->impressions->lower_bound ? $ad->impressions->lower_bound : ''}}</a></li>
             </ul>

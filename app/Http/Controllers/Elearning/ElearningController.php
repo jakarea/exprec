@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Elearning;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\Enrollment;
 
 class ElearningController extends Controller
 {
@@ -26,6 +27,7 @@ class ElearningController extends Controller
     }
     public function suggested()
     {
-        return view('course/suggested');
+        $enrolments = Enrollment::where('user_id', auth()->user()->id)->get();
+        return view('course/enrolments',compact('enrolments'));
     }
 }
