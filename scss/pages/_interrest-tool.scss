@@ -1,5 +1,6 @@
 @use '../util/variabls' as v;
 @use '../util/mixin' as m;
+@use './util/media-query' as q;
 
 .interrest-search-wrap {
     display: grid;
@@ -292,7 +293,7 @@
         max-width: 30%;
         width: 90%;  
         margin: 0 auto;
-        margin-top: 5rem;
+        margin-top: 10rem;
         background: v.$mainbg;
         padding: 1.4rem;
         border-radius: .6rem;
