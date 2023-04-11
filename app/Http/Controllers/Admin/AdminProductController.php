@@ -340,7 +340,7 @@ class AdminProductController extends Controller
             $title = htmlspecialchars_decode($jsonProduct->titleModule->subject); 
             $slug = Str::slug($title);
 
-            $price_str = str_replace('US $', '', $jsonProduct->priceModule->formatedActivityPrice);
+            $price_str = str_replace('US$', '', $jsonProduct->priceModule->formatedActivityPrice);
             $price_arr = explode(' - ', $price_str);
             $min_price = floatval($price_arr[0]);
             $buy_price = intval($min_price * $this->euro_rate);
@@ -354,17 +354,17 @@ class AdminProductController extends Controller
                 $message = "Product Added Successfully";
             }
     
-             $images = $jsonProduct->imageModule->imagePathList;
+            //  $images = $jsonProduct->imageModule->imagePathList;
 
-            foreach($images as $image){
-                $name = $slug .'-'.md5(rand(1000, 10000)) . '.jpg';
-                $image = file_get_contents($image);
-                file_put_contents('assets/images/product/'.$name, $image);
-                $imageNames [] = asset('assets/images/product/'.$name);
-            }
-            $product->images             =   json_encode($imageNames);
+            // foreach($images as $image){
+            //     $name = $slug .'-'.md5(rand(1000, 10000)) . '.jpg';
+            //     $image = file_get_contents($image);
+            //     file_put_contents('assets/images/product/'.$name, $image);
+            //     $imageNames [] = asset('assets/images/product/'.$name);
+            // }
+            // $product->images             =   json_encode($imageNames);
 
-            //$product->images                =   json_encode($jsonProduct->imageModule->imagePathList);
+            $product->images                =   json_encode($jsonProduct->imageModule->imagePathList);
 
             if(isset($jsonProduct->imageModule->videoUid) && isset($jsonProduct->imageModule->videoId)) {
                 $product->ali_video_link    =   "https://video.aliexpress-media.com/play/u/ae_sg_item/{$jsonProduct->imageModule->videoUid}/p/1/e/6/t/10301/{$jsonProduct->imageModule->videoId}.mp4";

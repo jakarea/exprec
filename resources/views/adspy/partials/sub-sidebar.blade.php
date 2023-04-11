@@ -10,19 +10,16 @@
       </li>
       <li>
         <a href="{{ url('adspy/pinterest') }}" class="{{ Request::is('adspy/pinterest')  ? ' active' : '' }}">
-          <i class="fa-brands fa-pinterest"></i> Pinterest ads </a>
+          <i class="fa-brands fa-pinterest"></i> <span class="lock-icons">Pinterest ads <i class="fas fa-lock"></i></span>  </a>
       </li>
       <li>
         <a href="{{ url('adspy/tiktok') }}" class="{{ Request::is('adspy/tiktok')  ? ' active' : '' }}">
-          <img src="{{ asset('assets/images/Tiktok.svg') }}" alt="Dash" class="img-fluid"> Tiktok ads </a>
+          <img src="{{ asset('assets/images/Tiktok.svg') }}" alt="Dash" class="img-fluid"> <span class="lock-icons">Tiktok ads <i class="fas fa-lock"></i></span>  </a>
       </li>
       <li>
         <a href="{{ url('adspy/mylist') }}" class="{{ Request::is('adspy/mylist')  ? ' active' : '' }}">
           <img src="{{ asset('assets/images/Vector.svg') }}" alt="Dash" class="img-fluid">My lists </a>
       </li>
-      <li>
-        <a href="{{ url('adspy/details/1') }}" class="{{ Request::is('adspy/details*')  ? ' active' : '' }}">
-          <img src="{{ asset('assets/images/Vector.svg') }}" alt="Dash" class="img-fluid">Details </a>
-      </li>
+
     </ul> 
 <!-- inner submenu @E -->

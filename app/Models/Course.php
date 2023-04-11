@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Lesson;
 use App\Models\Courselog;
 use App\Models\Enrollment;
 use App\Models\CourseActivity;
@@ -16,6 +17,7 @@ class Course extends Model
         'slug',
         'categories',
         'thumbnail',
+        'coverimage',
         'duration',
         'short_description',
         'long_description',
@@ -41,24 +43,24 @@ class Course extends Model
 
     public static function getProgress($user_id, $course_id)
     {
-        $courselogs = CourseActivity::where('user_id', $user_id)
-                                     ->where('course_id', $course_id)
-                                     ->where('is_completed', 1)
-                                     ->count();
-        $total = Courselog::where('course_id', $course_id)->count();
-        if ($total == 0) {
+        $lesson = Lesson::where('course_id', $course_id)->count();
+        $completed_lesson = CourseActivity::where('user_id', $user_id)
+                                            ->where('course_id', $course_id)
+                                            ->where('is_completed', 1)
+                                            ->count();
+        if ($lesson == 0) {
             return 0;
         }
-
         $enrollment = Enrollment::where('user_id', $user_id)
                                 ->where('course_id', $course_id)
                                 ->first();
         if ($enrollment) {
-            $enrollment->progress = round(($courselogs / $total) * 100);
+            $enrollment->progress = round(($completed_lesson / $lesson) * 100);
             $enrollment->save();
         }
 
-        return round(($courselogs / $total) * 100);
+        $percentage = round(($completed_lesson / $lesson) * 100);
+        return $percentage;
     }    
     
 }

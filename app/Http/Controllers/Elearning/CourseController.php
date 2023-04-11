@@ -78,6 +78,7 @@ class CourseController extends Controller
         $request->validate([
             'title' => 'required',
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'coverimage' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         //save course
@@ -105,6 +106,14 @@ class CourseController extends Controller
             $image->move($destinationPath, $name);
         }
         $course->thumbnail = $name;
+        //if coverimage is valid then save it
+        if ($request->hasFile('coverimage')) {
+            $image = $request->file('coverimage');
+            $name = $course->slug.'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/assets/images/course');
+            $image->move($destinationPath, $name);
+        }
+        $course->coverimage = $name;
         $course->save();
         return redirect('admin/elearning/courses')->with('success', 'Course saved!');
     }
@@ -137,7 +146,7 @@ class CourseController extends Controller
         $course->duration = $request->duration;
         $course->short_description = $request->short_description;
         $course->long_description = $request->long_description;
-        $course->categories = implode(',',$request->categories);
+        $course->categories = count($request->categorie) > 0 ?  implode(',',$request->categories): '';
         $course->number_of_module = $request->number_of_module;
         $course->number_of_lesson = $request->number_of_lesson;
         $course->number_of_quiz = $request->number_of_quiz;
