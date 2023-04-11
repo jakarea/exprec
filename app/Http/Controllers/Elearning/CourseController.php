@@ -146,7 +146,7 @@ class CourseController extends Controller
         $course->duration = $request->duration;
         $course->short_description = $request->short_description;
         $course->long_description = $request->long_description;
-        $course->categories = implode(',',$request->categories);
+        $course->categories = count($request->categorie) > 0 ?  implode(',',$request->categories): '';
         $course->number_of_module = $request->number_of_module;
         $course->number_of_lesson = $request->number_of_lesson;
         $course->number_of_quiz = $request->number_of_quiz;

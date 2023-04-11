@@ -41,9 +41,7 @@ class AdspyController extends Controller
         $limit = 5;
         $api_url = 'https://graph.facebook.com/v16.0/ads_archive?fields=id,page_id,page_name,ad_creative_bodies,languages,currency,spend,bylines,publisher_platforms,impressions,estimated_audience_size,demographic_distribution,ad_snapshot_url,ad_creation_time,ad_creative_link_captions,ad_creative_link_descriptions,ad_creative_link_titles,ad_delivery_start_time,ad_delivery_stop_time,delivery_by_region&search_terms='.$search_terms.'&ad_reached_countries=['.$countries.']&'.$limit.'=4&access_token='.$this->access_token;
         $results = Http::get($api_url); 
-
         return response()->json($results['data']);
-
     } 
 
 
@@ -77,27 +75,24 @@ class AdspyController extends Controller
             // ...
         
             $nextPage = $request->nextPage;
-            $limit = 6;
+            $limit = 16;
             $api_url = 'https://graph.facebook.com/v16.0/ads_archive?fields=id,page_id,page_name,ad_creative_bodies,languages,currency,spend,bylines,publisher_platforms,impressions,estimated_audience_size,demographic_distribution,ad_snapshot_url,ad_creation_time,ad_creative_link_captions,ad_creative_link_descriptions,ad_creative_link_titles,ad_delivery_start_time,ad_delivery_stop_time,delivery_by_region&'.$queryString.'&limit='.$limit.'&access_token='.$this->access_token;
             if($nextPage){
                 $api_url = $nextPage;
             }
             $results = Http::get($api_url); 
             $uniqueAds = array();
+            
             foreach ($results['data'] as $ad) {
-               
-                $exists = false;
-                foreach ($uniqueAds as $uniqueAd) {
-                    if ($uniqueAd["page_id"] == $ad["page_id"] && $uniqueAd["ad_delivery_start_time"] == $ad["ad_delivery_start_time"] && 
-                        (isset($uniqueAd["ad_delivery_stop_time"]) && isset($ad["ad_delivery_stop_time"]) && $uniqueAd["ad_delivery_stop_time"] == $ad["ad_delivery_stop_time"]) ) {
-                        $exists = true;
-                        break;
-                    }
-                }
-                if (!$exists) {
-                    $uniqueAds[] = $ad;
+                $key = $ad["page_id"] . "_" . $ad["ad_delivery_start_time"];
+                if(isset($ad["ad_delivery_stop_time"]))
+                    $key .= "_" . $ad["ad_delivery_stop_time"];
+
+                if (!isset($uniqueAds[$key])) {
+                    $uniqueAds[$key] = $ad;
                 }
             }
+            $uniqueAds = array_values($uniqueAds);
 
             $data['ads'] = $uniqueAds;
             $data['nextPage'] = $results['data'] ? $results['paging']['next'] : '';
@@ -105,7 +100,6 @@ class AdspyController extends Controller
         }
 
         public function scrapAdById($id){
-           
             $url = "https://www.facebook.com/ads/archive/render_ad/?id=$id&access_token=".$this->access_token;
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -160,6 +154,7 @@ class AdspyController extends Controller
             $ad->is_saved = $allInputs['addToList'];
         }
         $ad->data = json_encode($allInputs);
+        $ad->user_id = Auth::user()->id;
         $ad->save();
         return response()->json($ad);
     }

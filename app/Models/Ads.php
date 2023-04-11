@@ -9,5 +9,5 @@ class Ads extends Model
 {
     use HasFactory;
     protected $table = 'ads';
-    protected $fillable = ['is_saved', 'data','user_id'];
+    protected $fillable = ['is_saved', 'data','user_id', 'project_id'];
 }
