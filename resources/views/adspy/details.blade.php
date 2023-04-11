@@ -13,7 +13,7 @@
             <div class="col-12">
                 <div class="addspy-dash-head">
                     <h1>Ad details</h1>
-                    <p>get more details from the add here:</p>
+                    <p>get more details from the ad here</p>
                 </div>
             </div>
         </div>
@@ -49,26 +49,62 @@
                         <p>{{ isset($ad->title) ? $ad->title : "" }}</a></p>
                     </div>
                     <!-- add thumbnail @S -->
+                    @php 
+                        $showed = true;
+                    @endphp
                     @if(isset($ad->images) && count($ad->images) > 0)
+                    @php 
+                        $showed = false;
+                    @endphp
                     <div class="ads-thumbnail-wrap">
                         <img src="{{ $ad->images[0]->original_image_url}}" alt="post-image" class="img-fluid">
                     </div>
                     @endif
+            
                     <!-- add thumbnail @E -->
-                    <!-- add slider @S -->
-                    <!-- <div class="ads-slider-wrap">
-                        <div class="add-slider-arrows">
-                            <a href="javascript:void(0)" class="prev"><i class="fas fa-angle-left"></i></a>
-                            <a href="javascript:void(0)" class="next"><i class="fas fa-angle-right"></i></a>
+                    @if($showed && isset($ad->cards) && count($ad->cards) > 0)
+                        @php 
+                            $showed = false;
+                        @endphp
+                        <div class="ads-slider-wrap">
+                            <div class="add-slider-arrows">
+                                <a href="javascript:void(0)" class="prev"><i class="fas fa-angle-left"></i></a>
+                                <a href="javascript:void(0)" class="next"><i class="fas fa-angle-right"></i></a>
+                            </div>
+                            <div class="add-slider">
+                                @foreach($ad->cards as $card)
+                                    @if($card->video_preview_image_url)
+                                    <video controlslist="nodownload" height="100%" loop="" poster="{{$card->video_preview_image_url}}"  width="100%" controls="">
+                                    <source src="{{$card->video_hd_url ? $card->video_hd_url : $card->video_sd_url}}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                    @else
+                                    <img src="{{ $card->original_image_url}}" alt="post-image" class="img-fluid">
+                                    @endif
+                                
+                                    <!--  Need to visible it inside slider -->
+                                    <div class="ads-ftr-cta-bttn">
+                                        @if(isset($card->caption))
+                                        <a href="{{isset($ad->link_url) && $ad->link_url ? $ad->link_url : '#'}}" target="_blank">{{$ad->caption}}</a>
+                                        @endif
+                                        @if(isset($card->title))
+                                        <h6>{{ $card->title}}</h6>
+                                        @endif
+                                        @if(isset($card->link_description))
+                                        <p>{{ $card->link_description}}</p>
+                                        @endif
+                                        @if(isset($card->cta_text))
+
+                                        <a href="{{ $card->link_url }}" class="cta-button" target="_blank">{{$card->cta_text}}</a>
+                                        @endif
+                                    </div>
+
+                                @endforeach
+                            </div>
                         </div>
-                        <div class="add-slider">
-                            <img src="{{asset('assets/images/post-02.png')}}" alt="post-image" class="img-fluid">
-                            <img src="{{asset('assets/images/post-01.png')}}" alt="post-image" class="img-fluid">
-                            <img src="{{asset('assets/images/post-03.png')}}" alt="post-image" class="img-fluid">
-                        </div>
-                    </div> -->
+                    @endif
                     <!-- add slider @E -->
-                    @if(isset($ad->videos) &&  count($ad->videos) > 0)
+                    @if($showed && isset($ad->videos) &&  count($ad->videos) > 0)
                     <!-- add video @S -->
                     <div class="ads-video-wrap">
                         <video controlslist="nodownload" height="100%" loop="" poster="{{$ad->videos[0]->video_preview_image_url}}"  width="100%" controls="">
@@ -77,23 +113,24 @@
                         </video>
                     </div>
                     @endif
-
                     <!-- add video @E -->
-                    <div class="ads-ftr-cta-bttn">
-                        @if(isset($ad->caption))
-                        <a href="{{isset($ad->link_url) && $ad->link_url ? $ad->link_url : '#'}}">{{$ad->caption}}</a>
-                        @endif
-                        @if(isset($ad->title))
-                        <h6>{{ $ad->title}}</h6>
-                        @endif
-                        @if(isset($ad->link_description))
-                        <p>{{ $ad->link_description}}</p>
-                        @endif
-                        @if(isset($ad->cta_text))
+                    @if($showed)
+                        <div class="ads-ftr-cta-bttn">
+                            @if(isset($ad->caption))
+                            <a href="{{isset($ad->link_url) && $ad->link_url ? $ad->link_url : '#'}}" target="_blank">{{$ad->caption}}</a>
+                            @endif
+                            @if(isset($ad->title))
+                            <h6>{{ $ad->title}}</h6>
+                            @endif
+                            @if(isset($ad->link_description))
+                            <p>{{ $ad->link_description}}</p>
+                            @endif
+                            @if(isset($ad->cta_text))
 
-                        <a href="//{{ $ad->caption }}" class="cta-button">{{$ad->cta_text}}</a>
-                        @endif
-                    </div>
+                            <a href="#" class="cta-button" target="_blank">{{$ad->cta_text}}</a>
+                            @endif
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="col-md-7">
@@ -117,7 +154,7 @@
 
                         </div>
                         @if(isset($ad->page_profile_uri))
-                        <a href="{{ $ad->page_profile_uri}}"><i class="fas fa-link"></i></a>
+                        <a href="{{ $ad->page_profile_uri}}" target="_blank"><i class="fas fa-link"></i></a>
                         @endif
                     </div>
                     <div class="page-details-wrap">
@@ -217,6 +254,10 @@
         </div>
     </div>
 </main>
+@php
+  $adData = isset($ad) && property_exists($ad, 'demographic_distribution') ? $ad->demographic_distribution : null;
+  $adRegionData = isset($ad) && property_exists($ad, 'delivery_by_region') ? $ad->delivery_by_region : null;
+@endphp
 @endsection
 
 @section('script')
@@ -225,7 +266,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-  var data = @json($ad->demographic_distribution);
+
+  var data = {!! json_encode($adData) !!};
 
   const labels = [...new Set(data.map(item => item.age))];
 const maleData = data.filter(item => item.gender === 'male').map(item => item.percentage);
@@ -283,14 +325,11 @@ const chartData = {
 var ctx = document.getElementById('demographicChart').getContext('2d');
 var demographicChart = new Chart(ctx, chartData);
 
-
-
-
 // Get the canvas element
 const canvas = document.getElementById('regionChart');
 
 // Get the data
-var delivery_by_region = @json($ad->delivery_by_region);
+var delivery_by_region = {!! json_encode($adRegionData) !!};
 
 const deliveryData = {
     labels: delivery_by_region.map(region => region.region),

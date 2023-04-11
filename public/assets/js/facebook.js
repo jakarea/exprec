@@ -241,6 +241,7 @@ async function getImagesByIds(ids) {
                 myImage.classList.add("d-none");
                 myPlayer.poster = video_preview_image_url;
                 mySource.src = video_url;
+                myPlayer.load()
             }
 
             if (image) {
