@@ -140,9 +140,15 @@ function makeAjaxRequest() {
                 title = ad.ad_creative_link_titles ? ad.ad_creative_link_titles[0] : ''
                 htmlAds += `<div class="col-lg-4 col-md-6 col-sm-6" id="ad_${ad.id}">
                                 <div class="wining-product-item adspy-filter-product">
-                                    <div class="wining-product-thumbnail">
+                                    <div class="wining-product-thumbnail image_${ad.id}">
                                         <img id="img_${ad.id}" src="${baseUrl}/assets/images/preloader2.gif" alt="${title}" class="img-fluid main-img">
-                                        <img id="player_${ad.id}"src="${baseUrl}/assets/images/play-icon.png" alt="Line" class="img-fluid player-img d-none">
+                                    </div>
+
+                                    <div class="wining-product-thumbnail video_${ad.id} d-none">
+                                        <video id="player_${ad.id}" controlslist="nodownload" height="100%" loop="" poster="https://www.w3schools.com/html/pic_trulli.jpg"  width="100%" controls="">
+                                            <source id="source_${ad.id}" src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
                                     </div>
                                     <div class="wining-product-txt">
                                         <h5>${title}</h5>
@@ -209,21 +215,25 @@ async function getImagesByIds(ids) {
             if (videos.length || cards.length) {
                 const {
                     video_preview_image_url,
-                    video_hd_url
+                    video_hd_url,
+                    video_sd_url
                 } = videos.length ? videos[0] : (cards.length ? cards[0] : {});
                 video_image = video_preview_image_url || '';
-                video_url = video_hd_url || '';
+                video_url = video_hd_url || video_sd_url || '';
                 if (!images.length && cards.length) {
                     image = cards[0].resized_image_url;
                 }
             }
 
             let myImg = document.getElementById("img_" + id);
+            let myVideoDiv = document.getElementById("video_" + id);
             let myPlayer = document.getElementById("player_" + id);
+            let mySouce = document.getElementById("source_" + id);
 
             if (video_image) {
-                myImg.src = video_image;
-                myPlayer.classList.remove("d-none");
+                myPlayer.poster = video_image;
+                myVideoDiv.classList.remove("d-none");
+                mySouce.src = video_url;
             }
 
             if (image) {
@@ -293,7 +303,8 @@ projectForm.addEventListener('submit', async function (event) {
 
             // Remove all existing options
             selectElement.innerHTML = "";
-
+            let option = new Option('Select Below', '');
+            selectElement.add(option);
             projects.forEach(project => {
                 let option = new Option(project.name, project.id);
                 selectElement.add(option);

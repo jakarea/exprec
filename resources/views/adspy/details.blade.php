@@ -68,9 +68,13 @@
                     @if(count($ad->videos) > 0)
                     <!-- add video @S -->
                     <div class="ads-video-wrap">
-                        <video controlslist="nodownload" height="100%" loop="" poster="{{$ad->videos[0]->video_preview_image_url}}" src="{{$ad->videos[0]->video_hd_url}}" width="100%" controls=""></video>
+                        <video controlslist="nodownload" height="100%" loop="" poster="{{$ad->videos[0]->video_preview_image_url}}"  width="100%" controls="">
+                            <source src="{{$ad->videos[0]->video_hd_url ? $ad->videos[0]->video_hd_url : $ad->videos[0]->video_sd_url}}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                     @endif
+
                     <!-- add video @E -->
                     <div class="ads-ftr-cta-bttn">
                         <a href="{{$ad->link_url}}">{{$ad->caption}}</a>
