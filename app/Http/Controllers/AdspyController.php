@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Facebook\Facebook;
 use App\Models\Project;
 use App\Models\Ads;
+use Auth;
+
 class AdspyController extends Controller
 {
     protected $access_token;
@@ -19,7 +21,9 @@ class AdspyController extends Controller
 
     public function index()
     {
-        return view('adspy/index');
+        //$ads = Ads::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->get();
+        $ads = Ads::orderBy('id', 'desc')->get();
+        return view('adspy/index', compact('ads'));
     }
 
     public function facebook()
@@ -223,9 +227,11 @@ class AdspyController extends Controller
         if(!$project_id){
             $project = new Project();
             $project->name = $project_name;
+            $project->user_id = Auth::user()->id;
             $project->save();
             $project_id = $project->id;
         }
+
         $result = $this->saveAdToProject($project_id, $adData);
         $projects = Project::orderBy('id', 'desc')->get();
         if($result){
@@ -234,6 +240,7 @@ class AdspyController extends Controller
             
             return response()->json([$projects, 'success' => 0]);
         }
+
     }
 
     public function saveAdToProject($project_id, $adData){
@@ -244,6 +251,7 @@ class AdspyController extends Controller
             $ad->ad_id = $ad_id;
         }
         $ad->project_id = $project_id;
+        $ad->is_saved = 1;
         $ad->data = json_encode($adData);
         return $ad->save();
         exit;

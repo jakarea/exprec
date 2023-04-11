@@ -140,12 +140,18 @@ function makeAjaxRequest() {
                 title = ad.ad_creative_link_titles ? ad.ad_creative_link_titles[0] : ''
                 htmlAds += `<div class="col-lg-4 col-md-6 col-sm-6" id="ad_${ad.id}">
                                 <div class="wining-product-item adspy-filter-product">
-                                    <div class="wining-product-thumbnail">
+                                    <div class="wining-product-thumbnail" id="image_${ad.id}">
                                         <img id="img_${ad.id}" src="${baseUrl}/assets/images/preloader2.gif" alt="${title}" class="img-fluid main-img">
-                                        <img id="player_${ad.id}"src="${baseUrl}/assets/images/play-icon.png" alt="Line" class="img-fluid player-img d-none">
+                                    </div>
+
+                                    <div class="wining-product-thumbnail d-none" id="video_div_${ad.id}">
+                                        <video id="player_${ad.id}" controlslist="nodownload" height="100%" loop="" poster=""  width="100%" controls="">
+                                            <source id="source_${ad.id}" src="" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
                                     </div>
                                     <div class="wining-product-txt">
-                                        <h5>${title}</h5>
+                                        <h5>${title.substring(0, 25)}</h5>
                                         <h3>${getDayDiff(ad.ad_delivery_start_time, ad.ad_delivery_stop_time)} Days</h3>
                                         <ul>
                                         <li><a href="#"><img src="${baseUrl}/assets/images/tag-icon.svg" alt="Comment" class="img-fluid"> ${ad.estimated_audience_size && ad.estimated_audience_size.lower_bound ? humanReadableFormat(ad.estimated_audience_size.lower_bound) : ''}</a></li>
@@ -202,32 +208,47 @@ async function getImagesByIds(ids) {
                 cards
             } = data;
             savedAdsContent.push(data);
-            let [image, video_image, video_url] = ['', '', ''];
-            if (images.length) {
+            let [video_hd_url, video_sd_url, video_preview_image_url, image, video_url] = ['', '', '', ''];
+
+            console.log({ images, videos, cards })
+            if (images && images.length) {
                 image = images[0].resized_image_url;
             }
-            if (videos.length || cards.length) {
-                const {
-                    video_preview_image_url,
-                    video_hd_url
-                } = videos.length ? videos[0] : (cards.length ? cards[0] : {});
-                video_image = video_preview_image_url || '';
-                video_url = video_hd_url || '';
-                if (!images.length && cards.length) {
+
+            if (videos && videos.length) {
+                video_hd_url = videos[0].video_hd_url;
+                video_sd_url = videos[0].video_sd_url;
+                video_preview_image_url = videos[0].video_preview_image_url;
+                video_url = video_hd_url || video_sd_url || '';
+            }
+
+            if (cards && cards.length) {
+                video_preview_image_url = cards[0].video_preview_image_url || '';
+                video_url = cards[0].video_hd_url || cards[0].video_sd_url || '';
+                if (!images.length) {
                     image = cards[0].resized_image_url;
                 }
             }
 
             let myImg = document.getElementById("img_" + id);
+            let myImage = document.getElementById("image_" + id);
             let myPlayer = document.getElementById("player_" + id);
+            let mySource = document.getElementById("source_" + id);
+            let video_div = document.getElementById("video_div_" + id);
 
-            if (video_image) {
-                myImg.src = video_image;
-                myPlayer.classList.remove("d-none");
+            if (video_preview_image_url) {
+                video_div.classList.remove("d-none");
+                myImage.classList.add("d-none");
+                myPlayer.poster = video_preview_image_url;
+                mySource.src = video_url;
             }
 
             if (image) {
                 myImg.src = image;
+            }
+            if (!image && !video_preview_image_url) {
+                myImage.classList.add("d-none");
+                myImg.classList.add("d-none");
             }
         }
     } catch (error) {
@@ -293,7 +314,8 @@ projectForm.addEventListener('submit', async function (event) {
 
             // Remove all existing options
             selectElement.innerHTML = "";
-
+            let option = new Option('Select Below', '');
+            selectElement.add(option);
             projects.forEach(project => {
                 let option = new Option(project.name, project.id);
                 selectElement.add(option);
