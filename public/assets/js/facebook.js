@@ -169,7 +169,7 @@ function makeAjaxRequest() {
                                         </table> 
                                         <div class="adspy-filter-product-bttns">
                                             <a href="#" data-id="${i}" class="saveAdAndOpen preventDefault">See ad details</a>
-                                            <a href="#" data-id="${i}" data-select='${JSON.stringify(ad)}' class="saveAdToList preventDefault">Add to a list</a>
+                                            <a href="#" data-id="${i}" class="saveAdToList preventDefault">Add to a list</a>
                                         </div>
                                     </div>
                                 </div>
