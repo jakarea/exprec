@@ -66,7 +66,17 @@
                    </div>
                  </div>
                  <div class="col-12">
-                <div id="imgThumbnailPreview"></div>
+                  <div id="imgThumbnailPreview"></div>
+                </div>
+                 <div class="col-md-12">
+                   <div class="form-group">
+                     <label for="files">Cover Image <sup class="text-danger">*</sup></label>
+                     <input type="file" name="coverimage" id="files" class="form-control  @error('coverimage') is-invalid @enderror">
+                     <span class="invalid-feedback">@error('coverimage'){{ $message }} @enderror</span>
+                   </div>
+                 </div>
+                 <div class="col-12">
+                  <div id="imgCoverimagePreview"></div>
                 </div>
                  <div class="col-md-12">
                   <div class="form-group">

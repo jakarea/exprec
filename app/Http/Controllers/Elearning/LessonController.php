@@ -34,7 +34,7 @@ class LessonController extends Controller
             'module_id' => 'required',
             'course_id' => 'required',
             'duration' => 'required',
-            'video_file' => 'required|mimetypes:video/mp4|max:5000000', // max 5MB
+            'video_file' => 'nullable|mimetypes:video/mp4|max:5000000', // max 5MB
         ]);
         // return $request->all();     
 
