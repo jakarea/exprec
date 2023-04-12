@@ -34,8 +34,10 @@ class LessonController extends Controller
             'module_id' => 'required',
             'course_id' => 'required',
             'duration' => 'required',
+            'attachment' => 'nullable|mimes:doc,docx,pdf,ppt,pptx,xls,xlsx,jpg,jpeg,png|max:5000000', // max 5MB
             'video_file' => 'nullable|mimetypes:video/mp4|max:5000000', // max 5MB
         ]);
+        
         // return $request->all();     
 
         $lesson = new Lesson([
@@ -93,17 +95,17 @@ class LessonController extends Controller
     }
     //create a method to update lesson on database
 
-    public function updateLesson(Request $request, $slug){
+    public function updateLesson(Request $request, $slug)
+    {
 
         // return $request->all();
 
         $request->validate([
-            'title' => 'required',
-            'module_id' => 'required',
-            'course_id' => 'required',
-            'video_url' => 'required',
-            'duration' => 'required',
+            'attachment' => 'nullable|mimes:doc,docx,pdf,ppt,pptx,xls,xlsx,jpg,jpeg,png|max:5000000', // max 5MB
+            'video_file' => 'nullable|mimetypes:video/mp4|max:5000000', // max 5MB
         ]);
+
+        // return $request->all();
 
         $lesson = Lesson::where('slug', $slug)->first();
         $lesson->title = $request->title;
@@ -122,16 +124,33 @@ class LessonController extends Controller
          //if attachment is valid then save it
         if ($request->hasFile('attachment')) {
             //delete old attachment
-            $oldThumbnail = public_path('/images/'.$lesson->attachment);
+            $oldThumbnail = public_path('/assets/images/lesson'.$lesson->attachment);
             if (file_exists($oldThumbnail)) {
                 @unlink($oldThumbnail);
             }
             $image = $request->file('attachment');
             $name = $lesson->slug.'.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/images');
+            $destinationPath = public_path('/assets/images/lesson');
             $image->move($destinationPath, $name);
+            $lesson->attachment = $name;
         }
-        // $lesson->attachment = $name;
+        
+        if ($request->hasFile('video_file')) {
+            // upload video into vimeo through API
+            $response = Vimeo::upload(
+                $request->file('video_file')->getPathname(),
+                [
+                    'name' => $request->file('video_file')->getClientOriginalName(),
+                    'description' => 'Uploaded from my Laravel application',
+                    'privacy' => [
+                        'view' => 'nobody',
+                    ],
+                ]
+            );
+            
+            $lesson->video_url = $response;
+        } 
+
         $lesson->save();
         return redirect('admin/elearning/lessons')->with('success', 'Lesson updated!');
     }
@@ -139,8 +158,14 @@ class LessonController extends Controller
     // create a method to delete lesson from database
     public function deleteLesson($slug){
          
-        $lesson = Lesson::where('slug', $slug)->delete(); 
-        return redirect('admin/elearning/lessons')->with('success', 'Lesson deleted!');
+        $lesson = Lesson::where('slug', $slug)->first();
+        // delete attachment
+        $oldThumbnail = public_path('/assets/images/lesson'.$lesson->attachment);
+        if (file_exists($oldThumbnail)) {
+            @unlink($oldThumbnail);
+        }
+        $lesson->delete();
 
+        return redirect('admin/elearning/lessons')->with('success', 'Lesson deleted!');
     }
 }
