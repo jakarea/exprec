@@ -118,10 +118,6 @@
   border-radius: 0.7rem;
   background-color: #ffffff;
   margin-right: 0.7rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
 }
 .wining-product-item .wining-product-thumbnail {
   position: relative;
@@ -740,6 +736,7 @@
 }
 .about-add-box-wrap .ads-video-wrap video {
   border-radius: 0.7rem;
+  height: 250px;
 }
 .about-add-box-wrap .ads-ftr-cta-bttn {
   margin-top: 0.5rem;

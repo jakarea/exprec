@@ -110,8 +110,6 @@
 .wining-product-item {
     @include m.box(.6rem, .7rem, v.$light);
     margin-right: .7rem;
-    @include m.df(space-between);
-    flex-direction: column;
 
     .wining-product-thumbnail {
         position: relative;
@@ -716,7 +714,8 @@
 
     .ads-video-wrap {
         video {
-            border-radius: 0.7rem; 
+            border-radius: 0.7rem;
+            height: 250px;
         }
     }
 
