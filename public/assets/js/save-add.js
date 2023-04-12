@@ -13,13 +13,14 @@ const closeModal = () => {
     adspyModal.style.display = "none";
 }
 
-openModal.addEventListener("click",opepnModal);
-closedModal.addEventListener("click",closeModal);
+openModal.addEventListener("click", opepnModal);
+closedModal.addEventListener("click", closeModal);
 
 projectForm.addEventListener('submit', async function (event) {
     event.preventDefault();
     let project_id = document.getElementById("project_id").value;
-    let project_name = document.getElementById("project_name").value; 
+    let project_name = document.getElementById("project_name").value;
+    let ad_id = document.getElementById("ad_id").value;
 
     try {
         const url = baseUrl + '/adspy/facebook2/save-ad2/save-project-new';
@@ -29,7 +30,7 @@ projectForm.addEventListener('submit', async function (event) {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            body: JSON.stringify({ project_id, project_name})
+            body: JSON.stringify({ project_id, project_name, ad_id })
         });
         const data = await response.json();
 
@@ -39,7 +40,7 @@ projectForm.addEventListener('submit', async function (event) {
             document.getElementById("project_name").value = '';
             closeModal();
             project_id = '';
-            project_name = ''; 
+            project_name = '';
             var selectElement = document.getElementById("project_id");
 
             // Remove all existing options
