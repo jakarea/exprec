@@ -3,6 +3,7 @@
 
 @section('style') 
 <link href="{{ asset('assets/css/adspy.css') }}" rel="stylesheet" type="text/css" />  
+<link href="{{ asset('assets/css/video-controller.css') }}" rel="stylesheet" type="text/css" />  
 @endsection
 
 @section('content') 
@@ -57,7 +58,7 @@
         <!-- Item @S -->
         @foreach($ads as $ad)
         @php 
-          $ad = json_decode($ad->data);
+          $ad = json_decode($ad->data); 
         @endphp
        
         <div class="wining-product-item">
@@ -67,19 +68,61 @@
             @endif
 
             @if(isset($ad->videos) && count($ad->videos) > 0)
-              <video controlslist="nodownload" height="100%" loop="" poster="{{$ad->videos[0]->video_preview_image_url}}" src="{{$ad->videos[0]->video_hd_url}}" width="100%" controls=""></video>
-              <img src="{{asset('assets/images/play-icon.png')}}" alt="Line" class="img-fluid player-img">
+
+            <div class="video-container list-video-wrapper">
+                  <video class="video-container__video" controlslist="nodownload" height="100%" poster="{{$ad->videos[0]->video_preview_image_url}}"  width="100%" controls="">
+                  <source  src="{{$ad->videos[0]->video_hd_url ? $ad->videos[0]->video_hd_url : $ad->videos[0]->video_sd_url}}" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                  <!-- video controller @S -->
+                  <div class="video-container__controls"> 
+                            <div class="progress">
+                                <div class="progress__current"></div>
+                            </div>
+                            <button class="control control--backward">
+                                <i class="fas fa-backward"></i>
+                            </button>
+                            <button class="control control--play paused">
+                                <i class="fas fa-play"></i>
+                                <i class="fas fa-pause"></i>
+                            </button>
+                            <button class="control control--stop">
+                                <i class="fas fa-stop"></i>
+                            </button>
+                            <button class="control control--forward">
+                                <i class="fas fa-forward"></i>
+                            </button>
+                            <button class="control control--replay">
+                                <i class="fas fa-sync"></i>
+                            </button>
+                            <button class="control control--volume">
+                                <div class="control--volume__button">
+                                    <i class="fas fa-volume-off"></i>
+                                    <i class="fas fa-volume-up"></i>
+                                </div>
+                                <input class="control--volume__slider" value="1" type="range" min="0" max="1" step="0.01" style="width: 76px">
+                            </button>
+                            <button class="control control--fullscreen">
+                                <i class="fas fa-expand"></i>
+                                <i class="fas fa-compress"></i>
+                            </button>
+                        </div>
+                        <!-- video controller @E -->
+            </div>
             @endif
-          </div>
+          </div> 
           <div class="wining-product-txt">
             <h5><a href="">{{ isset($ad->title) ? $ad->title : "" }}</a></h5>
-
-            <ul>
+           <ul>
               <li><a href="#"><i class="fa-regular fa-heart"></i>  {{ isset($ad->estimated_audience_size) && $ad->estimated_audience_size->lower_bound ? $ad->estimated_audience_size->lower_bound : ''}}</a></li>
               <li><a href="#"><img src="{{asset('assets/images/comment-icon.svg')}}" alt="Comment" class="img-fluid"> 12K</a></li>
               <li><a href="#"><img src="{{asset('assets/images/submit-icon.svg')}}" alt="Comment" class="img-fluid"> {{ $ad->impressions && $ad->impressions->lower_bound ? $ad->impressions->lower_bound : ''}}</a></li>
             </ul>
-          </div>
+            
+            <div class="adspy-filter-product-bttns">
+                  <a href="#" data-id="{{$ad->id}}">See Ad details</a> 
+              </div>
+          </div> 
         </div>
 
         @endforeach
@@ -182,4 +225,9 @@
     </div>
     <!-- add spy banner @E -->
   </main>
+@endsection
+
+
+@section('script')
+<script src="{{asset('assets/js/videoController.js')}}" type="text/javascript"></script>
 @endsection
