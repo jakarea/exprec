@@ -145,7 +145,7 @@ function makeAjaxRequest() {
                                     </div>
 
                                     <div class="wining-product-thumbnail d-none" id="video_div_${ad.id}">
-                                        <video id="player_${ad.id}" controlslist="nodownload" height="100%" loop="" poster=""  width="100%" controls="">
+                                        <video id="player_${ad.id}" controlslist="nodownload" height="100%" poster=""  width="100%" controls="">
                                             <source id="source_${ad.id}" src="" type="video/mp4">
                                             Your browser does not support the video tag.
                                         </video>
@@ -169,7 +169,7 @@ function makeAjaxRequest() {
                                         </table> 
                                         <div class="adspy-filter-product-bttns">
                                             <a href="#" data-id="${i}" class="saveAdAndOpen preventDefault">See ad details</a>
-                                            <a href="#" data-id="${i}" data-select='${JSON.stringify(ad)}' class="saveAdToList preventDefault">Add to a list</a>
+                                            <a href="#" data-id="${i}" class="saveAdToList preventDefault">Add to a list</a>
                                         </div>
                                     </div>
                                 </div>

@@ -216,6 +216,7 @@
     top: -6.2rem;
     z-index: 3000;
     display: none;
+    z-index: 9999;
 }
 .sidebar-nav-area {
     .menubar {
@@ -246,6 +247,11 @@
     padding: 10px 20px;
     display: flex;
     align-items: center;
+    .lock-icons{
+        i{
+            font-size: .8rem;
+        }
+    }
 }
 
 .pages-submenu-wrap li a.active,

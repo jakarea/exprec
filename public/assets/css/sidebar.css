@@ -178,6 +178,7 @@
   top: -6.2rem;
   z-index: 3000;
   display: none;
+  z-index: 9999;
 }
 
 .sidebar-nav-area .menubar .menu-item:hover .pages-submenu-wrap {
@@ -204,6 +205,9 @@
   padding: 10px 20px;
   display: flex;
   align-items: center;
+}
+.pages-submenu-wrap li a .lock-icons i {
+  font-size: 0.8rem;
 }
 
 .pages-submenu-wrap li a.active,
