@@ -28,6 +28,7 @@
 					<label for="">Save to a new project</label>
 					<input type="text" placeholder="Name your project" name="project_name" id="project_name" class="form-control"> 
 				</div> 
+                <input type="hidden" name="ad_id" id="ad_id" value="{{$ad->page_id.'_'.$ad->id}}">
 				<div class="form-groups"> 
 					<button type="button" class="btn btn-closes" id="close-adspy-modal">Close</button>
 					<button type="submit" class="btn btn-submits">Save</button>
