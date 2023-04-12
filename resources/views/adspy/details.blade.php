@@ -51,6 +51,7 @@
                     <!-- add thumbnail @S -->
                     @php 
                         $showed = true;
+                        $info = true;
                     @endphp
                     @if(isset($ad->images) && count($ad->images) > 0)
                     @php 
@@ -85,6 +86,9 @@
                                     <!--  Need to visible it inside slider -->
                                     <div class="ads-ftr-cta-bttn">
                                         @if(isset($card->caption))
+                                        @php 
+                                            $info = false;
+                                        @endphp
                                         <a href="{{isset($ad->link_url) && $ad->link_url ? $ad->link_url : '#'}}" target="_blank">{{$ad->caption}}</a>
                                         @endif
                                         @if(isset($card->title))
@@ -114,7 +118,7 @@
                     </div>
                     @endif
                     <!-- add video @E -->
-                    @if($showed)
+                    @if($info)
                         <div class="ads-ftr-cta-bttn">
                             @if(isset($ad->caption))
                             <a href="{{isset($ad->link_url) && $ad->link_url ? $ad->link_url : '#'}}" target="_blank">{{$ad->caption}}</a>
@@ -226,7 +230,6 @@
                                         <p><span>Impressions:</span>{{ isset($ad->impressions->lower_bound) ? $ad->impressions->lower_bound : "" }} {{ isset($ad->impressions->upper_bound) ? '~' . $ad->impressions->upper_bound : '' }}</p></li>
                                         <li><i class="fas fa-circle"></i> <p><span>Audiencen</span>: {{ isset($ad->estimated_audience_size->lower_bound) ? $ad->estimated_audience_size->lower_bound : "" }} {{ isset($ad->estimated_audience_size->upper_bound) ?'~' . $ad->estimated_audience_size->upper_bound : '' }}</p></li>
                                     </ul> 
-                                  
                                 </div>
                                 <div class="page-graph-wrap">
 
