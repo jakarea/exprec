@@ -719,8 +719,7 @@
 
     .ads-video-wrap {
         video {
-            border-radius: 0.7rem;
-            height: 250px;
+            border-radius: 0.7rem; 
         }
     }
 
@@ -912,6 +911,24 @@
     .progress:before{
         height: 10px!important;
         background: v.$gdbg!important;
+    }
+}
+
+.adspy-head-bttn{
+    text-align: right;
+    a {
+        @include m.button(1rem, v.$light, v.$gdbg);
+        border-radius: 3rem;
+
+        &:hover {
+            opacity: .7;
+        } 
+    }
+}
+
+.lock-icons{
+    i{
+        font-size: .7rem!important;
     }
 }
 

@@ -260,7 +260,6 @@ async function getImagesByIds(ids) {
 const adspyModal = document.getElementById("adspy-modal");
 const closeAdspyModal = document.getElementById("close-adspy-modal");
 const setAdId = document.getElementById("ad-data");
-
 const closeModal = () => {
     adspyModal.style.display = "none";
 }

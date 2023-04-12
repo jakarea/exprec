@@ -134,12 +134,13 @@ class AdspyController extends Controller
     }
     public function details($id)
     {
+        $projects = Project::orderBy('id', 'desc')->get();
         $ad = Ads::where('ad_id', $id)->first();
         if(!$ad){
             return redirect('adspy/facebook');
         }
         $ad = json_decode($ad->data);
-        return view('adspy/details', compact('ad'));
+        return view('adspy/details', compact('ad','projects'));
     }
 
     public function saveAd(Request $request){
@@ -248,6 +249,39 @@ class AdspyController extends Controller
         $ad->project_id = $project_id;
         $ad->is_saved = 1;
         $ad->data = json_encode($adData);
+        return $ad->save();
+        exit;
+    }
+
+    public function saveAdInProjectNew(Request $request){
+        $allInputs = $request->all();
+        $project_name = $allInputs['project_name'];
+        $project_id = $allInputs['project_id']; 
+        if(!$project_id){
+            $project = new Project();
+            $project->name = $project_name;
+            $project->user_id = Auth::user()->id;
+            $project->save();
+            $project_id = $project->id;
+        }
+
+        $result = $this->saveAdToProjectNew($project_id);
+        $projects = Project::orderBy('id', 'desc')->get();
+        if($result){
+            return response()->json([$projects, 'success' => 1]);
+        }else{
+            
+            return response()->json([$projects, 'success' => 0]);
+        }
+
+    }
+
+    public function saveAdToProjectNew($project_id){ 
+        // return $project_id;
+        $user_id = Auth::user()->id;
+        $ad = Ads::where(['user_id' => $user_id, 'project_id' => $project_id])->first();
+        return $ad;
+        $ad->is_saved = 1; 
         return $ad->save();
         exit;
     }

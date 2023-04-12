@@ -10,8 +10,8 @@
 @section('content') 
 <main class="addspy-dahboard-page adspy-facebook-page-wrap">
 
-    <!-- save to project modal @S -->
-    <div class="save-to-project-modal" id="adspy-modal">
+<!-- save to project modal @S -->
+<div class="save-to-project-modal" id="adspy-modal">
 		<div class="saveto-modal-txt">
 			<h4>Save to project</h4>
 			<form id="projectForm" name="projectForm" method="post">
@@ -27,7 +27,8 @@
 				<div class="form-group">
 					<label for="">Save to a new project</label>
 					<input type="text" placeholder="Name your project" name="project_name" id="project_name" class="form-control"> 
-				</div> 
+				</div>
+				<input type="hidden" name="adData" id="adData" value="">
 				<div class="form-groups"> 
 					<button type="button" class="btn btn-closes" id="close-adspy-modal">Close</button>
 					<button type="submit" class="btn btn-submits">Save</button>
@@ -81,12 +82,10 @@
                   
                     <div class="details">
                         <p>{{ isset($ad->title) ? $ad->title : "" }}</a></p>
-                        
                     </div>
                     <!-- add thumbnail @S -->
                     @php 
                         $showed = true;
-                        $info = true;
                     @endphp
                     @if(isset($ad->images) && count($ad->images) > 0)
                     @php 
@@ -113,10 +112,8 @@
                                 <!-- item @S -->
                                 @foreach($ad->cards as $card)
                                 <div class="slider-item">
-                                    @php 
-                                        $info = false;
-                                    @endphp
-                                    @if(isset($card->video_preview_image_url))
+                                
+                                    @if($card->video_preview_image_url) 
                                     <video controlslist="nodownload" height="100%" poster="{{$card->video_preview_image_url}}"  width="100%" controls="">
                                     <source src="{{$card->video_hd_url ? $card->video_hd_url : $card->video_sd_url}}" type="video/mp4">
                                     Your browser does not support the video tag.
@@ -149,15 +146,16 @@
                     @endif
                     <!-- add slider @E -->
                     @if($showed && isset($ad->videos) &&  count($ad->videos) > 0)
-                    <!-- add video @S --> 
+                    <!-- add video @S -->  
 
-                    <div class="ads-video-wrap video-container list-video-wrapper">
-                        <video class="video-container__video" controlslist="nodownload" height="100%" loop="" poster="{{$ad->videos[0]->video_preview_image_url}}"  width="100%" controls="">
-                            <source src="{{$ad->videos[0]->video_hd_url ? $ad->videos[0]->video_hd_url : $ad->videos[0]->video_sd_url}}" type="video/mp4">
+                    <div class="video-player-wrapper">
+                        <div class="video-container ads-video-wrap">
+                        <video class="video-container__video" controlslist="nodownload" height="100%" poster="{{$ad->videos[0]->video_preview_image_url}}"  width="100%" controls="">
+                        <source src="{{$ad->videos[0]->video_hd_url ? $ad->videos[0]->video_hd_url : $ad->videos[0]->video_sd_url}}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                         <!-- video controller @S -->
-                  <div class="video-container__controls"> 
+                        <div class="video-container__controls"> 
                             <div class="progress">
                                 <div class="progress__current"></div>
                             </div>
@@ -182,7 +180,7 @@
                                     <i class="fas fa-volume-off"></i>
                                     <i class="fas fa-volume-up"></i>
                                 </div>
-                                <input class="control--volume__slider" value="1" type="range" min="0" max="1" step="0.01" style="width: 76px">
+                                <input class="control--volume__slider" value="1" type="range" min="0" max="1" step="0.01">
                             </button>
                             <button class="control control--fullscreen">
                                 <i class="fas fa-expand"></i>
@@ -191,20 +189,23 @@
                         </div>
                         <!-- video controller @E -->
                     </div>
+                    </div> 
                     @endif
                     <!-- add video @E -->
-                    @if($info)
+                    @if($showed)
                         <div class="ads-ftr-cta-bttn">
                             @if(isset($ad->caption))
                             <a href="{{isset($ad->link_url) && $ad->link_url ? $ad->link_url : '#'}}" target="_blank">{{$ad->caption}}</a>
                             @endif
-                            @if(isset($ad->title))
-                            <h6>{{ $ad->title}}</h6>
-                            @endif
-                            @if(isset($ad->link_description))
-                            <p>{{ $ad->link_description}}</p>
-                            @endif
-                            @if(isset($ad->cta_text))
+                            <div class="details">
+                                @if(isset($ad->title))
+                                <h6>{{ $ad->title}}</h6>
+                                @endif
+                                @if(isset($ad->link_description))
+                                <p>{{ $ad->link_description}}</p>
+                                @endif
+                                @if(isset($ad->cta_text))
+                            </div>
 
                             <a href="#" class="cta-button" target="_blank">{{$ad->cta_text}}</a>
                             @endif
@@ -305,6 +306,7 @@
                                         <p><span>Impressions:</span>{{ isset($ad->impressions->lower_bound) ? $ad->impressions->lower_bound : "" }} {{ isset($ad->impressions->upper_bound) ? '~' . $ad->impressions->upper_bound : '' }}</p></li>
                                         <li><i class="fas fa-circle"></i> <p><span>Audiencen</span>: {{ isset($ad->estimated_audience_size->lower_bound) ? $ad->estimated_audience_size->lower_bound : "" }} {{ isset($ad->estimated_audience_size->upper_bound) ?'~' . $ad->estimated_audience_size->upper_bound : '' }}</p></li>
                                     </ul> 
+                                  
                                 </div>
                                 <div class="page-graph-wrap">
 
@@ -342,7 +344,7 @@
 <script src="{{asset('assets/js/slick.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/slider-config.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/videoController.js')}}" type="text/javascript"></script>
-<script src="{{asset('assets/js/save-add.js')}}" type="text/javascript"></script>
+<script src="{{ asset('assets/js/facebook.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
