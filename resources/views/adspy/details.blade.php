@@ -27,8 +27,7 @@
 				<div class="form-group">
 					<label for="">Save to a new project</label>
 					<input type="text" placeholder="Name your project" name="project_name" id="project_name" class="form-control"> 
-				</div>
-				<input type="hidden" name="adData" id="adData" value="">
+				</div> 
 				<div class="form-groups"> 
 					<button type="button" class="btn btn-closes" id="close-adspy-modal">Close</button>
 					<button type="submit" class="btn btn-submits">Save</button>

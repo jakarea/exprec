@@ -14,6 +14,7 @@ Route::prefix('adspy')->controller(AdspyController::class)->group(function () {
     Route::get('/scrapAdBy/{id}', 'scrapAdById');
     Route::post('/facebook2/save-ad2/yes', 'saveAd');
     Route::post('/facebook2/save-ad2/save-project', 'saveAdInProject');
+    Route::post('/facebook2/save-ad2/save-project-new', 'saveAdInProjectNew');
 
 });
 
