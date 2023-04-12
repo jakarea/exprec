@@ -67,7 +67,7 @@
             @endif
 
             @if(isset($ad->videos) && count($ad->videos) > 0)
-              <video controlslist="nodownload" height="100%" loop="" poster="{{$ad->videos[0]->video_preview_image_url}}" src="{{$ad->videos[0]->video_hd_url}}" width="100%" controls=""></video>
+              <video controlslist="nodownload" height="100%" poster="{{$ad->videos[0]->video_preview_image_url}}" src="{{$ad->videos[0]->video_hd_url}}" width="100%" controls=""></video>
               <img src="{{asset('assets/images/play-icon.png')}}" alt="Line" class="img-fluid player-img">
             @endif
           </div>
