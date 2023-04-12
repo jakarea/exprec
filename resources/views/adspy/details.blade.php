@@ -52,6 +52,7 @@
                   
                     <div class="details">
                         <p>{{ isset($ad->title) ? $ad->title : "" }}</a></p>
+                        
                     </div>
                     <!-- add thumbnail @S -->
                     @php 
@@ -83,8 +84,10 @@
                                 <!-- item @S -->
                                 @foreach($ad->cards as $card)
                                 <div class="slider-item">
-                                
-                                    @if($card->video_preview_image_url) 
+                                    @php 
+                                        $info = false;
+                                    @endphp
+                                    @if(isset($card->video_preview_image_url))
                                     <video controlslist="nodownload" height="100%" poster="{{$card->video_preview_image_url}}"  width="100%" controls="">
                                     <source src="{{$card->video_hd_url ? $card->video_hd_url : $card->video_sd_url}}" type="video/mp4">
                                     Your browser does not support the video tag.
@@ -96,9 +99,6 @@
                                     <!--  item are visible inside slider = done -->
                                     <div class="ads-ftr-cta-bttn">
                                         @if(isset($card->caption))
-                                        @php 
-                                            $info = false;
-                                        @endphp
                                         <a href="{{isset($ad->link_url) && $ad->link_url ? $ad->link_url : '#'}}" target="_blank">{{$ad->caption}}</a>
                                         @endif
                                         @if(isset($card->title))
