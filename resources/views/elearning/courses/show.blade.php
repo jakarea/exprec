@@ -31,15 +31,27 @@ span.finsihLesson {
 <!-- course details page @S -->
 <main class="course-page-wrap">
     <!-- suggested banner @S -->
-    <div class="learning-banners-wrap">
+    @if ( $course->coverimage != null )
+    <div class="learning-banners-wrap" style="background-image:url({{ asset('assets/images/course/'. $course->coverimage) }})">
         <div class="media">
-        <div class="media-body">
-            <h1 class="addspy-main-title">{{$course->title}}</h1>
-            <p>{{$course->short_description}}</p>
-            <a href="#">Continue</a>
-        </div> 
+            <div class="media-body">
+                <h1 class="addspy-main-title">{{$course->title}}</h1>
+                <p>{{$course->short_description}}</p>
+                <a href="#">Continue</a>
+            </div> 
         </div>
     </div>
+    @else
+    <div class="learning-banners-wrap" style="background-image:url({{ asset('assets/images/course/suggested-banner.png') }})">
+        <div class="media">
+            <div class="media-body">
+                <h1 class="addspy-main-title">{{$course->title}}</h1>
+                <p>{{$course->short_description}}</p>
+                <a href="#">Continue</a>
+            </div> 
+        </div>
+    </div>
+    @endif
     <!-- suggested banner @E -->
 
     <div class="row">
@@ -53,6 +65,7 @@ span.finsihLesson {
                     $attachements = [];
                     $active = 8;
                     $i = 0;
+                    $lesson = null;
                     @endphp
                     @foreach($course->modules as $module)
                     @php $i++; @endphp
@@ -128,17 +141,32 @@ span.finsihLesson {
                 <div class="course-content-box">
                     <div class="d-flex">
                         <h5>Course’s content</h5>
-                        <p>Last Updated : 2 hours ago</p>
+                        @if ( $lesson )
+                        <p>Last Updated : {{ $lesson->updated_at->format('d M, Y') }}</p>
+                        @else
+                        <p>Last Updated : {{ $course->updated_at->format('d M, Y') }}</p>
+                        @endif
                     </div>
                     <div class="row border-right-custom">
-                        @foreach($attachements as $key => $attachement)
-                        <div class="col-lg-6">
+                        
+                        @if ( $lesson )
+                            @foreach ( App\Models\Lesson::getAttachments($lesson->course_id) as $key => $attachment )
+                            <div class="col-lg-12">
+                                <div class="attached-file-box me-lg-2">
+                                    <h4><img src="{{asset('assets/images/course/pdf-icon.svg')}}" alt="Place" class="img-fluid me-1" width="40"> {{ $attachment->attachment_name }}</h4>
+                                    <a href="{{asset('assets/images/lesson/'. $attachment->attachment)}}" download>
+                                        <img src="{{asset('assets/images/course/download-icon.svg')}}" alt="Place" class="img-fluid">
+                                    </a>
+                                </div> 
+                            </div>
+                            @endforeach
+                        @else
+                        <div class="col-lg-12">
                             <div class="attached-file-box me-lg-2">
-                                <h4><img src="{{asset('assets/images/course/pdf-icon.svg')}}" alt="Place" class="img-fluid me-1" width="40"> {{ $attachement ? $attachement : $key }}</h4>
-                                <a href="{{asset('assets/images/course/download-icon.svg')}}" download><img src="{{asset('assets/images/course/download-icon.svg')}}" alt="Place" class="img-fluid"></a>
-                            </div> 
+                                <p>No Resource Found</p>
+                            </div>
                         </div>
-                        @endforeach                    
+                        @endif
                     </div>
                 </div>
             </div>

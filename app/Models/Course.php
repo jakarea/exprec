@@ -61,6 +61,11 @@ class Course extends Model
 
         $percentage = round(($completed_lesson / $lesson) * 100);
         return $percentage;
-    }    
+    }
+    
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class);
+    }
     
 }

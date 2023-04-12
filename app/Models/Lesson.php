@@ -29,4 +29,10 @@ class Lesson extends Model
     {
         return $this->belongsTo(Course::class);
     }
+
+    public static function getAttachments($course_id)
+    {
+        $attachments = Lesson::where('course_id', $course_id)->get();
+        return $attachments;
+    }
 }
