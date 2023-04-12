@@ -11,10 +11,15 @@
 <main class="addspy-dahboard-page">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
+            <div class="col-lg-6">
                 <div class="addspy-dash-head">
                     <h1>Ad details</h1>
                     <p>get more details from the ad here</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="adspy-head-bttn">
+                    
                 </div>
             </div>
         </div>
