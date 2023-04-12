@@ -5,6 +5,7 @@ $('.add-slider').slick({
   slidesToScroll: 1,
   arrows: true,
   dots: false,
+  adaptiveHeight: true,
   prevArrow: '.prev',
   nextArrow: '.next'
 });

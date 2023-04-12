@@ -10,10 +10,15 @@
 <main class="addspy-dahboard-page">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
+            <div class="col-lg-6">
                 <div class="addspy-dash-head">
                     <h1>Ad details</h1>
                     <p>get more details from the ad here</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="adspy-head-bttn">
+                    
                 </div>
             </div>
         </div>
@@ -63,6 +68,8 @@
                     @endif
             
                     <!-- add thumbnail @E -->
+
+                    <!-- add slider @S -->
                     @if($showed && isset($ad->cards) && count($ad->cards) > 0)
                         @php 
                             $showed = false;
@@ -72,10 +79,13 @@
                                 <a href="javascript:void(0)" class="prev"><i class="fas fa-angle-left"></i></a>
                                 <a href="javascript:void(0)" class="next"><i class="fas fa-angle-right"></i></a>
                             </div>
-                            <div class="add-slider">
+                            <div class="add-slider"> 
+                                <!-- item @S -->
                                 @foreach($ad->cards as $card)
-                                    @if($card->video_preview_image_url)
-                                    <video controlslist="nodownload" height="100%" loop="" poster="{{$card->video_preview_image_url}}"  width="100%" controls="">
+                                <div class="slider-item">
+                                
+                                    @if($card->video_preview_image_url) 
+                                    <video controlslist="nodownload" height="100%" poster="{{$card->video_preview_image_url}}"  width="100%" controls="">
                                     <source src="{{$card->video_hd_url ? $card->video_hd_url : $card->video_sd_url}}" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
@@ -83,7 +93,7 @@
                                     <img src="{{ $card->original_image_url}}" alt="post-image" class="img-fluid">
                                     @endif
                                 
-                                    <!--  Need to visible it inside slider -->
+                                    <!--  item are visible inside slider = done -->
                                     <div class="ads-ftr-cta-bttn">
                                         @if(isset($card->caption))
                                         @php 
@@ -101,9 +111,10 @@
 
                                         <a href="{{ $card->link_url }}" class="cta-button" target="_blank">{{$card->cta_text}}</a>
                                         @endif
-                                    </div>
-
+                                    </div> 
+                                </div>
                                 @endforeach
+                                <!-- item @E --> 
                             </div>
                         </div>
                     @endif

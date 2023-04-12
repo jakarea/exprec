@@ -53,7 +53,7 @@
             <li class="menu-item">
                 <a href="{{ url('/adspy') }}" class="{{ Request::is('adspy*')  ? ' active' : '' }} menu-link">
                     <img src="{{ asset('assets/images/adspy-icon.svg') }}" alt="Adspy" title="Adspy" class="img-fluid" />
-                    <span class="lock-icons">Adspy <i class="fas fa-lock"></i></span>
+                    <span class="lock-icons">Adspy <!-- <i class="fas fa-lock"></i> --></span>
                     <i class="fa-solid fa-angles-right"></i>
                 </a>
                 <!-- inner submenu @S -->
