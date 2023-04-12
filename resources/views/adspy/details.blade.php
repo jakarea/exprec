@@ -63,6 +63,8 @@
                     @endif
             
                     <!-- add thumbnail @E -->
+
+                    <!-- add slider @S -->
                     @if($showed && isset($ad->cards) && count($ad->cards) > 0)
                         @php 
                             $showed = false;
@@ -72,9 +74,12 @@
                                 <a href="javascript:void(0)" class="prev"><i class="fas fa-angle-left"></i></a>
                                 <a href="javascript:void(0)" class="next"><i class="fas fa-angle-right"></i></a>
                             </div>
-                            <div class="add-slider">
+                            <div class="add-slider"> 
+                                <!-- item @S -->
                                 @foreach($ad->cards as $card)
-                                    @if($card->video_preview_image_url)
+                                <div class="slider-item">
+                                
+                                    @if($card->video_preview_image_url) 
                                     <video controlslist="nodownload" height="100%" poster="{{$card->video_preview_image_url}}"  width="100%" controls="">
                                     <source src="{{$card->video_hd_url ? $card->video_hd_url : $card->video_sd_url}}" type="video/mp4">
                                     Your browser does not support the video tag.
@@ -83,7 +88,7 @@
                                     <img src="{{ $card->original_image_url}}" alt="post-image" class="img-fluid">
                                     @endif
                                 
-                                    <!--  Need to visible it inside slider -->
+                                    <!--  item are visible inside slider = done -->
                                     <div class="ads-ftr-cta-bttn">
                                         @if(isset($card->caption))
                                         <a href="{{isset($ad->link_url) && $ad->link_url ? $ad->link_url : '#'}}" target="_blank">{{$ad->caption}}</a>
@@ -98,9 +103,10 @@
 
                                         <a href="{{ $card->link_url }}" class="cta-button" target="_blank">{{$card->cta_text}}</a>
                                         @endif
-                                    </div>
-
+                                    </div> 
+                                </div>
                                 @endforeach
+                                <!-- item @E --> 
                             </div>
                         </div>
                     @endif

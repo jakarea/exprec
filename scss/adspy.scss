@@ -112,6 +112,7 @@
     margin-right: .7rem;
     @include m.df(space-between);
     flex-direction: column;
+    margin: 0.7rem;
 
     .wining-product-thumbnail {
         position: relative;
@@ -126,19 +127,21 @@
             bottom: 0;
             left: 0;
             padding-right: 1rem;
+            display: none;
         }
     }
 
     .wining-product-txt {
         padding: .4rem 0;
-
+        width: 95%;
         h5 {
             @include m.para(1.3rem, 500, v.$dark);
             margin-bottom: 0.7rem;
         }
 
         ul {
-            @include m.df;
+            @include m.df(space-between); 
+            width: 100%; 
 
             li {
                 a {
@@ -681,14 +684,14 @@
                 position: absolute;
                 top: 50%;
                 justify-content: center;
-                background: v.$fourth;
+                background: v.$gdbg;
                 color: v.$light;
                 width: 2rem;
                 height: 2rem;
                 border-radius: .2rem;
                 display: inline-flex;
                 align-items: center;
-                z-index: 99;
+                z-index: 1;
                 transform: translateY(-50%);
 
                 &:first-child {
@@ -706,7 +709,7 @@
         }
 
         .add-slider {
-            img {
+            .slider-item{
                 display: block;
                 width: 100%;
             }
@@ -893,6 +896,21 @@
 .main-page-width{
     .save-to-project-modal {
         margin-left: 22px!important;
+    }
+}
+
+.list-video-wrapper{
+    height: auto;
+    .control--volume__slider{
+        width: 62px!important;
+    }
+    i {
+        font-size: 16px;
+        color:  v.$light!important;
+      }
+    .progress:before{
+        height: 10px!important;
+        background: v.$gdbg!important;
     }
 }
 
