@@ -72,12 +72,11 @@
                 li {
                     a {
                         display: block;
-                        @include m.para(0.9rem, 600, v.$primary);
+                        @include m.para(0.9rem, 600, v.$blu);
                         margin-right: 1.4rem;
                     }
-
-                    &:nth-child(2) {
-                        margin-left: 3rem !important;
+                    &:nth-child(2){
+                        margin-left: 3rem!important;
                     }
                 }
             }
@@ -96,7 +95,6 @@
     padding-bottom: .4rem;
     width: 100%;
     padding-top: 0;
-
     h5 {
         margin-bottom: 0.8rem;
         @include m.para(1rem, 700, v.$primary);
@@ -118,30 +116,12 @@
             border-radius: 0.625rem;
         }
     }
-
-    a {
-        @include m.para(.9rem, 700, v.$light);
-        background: v.$gdbg;
-        @include m.df(center);
-        border-radius: 2rem;
-        text-align: center;
-        display: block;
-        width: 100%;
-        padding: .7rem 2rem;
-
-        &:hover {
-            opacity: .7;
-            color: v.$light;
-        }
-    }
 }
-
-.course-more-info {
-    a {
-        @include m.para(.9rem, 700, v.$blu);
+.course-more-info{
+    a{
+        @include m.para(.9rem,700,v.$blu);
         @include m.df;
-
-        img {
+        img{
             margin-right: 0.4rem;
         }
     }
@@ -179,11 +159,9 @@
             border: 0;
             position: relative;
             padding: .6rem 0;
-
-            i {
+            i{
                 color: v.$fourth;
             }
-
             &:before {
                 position: absolute;
                 content: "";
@@ -221,7 +199,6 @@
                 padding: .8rem 1rem;
                 border: none;
                 padding-right: 0;
-
                 .d-flex {
                     justify-content: space-between;
                     width: 100%;
@@ -240,10 +217,6 @@
                         display: block;
                         @include m.para(.9rem, 400, v.$btnbg);
                         margin: .8rem 0;
-
-                        img {
-                            filter: invert(52%) sepia(77%) saturate(2110%) hue-rotate(322deg) brightness(100%) contrast(102%);
-                        }
                     }
                 }
             }
@@ -267,45 +240,42 @@
     background: v.$light;
     padding: 2rem;
 }
-
-.custom-margin-top {
+.custom-margin-top{
     margin-top: -2rem;
 }
 
-.add_module_bttn {
+.add_module_bttn{
     padding: 10px 15px;
     border-radius: 1.6rem;
     background: v.$gdbg;
     color: v.$light;
     display: block;
-    text-align: center;
+    text-align: center; 
     width: 80%;
     margin: 0 auto;
     margin-top: .3rem;
-
-    &:hover {
+    &:hover{
         background-color: v.$menuclr;
         color: v.$light;
     }
 }
-
-.add_lesson_bttn {
+// {{ url('admin/elearning/modules/create?course='. $course_id.'&'.$module_id) }}
+.add_lesson_bttn{
     padding: 7px 15px;
     border-radius: 1.4rem;
     background-color: v.$blu;
     color: v.$light;
     margin-top: .3rem;
     display: inline-block;
-    text-align: center;
+    text-align: center; 
     font-size: .9rem;
-
-    &:hover {
+    &:hover{
         background-color: v.$menuclr;
         color: v.$light;
     }
 }
 
-.course-outline-box .accordion .accordion-item:last-child:before {
+.course-outline-box .accordion .accordion-item:last-child:before{
     height: 0;
 }
 
@@ -323,8 +293,7 @@
                 opacity: .7
             }
         }
-
-        a.min_width {
+        a.min_width{
             min-width: 10rem;
             text-align: center;
             margin-left: 0.5rem;
@@ -366,7 +335,7 @@
     .d-flex {
         align-items: center;
         justify-content: space-between;
-        padding: 1.4rem 0;
+        padding: 1.4rem 0; 
         border-top: 1px solid v.$third;
         border-bottom: 1px solid v.$third;
 
@@ -391,10 +360,9 @@
     }
 }
 
-.border-right-custom {
+.border-right-custom{
     position: relative;
-
-    &::before {
+    &::before{
         position: absolute;
         content: "";
         left: 50%;
@@ -410,12 +378,11 @@
 
 // suggested css @S
 .learning-banners-wrap {
-    @include m.box(2rem 2.2rem, 0, transparent);
+    @include m.box(2rem 2.2rem, 0,transparent);
     margin-bottom: 2rem;
     margin-left: -24px;
     margin-top: -17px;
     @include m.bgi('../images/course/suggested-banner.png');
-
     .media {
         align-items: center;
 
@@ -449,64 +416,55 @@
 }
 
 
-.frame-box {
-    .media {
+.frame-box{
+    .media{
         background: v.$light;
         padding: 1rem;
         border-radius: 0.625rem;
         margin-bottom: 1rem;
         margin-left: 1rem;
-
-        h5 {
-            @include m.para(1.25rem, 600, v.$btnbg);
+        h5{
+            @include m.para(1.25rem,600,v.$btnbg);
         }
-
-        p {
-            @include m.para(0.9rem, 400, v.$btnbg);
+        p{
+            @include m.para(0.9rem,400,v.$btnbg);
             margin: .3rem 0;
         }
-
-        span {
-            @include m.para(0.8rem, 400, v.$fourth);
+        span{
+            @include m.para(0.8rem,400,v.$fourth);
             display: block;
         }
-
-        img {
+        img{
             margin-right: 1rem;
         }
     }
 }
 
-.learning-content-box-2 {
+.learning-content-box-2{
     border-radius: 0.625rem;
-
-    .profile-box-2 {
+    .profile-box-2{
         @include m.df(space-between);
         padding-bottom: 2rem;
         margin-bottom: 2rem;
         border-bottom: 1px solid v.$border;
     }
-
-    .muted-content-box {
-        h5 {
-            @include m.para(1rem, 700, v.$fourth);
+    .muted-content-box{
+        h5{
+            @include m.para(1rem,700,v.$fourth);
             margin-bottom: 1rem;
         }
-
-        p {
-            @include m.para(0.95rem, 500, v.$newbrdr);
+        p{
+            @include m.para(0.95rem,500,v.$newbrdr);
             margin-bottom: 1rem;
             line-height: 160%;
             width: 90%;
         }
-
         ul {
             margin-top: 2rem;
-
-            li {
-                a {
+            li{
+                a{
                     display: block;
-                    @include m.para(1rem, 500, v.$blu);
+                    @include m.para(1rem,500,v.$blu);
                     margin-top: 0.8rem;
                     text-decoration: underline;
                 }
@@ -521,23 +479,13 @@
     }
 }
 
-.video-iframe-vox {
-    img {
+.video-iframe-vox{
+    img{
         display: block;
         width: 100%;
     }
 }
-
 // suggested css @E
-
-.productss-list-box {
-    td {
-        span.badge {
-            background: v.$gdbg !important;
-        }
-    }
-}
-
 
 // mobile responsive device css
 @include q.responsive(phone) {
@@ -583,81 +531,64 @@
     .course-content-box .attached-file-box h4 {
         font-size: 1rem;
     }
-
-    .suggested-banners-wrap {
+    .suggested-banners-wrap{
         padding: 1.5rem;
-
-        h1.addspy-main-title {
-            font-size: 2rem !important;
+        h1.addspy-main-title{
+            font-size: 2rem!important;
         }
     }
-
-    .frame-box {
-        .media {
-            img {
+    .frame-box{
+        .media{
+            img{
                 width: 6rem;
             }
         }
     }
-
-    .learning-content-box-2 .profile-box-2 {
+    .learning-content-box-2 .profile-box-2{
         flex-direction: column;
         align-items: flex-start;
     }
-
-    .learning-content-box-2 .profile-box-2 {
+    .learning-content-box-2 .profile-box-2{
         margin-top: 0;
         margin-bottom: 1rem;
-
         .media {
-            h5 {
+            h5{
                 font-size: 1rem;
             }
-
-            p {
+            p{
                 font-size: 0.9rem;
             }
         }
     }
-
-    .learning-banners-wrap {
+    .learning-banners-wrap{
         padding: 1rem;
     }
-
-    .learning-banners-wrap .media .media-body .addspy-main-title {
+    .learning-banners-wrap .media .media-body .addspy-main-title{
         font-size: 2rem;
     }
-
-    .learning-banners-wrap .media .media-body p {
+    .learning-banners-wrap .media .media-body p{
         font-size: .9rem;
     }
-
     .border-right-custom::before {
-        width: 0 !important;
+        width: 0!important;
     }
-
     .mylearning-txt-box {
-        margin-top: 0 !important;
+        margin-top: 0!important;
     }
-
-    .mylearning-video-content-box {
+    .mylearning-video-content-box{
         padding: 1rem;
     }
-
-    .content-txt-box p {
+    .content-txt-box p{
         font-size: 0.9rem;
         line-height: 160%;
     }
-
-    .custom-margin-top {
+    .custom-margin-top{
         margin-top: 1rem;
     }
-
-    .profile-box a {
+    .profile-box a{
         margin-top: 1rem;
     }
-
-    .learning-content-box-2 .muted-content-box p {
+    .learning-content-box-2 .muted-content-box p{
         width: 100%;
     }
 }
@@ -665,52 +596,43 @@
 // landscape mobile responsive device css
 @include q.responsive(landphone) {
     .border-right-custom::before {
-        width: 0 !important;
+        width: 0!important;
     }
-
-    .custom-margin-top {
+    .custom-margin-top{
         margin-top: 2rem;
     }
-
-    .content-txt-box .d-flex {
+    .content-txt-box .d-flex{
         flex-direction: column;
         align-items: flex-start;
     }
-
-    .learning-content-box-2 .muted-content-box p {
+    .learning-content-box-2 .muted-content-box p{
         width: 100%;
     }
 }
 
 // tablet responsive device css
 @include q.responsive(tablet) {
-    .mylearning-txt-box h1 {
+    .mylearning-txt-box h1{
         font-size: 2rem;
     }
-
     .course-content-box .d-flex,
-    .content-txt-box .d-flex {
+    .content-txt-box .d-flex{
         flex-direction: column;
         align-items: flex-start;
     }
-
-    .content-txt-box .d-flex a {
+    .content-txt-box .d-flex a{
         margin-top: 1rem;
     }
-
-    .mylearning-txt-box p {
+    .mylearning-txt-box p{
         width: 100%;
     }
-
     .frame-box .media {
         flex-direction: column;
     }
-
     .border-right-custom::before {
-        width: 0 !important;
+        width: 0!important;
     }
-
-    .frame-box .media img {
+    .frame-box .media img{
         margin-right: 0;
         display: block;
         width: 100%;
@@ -720,46 +642,36 @@
 
 // landscape tablet responsive device css
 @include q.responsive(landtablet) {
-
     .course-content-box .d-flex,
-    .content-txt-box .d-flex {
+    .content-txt-box .d-flex{
         flex-direction: column;
         align-items: flex-start;
     }
-
-    .content-txt-box .d-flex a {
+    .content-txt-box .d-flex a{
         margin-top: 1rem;
     }
-
-    .mylearning-txt-box h1 {
+    .mylearning-txt-box h1{
         font-size: 1.7rem;
     }
-
-    .course-content-box .attached-file-box h4 {
+    .course-content-box .attached-file-box h4{
         font-size: .8rem;
-
-        img {
-            width: 2rem !important;
+        img{
+            width: 2rem!important;
         }
     }
-
-    .mylearning-txt-box p {
+    .mylearning-txt-box p{
         width: 100%;
     }
-
     .frame-box .media {
         flex-direction: column;
     }
-
-    .course-box-wrap .course-content-box .course-txt-box ul li:nth-child(2) {
+    .course-box-wrap .course-content-box .course-txt-box ul li:nth-child(2){
         margin-left: 0;
     }
-
-    .course-box-wrap .course-content-box .course-txt-box ul li a {
+    .course-box-wrap .course-content-box .course-txt-box ul li a{
         margin-right: 0;
     }
-
-    .frame-box .media img {
+    .frame-box .media img{
         margin-right: 0;
         display: block;
         width: 100%;
@@ -769,47 +681,37 @@
 
 // regular device 
 @include q.responsive(regular) {
-
     .course-content-box .d-flex,
-    .content-txt-box .d-flex {
+    .content-txt-box .d-flex{
         flex-direction: column;
         align-items: flex-start;
     }
-
-    .content-txt-box .d-flex a {
+    .content-txt-box .d-flex a{
         margin-top: 1rem;
     }
-
-    .mylearning-txt-box h1 {
+    .mylearning-txt-box h1{
         font-size: 2rem;
     }
-
-    .course-content-box .attached-file-box h4 {
+    .course-content-box .attached-file-box h4{
         font-size: .8rem;
-
-        img {
-            width: 2rem !important;
+        img{
+            width: 2rem!important;
         }
     }
-
-    .course-box-wrap .course-content-box .course-txt-box ul li a {
+    .course-box-wrap .course-content-box .course-txt-box ul li a{
         margin-right: 0;
     }
-
-    .course-box-wrap .course-content-box .course-txt-box p {
+    .course-box-wrap .course-content-box .course-txt-box p{
         line-height: 140%;
     }
-
-    .course-box-wrap .course-content-box .course-txt-box {
+    .course-box-wrap .course-content-box .course-txt-box{
         padding: 0.5rem;
-    }
-
+    } 
     .frame-box .media {
         flex-direction: column;
         align-items: flex-start;
     }
-
-    .frame-box .media img {
+    .frame-box .media img{
         margin-right: 0;
         display: block;
         width: 100%;

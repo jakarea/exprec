@@ -18,7 +18,6 @@
             <!-- header navbar @S -->
             <div class="header-navbar-wrap">
                 <ul class="head-navbar justify-content-end"> 
-                @guest
                   @if (Route::has('login'))
                     <li class="link-item me-3 me-md-0">
                         <a href="{{ url('/login') }}" class="link-click">Login</a>
@@ -29,7 +28,6 @@
                         <a href="{{ url('/register') }}" class="link-click">Register</a>
                     </li>
                     @endif 
-                  @endguest
                 </ul>
             </div>
             <!-- header navbar @E -->

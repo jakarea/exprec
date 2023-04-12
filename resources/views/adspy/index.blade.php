@@ -77,7 +77,7 @@
               <img src="{{ $ad->images[0]->original_image_url}}" alt="post-image" class="img-fluid">
               @endif
               @if(isset($ad->videos) && count($ad->videos) > 0)
-              <video controlslist="nodownload" height="100%" poster="{{$ad->videos[0]->video_preview_image_url}}"  width="100%" controls="">
+              <video controlslist="nodownload" height="100%" loop="" poster="{{$ad->videos[0]->video_preview_image_url}}"  width="100%" controls="">
                             <source src="{{$ad->videos[0]->video_hd_url ? $ad->videos[0]->video_hd_url : $ad->videos[0]->video_sd_url}}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
