@@ -134,12 +134,13 @@ class AdspyController extends Controller
     }
     public function details($id)
     {
+        $projects = Project::orderBy('id', 'desc')->get();
         $ad = Ads::where('ad_id', $id)->first();
         if(!$ad){
             return redirect('adspy/facebook');
         }
         $ad = json_decode($ad->data);
-        return view('adspy/details', compact('ad'));
+        return view('adspy/details', compact('ad','projects'));
     }
 
     public function saveAd(Request $request){

@@ -260,12 +260,25 @@ async function getImagesByIds(ids) {
 const adspyModal = document.getElementById("adspy-modal");
 const closeAdspyModal = document.getElementById("close-adspy-modal");
 const setAdId = document.getElementById("ad-data");
-
 const closeModal = () => {
     adspyModal.style.display = "none";
 }
 
 closeAdspyModal.addEventListener("click", closeModal);
+ 
+// save add on details page
+// const saveThisAdd = document.querySelector(".adspy-head-bttn a");
+// saveThisAdd.addEventListener('click', function (event) {
+   
+//     if (event.target.classList.contains('preventDefault')) {
+//         event.preventDefault(); 
+//         var adId = event.target.getAttribute('data-id');
+//         if (event.target.classList.contains('saveAdToList')) {
+//             adspyModal.style.display = "block";
+//             adData.value = JSON.stringify(savedAds[adId]);
+//         }
+//     }
+// });
 
 document.addEventListener('click', function (event) {
     if (event.target.classList.contains('preventDefault')) {

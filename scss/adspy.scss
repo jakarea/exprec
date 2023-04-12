@@ -914,6 +914,18 @@
     }
 }
 
+.adspy-head-bttn{
+    text-align: right;
+    a {
+        @include m.button(1rem, v.$light, v.$gdbg);
+        border-radius: 3rem;
+
+        &:hover {
+            opacity: .7;
+        } 
+    }
+}
+
 // responsive css @S
 @include q.responsive(phone) {
     .wining-product-wrapper .wining-products-box {
