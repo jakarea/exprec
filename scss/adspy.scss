@@ -757,6 +757,7 @@
     }
 }
 
+
 .about-page-header-wrap {
     @include m.box(1.5rem, .7rem, v.$light);
     border: 1px solid v.$third;
@@ -923,12 +924,6 @@
         &:hover {
             opacity: .7;
         } 
-    }
-}
-
-.lock-icons{
-    i{
-        font-size: .7rem!important;
     }
 }
 

@@ -69,6 +69,13 @@ main {
     }
 } 
 
+.lock-icons{
+    i{
+        font-size: .6rem!important;
+    }
+}
+
+
 // responsive css start
 @include q.responsive(phone) { 
     .main-body-wrapper .main-page-wrapper {
