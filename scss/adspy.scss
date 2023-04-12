@@ -719,8 +719,7 @@
 
     .ads-video-wrap {
         video {
-            border-radius: 0.7rem;
-            height: 250px;
+            border-radius: 0.7rem; 
         }
     }
 
@@ -924,6 +923,12 @@
         &:hover {
             opacity: .7;
         } 
+    }
+}
+
+.lock-icons{
+    i{
+        font-size: .7rem!important;
     }
 }
 

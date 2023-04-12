@@ -4,13 +4,14 @@
 @section('style') 
 <link href="{{ asset('assets/css/adspy.css') }}" rel="stylesheet" type="text/css" />  
 <link href="{{ asset('assets/css/slick.css') }}" rel="stylesheet" type="text/css" />  
+<link href="{{ asset('assets/css/video-controller.css') }}" rel="stylesheet" type="text/css" />  
 @endsection
 
 @section('content') 
 <main class="addspy-dahboard-page adspy-facebook-page-wrap">
 
-<!-- save to project modal @S -->
-<div class="save-to-project-modal" id="adspy-modal">
+    <!-- save to project modal @S -->
+    <div class="save-to-project-modal" id="adspy-modal">
 		<div class="saveto-modal-txt">
 			<h4>Save to project</h4>
 			<form id="projectForm" name="projectForm" method="post">
@@ -149,12 +150,47 @@
                     @endif
                     <!-- add slider @E -->
                     @if($showed && isset($ad->videos) &&  count($ad->videos) > 0)
-                    <!-- add video @S -->
-                    <div class="ads-video-wrap">
-                        <video controlslist="nodownload" height="100%" loop="" poster="{{$ad->videos[0]->video_preview_image_url}}"  width="100%" controls="">
+                    <!-- add video @S --> 
+
+                    <div class="ads-video-wrap video-container list-video-wrapper">
+                        <video class="video-container__video" controlslist="nodownload" height="100%" loop="" poster="{{$ad->videos[0]->video_preview_image_url}}"  width="100%" controls="">
                             <source src="{{$ad->videos[0]->video_hd_url ? $ad->videos[0]->video_hd_url : $ad->videos[0]->video_sd_url}}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
+                        <!-- video controller @S -->
+                  <div class="video-container__controls"> 
+                            <div class="progress">
+                                <div class="progress__current"></div>
+                            </div>
+                            <button class="control control--backward">
+                                <i class="fas fa-backward"></i>
+                            </button>
+                            <button class="control control--play paused">
+                                <i class="fas fa-play"></i>
+                                <i class="fas fa-pause"></i>
+                            </button>
+                            <button class="control control--stop">
+                                <i class="fas fa-stop"></i>
+                            </button>
+                            <button class="control control--forward">
+                                <i class="fas fa-forward"></i>
+                            </button>
+                            <button class="control control--replay">
+                                <i class="fas fa-sync"></i>
+                            </button>
+                            <button class="control control--volume">
+                                <div class="control--volume__button">
+                                    <i class="fas fa-volume-off"></i>
+                                    <i class="fas fa-volume-up"></i>
+                                </div>
+                                <input class="control--volume__slider" value="1" type="range" min="0" max="1" step="0.01" style="width: 76px">
+                            </button>
+                            <button class="control control--fullscreen">
+                                <i class="fas fa-expand"></i>
+                                <i class="fas fa-compress"></i>
+                            </button>
+                        </div>
+                        <!-- video controller @E -->
                     </div>
                     @endif
                     <!-- add video @E -->
@@ -306,6 +342,8 @@
 @section('script')
 <script src="{{asset('assets/js/slick.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/slider-config.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/js/videoController.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/js/save-add.js')}}" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
