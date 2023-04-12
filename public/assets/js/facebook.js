@@ -145,7 +145,7 @@ function makeAjaxRequest() {
                                     </div>
 
                                     <div class="wining-product-thumbnail d-none" id="video_div_${ad.id}">
-                                        <video id="player_${ad.id}" controlslist="nodownload" height="100%" poster=""  width="100%" controls="">
+                                        <video id="player_${ad.id}" controlslist="nodownload" height="100%" loop="" poster=""  width="100%" controls="">
                                             <source id="source_${ad.id}" src="" type="video/mp4">
                                             Your browser does not support the video tag.
                                         </video>

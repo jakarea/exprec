@@ -8,9 +8,38 @@
 @endsection
 
 @section('content') 
-<main class="addspy-dahboard-page">
+<main class="addspy-dahboard-page adspy-facebook-page-wrap">
+
+<!-- save to project modal @S -->
+<div class="save-to-project-modal" id="adspy-modal">
+		<div class="saveto-modal-txt">
+			<h4>Save to project</h4>
+			<form id="projectForm" name="projectForm" method="post">
+				<div class="form-group">
+					<label for="">Save to an existing project</label>
+					<select name="previous_project" id="project_id" class="form-control">
+						<option value="">Select Below</option>
+						@foreach($projects as $project) 
+						<option name="project_id" value="{{$project['id']}}">{{$project['name']}}</option>
+						@endforeach
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="">Save to a new project</label>
+					<input type="text" placeholder="Name your project" name="project_name" id="project_name" class="form-control"> 
+				</div>
+				<input type="hidden" name="adData" id="adData" value="">
+				<div class="form-groups"> 
+					<button type="button" class="btn btn-closes" id="close-adspy-modal">Close</button>
+					<button type="submit" class="btn btn-submits">Save</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- save to project modal @E -->
+
     <div class="container-fluid">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-lg-6">
                 <div class="addspy-dash-head">
                     <h1>Ad details</h1>
@@ -18,8 +47,8 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="adspy-head-bttn">
-                    
+                <div class="adspy-head-bttn"> 
+                    <a href="#" data-id="{{$ad->id}}" class="saveAdToList preventDefault">Save this Add</a>
                 </div>
             </div>
         </div>
@@ -315,6 +344,7 @@
 <script src="{{asset('assets/js/slick.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/slider-config.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/videoController.js')}}" type="text/javascript"></script>
+<script src="{{ asset('assets/js/facebook.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>

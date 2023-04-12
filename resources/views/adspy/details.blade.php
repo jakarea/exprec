@@ -4,7 +4,6 @@
 @section('style') 
 <link href="{{ asset('assets/css/adspy.css') }}" rel="stylesheet" type="text/css" />  
 <link href="{{ asset('assets/css/slick.css') }}" rel="stylesheet" type="text/css" />  
-<link href="{{ asset('assets/css/video-controller.css') }}" rel="stylesheet" type="text/css" />  
 @endsection
 
 @section('content') 
@@ -82,10 +81,12 @@
                   
                     <div class="details">
                         <p>{{ isset($ad->title) ? $ad->title : "" }}</a></p>
+                        
                     </div>
                     <!-- add thumbnail @S -->
                     @php 
                         $showed = true;
+                        $info = true;
                     @endphp
                     @if(isset($ad->images) && count($ad->images) > 0)
                     @php 
@@ -112,8 +113,10 @@
                                 <!-- item @S -->
                                 @foreach($ad->cards as $card)
                                 <div class="slider-item">
-                                
-                                    @if($card->video_preview_image_url) 
+                                    @php 
+                                        $info = false;
+                                    @endphp
+                                    @if(isset($card->video_preview_image_url))
                                     <video controlslist="nodownload" height="100%" poster="{{$card->video_preview_image_url}}"  width="100%" controls="">
                                     <source src="{{$card->video_hd_url ? $card->video_hd_url : $card->video_sd_url}}" type="video/mp4">
                                     Your browser does not support the video tag.
@@ -146,66 +149,27 @@
                     @endif
                     <!-- add slider @E -->
                     @if($showed && isset($ad->videos) &&  count($ad->videos) > 0)
-                    <!-- add video @S -->  
-
-                    <div class="video-player-wrapper">
-                        <div class="video-container ads-video-wrap">
-                        <video class="video-container__video" controlslist="nodownload" height="100%" poster="{{$ad->videos[0]->video_preview_image_url}}"  width="100%" controls="">
-                        <source src="{{$ad->videos[0]->video_hd_url ? $ad->videos[0]->video_hd_url : $ad->videos[0]->video_sd_url}}" type="video/mp4">
+                    <!-- add video @S -->
+                    <div class="ads-video-wrap">
+                        <video controlslist="nodownload" height="100%" loop="" poster="{{$ad->videos[0]->video_preview_image_url}}"  width="100%" controls="">
+                            <source src="{{$ad->videos[0]->video_hd_url ? $ad->videos[0]->video_hd_url : $ad->videos[0]->video_sd_url}}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
-                        <!-- video controller @S -->
-                        <div class="video-container__controls"> 
-                            <div class="progress">
-                                <div class="progress__current"></div>
-                            </div>
-                            <button class="control control--backward">
-                                <i class="fas fa-backward"></i>
-                            </button>
-                            <button class="control control--play paused">
-                                <i class="fas fa-play"></i>
-                                <i class="fas fa-pause"></i>
-                            </button>
-                            <button class="control control--stop">
-                                <i class="fas fa-stop"></i>
-                            </button>
-                            <button class="control control--forward">
-                                <i class="fas fa-forward"></i>
-                            </button>
-                            <button class="control control--replay">
-                                <i class="fas fa-sync"></i>
-                            </button>
-                            <button class="control control--volume">
-                                <div class="control--volume__button">
-                                    <i class="fas fa-volume-off"></i>
-                                    <i class="fas fa-volume-up"></i>
-                                </div>
-                                <input class="control--volume__slider" value="1" type="range" min="0" max="1" step="0.01">
-                            </button>
-                            <button class="control control--fullscreen">
-                                <i class="fas fa-expand"></i>
-                                <i class="fas fa-compress"></i>
-                            </button>
-                        </div>
-                        <!-- video controller @E -->
                     </div>
-                    </div> 
                     @endif
                     <!-- add video @E -->
-                    @if($showed)
+                    @if($info)
                         <div class="ads-ftr-cta-bttn">
                             @if(isset($ad->caption))
                             <a href="{{isset($ad->link_url) && $ad->link_url ? $ad->link_url : '#'}}" target="_blank">{{$ad->caption}}</a>
                             @endif
-                            <div class="details">
-                                @if(isset($ad->title))
-                                <h6>{{ $ad->title}}</h6>
-                                @endif
-                                @if(isset($ad->link_description))
-                                <p>{{ $ad->link_description}}</p>
-                                @endif
-                                @if(isset($ad->cta_text))
-                            </div>
+                            @if(isset($ad->title))
+                            <h6>{{ $ad->title}}</h6>
+                            @endif
+                            @if(isset($ad->link_description))
+                            <p>{{ $ad->link_description}}</p>
+                            @endif
+                            @if(isset($ad->cta_text))
 
                             <a href="#" class="cta-button" target="_blank">{{$ad->cta_text}}</a>
                             @endif
@@ -306,7 +270,6 @@
                                         <p><span>Impressions:</span>{{ isset($ad->impressions->lower_bound) ? $ad->impressions->lower_bound : "" }} {{ isset($ad->impressions->upper_bound) ? '~' . $ad->impressions->upper_bound : '' }}</p></li>
                                         <li><i class="fas fa-circle"></i> <p><span>Audiencen</span>: {{ isset($ad->estimated_audience_size->lower_bound) ? $ad->estimated_audience_size->lower_bound : "" }} {{ isset($ad->estimated_audience_size->upper_bound) ?'~' . $ad->estimated_audience_size->upper_bound : '' }}</p></li>
                                     </ul> 
-                                  
                                 </div>
                                 <div class="page-graph-wrap">
 
@@ -343,8 +306,6 @@
 @section('script')
 <script src="{{asset('assets/js/slick.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/slider-config.js')}}" type="text/javascript"></script>
-<script src="{{asset('assets/js/videoController.js')}}" type="text/javascript"></script>
-<script src="{{ asset('assets/js/facebook.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
