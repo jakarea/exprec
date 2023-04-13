@@ -47,7 +47,6 @@ span.finsihLesson {
             <div class="media-body">
                 <h1 class="addspy-main-title">{{$course->title}}</h1>
                 <p>{{$course->short_description}}</p>
-                <a href="#">Continue</a>
             </div> 
         </div>
     </div>
@@ -125,7 +124,8 @@ span.finsihLesson {
                 <div class="content-txt-box">
                     <div class="d-flex">
                         <h3>{{$course->title}}</h3>
-                        <a href="#" class="min_width">Continue</a>
+                        <!-- I want a button and when click go to second lesson if lesson dont have then button disabled -->
+                        <a href="#" class="btn btn-primary next-lesson">Next Lesson</a>
                     </div>
                     {!! $course->long_description !!} 
                 </div>
@@ -153,7 +153,7 @@ span.finsihLesson {
                             @foreach ( App\Models\Lesson::getAttachments($lesson->course_id) as $key => $attachment )
                             <div class="col-lg-12">
                                 <div class="attached-file-box me-lg-2">
-                                    <h4><img src="{{asset('assets/images/course/pdf-icon.svg')}}" alt="Place" class="img-fluid me-1" width="40"> {{ $attachment->attachment_name }}</h4>
+                                    <h4><img src="{{asset('assets/images/course/pdf-icon.svg')}}" alt="Place" class="img-fluid me-1" width="40"> {{ $attachment->attachment_name ?$attachment->attachment_name : $attachment->attachment }}</h4>
                                     <a href="{{asset('assets/images/lesson/'. $attachment->attachment)}}" download>
                                         <img src="{{asset('assets/images/course/download-icon.svg')}}" alt="Place" class="img-fluid">
                                     </a>
@@ -256,6 +256,15 @@ span.finsihLesson {
                     console.log(xhr.responseText);
                 }
             });
+        });
+
+        // When click next-lesson button go to next lesson to run a.video_list_play click event
+        $('a.next-lesson').click(function(e){
+            e.preventDefault();
+            // get current lesson
+            var currentLesson = $('a.video_list_play').eq(1);
+            var nextLesson = $('a.video_list_play').eq(currentLesson.index() + 1);
+            nextLesson.click();
         });
 
     });
