@@ -217,6 +217,9 @@
                         display: block;
                         @include m.para(.9rem, 400, v.$btnbg);
                         margin: .8rem 0;
+                        img{
+                            filter: invert(58%) sepia(25%) saturate(3683%) hue-rotate(319deg) brightness(96%) contrast(113%);
+                        }
                     }
                 }
             }

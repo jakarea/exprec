@@ -26,8 +26,7 @@ return new class extends Migration
             $table->string('number_of_lesson')->nullable();
             $table->string('number_of_quiz')->nullable();   
             $table->string('number_of_attachment')->nullable();
-            $table->string('number_of_video')->nullable();
-            $table->string('order')->default(0);
+            $table->string('number_of_video')->nullable(); 
             $table->string('status')->default('draft');
             $table->timestamps();
         });
