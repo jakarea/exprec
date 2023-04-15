@@ -40,7 +40,7 @@ Route::get('/home', function () {
 });
 
 // interest project route
-Route::prefix('add-interest')->controller(ProjectController::class)->group(function () {
+Route::prefix('add-interest')->middleware(['auth'])->controller(ProjectController::class)->group(function () {
     Route::get('/projects', 'index')->name('projectlist');   
     Route::post('/projects', 'addprojectlist')->name('post_projectlist'); 
     Route::get('/projects/{id}', 'projectsingle')->name('project_single');   
@@ -48,14 +48,14 @@ Route::prefix('add-interest')->controller(ProjectController::class)->group(funct
 });
 
 // interest search route 
-Route::controller(AdInterestController::class)->group(function () {
+Route::controller(AdInterestController::class)->middleware(['auth'])->group(function () {
     Route::get('/add-interest', 'adInterest')->name('get_add_interest');
     Route::post('/add-interest', '_adInterest')->name('post_add_interest');
 });
 
 
 // email camping route 
-Route::prefix('email-marketing')->controller(EmailCampingController::class)->group(function () {       
+Route::prefix('email-marketing')->middleware(['auth'])->controller(EmailCampingController::class)->group(function () {       
     Route::get('/', 'index');     
     Route::get('/campaigns', 'campaigns'); 
     Route::get('/campaigns/new', 'new');  
@@ -72,7 +72,7 @@ Route::prefix('email-marketing')->controller(EmailCampingController::class)->gro
     Route::get('/2', 'e_camping_2');              
 });
  
-Route::get('/integrations', [EmailCampingController::class, 'integrations']);
+Route::middleware(['auth'])->get('/integrations', [EmailCampingController::class, 'integrations']);
 
 // adspy route
 

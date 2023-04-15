@@ -1,7 +1,8 @@
 <?php
 use App\Http\Controllers\AdspyController; 
 use App\Http\Controllers\ElearingController;
-Route::prefix('adspy')->controller(AdspyController::class)->group(function () {   
+
+Route::prefix('adspy')->middleware(['auth'])->controller(AdspyController::class)->group(function () {   
     Route::get('/', 'index');      
     Route::get('/facebook', 'facebook');    
     Route::post('/facebook', 'getAdFromFacebook');      

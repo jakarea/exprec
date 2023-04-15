@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\AdminProductController;
 
 
 // product route
-Route::prefix('products')->controller(ProductController::class)->group(function () {      
+Route::prefix('products')->middleware(['auth'])->controller(ProductController::class)->group(function () {      
     Route::get('/', 'index')->name('product_research');
     Route::get('/ali/{id}','insert_product')->name('insert_product');
     Route::get('/{slug}', 'view')->name('product_research_details');
@@ -13,7 +13,7 @@ Route::prefix('products')->controller(ProductController::class)->group(function 
 
 
 // admin product route
-Route::prefix('admin/products')->controller(AdminProductController::class)->group(function () {    
+Route::prefix('admin/products')->middleware(['auth'])->controller(AdminProductController::class)->group(function () {    
     Route::get('/', 'index')->name('admin_products_list'); 
     Route::get('/create', 'create')->name('product_research_create');   
     Route::post('/create', 'store')->name('product_research_store'); 
@@ -29,7 +29,7 @@ Route::prefix('admin/products')->controller(AdminProductController::class)->grou
 });
 
 // category route
-Route::prefix('admin/categories')->controller(ProductCategoryController::class)->group(function () {       
+Route::prefix('admin/categories')->middleware(['auth'])->controller(ProductCategoryController::class)->group(function () {       
     Route::get('/', 'index')->name('category_list');    
     Route::get('/create', 'create')->name('category_create');    
     Route::post('/create', 'store')->name('category_store');    
