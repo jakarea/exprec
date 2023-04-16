@@ -72,14 +72,18 @@
                
                 <td width="10%">
                     <div class="action-bttn"> 
+                    @can('lesson-edit')
                         <a href="{{ url('admin/elearning/lessons/'.$lesson->slug.'/edit') }}">
                             <i class="fas fa-pen text-info me-2"></i>
-                        </a>  
+                        </a>
+                    @endcan
+                    @can('lesson-delete')
                         <form method="post" class="d-inline" action="{{ url('admin/elearning/lessons/'.$lesson->slug.'/destroy') }}">
                             @csrf 
                             @method("DELETE")
                             <button type="submit" class="btn p-0"><i class="fas fa-trash text-danger"></i></button>
                         </form>
+                    @endcan
                     </div>
                 </td>
             </tr>
