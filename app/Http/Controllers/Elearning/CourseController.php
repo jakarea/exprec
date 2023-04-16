@@ -13,6 +13,19 @@ use App\Http\Controllers\Controller;
 
 class CourseController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+         $this->middleware('permission:course-list|course-create|course-edit|course-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:course-create', ['only' => ['create','store']]);
+         $this->middleware('permission:course-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:course-delete', ['only' => ['destroy']]);
+    }
+
     //create a method to show all courses withe its modules and lessons
     public function courses()
     { 

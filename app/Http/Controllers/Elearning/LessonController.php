@@ -11,6 +11,18 @@ use App\Models\Lesson;
 use Vimeo\Laravel\Facades\Vimeo;
 class LessonController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+         $this->middleware('permission:lesson-list|lesson-create|lesson-edit|lesson-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:lesson-create', ['only' => ['create','store']]);
+         $this->middleware('permission:lesson-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:lesson-delete', ['only' => ['destroy']]);
+    }
     //show all lessons
     public function lessons()
     { 

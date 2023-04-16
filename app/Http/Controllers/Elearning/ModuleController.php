@@ -11,6 +11,18 @@ use Illuminate\Support\Str;
 
 class ModuleController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+         $this->middleware('permission:module-list|module-create|module-edit|module-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:module-create', ['only' => ['create','store']]);
+         $this->middleware('permission:module-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:module-delete', ['only' => ['destroy']]);
+    }
     public function modules()
     {
         $modules = Module::orderBy('order', 'asc')->paginate(12);

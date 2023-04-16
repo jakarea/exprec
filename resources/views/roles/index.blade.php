@@ -47,4 +47,4 @@
     </table>
     {!! $roles->render() !!}
 </main>
-@ensection
+@endsection

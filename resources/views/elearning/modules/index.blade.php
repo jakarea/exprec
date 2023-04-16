@@ -80,14 +80,18 @@
                         <!-- <a href="{{ url('admin/elearning/module/'.$module->slug) }}">
                             <i class="fas fa-eye text-info me-2"></i>
                         </a>  -->
+                        @can('module-edit')
                         <a href="{{ url('admin/elearning/modules/'.$module->slug.'/edit') }}">
                             <i class="fas fa-pen text-primary me-2"></i>
                         </a>  
+                        @endcan
+                        @can('module-delete')
                         <form method="post" class="d-inline" action="{{ url('admin/elearning/modules/'.$module->slug.'/destroy') }}">
                             @csrf 
                             @method("DELETE")
                             <button type="submit" class="btn p-0"><i class="fas fa-trash text-danger"></i></button>
                         </form>
+                        @endcan
                     </div>
                 </td>
             </tr>
