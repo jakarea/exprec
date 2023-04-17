@@ -58,9 +58,10 @@
         <!-- Item @S -->
         @foreach($ads as $ad)
         @php 
+          $ad_id = $ad->ad_id;
           $ad = json_decode($ad->data); 
+          
         @endphp
-       
         <div class="wining-product-item">
           <div class="wining-product-thumbnail">
             @if(isset($ad->images) && count($ad->images) > 0)
@@ -120,7 +121,7 @@
             </ul>
             
             <div class="adspy-filter-product-bttns">
-                  <a href="#" data-id="{{$ad->id}}">See Ad details</a> 
+                  <a href="facebook/{{$ad_id}}" target="_blank">See Ad details</a> 
               </div>
           </div> 
         </div>

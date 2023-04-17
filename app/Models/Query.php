@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ads extends Model
+class Query extends Model
 {
     use HasFactory;
-    protected $table = 'ads';
-    protected $fillable = [ 'ad_id','data','user_ids', 'project_ids'];
+    protected $table = 'adwords';
+    protected $fillable = ['query', 'user_id', 'keyword'];
 }

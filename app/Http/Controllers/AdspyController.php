@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Facebook\Facebook;
 use App\Models\Project;
 use App\Models\Ads;
+use App\Models\Query;
 use Auth;
 
 class AdspyController extends Controller
@@ -21,15 +22,30 @@ class AdspyController extends Controller
 
     public function index()
     {
-        //$ads = Ads::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->get();
-        $ads = Ads::orderBy('id', 'desc')->get();
-        return view('adspy/index', compact('ads'));
+        $projects = Project::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->get();
+        $ads = Ads::whereIn('user_ids', [Auth::user()->id])->orderBy('id', 'desc')->get();
+
+        $adsByProject = [];
+
+            foreach ($ads as $ad) {
+                $projectIds = explode(',', trim($ad['project_ids'], ','));
+                foreach ($projectIds as $projectId) {
+                    foreach ($projects as $project) {
+                        if ($project['id'] == $projectId) {
+                            $adsByProject[$project['name']][] = $ad;
+                        }
+                    }
+                }
+            }
+
+        return view('adspy/index', compact('adsByProject'));
     }
 
     public function facebook()
     {
-        $projects = Project::orderBy('id', 'desc')->get();
-        return view('adspy/facebook',compact('projects'));
+        $queries = Query::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->take(5)->get();
+        $projects = Project::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->get();
+        return view('adspy/facebook',compact('projects','queries'));
     } 
 
     public function getAdFromFacebook(Request $request){
@@ -128,19 +144,36 @@ class AdspyController extends Controller
 
     public function mylist()
     {
-        $ads = Ads::where('is_saved', 1)->get();
-        return view('adspy/mylist', compact('ads'));
+        $projects = Project::where('user_id',Auth::user()->id)->orderBy('name', 'asc')->get();
+        $ads = Ads::whereIn('user_ids', [Auth::user()->id])->get();
+        $adsByProject = [];
 
+            foreach ($ads as $ad) {
+                $projectIds = explode(',', trim($ad['project_ids'], ','));
+                foreach ($projectIds as $projectId) {
+                    foreach ($projects as $project) {
+                        if ($project['id'] == $projectId) {
+                            $adsByProject[$project['name']][] = $ad;
+                        }
+                    }
+                }
+            }
+        return view('adspy/mylist', compact('ads'));
     }
+
     public function details($id)
     {
-        $projects = Project::orderBy('id', 'desc')->get();
+        $projects = Project::where('user_id',Auth::user()->id)->orderBy('name', 'asc')->get();
         $ad = Ads::where('ad_id', $id)->first();
+        $user_ids = explode(',', $ad->user_ids);
+        
+        $remove = array_search(Auth::user()->id, $user_ids);
         if(!$ad){
             return redirect('adspy/facebook');
         }
         $ad = json_decode($ad->data);
-        return view('adspy/details', compact('ad','projects'));
+
+        return view('adspy/details', compact('ad','projects','remove'));
     }
 
     public function saveAd(Request $request){
@@ -151,11 +184,7 @@ class AdspyController extends Controller
             $ad = new Ads();
             $ad->ad_id = $ad_id;
         }
-        if($allInputs['addToList']){
-            $ad->is_saved = $allInputs['addToList'];
-        }
         $ad->data = json_encode($allInputs);
-        $ad->user_id = Auth::user()->id;
         $ad->save();
         return response()->json($ad);
     }
@@ -177,49 +206,18 @@ class AdspyController extends Controller
         return redirect()->to($loginUrl);
     }
 
-    public function facebookCallback()
-    {
-        $fb = new Facebook([
-            'app_id' => env('FACEBOOK_APP_ID'),
-            'app_secret' => env('FACEBOOK_APP_SECRET'),
-            'default_graph_version' => env('FACEBOOK_API_VERSION'),
-        ]);
-
-        $helper = $fb->getRedirectLoginHelper();
-
-        try {
-            $accessToken = $helper->getAccessToken();
-        } catch (FacebookSDKException $e) {
-            // handle errors here
-        }
-
-        if (!isset($accessToken)) {
-            // handle errors here
-        }
-
-        $oAuth2Client = $fb->getOAuth2Client();
-        $tokenMetadata = $oAuth2Client->debugToken($accessToken);
-
-        $tokenMetadata->validateExpiration();
-
-        try {
-            $response = $fb->get('/me?fields=id,name,email,gender', $accessToken);
-        } catch (FacebookSDKException $e) {
-            // handle errors here
-        }
-
-        $user = $response->getGraphUser();
-
-        // do something with the user's information, like create a new user record in your database
-
-        return redirect()->to('/home');
-    }
-
+    // Adding project to my own list
     public function saveAdInProject(Request $request){
         $allInputs = $request->all();
         $project_name = $allInputs['project_name'];
         $project_id = $allInputs['project_id'];
         $adData = $allInputs['adData'];
+
+        if($project_name){
+            $project = Project::where(['name' => $project_name, 'user_id' => Auth::user()->id])->first();
+            $project_id = isset($project) ? $project->id : '';
+        }
+
         if(!$project_id){
             $project = new Project();
             $project->name = $project_name;
@@ -229,25 +227,44 @@ class AdspyController extends Controller
         }
 
         $result = $this->saveAdToProject($project_id, $adData);
-        $projects = Project::orderBy('id', 'desc')->get();
+        $projects = Project::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
         if($result){
             return response()->json([$projects, 'success' => 1]);
         }else{
-            
             return response()->json([$projects, 'success' => 0]);
         }
-
     }
 
+    // Saving ad to my project
     public function saveAdToProject($project_id, $adData){
         $ad_id = $adData['page_id'].'_'.$adData['id'];
-        $ad = Ads::where(['ad_id' => $ad_id, 'project_id' => $project_id])->first();
+        $ad = Ads::where(['ad_id' => $ad_id])->first();
+        $user_id = Auth::user()->id;
+        // if ad exists in database 
+        
         if(!$ad){
             $ad = new Ads();
             $ad->ad_id = $ad_id;
+            $ad->project_ids = $project_id;
+            $ad->user_ids = Auth::user()->id;
+        }else{
+            // if ad exists in database but not in my project
+            $project_ids_array = explode(",", $ad->project_ids);
+            if (!in_array($project_id, $project_ids_array)) {
+                $project_ids_array[] = $project_id;
+            }
+            $project_ids = implode(",", $project_ids_array);
+
+            $user_ids_array = explode(",", $ad->user_ids);
+            if (!in_array($user_id, $user_ids_array)) {
+                $user_ids_array[] = $user_id;
+            }
+            $user_ids = implode(",", $user_ids_array);
+
+            $ad->project_ids = trim($project_ids, ',');
+            $ad->user_ids = trim($user_ids, ',');
         }
-        $ad->project_id = $project_id;
-        $ad->is_saved = 1;
+        
         $ad->data = json_encode($adData);
         return $ad->save();
         exit;
@@ -259,6 +276,12 @@ class AdspyController extends Controller
         $project_name = $allInputs['project_name'];
         $project_id = $allInputs['project_id']; 
         $ad_id = $allInputs['ad_id'];
+
+        if($project_name){
+            $project = Project::where(['name' => $project_name, 'user_id' => Auth::user()->id])->first();
+            $project_id = isset($project) ? $project->id : '';
+        }
+        
         if(!$project_id){
             $project = new Project();
             $project->name = $project_name;
@@ -266,9 +289,8 @@ class AdspyController extends Controller
             $project->save();
             $project_id = $project->id;
         }
-
         $result = $this->saveAdToProjectNew($project_id, $ad_id);
-        $projects = Project::orderBy('id', 'desc')->get();
+        $projects = Project::where('user_id',Auth::user()->id)->orderBy('name', 'asc')->get();
         if($result){
             return response()->json([$projects, 'success' => 1]);
         }else{
@@ -277,11 +299,40 @@ class AdspyController extends Controller
     }
 
     public function saveAdToProjectNew($project_id, $ad_id){ 
+        $user_id = Auth::user()->id;
         $ad = Ads::where(['ad_id' => $ad_id])->first();
-        $ad->project_id = $project_id;
-        $ad->user_id = Auth::user()->id;
-        $ad->is_saved = 1; 
+        
+        $project_ids_array = explode(",", $ad->project_ids);
+        if (!in_array($project_id, $project_ids_array)) {
+            $project_ids_array[] = $project_id;
+        }
+        $project_ids = implode(",", $project_ids_array);
+
+        $user_ids_array = explode(",", $ad->user_ids);
+        if (!in_array($user_id, $user_ids_array)) {
+            $user_ids_array[] = $user_id;
+        }
+        $user_ids = implode(",", $user_ids_array);
+
+        $ad->project_ids = trim($project_ids,',');
+        $ad->user_ids = trim($user_ids,',');
+
+
         return $ad->save();
+    }
+
+    public function saveCurrentQuery(Request $request){
+        $keyword = trim($request->search_terms);
+        $query = $request->all();
+        $user_id = Auth::user()->id;
+        $query = Query::where(['user_id' => $user_id, 'keyword' => $keyword])->first();
+        if(!$query){
+            $query = new Query();
+        }
+        $query->user_id = $user_id;
+        $query->keyword = $keyword;
+        $query->query = json_encode($request->all());
+        return $query->save();
     }
 }
 

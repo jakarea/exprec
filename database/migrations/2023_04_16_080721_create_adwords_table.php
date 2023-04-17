@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('adwords', function (Blueprint $table) {
             $table->id();
             $table->string('keyword');
+            $table->string('query');
+            $table->string('user_id');
             $table->timestamps();
         });
     }

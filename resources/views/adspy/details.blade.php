@@ -48,7 +48,9 @@
             </div>
             <div class="col-lg-6">
                 <div class="adspy-head-bttn"> 
-                    <a href="#" data-id="{{$ad->id}}" class="saveAdToList preventDefault">Save this Add</a>
+                   
+                        <a href="#" data-id="{{$ad->id}}" id="removeAdFromList" class="preventDefault">Save this Add</a>
+                 
                 </div>
             </div>
         </div>
@@ -348,9 +350,9 @@
 
 <script>
 
-  var data = {!! json_encode($adData) !!};
+var data = {!! json_encode($adData) !!};
 
-  const labels = [...new Set(data.map(item => item.age))];
+const labels = [...new Set(data.map(item => item.age))];
 const maleData = data.filter(item => item.gender === 'male').map(item => item.percentage);
 const femaleData = data.filter(item => item.gender === 'female').map(item => item.percentage);
 const unknownData = data.filter(item => item.gender === 'unknown').map(item => item.percentage);

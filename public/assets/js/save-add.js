@@ -35,6 +35,7 @@ projectForm.addEventListener('submit', async function (event) {
         const data = await response.json();
 
         if (data) {
+            toastr["success"]("Added to project", "Success!")
             let status = data[1];
             let projects = data[0];
             document.getElementById("project_name").value = '';
@@ -56,3 +57,4 @@ projectForm.addEventListener('submit', async function (event) {
         console.error(error);
     }
 });
+

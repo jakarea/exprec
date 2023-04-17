@@ -6,7 +6,7 @@
 <link href="{{ asset('assets/css/email-camping.css') }}" rel="stylesheet" type="text/css" /> 
 <link href="//code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />  
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" /> 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" type="text/css" /> 
+
 
 @endsection
 
@@ -193,7 +193,7 @@ $languages = array(
 						<div class="adspy-filter-box">
 							<h6>Creation date:</h6>
 							<p><img src="{{ asset('assets/images/calendar-icon.svg') }}" alt="" class="img-fluid"> 
-								<input id="_creation_date_start" name="_creation_date_start" placeholder="mm/dd/yyyy">&nbsp; - &nbsp; <input name="_creation_date_end" id="_creation_date_end" placeholder="mm/dd/yyyy">
+								<input id="_creation_date_start" name="_creation_date_start" class="invalid" placeholder="mm/dd/yyyy">&nbsp; - &nbsp; <input name="_creation_date_end" id="_creation_date_end" placeholder="mm/dd/yyyy">
 							</p>
 							<h6>Delivery Date:</h6>
 							<p><img src="{{ asset('assets/images/calendar-icon.svg') }}" alt="" class="img-fluid">
@@ -222,9 +222,10 @@ $languages = array(
 			<div class="col-12">
 				<div class="quick-query">
 					<h6>Quick query:</h6>
-					<a href="#">Dropshipping</a>
-					<a href="#">Ecommerce</a>
-					<a href="#"><img src="{{ asset('assets/images/save-icon.svg') }}" alt="" class="img-fluid"> Save current query</a>
+					@foreach ($queries as $query)
+						<span class="btn quick-query-item" data-query="{{ $query->query }}">{{ $query->keyword }}</span>
+					@endforeach
+					<span id="saveCurrentQuery"><img src="{{ asset('assets/images/save-icon.svg') }}" alt="" class="img-fluid"> Save current query</span>
 				</div>
 				<div class="addspy-multi-select">
 					<div class="d-flex">
@@ -262,14 +263,16 @@ $languages = array(
 
 @section('script')
 <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script> 
-<script src="{{ asset('assets/js/facebook.js') }}"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> 
- 
+
+<script src="{{ asset('assets/js/facebook.js') }}"></script>
+<script src="{{ asset('assets/js/projects.js') }}"></script>
 <script>
-     $(function() {
+		
+
+    $(function() {
         $( "#ad_delivery_date_min" ).datepicker({  dateFormat: 'yy-mm-dd'});
         $( "#ad_delivery_date_max" ).datepicker({  dateFormat: 'yy-mm-dd'});
         $( "#_first_seen_start" ).datepicker({  dateFormat: 'yy-mm-dd'});
