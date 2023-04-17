@@ -16,6 +16,8 @@ Route::prefix('adspy')->middleware(['auth'])->controller(AdspyController::class)
     Route::post('/facebook2/save-ad2/yes', 'saveAd');
     Route::post('/facebook2/save-ad2/save-project', 'saveAdInProject');
     Route::post('/facebook2/save-ad2/save-project-new', 'saveAdInProjectNew');
+    Route::post('/facebook2/save-ad2/save-current-query', 'saveCurrentQuery');
+    
 
 });
 

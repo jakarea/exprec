@@ -15,30 +15,39 @@ var savedAds = [];
 var savedAdsContent = [];
 var saveAdAndOpenElements = document.querySelectorAll('.saveAdAndOpen');
 var adData = document.getElementById('adData');
+const adspyModal = document.getElementById("adspy-modal");
+const closeAdspyModal = document.getElementById("close-adspy-modal");
+const setAdId = document.getElementById("ad-data");
+const queryButtons = document.querySelectorAll('.quick-query-item');
+const closeModal = () => {
+    adspyModal.style.display = "none";
+}
+const saveCurrentQuery = document.getElementById('saveCurrentQuery');
+const dateFields = ['ad_delivery_date_min', '_first_seen_start', '_first_seen_end', '_last_seen_start', '_last_seen_end', '_creation_date_start', '_creation_date_end'];
+const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+function validateDateInput(dateStr) {
+    return dateRegex.test(dateStr);
+}
 
 searchButton.addEventListener('click', function (e) {
     e.preventDefault();
-
-    // search_type = document.getElementById("search_type").value;
-    // search_terms = document.getElementById("search_terms").value;
-    // publisher_platforms = document.getElementById("publisher_platforms").value;
-    // media_type = document.getElementById("media_type").value;
-    // languages = document.getElementById("languages").value;
-    // ad_reached_countries = document.getElementById("ad_reached_countries").value;
-    // ad_active_status = document.getElementById("ad_active_status").value;
-    // ad_delivery_date_min = document.getElementById("ad_delivery_date_min").value;
-    // ad_delivery_date_max = document.getElementById("ad_delivery_date_max").value;
-    // search_page_ids = document.getElementById("search_page_ids").value;
-
-    // _sex = document.getElementById("_sex").value;
-    // _cta_type = document.getElementById("_cta_type").value;
-    // _creation_date_start = document.getElementById("_creation_date_start").value;
-    // _creation_date_end = document.getElementById("_creation_date_end").value;
-    // _first_seen_start = document.getElementById("_first_seen_start").value;
-    // _first_seen_end = document.getElementById("_first_seen_end").value;
-    // _last_seen_start = document.getElementById("_last_seen_start").value;
-    // _last_seen_end = document.getElementById("_last_seen_end").value;
-
+    if (document.getElementById("search_terms").value == '') {
+        return;
+    }
+    dateFields.forEach(function (field) {
+        let inputFiled = document.getElementById(field)
+        inputFiled.style = "border: 0px";
+        const userInput = inputFiled.value;  // replace with appropriate method to get user input
+        if (userInput == '')
+            return true;
+        if (!validateDateInput(userInput)) {
+            inputFiled.style = "border: 1px solid red";
+            inputFiled.style = "border-radius: 3px";
+            inputFiled.style = "padding: 3px";
+            return false;
+        }
+    });
     nextPage = ''; // Clear the pagination
     //document.getElementById("search_terms").value = '';
     adsDiv.innerHTML = '';
@@ -74,6 +83,7 @@ function getDayDiff(start_date, stop_date) {
     var dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
     return dayDiff + 1;
 }
+
 function humanReadableFormat(num) {
     if (num >= 1000000) {
         return (num / 1000000).toFixed(1) + 'M';
@@ -83,6 +93,7 @@ function humanReadableFormat(num) {
     }
     return num;
 }
+
 function getDateFormated(dateStr) {
     var date = new Date(dateStr);
     var formattedDate = date.toLocaleDateString('en-US', {
@@ -106,16 +117,25 @@ function createJsonFromFields(fields) {
     return data;
 }
 
-function makeAjaxRequest() {
+function makeAjaxRequest(query = '') {
     isLoading = true;
     adContainerPreloader.classList.remove("d-none");
     let fields = ["search_type", "search_terms", "publisher_platforms", "media_type", "languages", "ad_reached_countries", "ad_active_status", "ad_delivery_date_min", "ad_delivery_date_max", "search_page_ids", "_sex", "_cta_type", "_creation_date_start", "_creation_date_end", "_first_seen_start", "_first_seen_end", "_last_seen_start", "_last_seen_end"];
-    let jsonData = createJsonFromFields(fields);
+    let jsonData = '';
+    if (query == '') {
+        jsonData = createJsonFromFields(fields);
+        console.log(jsonData)
+    } else {
+        jsonData = JSON.parse(query);
+        setFormFieldsData(fields, jsonData)
+        console.log(jsonData)
+    }
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
     $.ajax({
         url: baseUrl + '/adspy/load-more-data',
         type: 'GET',
@@ -257,28 +277,21 @@ async function getImagesByIds(ids) {
     }
 }
 
-const adspyModal = document.getElementById("adspy-modal");
-const closeAdspyModal = document.getElementById("close-adspy-modal");
-const setAdId = document.getElementById("ad-data");
-const closeModal = () => {
-    adspyModal.style.display = "none";
-}
-
 closeAdspyModal.addEventListener("click", closeModal);
 
 document.addEventListener('click', function (event) {
     if (event.target.classList.contains('preventDefault')) {
         event.preventDefault();
-        let save = 0;
         // Get data-id attribute from clicked element
         var adId = event.target.getAttribute('data-id');
+        const mergedAd = Object.assign({}, savedAds[adId], savedAdsContent[adId]);
+        let save = false;
         if (event.target.classList.contains('saveAdToList')) {
-            save = 1;
             adspyModal.style.display = "block";
-            adData.value = JSON.stringify(savedAds[adId]);
+            adData.value = JSON.stringify(mergedAd);
+            save = true;
         }
         if (event.target.classList.contains('saveAdAndOpen')) {
-            save = 0;
             saveAd(adId, save)
         }
     }
@@ -326,9 +339,8 @@ projectForm.addEventListener('submit', async function (event) {
     }
 });
 
-
-async function saveAd(adId, addToList = false) {
-    const mergedAd = Object.assign({}, savedAds[adId], savedAdsContent[adId], { addToList });
+async function saveAd(adId, addToList) {
+    const mergedAd = Object.assign({}, savedAds[adId], savedAdsContent[adId]);
 
     try {
         const url = baseUrl + '/adspy/facebook2/save-ad2/yes';
@@ -347,4 +359,53 @@ async function saveAd(adId, addToList = false) {
     } catch (error) {
         console.error(error);
     }
+}
+
+saveCurrentQuery.addEventListener('click', async function (event) {
+    let fields = ["search_type", "search_terms", "publisher_platforms", "media_type", "languages", "ad_reached_countries", "ad_active_status", "ad_delivery_date_min", "ad_delivery_date_max", "search_page_ids", "_sex", "_cta_type", "_creation_date_start", "_creation_date_end", "_first_seen_start", "_first_seen_end", "_last_seen_start", "_last_seen_end"];
+    let jsonData = createJsonFromFields(fields);
+    if (jsonData.search_terms == null) {
+        return;
+    }
+    jsonData.nextPage = '';
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        url: baseUrl + '/adspy/facebook2/save-ad2/save-current-query',
+        type: 'POST',
+        data: jsonData,
+        success: function (data) {
+            toastr["success"]("Query saved", "Success!")
+        }
+    });
+});
+
+
+
+
+// Loop through all buttons and add click event listener to each of them
+queryButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
+        const query = button.getAttribute('data-query');
+        makeAjaxRequest(query);
+    });
+});
+
+function setFormFieldsData(fields, jsonData) {
+
+    const keys = Object.keys(jsonData);
+    console.log(keys); // Output: ["name", "age", "gender"]
+
+    // Retrieve values using Object.values()
+    const values = Object.values(jsonData);
+    console.log(values);
+
+    fields.forEach(function (field) {
+        let element = document.getElementById(field);
+        element.value = jsonData[field] ? jsonData[field] : '';
+    })
 }
