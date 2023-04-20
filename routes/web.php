@@ -11,6 +11,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProjectController; 
 use App\Http\Controllers\AdInterestController; 
 use App\Http\Controllers\EmailCampingController;
+use App\Http\Controllers\PlanController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,6 +29,12 @@ Auth::routes();
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/home', 'index');
+});
+
+Route::middleware("auth")->group(function () {
+    Route::get('plans', [PlanController::class, 'index']);
+    Route::get('plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
+    Route::post('subscription', [PlanController::class, 'subscription'])->name("subscription.create");
 });
 
 Route::group(['middleware' => ['auth']], function() {
