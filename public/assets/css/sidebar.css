@@ -220,9 +220,17 @@
   margin-right: 12px;
 }
 
+.e-learn-pages-submenu-wrap li a img {
+  filter: invert(81%) sepia(10%) saturate(571%) hue-rotate(177deg) brightness(89%) contrast(84%);
+}
+
 .pages-submenu-wrap li a:hover img,
 .pages-submenu-wrap li a.active img {
   filter: invert(61%) sepia(28%) saturate(5968%) hue-rotate(355deg) brightness(99%) contrast(92%);
+}
+
+.lock-icons i.fa-lock {
+  font-size: 0.8rem;
 }
 
 /* pages inner submenu end */

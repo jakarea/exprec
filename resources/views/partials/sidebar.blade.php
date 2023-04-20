@@ -5,7 +5,7 @@
         <div class="media">
             <img src="{{ asset('assets/images/avatar.png') }}" alt="User Name" title="Jone Copper" class="img-fluid" />
             <div class="media-body">
-                <h5>Jone Copper</h5>
+                <h5>{{Auth()->user()->name}}</h5>
                 <p>Admin</p>
             </div>
         </div>
@@ -88,8 +88,22 @@
                     <span>Integrations</span> 
                 </a> 
             </li>
+            @role('Admin')
             <li class="menu-item">
-                <a class="menu-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <a href="{{ url('users') }}" class="{{ Request::is('users*')  ? ' active' : '' }} menu-link"> 
+                <i class="fa-solid fa-users"></i>
+                    <span>Users</span> 
+                </a> 
+            </li>
+            <li class="menu-item">
+                <a href="{{ url('roles') }}" class="{{ Request::is('roles*')  ? ' active' : '' }} menu-link"> 
+                <i class="fa-solid fa-user"></i>
+                    <span>Roles</span> 
+                </a> 
+            </li>
+            @endrole
+            <li class="menu-item">
+                <a class="menu-link bg-white" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <img src="{{ asset('assets/images/logout-icon.svg') }}" alt="Logout" title="Logout" class="img-fluid" />
                     <span>{{ __('Logout') }}</span>
                 </a>
