@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('adwords', function (Blueprint $table) {
+        Schema::create('plans', function (Blueprint $table) {
             $table->id();
-            $table->string('keyword');
-            $table->string('query');
-            // $table->string('user_id');
+            $table->string('name');
+            $table->string('slug');
+            $table->string('stripe_plan');
+            $table->integer('price');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('adwords');
+        Schema::dropIfExists('plans');
     }
 };

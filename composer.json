@@ -12,6 +12,7 @@
         "fabpot/goutte": "^4.0",
         "facebook/graph-sdk": "^5.1",
         "guzzlehttp/guzzle": "^7.5",
+        "laravel/cashier": "^14.12",
         "laravel/framework": "^9.23",
         "laravel/sanctum": "^2.15.1",
         "laravel/socialite": "^5.6",
