@@ -9,9 +9,7 @@
   <!-- session message @E -->
 
   <!-- course header area @S -->
-  <div class="product-filter-wrapper">
-   
-
+  <div class="product-filter-wrapper"> 
     <form action="" method="GET">
     <div class="product-filter-box">
     <h5>Course List</h5> 

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('ads', function (Blueprint $table) {
             $table->id();
             $table->text('ad_id');
-            $table->integer('user_id')->nullable();
+            $table->text('user_ids')->nullable();
             $table->longText('data');
             $table->tinyInteger('is_saved')->default(0);
             $table->timestamps();

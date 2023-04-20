@@ -1,9 +1,11 @@
 <!-- inner submenu @S --> 
     <ul class="pages-submenu-wrap">
+    @role('Admin')
       <li>
         <a href="{{ url('adspy') }}" class="{{ Request::is('adspy')  ? ' active' : '' }}">
           <img src="{{ asset('assets/images/dashboard-icon.svg') }}" alt="Dash" class="img-fluid"> Dashboard </a>
       </li>
+      @endrole
       <li>
         <a href="{{ url('adspy/facebook') }}" class="{{ Request::is('adspy/facebook')  ? ' active' : '' }}">
           <img src="{{ asset('assets/images/Icon.svg') }}" alt="Dash" class="img-fluid"> Facebook ads </a>
