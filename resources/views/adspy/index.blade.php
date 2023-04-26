@@ -5,7 +5,12 @@
 <link href="{{ asset('assets/css/adspy.css') }}" rel="stylesheet" type="text/css" />  
 @endsection
 
-@section('content') 
+@section('content')
+@role("Admin")
+<main class="d-flex justify-content-center align-items-center">
+    <h4>You Don't have access to this page!</h4>
+</main>
+@else 
   <main class="addspy-dahboard-page">
       <div class="container-fluid">
         <div class="row">
@@ -207,4 +212,5 @@
         </div>
       </div>
   </main>
+  @endrole
 @endsection

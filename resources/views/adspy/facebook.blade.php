@@ -11,6 +11,12 @@
 @endsection
 
 @section('content') 
+@role("Admin")
+<main class="d-flex justify-content-center align-items-center">
+    <h4>You Don't have access to this page!</h4>
+</main>
+@else 
+
 @php 
 $countries = array(
     'AT' => 'Austria',
@@ -286,6 +292,8 @@ $languages = array(
   </div>
 </div>
 <!-- popup video modal @E -->
+
+@endrole
 @endsection
 
 @section('script')

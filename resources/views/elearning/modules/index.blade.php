@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('title') Admin - Module List @endsection
 @section('content') 
-
+@role("Admin")
 <main class="product-research-page-wrap">
 
   <!-- session message @S -->
@@ -116,5 +116,9 @@
   </div>
   <!-- course pagginate @E -->
 </main>
-
+@else
+<main class="course-page-wrap d-flex justify-content-center align-items-center">
+    <h4>You Don't have access to this page!</h4>
+</main>
+@endrole
 @endsection

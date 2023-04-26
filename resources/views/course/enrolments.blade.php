@@ -4,7 +4,11 @@
 <link href="{{ asset('assets/css/course.css') }}" rel="stylesheet" type="text/css" />  
 @endsection
 @section('content') 
-
+@role("Admin")
+<main class="d-flex justify-content-center align-items-center">
+    <h4>You Don't have access to this page!</h4>
+</main>
+@else
 <main class="course-page-wrap">
 
     <!-- course title @S -->
@@ -75,6 +79,7 @@
     <!-- all courses @E -->
    
 </main>
+@endrole
 @endsection
 @section('script')
 <script>

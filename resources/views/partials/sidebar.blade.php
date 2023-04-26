@@ -31,7 +31,7 @@
                 </a>
             </li>
             <li class="menu-item">
-                <a href="{{ url('/elearning') }}" class="menu-link">
+                <a href="#" class="menu-link">
                     <img src="{{ asset('assets/images/elearning-icon.svg') }}" alt="E Learning" title="E Learning" class="img-fluid" />
                     <span>E Learning</span>
                     <i class="fa-solid fa-angles-right"></i>
@@ -75,7 +75,7 @@
             @endrole
  
             <li class="menu-item">
-                <a href="{{ url('/products') }}" class="{{ Request::is('products*')  ? ' active' : '' }} menu-link">
+                <a href="#" class="{{ Request::is('products*')  ? ' active' : '' }} menu-link">
                     <img src="{{ asset('assets/images/pr-icon.svg') }}" alt="Product Research" title="Product Research" class="img-fluid" />
                     <span>Product Research</span>
                     <i class="fa-solid fa-angles-right"></i>
@@ -84,6 +84,8 @@
                 @include('products/partials/sub-sidebar')
                 <!-- inner submenu @E -->
             </li>
+            @role('Admin')
+            @else
             <li class="menu-item">
                 <a href="{{ url('integrations') }}" class="{{ Request::is('integrations*')  ? ' active' : '' }} menu-link">
                 <!-- <i class="fa-brands fa-superpowers"></i> -->
@@ -91,6 +93,7 @@
                     <span>Integrations</span> 
                 </a> 
             </li>
+            @endrole
             @role('Admin')
             <li class="menu-item">
                 <a href="{{ url('users') }}" class="{{ Request::is('users*')  ? ' active' : '' }} menu-link"> 

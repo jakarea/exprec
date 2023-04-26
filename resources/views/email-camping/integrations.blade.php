@@ -7,6 +7,11 @@
 @endsection
 
 @section('content') 
+@role("Admin")
+<main class="d-flex justify-content-center align-items-center">
+    <h4>You Don't have access to this page!</h4>
+</main>
+@else 
 <main class="email-camping-page-wrap email-camp-integration-page"> 
     
   <!-- integration head @S -->
@@ -398,4 +403,5 @@
 </div>
  
 </main>
+@endrole
 @endsection
