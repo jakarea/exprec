@@ -1,6 +1,11 @@
 @extends('layouts.master')
 @section('title') Home @endsection
 @section('content') 
+@role("Admin")
+<main class="d-flex justify-content-center align-items-center">
+    <h4>You Don't have access to this page!</h4>
+</main>
+@else 
 <main class="interrest-tool-page-wrap">
 
 	@if ($errors->any())
@@ -236,7 +241,7 @@
 		<!-- search result table @E -->
 	</div>
 </main>
-
+@endrole
 @endsection
 
 @section('script')

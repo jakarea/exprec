@@ -6,7 +6,11 @@
 @endsection
 
 @section('content') 
-
+@role("Admin")
+<main class="d-flex justify-content-center align-items-center">
+    <h4>You Don't have access to this page!</h4>
+</main>
+@else 
 <main class="product-research-page-wrap  ">
 
   <!-- session message @S -->
@@ -166,5 +170,5 @@
   </div>
   <!-- product pagginate @E -->
 </main>
-
+@endrole
 @endsection

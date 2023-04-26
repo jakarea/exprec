@@ -7,6 +7,11 @@
 @endsection
 
 @section('content') 
+@role("Admin")
+<main class="d-flex justify-content-center align-items-center">
+    <h4>You Don't have access to this page!</h4>
+</main>
+@else 
   <main class="interrest-tool-page-wrap adspy-page-wrap">
 
     <div class="popular-interest-wrap mt-0">
@@ -226,6 +231,7 @@
     </div>
     <!-- add spy banner @E -->
   </main>
+  @endrole
 @endsection
 
 

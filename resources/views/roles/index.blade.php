@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('title') Admin - Roles List @endsection
 @section('content') 
-
+@role("Admin")
 <main class="course-page-wrap">
     <!-- session message @S -->
     @include('partials/session-message')
@@ -81,4 +81,9 @@
         <!-- user pagginate @E -->
 
 </main>
+@else
+<main class="course-page-wrap d-flex justify-content-center align-items-center">
+    <h4>You Don't have access to this page!</h4>
+</main>
+@endrole
 @endsection

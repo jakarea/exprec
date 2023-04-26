@@ -4,7 +4,7 @@
 <link href="{{ asset('assets/css/product-researchs.css') }}" rel="stylesheet" type="text/css" />  
 @endsection
 @section('content') 
-
+@role("Admin")
 <!-- === product research page @S === -->
 <main class="product-research-form">
   <!-- inner submenu @S -->
@@ -65,5 +65,9 @@
  <!-- research create page end  -->
 </main>
 <!-- === product research page @E === -->
-
+@else
+<main class="course-page-wrap d-flex justify-content-center align-items-center">
+    <h4>You Don't have access to this page!</h4>
+</main>
+@endrole
 @endsection

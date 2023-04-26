@@ -3,7 +3,11 @@
 @section('title') Home @endsection
 
 @section('content') 
-
+@role("Admin")
+<main class="d-flex justify-content-center align-items-center">
+    <h4>You Don't have access to this page!</h4>
+</main>
+@else 
 <main class="interrest-tool-page-wrap">
 
     <form id="searchForm" action="{{route('get_add_interest')}}" method="GET">
@@ -116,7 +120,7 @@
         <!-- search result table @E -->
     </div>
 </main>
-
+@endrole
 @endsection
 
 @section('script')

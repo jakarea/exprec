@@ -4,7 +4,7 @@
 <link href="{{ asset('assets/css/product-researchs.css') }}" rel="stylesheet" type="text/css" />  
 @endsection
 @section('content') 
-
+@role("Admin")
 @php
   $course_id = isset($_GET['course']) ? $_GET['course'] : '';
 @endphp
@@ -139,7 +139,11 @@
  </div> 
 </main>
 <!-- === course create page @E === -->
-
+@else
+<main class="course-page-wrap d-flex justify-content-center align-items-center">
+    <h4>You Don't have access to this page!</h4>
+</main>
+@endrole
 @endsection
 
 @section('script')
