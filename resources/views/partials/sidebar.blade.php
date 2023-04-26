@@ -39,8 +39,9 @@
                  <!-- inner submenu @S -->
                  @include('course/partials/sub-sidebar')
                 <!-- inner submenu @E -->
-            </li>
-
+            </li> 
+            @role('Admin')
+            @else
             <li class="menu-item">
                 <a href="{{ url('/email-marketing') }}" class="{{ Request::is('email-marketing*')  ? ' active' : '' }} menu-link">
                     <img src="{{ asset('assets/images/campining-icon.svg') }}" alt="Adspy" title="Adspy" class="img-fluid" />
@@ -51,7 +52,6 @@
                 @include('email-camping/partials/sub-sidebar')
                 <!-- inner submenu @E -->
             </li>
-
             <li class="menu-item">
                 <a href="{{ url('/adspy') }}" class="{{ Request::is('adspy*')  ? ' active' : '' }} menu-link">
                     <img src="{{ asset('assets/images/adspy-icon.svg') }}" alt="Adspy" title="Adspy" class="img-fluid" />
@@ -62,7 +62,6 @@
                 @include('adspy/partials/sub-sidebar')
                 <!-- inner submenu @E -->
             </li>
-
             <li class="menu-item">
                 <a href="{{ url('/add-interest') }}" class="{{ Request::is('add-interest*')  ? ' active' : '' }} menu-link">
                     <img src="{{ asset('assets/images/i-tools-icon.svg') }}" alt="Interest tool" title="Interest tool" class="img-fluid" />
@@ -73,6 +72,8 @@
                 @include('interest/partials/sub-sidebar')
                 <!-- inner submenu @E -->
             </li>
+            @endrole
+ 
             <li class="menu-item">
                 <a href="{{ url('/products') }}" class="{{ Request::is('products*')  ? ' active' : '' }} menu-link">
                     <img src="{{ asset('assets/images/pr-icon.svg') }}" alt="Product Research" title="Product Research" class="img-fluid" />

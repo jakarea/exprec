@@ -9,6 +9,7 @@
 <main class="main-home-page"> 
     <div class="row">
         <!-- col @S -->
+        @role("Admin")
         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
             <div class="total-session-box">
                 <h6>Total Customers</h6>
@@ -19,6 +20,7 @@
             </div>
         </div>
         <!-- col @E -->
+        @endrole
         <!-- col @S -->
         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
             <div class="total-session-box">
