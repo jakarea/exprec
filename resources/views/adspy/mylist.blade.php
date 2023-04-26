@@ -138,7 +138,7 @@
 
       <div class="potential-list-wrap">
         <!-- item @S -->
-        <div class="potential-item-box">
+        <!-- <div class="potential-item-box">
           <div class="media">
             <img src="{{asset('assets/images/send-icon.png')}}" alt="Send" class="img-fluid">
             <div class="media-body">
@@ -156,10 +156,10 @@
             </div>
             <i class="fas fa-angle-right"></i>
           </div>
-        </div>
+        </div> -->
         <!-- item @E -->
         <!-- item @S -->
-        <div class="potential-item-box verify-email-item">
+        <!-- <div class="potential-item-box verify-email-item">
           <div class="verify-email-boxs"> 
             <h6><img src="{{asset('assets/images/send-icon.png')}}" alt="Send" class="img-fluid"> Verify your mail</h6>
           </div>
@@ -180,10 +180,10 @@
             </div>
             <i class="fas fa-angle-right"></i>
           </div>
-        </div>
+        </div> -->
         <!-- item @E -->
         <!-- item @S -->
-        <div class="potential-item-box verify-email-item">
+        <!-- <div class="potential-item-box verify-email-item">
           <div class="verify-email-boxs"> 
             <h6><img src="{{asset('assets/images/send-icon.png')}}" alt="Send" class="img-fluid"> Verify your mail</h6>
           </div>
@@ -204,7 +204,7 @@
             </div>
             <i class="fas fa-angle-right"></i>
           </div>
-        </div>
+        </div> -->
         <!-- item @E -->
       </div>
     </div>

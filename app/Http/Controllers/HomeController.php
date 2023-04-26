@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
+use App\Models\Course;
+use App\Models\ProductResearch;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -22,8 +24,11 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return view('index');
+    { 
+        $userCount = User::count(); 
+        $productsCount = ProductResearch::count(); 
+        $courseCount = Course::count(); 
+        return view('index',compact('userCount','productsCount','courseCount'));
     }
      
 }

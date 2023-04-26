@@ -26,7 +26,7 @@
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
 <!-- integration filter wrap @S -->
 <div class="row integration-top-margin">
-    <div class="col-md-4 col-lg-3">
+    <!-- <div class="col-md-4 col-lg-3">
         <div class="integration-filter-box">
             <h6>Category</h6>
             <div class="integrate-filter-select">
@@ -60,7 +60,7 @@
                 <img src="{{asset('assets/images/email-camping/filter-icon.svg')}}" alt="" class="img-fluid">
             </div>
         </div>
-    </div>
+    </div> -->
   </div>
   <!-- integration filter wrap @E -->
 

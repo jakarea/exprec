@@ -19,6 +19,19 @@
 .sidebar-wrapper .header-user-box .media {
   align-items: center;
 }
+.sidebar-wrapper .header-user-box .media span {
+  width: 2.1rem;
+  height: 2.1rem;
+  background: linear-gradient(98.03deg, #FF6262 18.68%, #F37F14 88.52%);
+  border-radius: 50%;
+  margin-right: 1rem;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 .sidebar-wrapper .header-user-box .media img {
   width: 2.1rem;
   height: 2.1rem;

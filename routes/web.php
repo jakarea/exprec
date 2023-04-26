@@ -103,12 +103,3 @@ Route::get('/facebook/auth/callback', function () {
  
     // $user->token
 });
-
-
-// ********* only for test routes start ***********
-Route::controller(CourseController::class)->group(function () {
-    Route::get('/homes', 'index')->name('test'); 
-    Route::post('/homes', 'index')->name('test_store'); 
-});
-
-// ********* only for test routes end ***********

@@ -1,5 +1,10 @@
 @extends('layouts.master')
 @section('title') Home @endsection
+
+@section('style') 
+<link href="{{ asset('assets/css/product-researchs.css') }}" rel="stylesheet" type="text/css" />  
+@endsection
+
 @section('content') 
 
 <main class="product-research-page-wrap  ">
@@ -8,24 +13,11 @@
   @include('partials/session-message')
   <!-- session message @E -->
  
-    <!-- page search area @S -->
-  <form action="" method="GET">
-    <div class="interrest-search-wrap">
-      <div class="interrest-search-box">
-        <input type="text" class="form-control" placeholder="I'm looking for" name="title" value="{{ isset($_GET['title']) ? $_GET['title'] : '' }}">
-      </div>
-      <div class="interrest-bttn-box">
-        <button type="submit" class="btn">Search</button> 
-        <button type="reset" class="btn">Clear</button> 
-      </div>
-    </div>
-  </form>
-  <!-- page search area @E --> 
   <!-- product filter area @S -->
-  <div class="product-filter-wrapper">
+  <div class="product-filter-wrapper mt-0">
     <h5>Filters</h5>
     <form action="" method="GET">
-    <div class="product-filter-box">
+    <div class="product-filter-box product-filter-box-2">
       <div class="form-grp">
         <label for="">Time</label> 
         <select name="" id="" class="form-custom">
@@ -84,6 +76,20 @@
     </form>
   </div>
   <!-- product filter area @E --> 
+
+    <!-- page search area @S -->
+    <form action="" method="GET">
+    <div class="interrest-search-wrap mb-4">
+      <div class="interrest-search-box">
+        <input type="text" class="form-control" placeholder="I'm looking for" name="title" value="{{ isset($_GET['title']) ? $_GET['title'] : '' }}">
+      </div>
+      <div class="interrest-bttn-box">
+        <button type="submit" class="btn">Search</button> 
+        <button type="reset" class="btn">Clear</button> 
+      </div>
+    </div>
+  </form>
+  <!-- page search area @E --> 
 
   <!-- product listing @S -->
   <div class="row">

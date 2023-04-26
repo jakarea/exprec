@@ -105,8 +105,8 @@ $languages = array(
 				<div class="col-12">
 					<div class="addspy-dash-head add-head">
 						<h1>Discover every ads on Facebook <img src="{{ asset('assets/images/personalized-icon.svg') }}" alt="a" class="img-fluid"> </h1>
-						<a href="#">
-							<p>Tell me how does it works?</p> 
+						<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+							<p>How does it works?</p> 
 						</a>
 					</div>
 					<!-- page search area @S -->
@@ -131,66 +131,79 @@ $languages = array(
 				<div class="col-12">
 					<div class="addspy-first-list" id="first-lists">
 						<div class="d-flex">
-							<h6>My first list</h6>
+							<h6>Apply filter to the search</h6>
 							<a href="#">Clear all <img src="{{ asset('assets/images/trash-icon.svg') }}" alt="" class="img-fluid"></a>
 						</div>
 						<div class="adspy-filter-box">
 							<!-- <h6>Seen date:</h6>
 								<p><img src="{{ asset('assets/images/calendar-icon.svg') }}" alt="" class="img-fluid"> 
 								<input id="datepicker" name="seen_start" placeholder="mm/dd/yyyy"> &nbsp; - &nbsp; <input name="seen_end" id="ad_delivery_date_max" placeholder="mm/dd/yyyy"></p> -->
-							<select name="publisher_platforms" id="publisher_platforms">
-								<option value="">Platform</option>
-								<option value="">All</option>
-								<option value="FACEBOOK">Facebook</option>
-								<option value="INSTAGRAM">Instagram</option>
-								<option value="AUDIENCE_NETWORK">Audience Network</option>
-								<option value="MESSENGER">Messenger</option>
-								<option value="WHATSAPP">WhatsApp</option>
-								<option value="OCULUS">Oculus</option>
-							</select>
-							<select name="media_type" id="media_type">
-								<option value=""  >Media Type</option>
-								<option value="">All</option>
-								<option value="Image">Image</option>
-								<option value="Video">Video</option>
-							</select>
-							<select name="_sex" id="_sex">
-								<option value="All">Sex</option>
-								<option value="Male">Male</option>
-								<option value="Female">Female</option>
-							</select>
-							<div class="customselect-wrap">
+							<div class="adspy-filter-box mt-0">
+								<h6>Platform:</h6>
+								<select name="publisher_platforms" id="publisher_platforms"> 
+									<option value="">All</option>
+									<option value="FACEBOOK">Facebook</option>
+									<option value="INSTAGRAM">Instagram</option>
+									<option value="AUDIENCE_NETWORK">Audience Network</option>
+									<option value="MESSENGER">Messenger</option>
+									<option value="WHATSAPP">WhatsApp</option>
+									<option value="OCULUS">Oculus</option>
+								</select>
+							</div> 
+							<div class="adspy-filter-box mt-0">
+								<h6>Gender:</h6>
+								<select name="_sex" id="_sex">
+									<option value="All">All</option>
+									<option value="Male">Male</option>
+									<option value="Female">Female</option>
+								</select>
+							</div>
+							 
+							<div class="customselect-wrap adspy-filter-box mt-0">
+								<h6>Languages:</h6>
 								<select class="selectpicker" multiple aria-label="Default select example" data-live-search="true" name="languages" id="languages">
-								<option value="">Languages</option>
 									@foreach ($languages as $code => $name)
 										
 										<option value="{{ $code }}">{{ $name }}</option>
 									@endforeach
 								</select>
 							</div>
-							<div class="customselect-wrap">
-								<select class="selectpicker" multiple aria-label="Default select example" data-live-search="true" name="ad_reached_countries[]" id="ad_reached_countries">
-									<option value="">Countries</option>
+							<div class="customselect-wrap adspy-filter-box mt-0">
+								<h6>Countries:</h6>
+								<select class="selectpicker" multiple aria-label="Default select example" data-live-search="true" name="ad_reached_countries[]" id="ad_reached_countries"> 
 									@foreach ($countries as $code => $name)
 									<option value="{{$code}}">{{$name}}</option>
 									@endforeach
 								</select>
 							</div> 
+						</div>
+						<div class="adspy-filter-box mt-0"> 
+							<h6>CTA Type:</h6>
 							<div class="customselect-wrap">
-								<select class="selectpicker" multiple aria-label="Default select example" data-live-search="true" name="_cta_type" id="_cta_type">
-									<option value="">CTA Type</option>
+								<select class="selectpicker" multiple aria-label="Default select example" data-live-search="true" name="_cta_type" id="_cta_type"> 
 									<option value="learn_more">Learn More</option>
 									<option value="send_message">Send Message</option>
 								</select>
-							</div>  
-							<select name="ad_active_status" id="ad_active_status">
-								<option value="">Status</option>
-								<option value="ACTIVE">Active</option>
-								<option value="INACTIVE">InActive</option>
-								<option value="ALL">All</option>
-							</select>
+							</div>   
+							<div class="adspy-filter-box mt-0">
+								<h6>Add Status:</h6>
+								<select name="ad_active_status" id="ad_active_status">
+									<option value="">All</option>
+									<option value="ACTIVE">Active</option>
+									<option value="INACTIVE">InActive</option>
+									<option value="ALL">All</option>
+								</select>
+							</div>
+							<div class="adspy-filter-box mt-0">
+								<h6>Media Type:</h6>
+								<select name="media_type" id="media_type"> 
+									<option value="">All</option>
+									<option value="Image">Image</option>
+									<option value="Video">Video</option>
+								</select>
+							</div>
 						</div>
-						<div class="adspy-filter-box">
+						<div class="adspy-filter-box" style="margin-top: 8px;">
 							<h6>Creation date:</h6>
 							<p><img src="{{ asset('assets/images/calendar-icon.svg') }}" alt="" class="img-fluid"> 
 								<input id="_creation_date_start" name="_creation_date_start" class="invalid" placeholder="mm/dd/yyyy">&nbsp; - &nbsp; <input name="_creation_date_end" id="_creation_date_end" placeholder="mm/dd/yyyy">
@@ -238,11 +251,9 @@ $languages = array(
 					<div class="multiple-sort">
 						<img src="{{ asset('assets/images/sort-icon.svg') }}" alt="" class="img-fluid">
 						<select name="" id="">
-							<option value="">Sort By</option>
-							<option value="">Sort 01</option>
-							<option value="">Sort 02</option>
-							<option value="">Sort 03</option>
-							<option value="">Sort 04</option>
+							<option value="">Sort By</option> 
+							<option value="">Aesc to Desc</option> 
+							<option value="">Desc to Aesc</option> 
 						</select>
 						<i class="fas fa-angle-down"></i>
 					</div>
@@ -259,6 +270,22 @@ $languages = array(
 		</div>
 	</div>
 </main>
+
+<!-- popup video modal @S --> 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">This video explains how the tool works.</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+	  <iframe width="100%" height="315" src="https://www.youtube.com/embed/_CEzHeMY-vE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div> 
+    </div>
+  </div>
+</div>
+<!-- popup video modal @E -->
 @endsection
 
 @section('script')

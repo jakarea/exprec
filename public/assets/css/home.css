@@ -1,0 +1,28 @@
+.total-session-box {
+  background-color: #ffffff;
+  box-shadow: 2px 2px 5px 3px 22px 50px -2px #DEE3EB;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.total-session-box h6 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #000000;
+  line-height: 140%;
+  margin-bottom: 0.6rem;
+}
+.total-session-box .d-flex {
+  justify-content: space-between;
+  align-items: center;
+}
+.total-session-box .d-flex h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #000000;
+  line-height: 140%;
+}
+.total-session-box .d-flex i {
+  font-size: 3.2rem;
+  color: #FF6262;
+}

@@ -1,0 +1,26 @@
+@use './util/index' as m;
+@use './util/variabls' as v;
+@use './util/media-query' as q;
+
+.total-session-box{
+    background-color: v.$light;
+    box-shadow: 2px 2px 5px v.$bxs;
+    padding: 1rem;
+    border-radius: .5rem;
+    margin-bottom: 1.5rem;
+    h6{
+        @include m.para(1.2rem,600,v.$dark);
+        margin-bottom: .6rem;
+    }
+    .d-flex{
+        justify-content: space-between;
+        align-items: center;
+        h2{
+            @include m.para(3rem,700,v.$dark); 
+        }
+        i{
+            font-size: 3.2rem;
+            color: v.$primary;
+        }
+    }
+}

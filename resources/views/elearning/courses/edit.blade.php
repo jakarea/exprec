@@ -37,7 +37,7 @@
                     @endphp
                      <label for="categories">Categories <sup class="text-danger">*</sup></label>
                      <modular-behaviour name="Tags" src="https://cdn.jsdelivr.net/npm/bootstrap5-tags@1.4/tags.min.js" lazy>
-                      <select class="form-select @error('categories') is-invalid @enderror" id="categories" name="categories[]" multiple data-allow-clear="1" data-allow-new="true" data-separator=" |,|  ">
+                      <select class="form-select @error('categories') is-invalid @enderror" id="categories" name="categories[]" multiple data-allow-clear="1" data-allow-new="true" data-separator="|,|">
                         <option selected="selected" disabled hidden value="">Create categories...</option>
                         @foreach($selectedCategories as $key => $category)
                        <option value="{{$category}}" {{ in_array($category,$selectedCategories) ? "Selected" : ''}} >{{$category}}</option> 
