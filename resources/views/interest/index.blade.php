@@ -23,90 +23,90 @@
 				</div>
 				<!-- spiner @E -->
 			</div>
-			<!-- search settings @S -->
-			<div class="search-settings-main-wrap">
-				<div class="search-settings-wrap">
-					<div class="row">
-						<div class="col-md-4">
-							<h6>LANGUAGE</h6>
-							<select name="ln" id="" class="form-control">
-								<option value="nl_NL">Dutch</option>
-								<option value="English">English</option>
-								<option value="Bangla">Bangla</option>
-								<option value="Arabic">Arabic</option>
-							</select>
-						</div>
-						<div class="col-md-4">
-							<h6>MIN AUDIENCE SIZE</h6>
-							<select name="min" id="" class="form-control">
-								<option value="100">100</option>
-								<option value="1000">1000</option>
-								<option value="10000">10000</option>
-								<option value="100000">100000</option>
-							</select>
-						</div>
-						<div class="col-md-4">
-							<h6>MAX AUDIENCE SIZE</h6>
-							<select name="max" id="" class="form-control">
-								<option value="10000000000">10000000000</option>
-								<option value="1000000000000">1000000000000</option>
-								<option value="10000000000000">10000000000000</option>
-								<option value="100000000000000">100000000000000</option>
-							</select>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="me-md-5">
-								<div class="d-flex align-items-center justify-content-between mt-4 mb-2">
-									<h6 class="mb-0">EXCLUDED WORDS</h6>
-									<a href="javascript:clearWordSelections();" class="clear-section"><img src="{{ asset('assets/images/clear-icon.svg') }}" alt="Clear" class="img-fluid"> Clear selection</a>
-								</div>
-								<div class="word-settings-box">
-									@foreach($words as $key => $value)
-									<div class="word-item">
-										<div class="form-check">
-											<input class="form-check-input wordClass" onclick='handleClick(this);' type="checkbox" value="{{ $key }}" id="{{ $value.'_'.$key }}">
-											<label class="form-check-label" for="{{ $value.'_'.$key }}">
-											{{ $key }}
-											</label>
-										</div>
-										<p>{{ $value }}</p>
-									</div>
-									@endforeach
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="ms-md-5">
-								<div class="d-flex align-items-center justify-content-between mt-4 mb-2">
-									<h6 class="mb-0">EXCLUDED TOPICS</h6>
-									<a href="javascript:clearTopicSelections();" class="clear-section"><img src="{{ asset('assets/images/clear-icon.svg') }}" alt="Clear" class="img-fluid"> Clear selection</a>
-								</div>
-								<div class="word-settings-box">
-									@foreach($topics as $key => $value)
-									<div class="word-item">
-										<div class="form-check">
-											<input class="form-check-input topicClass" onclick='handleTopicClick(this);' type="checkbox" value="{{ $key }}" id="{{ $value.'_'.$key }}">
-											<label class="form-check-label" for="{{ $value.'_'.$key }}">
-											{{ $key }}
-											</label>
-										</div>
-										<p>{{ $value }}</p>
-									</div>
-									@endforeach
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- search settings @E -->
 			<div class="interrest-bttn-box">
 				<button type="submit" id="SubmitExplore" class="btn btn-search">Explore</button>
 				<button id="settings-toggle" class="btn">Settings</button>
 			</div>
 		</div>
+		<!-- search settings @S -->
+		<div class="search-settings-main-wrap"  >
+			<div class="search-settings-wrap">
+				<div class="row">
+					<div class="col-md-4">
+						<h6>LANGUAGE</h6>
+						<select name="ln" id="" class="form-control">
+							<option value="nl_NL">Dutch</option>
+							<option value="English">English</option>
+							<option value="Bangla">Bangla</option>
+							<option value="Arabic">Arabic</option>
+						</select>
+					</div>
+					<div class="col-md-4">
+						<h6>MIN AUDIENCE SIZE</h6>
+						<select name="min" id="" class="form-control">
+							<option value="100">100</option>
+							<option value="1000">1000</option>
+							<option value="10000">10000</option>
+							<option value="100000">100000</option>
+						</select>
+					</div>
+					<div class="col-md-4">
+						<h6>MAX AUDIENCE SIZE</h6>
+						<select name="max" id="" class="form-control">
+							<option value="10000000000">10000000000</option>
+							<option value="1000000000000">1000000000000</option>
+							<option value="10000000000000">10000000000000</option>
+							<option value="100000000000000">100000000000000</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="me-md-5">
+							<div class="d-flex align-items-center justify-content-between mt-4 mb-2">
+								<h6 class="mb-0">EXCLUDED WORDS</h6>
+								<a href="javascript:clearWordSelections();" class="clear-section"><img src="{{ asset('assets/images/clear-icon.svg') }}" alt="Clear" class="img-fluid"> Clear selection</a>
+							</div>
+							<div class="word-settings-box">
+								@foreach($words as $key => $value)
+								<div class="word-item">
+									<div class="form-check">
+										<input class="form-check-input wordClass" onclick='handleClick(this);' type="checkbox" value="{{ $key }}" id="{{ $value.'_'.$key }}">
+										<label class="form-check-label" for="{{ $value.'_'.$key }}">
+										{{ $key }}
+										</label>
+									</div>
+									<p>{{ $value }}</p>
+								</div>
+								@endforeach
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="ms-md-5">
+							<div class="d-flex align-items-center justify-content-between mt-4 mb-2">
+								<h6 class="mb-0">EXCLUDED TOPICS</h6>
+								<a href="javascript:clearTopicSelections();" class="clear-section"><img src="{{ asset('assets/images/clear-icon.svg') }}" alt="Clear" class="img-fluid"> Clear selection</a>
+							</div>
+							<div class="word-settings-box">
+								@foreach($topics as $key => $value)
+								<div class="word-item">
+									<div class="form-check">
+										<input class="form-check-input topicClass" onclick='handleTopicClick(this);' type="checkbox" value="{{ $key }}" id="{{ $value.'_'.$key }}">
+										<label class="form-check-label" for="{{ $value.'_'.$key }}">
+										{{ $key }}
+										</label>
+									</div>
+									<p>{{ $value }}</p>
+								</div>
+								@endforeach
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- search settings @E -->
 	</form>
 	<div class="popular-interest-wrap">
 		<h5>Popular interest</h5>

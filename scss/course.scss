@@ -42,8 +42,8 @@
     @include m.box(0.8rem 0.6rem, 0.625rem, v.$light);
     margin-top: 1.8rem;
     height: 96%;
-    @include m.df(space-between);
-    flex-direction: column;
+    // @include m.df(space-between);
+    // flex-direction: column;
 
     .course-thumbnail {
         img {

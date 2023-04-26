@@ -405,3 +405,15 @@
         }
     }
 }
+
+.product-filter-wrapper { 
+
+    .product-filter-box { 
+        .form-grp{ 
+            .form-custom { 
+                border: 1px solid v.$border; 
+                border-radius: 7px;
+            } 
+        }
+    }
+}

@@ -1,5 +1,10 @@
 @extends('layouts.admin')
 @section('title') Home @endsection
+
+@section('style') 
+<link href="{{ asset('assets/css/product-researchs.css') }}" rel="stylesheet" type="text/css" />  
+@endsection
+
 @section('content') 
 
 <main class="product-research-page-wrap">

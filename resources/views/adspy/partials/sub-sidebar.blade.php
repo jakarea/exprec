@@ -5,7 +5,7 @@
         <a href="{{ url('adspy') }}" class="{{ Request::is('adspy')  ? ' active' : '' }}">
           <img src="{{ asset('assets/images/dashboard-icon.svg') }}" alt="Dash" class="img-fluid"> Dashboard </a>
       </li>
-      @endrole
+      @else
       <li>
         <a href="{{ url('adspy/facebook') }}" class="{{ Request::is('adspy/facebook')  ? ' active' : '' }}">
           <img src="{{ asset('assets/images/Icon.svg') }}" alt="Dash" class="img-fluid"> Facebook ads </a>
@@ -22,6 +22,7 @@
         <a href="{{ url('adspy/mylist') }}" class="{{ Request::is('adspy/mylist')  ? ' active' : '' }}">
           <img src="{{ asset('assets/images/Vector.svg') }}" alt="Dash" class="img-fluid">My lists </a>
       </li>
+      @endrole
 
     </ul> 
 <!-- inner submenu @E -->
