@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Results;
 use App\Models\ProductResearch;
+use App\Models\FavoriteProduct;
 use App\Models\Category;
 use Image;
 use Str;
@@ -340,9 +341,12 @@ class AdminProductController extends Controller
             $title = htmlspecialchars_decode($jsonProduct->titleModule->subject); 
             $slug = Str::slug($title);
 
-            $price_str = str_replace('US$', '', $jsonProduct->priceModule->formatedActivityPrice);
-            $price_arr = explode(' - ', $price_str);
-            $min_price = floatval($price_arr[0]);
+            $min_price = $jsonProduct->priceModule->minAmount->value ?? 0;
+            if($min_price == 0){
+                $price_str = str_replace('US$', '', $jsonProduct->priceModule->formatedActivityPrice);
+                $price_arr = explode(' - ', $price_str);
+                $min_price = floatval($price_arr[0]);
+            }
             $buy_price = intval($min_price * $this->euro_rate);
 
             $sell_price = (mt_rand(240, 300) / 100) *  $buy_price;
@@ -397,6 +401,7 @@ class AdminProductController extends Controller
             return redirect()->route('admin_products_list')->with($notification);
         }
     }
+
 }
 
 // descriptionModule->descriptionUrl;

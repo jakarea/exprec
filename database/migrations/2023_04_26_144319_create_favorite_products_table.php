@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('ads', function (Blueprint $table) {
-            $table->integer('project_id')->nullable();
+        Schema::create('favorite_products', function (Blueprint $table) {
+            $table->id();
+            $table->string('product_id');
+            $table->string('user_id');
+            $table->string('project_id')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('ads', function (Blueprint $table) {
-            $table->dropColumn('project_id');
-        });
+        Schema::dropIfExists('favorite_products');
     }
 };
