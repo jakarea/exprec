@@ -8,7 +8,10 @@ use App\Http\Controllers\Admin\AdminProductController;
 Route::prefix('products')->middleware(['auth'])->controller(ProductController::class)->group(function () {      
     Route::get('/', 'index')->name('product_research');
     Route::get('/ali/{id}','insert_product')->name('insert_product');
+    Route::get('my-list', 'myList')->name('my_list_product');
     Route::get('/{slug}', 'view')->name('product_research_details');
+    Route::get('/{id}/add-to-list', 'addToList')->name('add_to_list_product');
+    Route::get('/{id}/remove-from-list', 'removeFromList')->name('add_to_list_product');
 });
 
 
@@ -25,6 +28,7 @@ Route::prefix('admin/products')->middleware(['auth'])->controller(AdminProductCo
     Route::get('/{slug}/edit', 'edit')->name('product_research_edit');
     Route::post('{slug}/edit', 'update')->name('product_research_update');
     Route::get('/{slug}/destroy', 'destroy')->name('product_destroy');
+   
     
 });
 

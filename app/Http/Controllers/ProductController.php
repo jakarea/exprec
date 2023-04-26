@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Results;
 use App\Models\ProductResearch;
+use App\Models\FavoriteProduct;
 use App\Models\Category;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\DB;
+
 
 use Image;
 use Str;
@@ -46,7 +49,7 @@ class ProductController extends Controller
 
         $products = $products->paginate(12);
         $categories = Category::orderby('id', 'desc')->get();
- 
+
         return view('products/index', compact('products','categories'));
     }
     
@@ -89,5 +92,34 @@ if ($err) {
             $product = ProductResearch::where('slug', $slug)->first();
            
             return view('products/admin/view', compact('product'));
-    }   
+        }  
+        
+        public function myList(){
+            $products = FavoriteProduct::where('user_id', Auth::user()->id)->with('product')->paginate(20);
+            $categories = Category::orderby('id', 'desc')->get();
+            return view('products/favorite', compact('products','categories'));
+        }
+
+        public function addToList($id)
+        {
+            $FavoriteProduct = FavoriteProduct::firstWhere('product_id', $id);
+            if(!$FavoriteProduct){
+                $FavoriteProduct = new FavoriteProduct();
+            }
+            $FavoriteProduct->product_id = $id;
+            $FavoriteProduct->user_id = Auth::user()->id;
+            $FavoriteProduct->save();
+
+            return redirect()->back()->with('success', 'Product added to your list');
+        }
+
+        public function removeFromList($id)
+        {
+            $FavoriteProduct = FavoriteProduct::firstWhere('product_id', $id);
+            if($FavoriteProduct){
+                $FavoriteProduct->delete();
+            }
+
+            return redirect()->back()->with('success', 'Product removed from your list');
+        }
 }

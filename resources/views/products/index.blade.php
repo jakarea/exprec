@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title') Home @endsection
+@section('title') Product Research @endsection
 
 @section('style') 
 <link href="{{ asset('assets/css/product-researchs.css') }}" rel="stylesheet" type="text/css" />  
@@ -150,7 +150,7 @@
         </div>
         <div class="product-bttn-box">
           <a href="{{ url('products/'.$product->slug) }}">Show me the details</a>
-          <a href="#">
+          <a href="{{ url('products/'.$product->id) .'/add-to-list'}}">
             <img src="{{ asset('assets/images/cart-icon.svg') }}" alt="Cart" class="img-fluid">
           </a>
         </div>

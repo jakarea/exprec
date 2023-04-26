@@ -13,18 +13,18 @@
 
     <!-- course title @S -->
     <div class="course-title">
-        <h1>Our Courses</h1>
+        <h1>Favorite Courses</h1>
     </div>
     <!-- course title @E -->
 
     <!-- course category @S -->
-    <div class="course-category-box">
+    <!-- <div class="course-category-box">
         <ul>
             <li><span>Show by Category</span></li>
             <li><a href="#">Dropshipping</a></li>
             <li><a href="#">Ecommerce</a></li>
         </ul>
-    </div>
+    </div> -->
     <!-- course category @E -->
 
     <!-- all courses @S -->
@@ -62,7 +62,6 @@
                 <div class="course-ftr">
 
                     <!-- course->enrollments->user_id is equal to logged in user id then show bought this course else buy now -->
-                   
                         <!-- <a href="{{url('elearning/courses/'.$enrolment->course->slug )}}" class="btn btn-primary">Already Purchased</a> -->
                         <h5><i class="fas fa-play"></i> Overview </h5>
 

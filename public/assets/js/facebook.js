@@ -124,11 +124,9 @@ function makeAjaxRequest(query = '') {
     let jsonData = '';
     if (query == '') {
         jsonData = createJsonFromFields(fields);
-        console.log(jsonData)
     } else {
         jsonData = JSON.parse(query);
         setFormFieldsData(fields, jsonData)
-        console.log(jsonData)
     }
     $.ajaxSetup({
         headers: {
@@ -230,7 +228,6 @@ async function getImagesByIds(ids) {
             savedAdsContent.push(data);
             let [video_hd_url, video_sd_url, video_preview_image_url, image, video_url] = ['', '', '', ''];
 
-            console.log({ images, videos, cards })
             if (images && images.length) {
                 image = images[0].resized_image_url;
             }
@@ -249,7 +246,6 @@ async function getImagesByIds(ids) {
                     image = cards[0].resized_image_url;
                 }
             }
-
             let myImg = document.getElementById("img_" + id);
             let myImage = document.getElementById("image_" + id);
             let myPlayer = document.getElementById("player_" + id);
@@ -324,7 +320,7 @@ projectForm.addEventListener('submit', async function (event) {
             project_name = '';
             adData = '';
             var selectElement = document.getElementById("project_id");
-
+            toastr["success"]("Added to project", "Success!")
             // Remove all existing options
             selectElement.innerHTML = "";
             let option = new Option('Select Below', '');
@@ -398,11 +394,9 @@ queryButtons.forEach(function (button) {
 function setFormFieldsData(fields, jsonData) {
 
     const keys = Object.keys(jsonData);
-    console.log(keys); // Output: ["name", "age", "gender"]
 
     // Retrieve values using Object.values()
     const values = Object.values(jsonData);
-    console.log(values);
 
     fields.forEach(function (field) {
         let element = document.getElementById(field);
