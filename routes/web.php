@@ -3,15 +3,17 @@
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\HomeController; 
 use App\Http\Controllers\CourseController; 
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProjectController; 
 use App\Http\Controllers\AdInterestController; 
+use App\Http\Controllers\PaymentListController;
 use App\Http\Controllers\EmailCampingController;
-use App\Http\Controllers\PlanController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +37,17 @@ Route::middleware("auth")->group(function () {
     Route::get('plans', [PlanController::class, 'index']);
     Route::get('plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
     Route::post('subscription', [PlanController::class, 'subscription'])->name("subscription.create");
+    Route::resource('paymentlist', PaymentListController::class);
+
+    Route::get('/plans/{id}/checkout', [CheckoutController::class, 'createCheckoutSession'])
+    ->name('plans.checkout');
+
+    Route::get('/checkout/success', [CheckoutController::class, 'checkoutSuccess'])
+        ->name('checkout.success');
+
+    Route::get('/checkout/cancel', [CheckoutController::class, 'checkoutCancel'])
+        ->name('checkout.cancel');
+
 });
 
 Route::group(['middleware' => ['auth']], function() {
