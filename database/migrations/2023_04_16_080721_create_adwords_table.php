@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('keyword');
             $table->string('query');
-            // $table->string('user_id');
+            $table->string('user_id');
             $table->timestamps();
         });
     }

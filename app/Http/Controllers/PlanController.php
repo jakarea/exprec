@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Plan;
+use Illuminate\Http\Request;
+use Laravel\Cashier\Cashier;
+use Illuminate\Support\Facades\DB;
 
 class PlanController extends Controller
 {
@@ -19,6 +21,14 @@ class PlanController extends Controller
         // return "we are here";
   
         return view("plans", compact("plans"));
+
+        // $stripe = Cashier::stripe();
+        // $products = $stripe->products->all();
+        
+        // return view('plans', [
+        //     'products' => $products,
+        //     'intent' => auth()->user()->createSetupIntent(),
+        // ]);
     }  
   
     /**
@@ -42,7 +52,7 @@ class PlanController extends Controller
 
         $subscription = $request->user()->newSubscription($request->plan, $plan->stripe_plan)
                         ->create($request->token);
-  
+                          
         return view("subscription_success");
     }
 }
