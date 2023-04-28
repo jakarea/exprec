@@ -5,6 +5,7 @@
 
 // user password changes
 .user-password-chnage {
+    padding-left: 1rem;
     .password-change-txt {
         h1 {
             @include m.para(2rem, 600, v.$btnbg);
@@ -22,14 +23,17 @@
     }
     .change-password-form{
         background-color: v.$light;
-        padding: 3rem;
+        padding: 2.5rem;
         border-radius: .5rem;
         box-shadow: v.$mbxs;
-        width: 90%;
+        width: 80%;
         margin: 0 auto;
         h3{
             @include m.para(1.4rem, 600, v.$btnbg);
             margin-bottom: .5rem;
+            span{
+                color: v.$primary;
+            }
         }
         p{
             @include m.para(.9rem, 400, v.$fourth);

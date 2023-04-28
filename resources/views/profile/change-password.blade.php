@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.auth')
 @section('title','user password chnage')
 @section('style') 
 <link href="{{ asset('assets/css/profile.css') }}" rel="stylesheet" type="text/css" />  
@@ -6,6 +6,7 @@
 @section('content')  
 <!-- === user password chnage page @S === -->
 <main class="user-password-chnage"> 
+  <div class="container">
   <div class="row align-items-center">
     <div class="col-lg-6">
       <div class="password-change-txt">
@@ -17,7 +18,7 @@
     </div>
     <div class="col-lg-6">
         <div class="change-password-form">
-          <h3> {{ $user->name}}, You are almost done!</h3>
+          <h3> <span>{{ $user->name}}</span>, You are almost done!</h3>
           <p>Once you've entered your new password and confirmed it, click the "Save Changes" button to update your password.</p>
           <!-- change pass form @S -->
           <form action="">
@@ -48,6 +49,7 @@
           <!-- change pass form @E -->
         </div>
     </div>
+  </div>
   </div>
 </main>
 <!-- === user password chnage page @E === -->

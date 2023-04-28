@@ -1,3 +1,6 @@
+.user-password-chnage {
+  padding-left: 1rem;
+}
 .user-password-chnage .password-change-txt h1 {
   font-size: 2rem;
   font-weight: 600;
@@ -17,10 +20,10 @@
 }
 .user-password-chnage .change-password-form {
   background-color: #ffffff;
-  padding: 3rem;
+  padding: 2.5rem;
   border-radius: 0.5rem;
   box-shadow: inset 0px -1px 0px #dfe5f1;
-  width: 90%;
+  width: 80%;
   margin: 0 auto;
 }
 .user-password-chnage .change-password-form h3 {
@@ -29,6 +32,9 @@
   color: #2C2C2C;
   line-height: 140%;
   margin-bottom: 0.5rem;
+}
+.user-password-chnage .change-password-form h3 span {
+  color: #FF6262;
 }
 .user-password-chnage .change-password-form p {
   font-size: 0.9rem;
