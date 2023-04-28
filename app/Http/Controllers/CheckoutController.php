@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Stripe\Stripe;
 use App\Models\Plan;
 use App\Models\User;
@@ -34,8 +35,8 @@ class CheckoutController extends Controller
                 'quantity' => 1,
             ]],
             'mode' => 'subscription',
-            'success_url' => route('checkout.success'),
-            'cancel_url' => route('checkout.cancel'),
+            'success_url' => route('changePassword'),
+            'cancel_url' => route('subscription.index'),
         ]);
         
         return redirect($session->url);
@@ -85,6 +86,7 @@ class CheckoutController extends Controller
                 // 'pm_last_four' => Session::all()['data'][0]['payment_method_details']['card']['last4'],
                 'trial_ends_at' => null,
             ]);
+            Auth::loginUsingId($user->id);
         }
 
         // if subscription is not null and not find in subscription table then create new subscription else update subscription
