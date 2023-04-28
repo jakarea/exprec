@@ -1,5 +1,9 @@
-@extends('layouts.admin')
-@section('title') Admin - Lesson List @endsection
+@extends('layouts.auth')
+
+@section('title')
+Payment Failed
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

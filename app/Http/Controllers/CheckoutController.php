@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Stripe\Stripe;
 use App\Models\Plan;
+use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
+use Illuminate\Support\Facades\Hash;
 
 class CheckoutController extends Controller
 {
@@ -33,7 +36,7 @@ class CheckoutController extends Controller
             'success_url' => route('checkout.success'),
             'cancel_url' => route('checkout.cancel'),
         ]);
-    
+        
         // Redirect the user to the Checkout Session
         return redirect($session->url);
     }
@@ -44,7 +47,7 @@ class CheckoutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function checkoutSuccess()
+    public function checkoutSuccess(Request $request)
     {
         return view('subscription_success');
     }    

@@ -31,14 +31,9 @@ Auth::routes();
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/home', 'index');
-});
+    Route::get('/subscription', [PlanController::class, 'subscription'])->name("subscription.index");
 
-Route::middleware("auth")->group(function () {
-    Route::get('plans', [PlanController::class, 'index']);
     Route::get('plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
-    Route::post('subscription', [PlanController::class, 'subscription'])->name("subscription.create");
-    Route::resource('paymentlist', PaymentListController::class);
-
     Route::get('/plans/{id}/checkout', [CheckoutController::class, 'createCheckoutSession'])
     ->name('plans.checkout');
 
@@ -48,6 +43,12 @@ Route::middleware("auth")->group(function () {
     Route::get('/checkout/cancel', [CheckoutController::class, 'checkoutCancel'])
         ->name('checkout.cancel');
 
+});
+
+Route::middleware("auth")->group(function () {
+    Route::get('plans', [PlanController::class, 'index']);
+    Route::post('subscription/store', [PlanController::class, 'subscriptionStore'])->name("subscription.create");
+    Route::resource('paymentlist', PaymentListController::class);
 });
 
 Route::group(['middleware' => ['auth']], function() {
