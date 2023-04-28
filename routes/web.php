@@ -39,7 +39,7 @@ Route::controller(HomeController::class)->group(function () {
 
     Route::get('/checkout/success', [CheckoutController::class, 'checkoutSuccess'])
         ->name('checkout.success');
-
+    
     Route::get('/checkout/cancel', [CheckoutController::class, 'checkoutCancel'])
         ->name('checkout.cancel');
 
