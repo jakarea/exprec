@@ -37,7 +37,7 @@
         </div>
         <div class="tab-content" id="pills-tabContent">
             @foreach($plans as $plan) 
-            <div class="tab-pane fade @if($plan['id'] == '1') active show @endif" id="pills-{{$plan['id']}}" role="tabpanel" aria-labelledby="pills-{{$plan['id']}}-tab" tabindex="0"> 
+            <div class="tab-pane @if($plan['id'] == '1') active show @endif" id="pills-{{$plan['id']}}" role="tabpanel" aria-labelledby="pills-{{$plan['id']}}-tab" tabindex="0"> 
                     <div class="row justify-content-center">
                         <div class="col-lg-4 col-md-6 col-sm-12 col-12">
                         <div class="subscription-plan-box">

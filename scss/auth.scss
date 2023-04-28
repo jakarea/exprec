@@ -118,7 +118,7 @@
 .subscription-section {
     margin-bottom: 2rem;
     .subscription-header {
-        margin-top: 6.2rem;
+        margin-top: 7rem;
         text-align: center;
         margin-bottom: 2rem;
 
@@ -186,16 +186,17 @@
                      @include m.para(0.9rem, 400, v.$btnbg);
                     i {
                         font-size: 1rem;
-                        color: v.$fourth;
+                        color: v.$primary;
                         margin-right: 0.3rem;
                     } 
                 }
-                li.na{
-                    color: v.$fourth;
+                li.na{ 
+                    i{
+                        color: v.$fourth; 
+                    }
                     sup{
                         font-size: .66rem;
-                        color: v.$fourth;
-                        margin-left: .6rem;
+                        color: v.$fourth; 
                     }
                 }
             }
@@ -221,10 +222,7 @@
         }
     }
 }
-
-
 // subscription-css @E
-
 
 // responsive css @S
 @include q.responsive(phone) {
@@ -233,13 +231,20 @@
     }
     .subscription-section .subscription-header {
         h1{
-            font-size: 1.8rem;
+            font-size: 1.4rem;
+            font-weight: 600;
             line-height: 100%;
         }
         p{
             width: 100%;
             display: none;
         }
+    }
+    .subscription-section .subscription-plan-box {
+        width: 90%;
+    }
+    .subscription-section .subscription-plan-box .plan-body h5.plan-title{
+        font-size: 2rem;
     }
     br{
         display: none;

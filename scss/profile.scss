@@ -1,0 +1,115 @@
+@use './util/variabls' as v;
+@use './util/mixin' as m;
+@use './util/media-query' as q;
+
+
+// user password changes
+.user-password-chnage {
+    padding-left: 1rem;
+    .password-change-txt {
+        h1 {
+            @include m.para(2rem, 600, v.$btnbg);
+            margin-bottom: 2rem;
+        }
+
+        p {
+            @include m.para(.9rem, 400, v.$fourth);
+            margin-bottom: 2rem;
+        }
+
+        img {
+            mix-blend-mode: darken;
+        }
+    }
+    .change-password-form{
+        background-color: v.$light;
+        padding: 2.5rem;
+        border-radius: .5rem;
+        box-shadow: v.$mbxs;
+        width: 80%;
+        margin: 0 auto;
+        h3{
+            @include m.para(1.4rem, 600, v.$btnbg);
+            margin-bottom: .5rem;
+            span{
+                color: v.$primary;
+            }
+        }
+        p{
+            @include m.para(.9rem, 400, v.$fourth);
+            margin-bottom: 1.5rem;
+        }
+        .form-group{
+            margin-bottom: 1rem;
+            label{
+                @include m.para(.95rem, 400, v.$btnbg);
+                margin-bottom: 0.4rem;
+            }
+            .form-control{
+                border: 1px solid v.$third;
+            }
+        }
+        .form-submit{
+            margin-top: 1rem;
+            .btn-submit{
+                display: block;
+                width: 100%;
+                text-align: center;
+                @include m.button(1rem, v.$light, v.$gdbg);
+
+                &:hover {
+                    opacity: .7
+                }
+            }
+        }
+    }
+    
+}
+
+
+@include q.responsive(phone) {
+    .user-password-chnage .password-change-txt {
+        h1{
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+        p{
+            width: 100%;
+            display: none;
+        }
+        img{
+            display: none;
+        }
+    }
+    .user-password-chnage .change-password-form{
+        width: 100%;
+        padding: 1.5rem;
+    }
+    .user-password-chnage .change-password-form h3{
+        font-size: 1.1rem;
+    }
+    
+}
+@include q.responsive(landphone) {
+    .user-password-chnage .password-change-txt {
+        h1{
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+        p{
+            width: 100%;
+            display: none;
+        }
+        img{
+            display: none;
+        }
+    }
+    .user-password-chnage .change-password-form{
+        width: 100%;
+        padding: 1.5rem;
+    }
+    .user-password-chnage .change-password-form h3{
+        font-size: 1.1rem;
+    }
+    
+}
