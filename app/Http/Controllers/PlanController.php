@@ -46,7 +46,7 @@ class PlanController extends Controller
      *
      * @return response()
      */
-    public function subscription(Request $request)
+    public function subscriptionStore(Request $request)
     {
         $plan = Plan::find($request->plan);
 
@@ -54,5 +54,15 @@ class PlanController extends Controller
                         ->create($request->token);
                           
         return view("subscription_success");
+    }
+
+    /**
+     * Write code on Method
+     */
+    public function subscription() {
+        
+        $plans = Plan::get();
+        
+        return view("plans", compact("plans"));
     }
 }
