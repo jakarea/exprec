@@ -62,6 +62,13 @@ Route::get('/home', function () {
     return redirect('/');
 });
 
+Route::middleware(['subscribed'])->group(function () {
+    // protected routes 
+    Route::get('/subscribed', function () {
+        return "subscribed";
+    });
+});
+
 // interest project route
 Route::prefix('add-interest')->middleware(['auth'])->controller(ProjectController::class)->group(function () {
     Route::get('/projects', 'index')->name('projectlist');   
