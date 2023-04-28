@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class CheckoutController extends Controller
@@ -55,15 +56,23 @@ class CheckoutController extends Controller
         $user = Session::all()['data'][0]['customer_details']['email'];
         $user = User::where('email', $user)->first();
 
+        // Subscription get by subscription
+        $subscription = \Stripe\Subscription::retrieve(Session::all()['data'][0]['subscription']);
+
+        // customer get by customer
+       $customer = \Stripe\Customer::retrieve(Session::all()['data'][0]['customer']);
+        // dd($subscription);
+        // get payment method data by customer        
+        // dd(Session::all()['data'][0]);
+
         // if user is not null and not find in user table then create new user else update user
         if($user != null){
             $user->update([
                 'name' => Session::all()['data'][0]['customer_details']['name'],
                 'email' => Session::all()['data'][0]['customer_details']['email'],
-                'password' => Hash::make(Str::random(24)),
                 'stripe_id' => Session::all()['data'][0]['customer'],
-                'pm_type' => Session::all()['data'][0]['payment_method_details']['card']['brand'],
-                'pm_last_four' => Session::all()['data'][0]['payment_method_details']['card']['last4'],
+                // 'pm_type' => Session::all()['data'][0]['payment_method_details']['card']['brand'],
+                // 'pm_last_four' => Session::all()['data'][0]['payment_method_details']['card']['last4'],
                 'trial_ends_at' => null,
             ]);
         }else{
@@ -77,6 +86,36 @@ class CheckoutController extends Controller
                 'trial_ends_at' => null,
             ]);
         }
+
+        // if subscription is not null and not find in subscription table then create new subscription else update subscription
+        if($subscription != null){
+            // user update subscription table by user id
+            $subscroptionUser = DB::table('subscriptions')->where('user_id', $user->id)->first();
+            if($subscroptionUser != null){
+                DB::table('subscriptions')->where('user_id', $user->id)->update([
+                    'name' => $subscription->plan->product,
+                    'stripe_id' => $subscription->id,
+                    'stripe_status' => $subscription->status,
+                    'stripe_price' => $subscription->plan->id,
+                    // 'stripe_plan' => $subscription->plan->id,
+                    'quantity' => $subscription->quantity,
+                    'trial_ends_at' => null,
+                    'ends_at' => null,
+                ]);
+            }else {
+                DB::table('subscriptions')->insert([
+                    'user_id' => $user->id,
+                    'name' => $subscription->plan->product,
+                    'stripe_id' => $subscription->id,
+                    'stripe_status' => $subscription->status,
+                    'stripe_price' => $subscription->plan->id,
+                    // 'stripe_plan' => $subscription->plan->id,
+                    'quantity' => $subscription->quantity,
+                    'trial_ends_at' => null,
+                    'ends_at' => null,
+                ]);
+            }
+        }        
         
         return view('subscription_success');
     }    

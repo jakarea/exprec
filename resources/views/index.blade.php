@@ -8,6 +8,26 @@
 <!-- === main home page @S === -->
 <main class="main-home-page"> 
     <div class="row">
+    @php
+        $user = Auth::user();
+        $stripe_id = $user->stripe_id;
+    if ( !empty($stripe_id) ) {
+        $stripe = new \Stripe\StripeClient( env('STRIPE_SECRET') );
+        $subscription = $stripe->subscriptions->all(['customer' => $stripe_id]);
+        $subscription_end_date = $subscription->data[0]->current_period_end;
+        $subscription_end_date = date('d-m-Y', $subscription_end_date);
+        $subscription_end_date2 = $subscription->data[0]->current_period_end;
+        $remaining_days = ceil(($subscription_end_date2 - time()) / 86400);
+    }
+    @endphp
+    @if ( !empty($subscription) && $subscription->data[0]->status == 'active' && $remaining_days > 0 )
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="alert alert-success" role="alert">
+            <h6 class="alert-heading">Subscription</h6>
+            <p>Your subscription will end on {{ $subscription_end_date }}, You have remain only {{ $remaining_days }} days!</p>
+        </div>
+    </div>
+    @endif
         <!-- col @S -->
         @role("Admin")
         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
@@ -75,7 +95,6 @@
                 </div> 
             </div>
         </div>
-        <!-- col @E --> 
     </div>
 </main>
 <!-- === main home page @E === -->
