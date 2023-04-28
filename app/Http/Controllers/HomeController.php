@@ -30,5 +30,11 @@ class HomeController extends Controller
         $courseCount = Course::count(); 
         return view('index',compact('userCount','productsCount','courseCount'));
     }
+    public function changePassword()
+    {
+        $userId = Auth()->user()->id; 
+        $user = User::where('id', $userId)->first();
+        return view('profile/change-password',compact('user'));
+    }
      
 }

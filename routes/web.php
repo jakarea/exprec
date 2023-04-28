@@ -43,6 +43,8 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/checkout/cancel', [CheckoutController::class, 'checkoutCancel'])
         ->name('checkout.cancel');
 
+    Route::get('/change-password', 'changePassword')->name('changePassword');
+
 });
 
 Route::middleware("auth")->group(function () {

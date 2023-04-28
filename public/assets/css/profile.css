@@ -1,0 +1,111 @@
+.user-password-chnage .password-change-txt h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #2C2C2C;
+  line-height: 140%;
+  margin-bottom: 2rem;
+}
+.user-password-chnage .password-change-txt p {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #8C8FAE;
+  line-height: 140%;
+  margin-bottom: 2rem;
+}
+.user-password-chnage .password-change-txt img {
+  mix-blend-mode: darken;
+}
+.user-password-chnage .change-password-form {
+  background-color: #ffffff;
+  padding: 3rem;
+  border-radius: 0.5rem;
+  box-shadow: inset 0px -1px 0px #dfe5f1;
+  width: 90%;
+  margin: 0 auto;
+}
+.user-password-chnage .change-password-form h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2C2C2C;
+  line-height: 140%;
+  margin-bottom: 0.5rem;
+}
+.user-password-chnage .change-password-form p {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #8C8FAE;
+  line-height: 140%;
+  margin-bottom: 1.5rem;
+}
+.user-password-chnage .change-password-form .form-group {
+  margin-bottom: 1rem;
+}
+.user-password-chnage .change-password-form .form-group label {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #2C2C2C;
+  line-height: 140%;
+  margin-bottom: 0.4rem;
+}
+.user-password-chnage .change-password-form .form-group .form-control {
+  border: 1px solid #DEE3EB;
+}
+.user-password-chnage .change-password-form .form-submit {
+  margin-top: 1rem;
+}
+.user-password-chnage .change-password-form .form-submit .btn-submit {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 140%;
+  background: linear-gradient(98.03deg, #FF6262 18.68%, #F37F14 88.52%);
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+}
+.user-password-chnage .change-password-form .form-submit .btn-submit:hover {
+  opacity: 0.7;
+}
+
+@media (min-width: 320px) and (max-width: 574px) {
+  .user-password-chnage .password-change-txt h1 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  .user-password-chnage .password-change-txt p {
+    width: 100%;
+    display: none;
+  }
+  .user-password-chnage .password-change-txt img {
+    display: none;
+  }
+  .user-password-chnage .change-password-form {
+    width: 100%;
+    padding: 1.5rem;
+  }
+  .user-password-chnage .change-password-form h3 {
+    font-size: 1.1rem;
+  }
+}
+@media (min-width: 574px) and (max-width: 767px) {
+  .user-password-chnage .password-change-txt h1 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  .user-password-chnage .password-change-txt p {
+    width: 100%;
+    display: none;
+  }
+  .user-password-chnage .password-change-txt img {
+    display: none;
+  }
+  .user-password-chnage .change-password-form {
+    width: 100%;
+    padding: 1.5rem;
+  }
+  .user-password-chnage .change-password-form h3 {
+    font-size: 1.1rem;
+  }
+}

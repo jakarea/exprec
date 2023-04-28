@@ -126,7 +126,7 @@
   margin-bottom: 2rem;
 }
 .subscription-section .subscription-header {
-  margin-top: 6.2rem;
+  margin-top: 7rem;
   text-align: center;
   margin-bottom: 2rem;
 }
@@ -202,16 +202,15 @@
 }
 .subscription-section .subscription-plan-box .plan-body ul li i {
   font-size: 1rem;
-  color: #8C8FAE;
+  color: #FF6262;
   margin-right: 0.3rem;
 }
-.subscription-section .subscription-plan-box .plan-body ul li.na {
+.subscription-section .subscription-plan-box .plan-body ul li.na i {
   color: #8C8FAE;
 }
 .subscription-section .subscription-plan-box .plan-body ul li.na sup {
   font-size: 0.66rem;
   color: #8C8FAE;
-  margin-left: 0.6rem;
 }
 .subscription-section .subscription-plan-box .plan-footer {
   margin-top: 1.5rem;
@@ -240,12 +239,19 @@
     padding-top: 6rem;
   }
   .subscription-section .subscription-header h1 {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
+    font-weight: 600;
     line-height: 100%;
   }
   .subscription-section .subscription-header p {
     width: 100%;
     display: none;
+  }
+  .subscription-section .subscription-plan-box {
+    width: 90%;
+  }
+  .subscription-section .subscription-plan-box .plan-body h5.plan-title {
+    font-size: 2rem;
   }
   br {
     display: none;
