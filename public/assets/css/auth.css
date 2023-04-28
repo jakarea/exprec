@@ -208,8 +208,8 @@
 .subscription-section .subscription-plan-box .plan-body ul li.na {
   color: #8C8FAE;
 }
-.subscription-section .subscription-plan-box .plan-body ul li.na span {
-  font-size: 0.7rem;
+.subscription-section .subscription-plan-box .plan-body ul li.na sup {
+  font-size: 0.66rem;
   color: #8C8FAE;
   margin-left: 0.6rem;
 }

@@ -60,10 +60,10 @@
                                         <i class="fa fa-check"></i> Adspy Facebook
                                     </li>
                                     <li class="na">
-                                        <i class="fa fa-check"></i> Adspy Pinterest <span>(Upcomming)</span>
+                                        <i class="fa fa-check"></i> Adspy Pinterest <sup>(Upcomming)</sup>
                                     </li>
                                     <li class="na">
-                                        <i class="fa fa-check"></i> Adspy Tiktok <span>(Upcomming)</span>
+                                        <i class="fa fa-check"></i> Adspy Tiktok <sup>(Upcomming)</sup>
                                     </li>
                                     <li>
                                         <i class="fa fa-check"></i> Interest tool
