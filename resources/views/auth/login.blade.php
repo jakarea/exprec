@@ -53,7 +53,7 @@ Login
                 </div>
                 </form>
                 <div class="login-logo-wrap text-center mt-3"> 
-                    <p>Don't have an account? <a href="{{url('/register')}}" class="registerr">Register</a></p>
+                    <p>Don't have an account? <a href="{{url('/subscription')}}" class="registerr">Register</a></p>
                 </div>
             </div>
         </div>
