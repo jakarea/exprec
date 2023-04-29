@@ -22,7 +22,7 @@ class CheckoutController extends Controller
     public function createCheckoutSession($stripe_plan)
     {
         // Set your Stripe API secret key
-        Stripe::setApiKey('sk_test_51MyRmPIPOd0zPaLLVoU39SY8hJKkKLWSXU4y8bule6fXQuzRtInpIbdJqD4CPxvPOkzhiRefwgDy1UgEInscPT1100cKRkHxeu');
+        Stripe::setApiKey(env('STRIPE_SECRET'));
     
         // Get the selected plan
         $plan = Plan::findOrFail($stripe_plan);
@@ -35,7 +35,7 @@ class CheckoutController extends Controller
                 'quantity' => 1,
             ]],
             'mode' => 'subscription',
-            'success_url' => route('changePassword'),
+            'success_url' => route('checkout.success'),
             'cancel_url' => route('subscription.index'),
         ]);
         
@@ -51,7 +51,7 @@ class CheckoutController extends Controller
     public function checkoutSuccess()
     {
         //Set your Stripe API secret key
-        Stripe::setApiKey('sk_test_51MyRmPIPOd0zPaLLVoU39SY8hJKkKLWSXU4y8bule6fXQuzRtInpIbdJqD4CPxvPOkzhiRefwgDy1UgEInscPT1100cKRkHxeu');
+        Stripe::setApiKey(env('STRIPE_SECRET'));
 
         // Get the last subscription from stripe payment list and retrive customer email after create account
         $user = Session::all()['data'][0]['customer_details']['email'];
@@ -76,6 +76,9 @@ class CheckoutController extends Controller
                 // 'pm_last_four' => Session::all()['data'][0]['payment_method_details']['card']['last4'],
                 'trial_ends_at' => null,
             ]);
+            // login user
+            $changePassword = false;
+            auth()->login($user);
         }else{
             $user = User::create([
                 'name' => Session::all()['data'][0]['customer_details']['name'],
@@ -86,7 +89,9 @@ class CheckoutController extends Controller
                 // 'pm_last_four' => Session::all()['data'][0]['payment_method_details']['card']['last4'],
                 'trial_ends_at' => null,
             ]);
-            Auth::loginUsingId($user->id);
+            // login user
+            $changePassword = true;
+            auth()->login($user);
         }
 
         // if subscription is not null and not find in subscription table then create new subscription else update subscription
@@ -118,8 +123,9 @@ class CheckoutController extends Controller
                 ]);
             }
         }        
-        
-        return view('subscription_success');
+
+        // with alert for change password
+        return redirect()->route('home')->with('success', 'Your subscription has been created successfully. You are redirecting to password change page.')->with('changePassword', $changePassword);
     }    
 
     /**

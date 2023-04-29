@@ -8,6 +8,24 @@
 <!-- === main home page @S === -->
 <main class="main-home-page"> 
     <div class="row">
+    <!-- Show all sesssion success message -->
+    @if(session()->has('success'))
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="alert alert-success" role="alert">
+            <h6 class="alert-heading">Success</h6>
+            <p>{{ session()->get('success') }}</p>
+        </div>
+    </div>
+    @endif
+    <!-- Show all session warning message -->
+    @if(session()->has('warning'))
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="alert alert-danger" role="alert">
+            <h6 class="alert-heading">Warning!</h6>
+            <p>{{ session()->get('warning') }}</p>
+        </div>
+    </div>
+    @endif
     @php
         $user = Auth::user();
         $stripe_id = $user->stripe_id;
@@ -101,4 +119,15 @@
 
 @endsection
 @section('script') 
+    <!-- if changePassword get true open modal -->
+    @if (session()->has('changePassword'))
+    <script>
+        $(document).ready(function(){
+           // redirect to change password page after 2 second
+              setTimeout(function(){
+                 window.location.href = "{{ route('changePassword') }}";
+              }, 2000);
+        });
+    </script>
+    @endif
 @endsection
