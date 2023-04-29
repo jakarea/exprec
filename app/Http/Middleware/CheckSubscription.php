@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Stripe\Stripe;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -21,6 +22,16 @@ class CheckSubscription
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
         $user = DB::table('subscriptions')->where('user_id', auth()->user()->id)->first('stripe_id');
+        
+        // get user who has role admin
+        $admin = User::whereHas('roles', function($q){
+            $q->where('name', 'admin');
+        })->first();
+
+        // if user has role admin
+        if ($admin) {
+            return $next($request);
+        }
 
         if ($user && $user->stripe_id) {
             // Retrieve the customer object
