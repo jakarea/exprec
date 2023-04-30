@@ -13,7 +13,7 @@ class ProjectController extends Controller
 
     public function index()
     {
-        $projects = Project::orderBy('id', 'desc')->get();
+        $projects = Project::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->get();
         return view('interest/projects-list', ['projects' => $projects]);
     }
 
