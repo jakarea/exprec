@@ -176,7 +176,11 @@
         .plan-body { 
             h5.plan-title {
                 margin: .8rem 0;
-                @include m.para(2.2rem, 700, v.$btnbg);
+                @include m.para(2.5rem, 700, v.$btnbg);
+                span{
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                }
             } 
 
             ul {

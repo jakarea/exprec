@@ -6,6 +6,7 @@
 // user password changes
 .user-password-chnage {
     padding-left: 1rem;
+
     .password-change-txt {
         h1 {
             @include m.para(2rem, 600, v.$btnbg);
@@ -21,37 +22,46 @@
             mix-blend-mode: darken;
         }
     }
-    .change-password-form{
+
+    .change-password-form {
         background-color: v.$light;
         padding: 2.5rem;
         border-radius: .5rem;
         box-shadow: v.$mbxs;
         width: 80%;
         margin: 0 auto;
-        h3{
+
+        h3 {
             @include m.para(1.4rem, 600, v.$btnbg);
             margin-bottom: .5rem;
-            span{
+
+            span {
                 color: v.$primary;
             }
         }
-        p{
+
+        p {
             @include m.para(.9rem, 400, v.$fourth);
             margin-bottom: 1.5rem;
         }
-        .form-group{
+
+        .form-group {
             margin-bottom: 1rem;
-            label{
+
+            label {
                 @include m.para(.95rem, 400, v.$btnbg);
                 margin-bottom: 0.4rem;
             }
-            .form-control{
+
+            .form-control {
                 border: 1px solid v.$third;
             }
         }
-        .form-submit{
+
+        .form-submit {
             margin-top: 1rem;
-            .btn-submit{
+
+            .btn-submit {
                 display: block;
                 width: 100%;
                 text-align: center;
@@ -63,53 +73,98 @@
             }
         }
     }
-    
+
+}
+
+.set-profile-picture {
+    .media {
+        align-items: center;
+
+        img {
+            width: 9rem;
+            height: 9rem;
+            border-radius: 50%;
+            border: 3px solid v.$primary;
+            margin-right: 1.5rem;
+        }
+
+        .btn-upload-pic {
+            background: v.$gdbg;
+            color: v.$light;
+            font-size: 1rem;
+            padding: .5rem 1rem;
+        }
+        .delete-bttn{
+            background: v.$blu;
+            display: block;
+            margin-top: .5rem;
+        }
+    }
+}
+
+.profile-imgs{
+    text-align: center;
+    img{
+        width: 70%;
+        display: block;
+        margin: 0 auto;
+        mix-blend-mode: darken;
+    }
 }
 
 
 @include q.responsive(phone) {
     .user-password-chnage .password-change-txt {
-        h1{
+        h1 {
             font-size: 1.4rem;
             margin-bottom: 1rem;
         }
-        p{
+
+        p {
             width: 100%;
             display: none;
         }
-        img{
+
+        img {
             display: none;
         }
     }
-    .user-password-chnage .change-password-form{
+
+    .user-password-chnage .change-password-form {
         width: 100%;
         padding: 1.5rem;
     }
-    .user-password-chnage .change-password-form h3{
+
+    .user-password-chnage .change-password-form h3 {
         font-size: 1.1rem;
     }
-    
+
 }
+
 @include q.responsive(landphone) {
     .user-password-chnage .password-change-txt {
-        h1{
+        h1 {
             font-size: 1.4rem;
             margin-bottom: 1rem;
         }
-        p{
+
+        p {
             width: 100%;
             display: none;
         }
-        img{
+
+        img {
             display: none;
         }
     }
-    .user-password-chnage .change-password-form{
+
+    .user-password-chnage .change-password-form {
         width: 100%;
         padding: 1.5rem;
     }
-    .user-password-chnage .change-password-form h3{
+
+    .user-password-chnage .change-password-form h3 {
         font-size: 1.1rem;
     }
-    
+
 }

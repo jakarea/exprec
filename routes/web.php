@@ -46,6 +46,9 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/change-password', 'changePassword')->name('changePassword');
     Route::post('/change-password', 'postChangePassword')->name('postChangePassword');
 
+    // profile page route
+    Route::get('/my-profile', 'myProfile')->name('myProfile');
+
 });
 
 Route::middleware("auth")->group(function () {

@@ -8,24 +8,32 @@
 <!-- === main home page @S === -->
 <main class="main-home-page"> 
     <div class="row">
-    <!-- Show all sesssion success message -->
-    @if(session()->has('success'))
-    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class="alert alert-success" role="alert">
-            <h6 class="alert-heading">Success</h6>
-            <p>{{ session()->get('success') }}</p>
-        </div>
-    </div>
-    @endif
-    <!-- Show all session warning message -->
-    @if(session()->has('warning'))
-    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class="alert alert-danger" role="alert">
-            <h6 class="alert-heading">Warning!</h6>
-            <p>{{ session()->get('warning') }}</p>
-        </div>
-    </div>
-    @endif
+        <div class="col-12">
+            <!-- Show all sesssion success message -->
+            @if(session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show alert-custom-txt" role="alert">
+                    <div class="media">
+                            <div class="media-body">
+                                <h6 class="alert-heading">Success</h6>
+                                <p>{{ session()->get('success') }}</p>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div> 
+                </div> 
+                @endif
+            <!-- Show all session warning message -->
+            @if(session()->has('warning')) 
+            <div class="alert alert-danger alert-dismissible fade show alert-custom-txt" role="alert">
+                <div class="media"> 
+                        <div class="media-body">
+                            <h6 class="alert-heading">Warning!</h6>
+                            <p>{{ session()->get('warning') }}</p>
+                        </div>
+                        <a href="{{url('/subscription')}}">Subscribe</a> 
+                </div> 
+                </div> 
+            @endif
+        </div> 
     @php
         $user = Auth::user();
         $stripe_id = $user->stripe_id;
@@ -39,11 +47,16 @@
     }
     @endphp
     @if ( !empty($subscription) && $subscription->data[0]->status == 'active' && $remaining_days > 7 )
-    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class="alert alert-success" role="alert">
-            <h6 class="alert-heading">Subscription</h6>
-            <p>Your subscription will end on {{ $subscription_end_date }}, You have remain only {{ $remaining_days }} days!</p>
-        </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12">  
+        <div class="alert alert-success alert-dismissible fade show alert-custom-txt" role="alert">
+            <div class="media">
+                <div class="media-body">
+                    <h6 class="alert-heading">Subscription</h6>
+                    <p>Your subscription will end on {{ $subscription_end_date }}, You have remain only {{ $remaining_days }} days!</p>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div> 
+        </div>  
     </div>
     @endif
         <!-- col @S -->
