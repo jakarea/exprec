@@ -789,7 +789,7 @@
 }
 
 .integration-top-margin {
-  margin-top: 5rem;
+  margin-top: 3rem;
 }
 
 .integration-filter-box h6 {
@@ -1731,6 +1731,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.platform-tab-head {
+  margin-top: 1rem;
+  background-color: #ffffff;
+  padding: 0.6rem 1rem;
+}
+.platform-tab-head .nav .nav-item .nav-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #000000;
+  line-height: 140%;
+}
+.platform-tab-head .nav .nav-item .nav-link.active {
+  background: linear-gradient(98.03deg, #FF6262 18.68%, #F37F14 88.52%);
+  color: #ffffff;
 }
 
 @media (min-width: 320px) and (max-width: 574px) {

@@ -730,7 +730,7 @@
     }
 }
 .integration-top-margin {
-    margin-top: 5rem;
+    margin-top: 3rem;
 }
 
 .integration-filter-box {
@@ -1652,6 +1652,23 @@
         }
         ul{
             @include m.df(space-between);
+        }
+    }
+}
+
+.platform-tab-head{ 
+    margin-top: 1rem;
+    background-color: v.$light;
+    padding: .6rem 1rem;
+    .nav{
+        .nav-item{
+            .nav-link{
+                @include m.para(.9rem,500,v.$dark);
+            }
+            .nav-link.active{
+                background: v.$gdbg;
+                color: v.$light;
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 @section('title') Admin - User Edit @endsection
 @section('style') 
 <link href="{{ asset('assets/css/product-researchs.css') }}" rel="stylesheet" type="text/css" />  
+<link href="{{ asset('assets/css/profile.css') }}" rel="stylesheet" type="text/css" />  
 @endsection
 @section('content') 
 
@@ -37,12 +38,12 @@
           <div class="row">
              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                <div class="row"> 
-                 <div class="col-md-12">
+               <div class="col-md-12">
                    <div class="form-group">
                      <label for="name">Name <sup class="text-danger">*</sup></label>
                      {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
                    </div>
-                 </div>
+                 </div> 
                  <div class="col-md-12">
                    <div class="form-group">
                      <label for="email">Email <sup class="text-danger">*</sup></label>
@@ -67,11 +68,25 @@
                      {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control')) !!}
                    </div>
                  </div>   
+                 
                </div> <!-- row end -->
              </div>
-           </div>
-           <div class="row"> 
-             <div class="col-12">
+           </div> 
+           <div class="row align-items-center"> 
+           <div class="col-lg-4">
+                <div class="set-profile-picture mb-3">
+                  <div class="media">
+                    <img src="{{asset('assets/images/post-01.png')}}" alt="Profile" class="img-fluid">
+                    <div class="media-body">
+                      <input type="file" id="upload" style="opacity: 0">
+                      <label for="upload">  
+                          <span class="btn btn-upload-pic">Change Photo</span> 
+                      </label> 
+                    </div>
+                  </div>
+                </div>
+                </div>
+             <div class="col-lg-8">
                <div class="submit-bttns">
                  <button type="reset" class="btn btn-reset">Clear</button>
                  <button type="submit" class="btn btn-submit">Submit</button>

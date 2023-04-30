@@ -14,7 +14,7 @@
           <p>Here is your profile page.</p> 
         </div>
         <div class="change-password-form w-100">
-          <h3>Profile Picture</h3>
+          <h3><span>{{ $user->name}}</span></h3>
           <form action="" method="POST">
           @csrf
           <div class="set-profile-picture">
@@ -22,11 +22,9 @@
               <img src="{{asset('assets/images/post-01.png')}}" alt="Profile" class="img-fluid">
               <div class="media-body">
                 <input type="file" id="upload" style="opacity: 0">
-                <label for="upload">
-                  aa
-                  <a class="btn btn-upload-pic" href="#">Change Photo</a> 
-                </label>
-                <!-- <button class="btn btn-upload-pic delete-bttn" type="button"><i class="fas fa-trash"></i> Delete</button> -->
+                <label for="upload">  
+                    <span class="btn btn-upload-pic">Change Photo</span> 
+                </label> 
               </div>
             </div>
           </div>

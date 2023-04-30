@@ -6,74 +6,73 @@
 // user password changes
 .user-password-chnage {
     padding-left: 1rem;
+}
 
-    .password-change-txt {
-        h1 {
-            @include m.para(2rem, 600, v.$btnbg);
-            margin-bottom: 2rem;
-        }
+.password-change-txt {
+    h1 {
+        @include m.para(2rem, 600, v.$btnbg);
+        margin-bottom: 2rem;
+    }
 
-        p {
-            @include m.para(.9rem, 400, v.$fourth);
-            margin-bottom: 2rem;
-        }
+    p {
+        @include m.para(.9rem, 400, v.$fourth);
+        margin-bottom: 2rem;
+    }
 
-        img {
-            mix-blend-mode: darken;
+    img {
+        mix-blend-mode: darken;
+    }
+}
+
+.change-password-form {
+    background-color: v.$light;
+    padding: 2.5rem;
+    border-radius: .5rem;
+    box-shadow: v.$mbxs;
+    width: 80%;
+    margin: 0 auto;
+
+    h3 {
+        @include m.para(1.4rem, 600, v.$btnbg);
+        margin-bottom: .5rem;
+
+        span {
+            color: v.$primary;
         }
     }
 
-    .change-password-form {
-        background-color: v.$light;
-        padding: 2.5rem;
-        border-radius: .5rem;
-        box-shadow: v.$mbxs;
-        width: 80%;
-        margin: 0 auto;
+    p {
+        @include m.para(.9rem, 400, v.$fourth);
+        margin-bottom: 1.5rem;
+    }
 
-        h3 {
-            @include m.para(1.4rem, 600, v.$btnbg);
-            margin-bottom: .5rem;
+    .form-group {
+        margin-bottom: 1rem;
 
-            span {
-                color: v.$primary;
-            }
+        label {
+            @include m.para(.95rem, 400, v.$btnbg);
+            margin-bottom: 0.4rem;
         }
 
-        p {
-            @include m.para(.9rem, 400, v.$fourth);
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-
-            label {
-                @include m.para(.95rem, 400, v.$btnbg);
-                margin-bottom: 0.4rem;
-            }
-
-            .form-control {
-                border: 1px solid v.$third;
-            }
-        }
-
-        .form-submit {
-            margin-top: 1rem;
-
-            .btn-submit {
-                display: block;
-                width: 100%;
-                text-align: center;
-                @include m.button(1rem, v.$light, v.$gdbg);
-
-                &:hover {
-                    opacity: .7
-                }
-            }
+        .form-control {
+            border: 1px solid v.$third;
         }
     }
 
+    .form-submit {
+        margin-top: 1rem;
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            text-align: center;
+            @include m.button(1rem, v.$light, v.$gdbg);
+
+            &:hover {
+                opacity: .7
+            }
+        }
+    }
 }
 
 .set-profile-picture {
