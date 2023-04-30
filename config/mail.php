@@ -78,6 +78,14 @@ return [
                 'log',
             ],
         ],
+        'from' => [
+            'address' => env('MAIL_FROM_ADDRESS', 'contact@experec.com'),
+            'name' => env('MAIL_FROM_NAME', 'Experec'),
+        ],
+        'reply_to' => [
+            'address' => env('MAIL_REPLY_TO', 'donot-reply@experec.com'),
+            'name' => env('APP_NAME', 'Experec'),
+        ],
     ],
 
     /*

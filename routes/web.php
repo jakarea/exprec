@@ -44,6 +44,7 @@ Route::controller(HomeController::class)->group(function () {
         ->name('checkout.cancel');
 
     Route::get('/change-password', 'changePassword')->name('changePassword');
+    Route::post('/change-password', 'postChangePassword')->name('postChangePassword');
 
 });
 

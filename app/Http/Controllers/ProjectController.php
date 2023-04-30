@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Results;
 use App\Models\Interest;
+use App\Models\ProjectList;
+use Auth;
 class ProjectController extends Controller
 { 
 
@@ -27,17 +29,18 @@ class ProjectController extends Controller
         $project_id = $request->previous_project;
 
         if($project_id){
-            $projects = Project::where(['id' => $project_id])->first();
+            $project = Project::where(['id' => $project_id])->first();
 
-            $old_data = json_decode($projects['details']);
+            $old_data = json_decode($project['details']);
             $newdata = array_merge($old_data,json_decode($request->project_details));
-            $projects->details = $newdata; 
-            $projects->save();
+            $project->details = $newdata; 
+            $project->save();
         }else{
-            $projects = new Project();
-            $projects->name = $request->name; 
-            $projects->details = $request->project_details; 
-            $projects->save();
+            $project = new Project();
+            $project->name = $request->name; 
+            $project->user_id = Auth()->user()->id; 
+            $project->details = $request->project_details; 
+            $project->save();
         }
         
         return redirect()->route('projectlist');

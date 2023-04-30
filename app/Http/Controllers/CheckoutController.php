@@ -6,10 +6,12 @@ use Auth;
 use Stripe\Stripe;
 use App\Models\Plan;
 use App\Models\User;
+use App\Mail\TempPassword;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 
 class CheckoutController extends Controller
@@ -29,19 +31,18 @@ class CheckoutController extends Controller
     
         // Create a new Checkout Session
         $session = Session::create([
-            'payment_method_types' => ['card'],
+            'payment_method_types' => ['card'], 
             'line_items' => [[
                 'price' => $plan->stripe_plan,
                 'quantity' => 1,
             ]],
             'mode' => 'subscription',
             'success_url' => route('checkout.success'),
-            'cancel_url' => route('subscription.index'),
+            'cancel_url' => route('subscription.index')
         ]);
         
         return redirect($session->url);
     }
-     
 
     /**
      * Show the form for creating a new resource.
@@ -61,7 +62,7 @@ class CheckoutController extends Controller
         $subscription = \Stripe\Subscription::retrieve(Session::all()['data'][0]['subscription']);
 
         // customer get by customer
-       $customer = \Stripe\Customer::retrieve(Session::all()['data'][0]['customer']);
+        $customer = \Stripe\Customer::retrieve(Session::all()['data'][0]['customer']);
         // dd($subscription);
         // get payment method data by customer        
         // dd(Session::all()['data'][0]);
@@ -80,10 +81,11 @@ class CheckoutController extends Controller
             $changePassword = false;
             auth()->login($user);
         }else{
+            $password = Str::random(8);
             $user = User::create([
                 'name' => Session::all()['data'][0]['customer_details']['name'],
                 'email' => Session::all()['data'][0]['customer_details']['email'],
-                'password' => Hash::make(Str::random(24)),
+                'password' => Hash::make($password),
                 'stripe_id' => Session::all()['data'][0]['customer'],
                 // 'pm_type' => Session::all()['data'][0]['payment_method_details']['card']['brand'],
                 // 'pm_last_four' => Session::all()['data'][0]['payment_method_details']['card']['last4'],
@@ -92,7 +94,9 @@ class CheckoutController extends Controller
             // login user
             $changePassword = true;
             auth()->login($user);
+            Mail::to($user)->send(new TempPassword(['password' => $password, 'email' => $user->email, 'name' => $user->name]));
         }
+
 
         // if subscription is not null and not find in subscription table then create new subscription else update subscription
         if($subscription != null){
