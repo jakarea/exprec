@@ -51,4 +51,11 @@ class HomeController extends Controller
         return redirect()->route('home')->with('success', 'Your password has been changed successfully!');
     }
 
+    public function myProfile()
+    {
+        $userId = Auth()->user()->id; 
+        $user = User::where('id', $userId)->first();
+        return view('profile/profile',compact('user'));
+    }
+
 }

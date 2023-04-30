@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('layouts.profile')
 
 @section('title') Subscription @endsection
 
@@ -45,7 +45,9 @@
                                 <h4>{{ $plan->name }}</h4>
                             </div>
                             <div class="plan-body"> 
-                                <h5 class="plan-title">${{ $plan->price }}/Mo</h5>
+                                <h5 class="plan-title">${{ $plan->price }} 
+                                @if($plan['id'] == '1')<span>/Month</span>  @elseif($plan['id'] == '2')<span>/Year</span>  @endif
+                            </h5>
                                 <ul>
                                     <li>
                                         <i class="fa fa-check"></i> Elearning 

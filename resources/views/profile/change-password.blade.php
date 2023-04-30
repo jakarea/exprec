@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('layouts.profile')
 @section('title','user password chnage')
 @section('style') 
 <link href="{{ asset('assets/css/profile.css') }}" rel="stylesheet" type="text/css" />  

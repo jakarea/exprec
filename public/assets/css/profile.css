@@ -75,6 +75,38 @@
   opacity: 0.7;
 }
 
+.set-profile-picture .media {
+  align-items: center;
+}
+.set-profile-picture .media img {
+  width: 9rem;
+  height: 9rem;
+  border-radius: 50%;
+  border: 3px solid #FF6262;
+  margin-right: 1.5rem;
+}
+.set-profile-picture .media .btn-upload-pic {
+  background: linear-gradient(98.03deg, #FF6262 18.68%, #F37F14 88.52%);
+  color: #ffffff;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+.set-profile-picture .media .delete-bttn {
+  background: #727DFF;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.profile-imgs {
+  text-align: center;
+}
+.profile-imgs img {
+  width: 70%;
+  display: block;
+  margin: 0 auto;
+  mix-blend-mode: darken;
+}
+
 @media (min-width: 320px) and (max-width: 574px) {
   .user-password-chnage .password-change-txt h1 {
     font-size: 1.4rem;
