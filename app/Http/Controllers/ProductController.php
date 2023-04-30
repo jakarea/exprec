@@ -97,7 +97,6 @@ if ($err) {
         public function myList(){
             $products = FavoriteProduct::where('user_id', Auth::user()->id)->with('product')->paginate(20);
             $categories = Category::orderby('id', 'desc')->get();
-            return  $products;
             return view('products/favorite', compact('products','categories'));
         }
 

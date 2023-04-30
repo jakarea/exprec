@@ -16,7 +16,7 @@
       <img src="{{ asset('assets/images/dashboard-icon.svg') }}" alt="Dash" class="img-fluid me-2"> All Products </a>
   </li> 
   <li>
-    <a href="{{ url('/products/mylist') }}" class="{{ Request::is('products/mylist')  ? ' active' : '' }}">
+    <a href="{{ url('/products/my-list') }}" class="{{ Request::is('products/my-list')  ? ' active' : '' }}">
       <img src="{{ asset('assets/images/dashboard-icon.svg') }}" alt="Dash" class="img-fluid me-2"> My List </a>
   </li> 
   @endrole
