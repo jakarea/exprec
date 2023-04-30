@@ -38,7 +38,7 @@
         $remaining_days = ceil(($subscription_end_date2 - time()) / 86400);
     }
     @endphp
-    @if ( !empty($subscription) && $subscription->data[0]->status == 'active' && $remaining_days > 0 )
+    @if ( !empty($subscription) && $subscription->data[0]->status == 'active' && $remaining_days > 7 )
     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="alert alert-success" role="alert">
             <h6 class="alert-heading">Subscription</h6>

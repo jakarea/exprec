@@ -21,8 +21,9 @@
           <h3> <span>{{ $user->name}}</span>, You are almost done!</h3>
           <p>Once you've entered your new password and confirmed it, click the "Save Changes" button to update your password.</p>
           <!-- change pass form @S -->
-          <form action="">
+          <form action="" method="POST">
            <!-- input @S -->
+           @csrf
            <div class="form-group">
               <label for="">Email</label>
               <input type="text" placeholder="Email" class="form-control" value="{{ $user->email}}" disabled>
@@ -30,14 +31,16 @@
            <!-- input @E -->
            <!-- input @S -->
            <div class="form-group">
-              <label for="">Password</label>
-              <input type="password" placeholder="*********" class="form-control">
+              <label for="">Password<sup class="text-danger">*</sup></label>
+              <input type="password" name="password" placeholder="*********" class="form-control @error('password') is-invalid @enderror" id="password">
+              <span class="invalid-feedback">@error('password'){{ $message }} @enderror</span> 
             </div>
            <!-- input @E -->
            <!-- input @S -->
            <div class="form-group">
-              <label for="">Confirm Password</label>
-              <input type="password" placeholder="*********" class="form-control">
+              <label for="">Confirm Password<sup class="text-danger">*</sup></label>
+              <input type="password" name="password_confirmation" placeholder="*********" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation">
+              <span class="invalid-feedback">@error('password_confirmation'){{ $message }} @enderror</span> 
             </div>
            <!-- input @E -->
            <!-- submit @S -->

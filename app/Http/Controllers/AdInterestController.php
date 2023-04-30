@@ -81,7 +81,7 @@ class AdInterestController extends Controller
  
             $size = count($results);
 
-            $projects = Project::orderBy('id', 'desc')->get();
+            $projects = Project::where('user_id',Auth()->user()->id)->orderBy('id', 'desc')->get();
             $words = $this->wordsArray;
             arsort($words);
             $words = array_slice($words, 0, 9);

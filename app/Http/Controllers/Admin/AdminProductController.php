@@ -341,7 +341,7 @@ class AdminProductController extends Controller
             $title = htmlspecialchars_decode($jsonProduct->titleModule->subject); 
             $slug = Str::slug($title);
 
-            $min_price = $jsonProduct->priceModule->minAmount->value ?? 0;
+            $min_price = $jsonProduct->priceModule->minActivityAmount->value ?? 0;
             if($min_price == 0){
                 $price_str = str_replace('US$', '', $jsonProduct->priceModule->formatedActivityPrice);
                 $price_arr = explode(' - ', $price_str);
