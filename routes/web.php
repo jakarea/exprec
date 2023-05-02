@@ -49,6 +49,7 @@ Route::controller(HomeController::class)->group(function () {
 
     // profile page route
     Route::get('/my-profile', 'myProfile')->name('myProfile');
+    Route::get('/my-profile/{id}', 'editMyProfile')->name('editMyProfile');
 
 });
 

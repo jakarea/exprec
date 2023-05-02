@@ -186,6 +186,29 @@
     }
 }
 
+.payment-method-info-item{
+    padding: 1.5rem;
+    border-radius: .5rem;
+    border: 1px solid v.$third;
+    span{
+        @include m.para(1rem,500,v.$fourth);
+    }
+    h6{
+        @include m.para(1.6rem,600,v.$btnbg);
+        color: v.$primary!important;
+    }
+}
+
+.productss-list-box{
+    border-radius: .5rem;
+}
+
+.edit-my-profile{
+    text-align: right;
+    a{
+        font-size: 1rem;
+    }
+}
 
 @include q.responsive(phone) {
     .user-password-chnage .password-change-txt {
@@ -211,6 +234,18 @@
 
     .user-password-chnage .change-password-form h3 {
         font-size: 1.1rem;
+    }
+
+    .productss-list-box{
+        margin-top: 2rem;
+    }
+
+    .product-filter-wrapper .product-filter-box{
+        grid-template-columns: 1fr!important;
+    }
+    .form-grp-btn{
+       margin-right: auto;
+        margin-bottom: 1rem;
     }
 
 }

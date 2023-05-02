@@ -189,6 +189,36 @@
   margin: 0.5rem 0 1rem !important;
 }
 
+.payment-method-info-item {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #DEE3EB;
+}
+.payment-method-info-item span {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #8C8FAE;
+  line-height: 140%;
+}
+.payment-method-info-item h6 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #2C2C2C;
+  line-height: 140%;
+  color: #FF6262 !important;
+}
+
+.productss-list-box {
+  border-radius: 0.5rem;
+}
+
+.edit-my-profile {
+  text-align: right;
+}
+.edit-my-profile a {
+  font-size: 1rem;
+}
+
 @media (min-width: 320px) and (max-width: 574px) {
   .user-password-chnage .password-change-txt h1 {
     font-size: 1.4rem;
@@ -207,6 +237,16 @@
   }
   .user-password-chnage .change-password-form h3 {
     font-size: 1.1rem;
+  }
+  .productss-list-box {
+    margin-top: 2rem;
+  }
+  .product-filter-wrapper .product-filter-box {
+    grid-template-columns: 1fr !important;
+  }
+  .form-grp-btn {
+    margin-right: auto;
+    margin-bottom: 1rem;
   }
 }
 @media (min-width: 574px) and (max-width: 767px) {
