@@ -8,9 +8,9 @@
     <!-- session message @E -->
 
     <!-- user header area @S -->
-    <div class="product-filter-wrapper">
+    <div class="product-filter-wrapper mt-0">
         <form action="" method="GET">
-            <div class="product-filter-box">
+            <div class="product-filter-box mt-0">
                 <h5>Users Management</h5> 
                 <div class="form-grp-btn mt-4 ms-auto">
                     <a href="{{ route('users.create') }}" class="btn me-3">Create User</a> 

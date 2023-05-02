@@ -1,203 +1,144 @@
 @extends('layouts.admin')
 @section('title') Admin - Customer Details @endsection
-@section('content') 
-@role("Admin")
-<main class="product-research-page-wrap">
-    <div class="row">
-        <div class="col-3">
-            <div class="card h-100">
-                <div class="card-body">
-                    <div class="customer-info">
-                        <a href="#">Customer</a>
-                        <h6>{{ $customer->name }}</h6>
-                        <p>{{ $customer->email }}</p>
-                        <br>
-                        <div id="accordion mt-3">
-                            <div id="headingOne">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Details</button>
-                            </h5>
-                            </div>
 
-                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                                <div class="mt-2">
-                                    <code>{{ $customer->stripe_id }}</code></br>
-                                    <!-- Account Details -->
-                                    <div class="account-details text-mute">
-                                        <span class="text-mute mb-2 border-bottom d-block">Account Details</span>
-                                        <p>{{ $customer->email }}</p>
-                                        <p>{{ $customer->name }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
+@section('style')
+<link href="{{ asset('assets/css/profile.css') }}" rel="stylesheet" type="text/css" />
+@endsection
+
+@section('content')
+<main class="course-page-wrap">
+    <!-- user header area @S -->
+    <div class="product-filter-wrapper my-0">
+        <div class="product-filter-box mt-0">
+            <div class="password-change-txt">
+                <h1 class="mb-1">Customer Profile</h1>
+                <p>This is <span class="text-danger"> {{ $customer->name }} </span> customer profile page.</p>
             </div>
-        </div>
-        <div class="col-9">
-            <div class="content-overviews">
-                <div class="card">
-                    <div class="card-header bg-transparent">
-                        <h6 class="card-title mb-0">Overviews</h6>
-                    </div>
-                    <div class="card-body">
-                        <!-- Subscription Start -->
-                        <div class="subscription">
-                            <h6>Subscription</h6><hr>
-                            <div class="subscription-info">
-                            @if ( count($subscriptions->data) > 0 )
-                            @foreach( $subscriptions->data as $subscription )
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="subscription-info-item">
-                                            <span class="text-mute">Status</span>
-                                            <h6 class="text-success">{{ $subscription->status }}</h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="subscription-info-item">
-                                            <span class="text-mute">Plan</span>
-                                            <h6 class="text-success">{{ $subscription->plan->product->name }}</h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="subscription-info-item">
-                                            <span class="text-mute">Start Date</span>
-                                            <h6 class="text-success">{{ date('Y-m-d', $subscription->current_period_start) }}</h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="subscription-info-item">
-                                            <span class="text-mute">End Date</span>
-                                            <h6 class="text-success">{{ date('Y-m-d', $subscription->current_period_end) }}</h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="subscription-info-item">
-                                            <span class="text-mute">Next Billing Date</span>
-                                            <h6 class="text-success">{{ date('Y-m-d', $subscription->current_period_end) }}</h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="subscription-info-item">
-                                            <span class="text-mute">Next Billing Amount</span>
-                                            <h6 class="text-success">$ {{ $subscription->plan->amount / 100 }}</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                            @else
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="subscription-info-item">
-                                            <span class="text-mute">Status</span>
-                                            <h6 class="text-success">No Subscription</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                            <!-- Subscription End -->
-                            </div>
-                        </div>
-                        <br>
-                        <!-- Payment Method Start -->
-                        <div class="payment-method">
-                            <h6>Payment Method</h6><hr>
-                            <div class="payment-method-info">
-                            @if ( count($paymentMethods->data) > 0 )
-                            @foreach( $paymentMethods->data as $paymentMethod )
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="payment-method-info-item">
-                                            <span class="text-mute">Card Brand</span>
-                                            <h6 class="text-success">{{ $paymentMethod->card->brand }}</h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="payment-method-info-item">
-                                            <span class="text-mute">Card Number</span>
-                                            <h6 class="text-success">{{ $paymentMethod->card->last4 }}</h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="payment-method-info-item">
-                                            <span class="text-mute">Card Expiry</span>
-                                            <h6 class="text-success">{{ $paymentMethod->card->exp_month }}/{{ $paymentMethod->card->exp_year }}</h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="payment-method-info-item">
-                                            <span class="text-mute">Card Country</span>
-                                            <h6 class="text-success">{{ $paymentMethod->card->country }}</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                            @else
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="payment-method-info-item">
-                                            <span class="text-mute">Card Brand</span>
-                                            <h6 class="text-success">No Payment Method</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                            </div>
-                        </div><br>
-                        <!-- Payment Method End -->
-                        <!-- Payment List -->
-                        <div class="payment-list">
-                            <h6>Payment List</h6><hr>
-                            <div class="payment-list-info">
-                            @if ( count($paymentIntents->data) > 0 )
-                            @foreach( $paymentIntents->data as $paymentIntent )
-                            @if ( $paymentIntent->customer->email == $customer->email )
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="payment-list-info-item">
-                                            <span class="text-mute">Amount</span>
-                                            <h6 class="text-success">$ {{ $paymentIntent->amount / 100 }}</h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="payment-list-info-item">
-                                            <span class="text-mute">Status</span>
-                                            <h6 class="text-success">{{ $paymentIntent->status }}</h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="payment-list-info-item">
-                                            <span class="text-mute">Created</span>
-                                            <h6 class="text-success">{{ date('Y-m-d', $paymentIntent->created) }}</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                            @endforeach
-                            @else
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="payment-list-info-item">
-                                            <span class="text-mute">Amount</span>
-                                            <h6 class="text-success">No Payment</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="form-grp-btn mt-0 ms-auto">
+                <a href="{{ url('customers') }}" class="btn me-3">All Customers</a>
             </div>
         </div>
     </div>
+    <!-- user header area @E -->
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="change-password-form w-100 customer-profile-info">
+                <div class="set-profile-picture">
+                    <div class="media justify-content-center">
+                        <span>{!! strtoupper($customer->name[0]) !!}</span> 
+                    </div>
+                    <div class="role-label">
+                        @if(!empty($customer->getRoleNames()))
+                        @foreach($customer->getRoleNames() as $v)
+                        <span class="badge rounded-pill bg-dark">{{ $v }}</span>
+                        @endforeach
+                        @endif
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h3>{{ $customer->name }} </h3>
+                    <!-- details box @S -->
+                    <div class="form-group mt-3 mb-1 ">
+                        <label for=""><i class="fa-brands fa-cc-stripe"></i> Stripe ID: </label>
+                        <code>{{ $customer->stripe_id }}</code>
+                    </div>
+                    <!-- details box @E -->
+                    <div class="form-group mb-0 ">
+                        <label for=""><i class="fa-solid fa-envelope"></i> Email: </label>
+                        <p>{{ $customer->email }}</p>
+                    </div>
+                </div>
+                <!-- details box @E -->
+                <h6>Subscription :</h6>
+                @if ( count($subscriptions->data) > 0 )
+                @foreach( $subscriptions->data as $subscription )
+                <div class="form-group mb-0">
+                    <label for=""><i class="fa-solid fa-flag"></i> Status: </label>
+                    @if( $subscription->status == 'active')
+                    <p class="text-success">{{ $subscription->status }}</p>
+                    @else
+                    <p>{{ $subscription->status }}</p>
+                    @endif
+
+                </div>
+                <div class="form-group mb-0">
+                    <label for=""><i class="fa-solid fa-cube"></i> Plan: </label>
+                    <p>{{ $subscription->plan->product->name }}</p>
+                </div>
+                <div class="form-group my-0">
+                    <label for=""><i class="fa-solid fa-calendar"></i> Start Date: </label>
+                    <p>{{ date('Y-m-d', $subscription->current_period_start) }}</p>
+                </div>
+                <div class="form-group my-0">
+                    <label for=""><i class="fa-regular fa-calendar"></i> End Date: </label>
+                    <p>{{ date('Y-m-d', $subscription->current_period_end) }}</p>
+                </div>
+                <div class="form-group my-0">
+                    <label for=""><i class="fa-solid fa-money-bills"></i> Next Billing Amount: </label>
+                    <p>$ {{ $subscription->plan->amount / 100 }}</p>
+                </div>
+                <div class="form-group my-0">
+                    <label for=""><i class="fa-solid fa-calendar-day"></i> Next Billing Date: </label>
+                    <p>{{ date('Y-m-d', $subscription->current_period_end) }}</p>
+                </div>
+
+                @endforeach
+                @else
+                <div class="row">
+                    <div class="col-6">
+                        <div class="subscription-info-item">
+                            <span class="text-mute">Status</span>
+                            <h6 class="text-success">No Subscription</h6>
+                        </div>
+                    </div>
+                </div>
+                @endif
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <!-- Customers payment listing @S -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="productss-list-box">
+                        @if ( count($paymentMethods->data) > 0 )
+                        <table>
+                            <tr>
+                                <th width="5%">No</th>
+                                <th>Card Brand</th>
+                                <th>Card Number</th>
+                                <th>Card Expiry</th>
+                                <th>Card Country</th>
+
+                            </tr>
+                            <!-- item start -->
+                            @foreach( $paymentMethods->data as $key => $paymentMethod )
+                            <tr>
+                                <td>{{ $key +1 }}</td>
+                                <td>{{ $paymentMethod->card->brand }}</td>
+                                <td>********{{ $paymentMethod->card->last4 }}</td>
+                                <td>{{ $paymentMethod->card->exp_month }} / {{ $paymentMethod->card->exp_year }}</td>
+                                <td>{{ $paymentMethod->card->country }}</td>
+                            </tr>
+                            @endforeach
+                            <!-- item end -->
+                        </table>
+                        @else
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="payment-method-info-item">
+                                    <span class="text-mute">Card Brand</span>
+                                    <h6 class="text-success">No Payment Method</h6>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <!-- Customers payment listing @E -->
+        </div>
+    </div>
+
 </main>
-@else
-<main class="course-page-wrap d-flex justify-content-center align-items-center">
-    <h4>You Don't have access to this page!</h4>
-</main>
-@endrole
 @endsection
