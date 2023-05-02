@@ -10,6 +10,7 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\HomeController; 
 use App\Http\Controllers\CourseController; 
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProjectController; 
 use App\Http\Controllers\AdInterestController; 
 use App\Http\Controllers\PaymentListController;
@@ -44,10 +45,6 @@ Route::controller(HomeController::class)->group(function () {
         ->name('checkout.cancel');
 
     Route::get('/change-password', 'changePassword')->name('changePassword');
-    Route::post('/change-password', 'postChangePassword')->name('postChangePassword');
-
-    // profile page route
-    Route::get('/my-profile', 'myProfile')->name('myProfile');
 
 });
 
@@ -60,6 +57,14 @@ Route::middleware("auth")->group(function () {
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+    // Customer routes
+    Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');
+    Route::get('customers/create', [CustomerController::class, 'create'])->name('customers.create');
+    Route::post('customers/store', [CustomerController::class, 'store'])->name('customers.store');
+    Route::get('customers/{id}/edit', [CustomerController::class, 'edit'])->name('customers.edit');
+    Route::post('customers/{id}/update', [CustomerController::class, 'update'])->name('customers.update');
+    Route::get('customers/{id}/delete', [CustomerController::class, 'destroy'])->name('customers.delete');
+    Route::get('customers/{id}/show', [CustomerController::class, 'show'])->name('customers.show');
 });
 
 Route::get('/home', function () {
