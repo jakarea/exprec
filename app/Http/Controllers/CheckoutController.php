@@ -91,6 +91,8 @@ class CheckoutController extends Controller
                 // 'pm_last_four' => Session::all()['data'][0]['payment_method_details']['card']['last4'],
                 'trial_ends_at' => null,
             ]);
+            // set role for user
+            $user->assignRole('Customer');
             // login user
             $changePassword = true;
             auth()->login($user);
