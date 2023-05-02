@@ -96,6 +96,12 @@
             @endrole
             @role('Admin')
             <li class="menu-item">
+                <a href="{{ url('customers') }}" class="{{ Request::is('customers*')  ? ' active' : '' }} menu-link"> 
+                    <i class="fa-solid fa-user-group"></i>
+                    <span>Customers</span> 
+                </a> 
+            </li>
+            <li class="menu-item">
                 <a href="{{ url('users') }}" class="{{ Request::is('users*')  ? ' active' : '' }} menu-link"> 
                 <i class="fa-solid fa-users"></i>
                     <span>Users</span> 

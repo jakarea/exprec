@@ -129,6 +129,18 @@
   position: relative;
   margin-bottom: 2rem;
 }
+.customer-profile-info .set-profile-picture .media span {
+  width: 10rem;
+  height: 10rem;
+  background: linear-gradient(98.03deg, #FF6262 18.68%, #F37F14 88.52%);
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 4rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 .customer-profile-info .set-profile-picture .media img {
   border-radius: 20%;
   width: 12rem;
@@ -143,7 +155,7 @@
 }
 .customer-profile-info .set-profile-picture .role-label .badge {
   font-size: 0.9rem;
-  background: linear-gradient(98.03deg, #FF6262 18.68%, #F37F14 88.52%);
+  background-color: #727DFF !important;
 }
 .customer-profile-info .form-group {
   margin-bottom: 0.5rem !important;

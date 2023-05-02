@@ -128,6 +128,18 @@
         position: relative;
         margin-bottom: 2rem;
         .media{
+            span{
+                width: 10rem;
+                height: 10rem;
+                background: v.$gdbg;
+                border-radius: 50%; 
+                color: v.$light;
+                font-size: 4rem;
+                font-weight: 600;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
             img{
                 border-radius: 20%;
                 width: 12rem;
@@ -142,7 +154,7 @@
             transform: translateX(-50%);
             .badge{
                 font-size: .9rem;
-                background: v.$gdbg;
+                background-color: v.$blu!important;
             }
         }
     }

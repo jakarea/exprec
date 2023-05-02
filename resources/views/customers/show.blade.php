@@ -26,7 +26,7 @@
             <div class="change-password-form w-100 customer-profile-info">
                 <div class="set-profile-picture">
                     <div class="media justify-content-center">
-                        <img src="{{asset('assets/images/post-02.png')}}" alt="Profile" class="img-fluid">
+                        <span>{!! strtoupper($customer->name[0]) !!}</span> 
                     </div>
                     <div class="role-label">
                         @if(!empty($customer->getRoleNames()))
