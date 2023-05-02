@@ -111,6 +111,69 @@
     }
 }
 
+.customer-profile-info{
+    padding: 2rem;
+    border: 1px solid v.$third;
+    .d-flex{
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.7rem;
+        
+    }
+    h3{
+        @include m.para(1.5rem,600,v.$btnbg);
+        text-transform: capitalize;
+    }
+    .set-profile-picture{
+        position: relative;
+        margin-bottom: 2rem;
+        .media{
+            img{
+                border-radius: 20%;
+                width: 12rem;
+                height: 12rem;
+                border: 5px solid v.$primary;
+            }
+        }
+        .role-label{
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            .badge{
+                font-size: .9rem;
+                background: v.$gdbg;
+            }
+        }
+    }
+    .form-group{
+        margin-bottom: 0.5rem!important;
+        @include m.df(space-between);
+        label{ 
+            color: v.$fourth;
+            i{
+                margin-right: 4px;
+            }
+        }
+        p{
+            @include m.para(1rem,500,v.$btnbg);
+            margin-left: 0.5rem;
+            display: inline-block;
+            margin-bottom: 0;
+        }
+        code{
+            font-size: 1rem;
+            margin-left: 0.5rem;
+            display: inline-block;
+        }
+    }
+    h6{
+        font-size: 1.2rem;
+        color: v.$primary;
+        margin: .5rem 0 1rem!important;
+    }
+}
+
 
 @include q.responsive(phone) {
     .user-password-chnage .password-change-txt {
