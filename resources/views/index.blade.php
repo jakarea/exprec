@@ -132,8 +132,11 @@
 
 @endsection
 @section('script') 
-    <!-- if changePassword get true open modal -->
-    @if (session()->has('changePassword'))
+    <!-- changePassword is equal true -->
+    @php
+        $changePassword = session()->get('changePassword');
+    @endphp
+    @if ($changePassword == true)
     <script>
         $(document).ready(function(){
            // redirect to change password page after 2 second

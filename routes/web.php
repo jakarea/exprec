@@ -15,6 +15,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\AdInterestController; 
 use App\Http\Controllers\PaymentListController;
 use App\Http\Controllers\EmailCampingController;
+use App\Http\Controllers\SubscriptionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -69,6 +70,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('customers/{id}/update', [CustomerController::class, 'update'])->name('customers.update');
     Route::get('customers/{id}/delete', [CustomerController::class, 'destroy'])->name('customers.delete');
     Route::get('customers/{id}/show', [CustomerController::class, 'show'])->name('customers.show');
+    // Subscription routes
+    Route::get('subscriptions', [SubscriptionController::class, 'index'])->name('subscriptions.index');
 });
 
 Route::get('/home', function () {
