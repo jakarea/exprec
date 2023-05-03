@@ -12,12 +12,12 @@
    <div class="row">
      <div class="col-lg-12">
        <div class="create-form-wrap">
-         <div class="create-form-head">
-           <h6>Edit User</h6>
-           <a href="{{ route('users.index') }}"> 
-            <i class="fa-solid fa-list"></i> All Users </a>
-           </a> 
-         </div>
+        <div class="create-form-head">
+          <h6>Edit your profile</h6>
+          <a href="{{ url('change-password') }}">
+            <i class="fa-solid fa-key"></i> Change Password </a>
+          </a>
+        </div>
         <!-- user edit form @S -->
         
         <!-- error message @S -->
@@ -61,13 +61,7 @@
                      <label for="password">Confirm Password <sup class="text-danger">*</sup></label>
                      {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
                    </div>
-                 </div>   
-                 <div class="col-md-12">
-                   <div class="form-group">
-                     <label for="password">Select Role <sup class="text-danger">*</sup></label>
-                     {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control')) !!}
-                   </div>
-                 </div>   
+                 </div>     
                  
                </div> <!-- row end -->
              </div>
