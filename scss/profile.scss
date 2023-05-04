@@ -186,6 +186,12 @@
     }
 }
 
+.payment-history-table{
+    h5{ 
+        @include m.para(1.4rem,600,v.$btnbg);
+    }
+}
+
 
 @include q.responsive(phone) {
     .user-password-chnage .password-change-txt {

@@ -23,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'thumbnail',
         'stripe_id',
         'pm_type',
         'pm_last_four',

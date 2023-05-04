@@ -55,10 +55,16 @@
                         <a href="#"data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ asset('assets/images/settings-icon.svg') }}" alt="Settings Icon" class="img-fluid" />
                         </a>  
-                        <ul class="dropdown-menu settings-dropdown"> 
-                           <li><a href="#"><i class="fas fa-user"></i> My Profile</a></li> 
-                           <li><a href="#"><i class="fa-solid fa-plug"></i>Integrations</a></li>
-                           <li><a href="#"><i class="fas fa-gear"></i> Settings</a></li>
+                        <ul class="dropdown-menu settings-dropdown">  
+                           @role('Customer')
+                            <li><a href="{{ url('/my-profile') }}"><i class="fas fa-user"></i> My Profile</a></li> 
+                            <li><a href="{{ url('/integrations') }}"><i class="fa-solid fa-plug"></i>Integrations</a></li>
+                           @endrole 
+                           @role('Admin')
+                            <li><a href="{{ url('/users') }}"><i class="fas fa-user"></i> Users</a></li> 
+                            <li><a href="{{ url('/customers') }}"><i class="fas fa-user"></i> Customers</a></li> 
+                           @endrole
+                           <li><a href="{{ url('/') }}"><i class="fas fa-gear"></i> Settings</a></li> 
                         </ul> 
                     </li>
                 </ul>
