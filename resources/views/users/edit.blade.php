@@ -76,7 +76,7 @@
           </div>
           <div class="row align-items-center">
             <div class="col-lg-4">
-              <div class="file-wrapper">
+              <div class="file-wrapper" @if($user->thumbnail) style="background-image: url({{asset('assets/images/user/'.$user->thumbnail)}})" @endif>
                 <input type="file" name="thumbnail" accept="image/*" />
                 <div class="close-btn"><i class="fas fa-close"></i></div>
               </div>

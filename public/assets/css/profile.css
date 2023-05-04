@@ -146,6 +146,8 @@
   width: 12rem;
   height: 12rem;
   border: 5px solid #FF6262;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .customer-profile-info .set-profile-picture .role-label {
   position: absolute;
@@ -202,6 +204,8 @@
   border: 3px solid #FF6262;
   border-radius: 0.4rem;
   position: relative;
+  background-size: cover;
+  background-position: center center;
 }
 
 .file-wrapper:after {
@@ -214,7 +218,7 @@
   margin: auto;
   width: -moz-max-content;
   width: max-content;
-  font-size: 3rem;
+  font-size: 3.5rem;
   color: #FF6262;
   margin-bottom: 1rem;
   margin-top: 2rem;
@@ -288,6 +292,26 @@
 
 .file-set > input {
   pointer-events: none;
+}
+
+.table-avatar img {
+  width: 3rem !important;
+  height: 3rem !important;
+  border-radius: 50% !important;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.table-avatar span {
+  width: 3rem;
+  height: 3rem;
+  background: linear-gradient(98.03deg, #FF6262 18.68%, #F37F14 88.52%);
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (min-width: 320px) and (max-width: 574px) {

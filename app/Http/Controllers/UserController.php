@@ -108,24 +108,21 @@ class UserController extends Controller
             'password' => 'same:confirm-password',
             'roles' => 'required'
         ]);
-    
-        $input = $request->all();
-        if(!empty($input['password'])){ 
-            $input['password'] = Hash::make($input['password']);
-        }else{
-            $input = Arr::except($input,array('password'));    
-        }
-    
-        $user = User::find($id);
-
+     
+        $user = User::find($id); 
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        } 
         $userSlug = Str::slug($user->name);
      
         $imageName = $userSlug.'.'.request()->thumbnail->getClientOriginalExtension();
         request()->thumbnail->move(public_path('assets/images/user'), $imageName);
         // return $imageName;
-        $user->thumbnail = $imageName;
+        $user->thumbnail =  $imageName;
 
-        $user->update($input);
+        $user->save();
         DB::table('model_has_roles')->where('model_id',$id)->delete();
     
         $user->assignRole($request->input('roles'));

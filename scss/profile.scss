@@ -152,6 +152,7 @@
                 width: 12rem;
                 height: 12rem;
                 border: 5px solid v.$primary;
+                object-fit: cover;
             }
         }
 
@@ -214,8 +215,10 @@
     height: 10rem;
     border: 3px solid v.$primary;
     border-radius: .4rem;
-    position: relative; 
-}
+    position: relative;
+    background-size: cover;
+    background-position: center center;
+} 
 
 .file-wrapper:after {
     content: '+';
@@ -225,8 +228,8 @@
     left: 0;
     right: 0;
     margin: auto;
-    width: max-content; 
-    font-size: 3rem;
+    width: max-content;
+    font-size: 3.5rem;
     color: v.$primary;
     margin-bottom: 1rem;
     margin-top: 2rem;
@@ -245,7 +248,7 @@
     font-size: 0.75em;
     color: gray;
 }
- 
+
 
 .file-wrapper .close-btn {
     display: none;
@@ -299,6 +302,28 @@
 
 .file-set>input {
     pointer-events: none;
+}
+
+
+.table-avatar{
+    img{
+        width: 3rem!important;
+        height: 3rem!important;
+        border-radius: 50%!important;
+        object-fit: cover;
+    }
+    span {
+        width: 3rem;
+        height: 3rem;
+        background: v.$gdbg;
+        border-radius: 50%;
+        color: v.$light;
+        font-size: 1rem;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 

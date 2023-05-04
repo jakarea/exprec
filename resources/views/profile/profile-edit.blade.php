@@ -14,8 +14,8 @@
         <div class="create-form-wrap">
           <div class="create-form-head">
             <h6>Edit your profile</h6>
-            <a href="{{ url('change-password') }}">
-              <i class="fa-solid fa-key"></i> Change Password </a>
+            <a href="{{ url('/') }}">
+              <i class="fa-solid fa-list"></i> Dashboard </a>
             </a>
           </div>
           <!-- user edit form @S -->
@@ -69,11 +69,11 @@
             </div>
           </div>
           <div class="row align-items-center">
-            <div class="col-lg-4">
-              <div class="file-wrapper">
-                <input type="file" name="thumbnail" accept="image/*" />
-                <div class="close-btn"><i class="fas fa-close"></i></div>
-              </div>
+            <div class="col-lg-4"> 
+                <div class="file-wrapper" @if($user->thumbnail) style="background-image: url({{asset('assets/images/user/'.$user->thumbnail)}})" @endif>
+                  <input type="file" name="thumbnail" accept="image/*" />
+                  <div class="close-btn"><i class="fas fa-close"></i></div>
+                </div> 
             </div>
             <div class="col-lg-8">
               <div class="submit-bttns">

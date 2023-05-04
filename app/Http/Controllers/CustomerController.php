@@ -138,8 +138,6 @@ class CustomerController extends Controller
         $user->email = $request->email;
         if ($request->password) {
             $user->password = Hash::make($request->password);
-        }else{
-            $user->password = $user->password;
         } 
         $userSlug = Str::slug($user->name);
      
@@ -149,7 +147,7 @@ class CustomerController extends Controller
         $user->thumbnail = $imageName;
 
         $user->save();
-        return redirect()->route('myProfile')->with('success', 'Your Profile has been Updated successfully!');
+        return redirect()->route('customers.index')->with('success', 'Your Profile has been Updated successfully!');
     }
 
     /**
