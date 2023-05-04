@@ -72,6 +72,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('customers/{id}/show', [CustomerController::class, 'show'])->name('customers.show');
     // Subscription routes
     Route::get('subscriptions', [SubscriptionController::class, 'index'])->name('subscriptions.index');
+    Route::get('subscriptions/create', [SubscriptionController::class, 'create'])->name('subscriptions.create');
+    Route::post('subscriptions/store', [SubscriptionController::class, 'store'])->name('subscriptions.store');
+    Route::get('subscriptions/{id}/edit', [SubscriptionController::class, 'edit'])->name('subscriptions.edit');
+    Route::post('subscriptions/{id}/update', [SubscriptionController::class, 'update'])->name('subscriptions.update');
+    Route::get('subscriptions/{id}/refunds', [SubscriptionController::class, 'refunds'])->name('subscriptions.refunds');
+    Route::get('subscriptions/{id}/delete', [SubscriptionController::class, 'destroy'])->name('subscriptions.delete');
+    Route::get('subscriptions/{id}/show', [SubscriptionController::class, 'show'])->name('subscriptions.show');
 });
 
 Route::get('/home', function () {

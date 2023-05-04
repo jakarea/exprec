@@ -96,6 +96,12 @@
             @endrole
             @role('Admin')
             <li class="menu-item">
+                <a href="{{ url('subscriptions') }}" class="{{ Request::is('subscriptions*')  ? ' active' : '' }} menu-link"> 
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>Subscription List</span> 
+                </a> 
+            </li>
+            <li class="menu-item">
                 <a href="{{ url('customers') }}" class="{{ Request::is('customers*')  ? ' active' : '' }} menu-link"> 
                     <i class="fa-solid fa-user-group"></i>
                     <span>Customers</span> 
