@@ -37,6 +37,8 @@
   height: 2.1rem;
   border-radius: 50%;
   margin-right: 1rem;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .sidebar-wrapper .header-user-box .media .media-body h5 {
   font-size: 1rem;
@@ -68,6 +70,12 @@
 }
 .sidebar-wrapper .sidebar-nav-area .menubar .menu-item .menu-link .fa-angles-right {
   font-size: 0.8rem;
+  color: #8C8FAE;
+}
+.sidebar-wrapper .sidebar-nav-area .menubar .menu-item .menu-link .fa-user-group,
+.sidebar-wrapper .sidebar-nav-area .menubar .menu-item .menu-link .fa-users,
+.sidebar-wrapper .sidebar-nav-area .menubar .menu-item .menu-link .fa-user {
+  font-size: 1.1rem;
   color: #8C8FAE;
 }
 .sidebar-wrapper .sidebar-nav-area .menubar .menu-item .menu-link i.fa-superpowers,

@@ -26,7 +26,12 @@
             <div class="change-password-form w-100 customer-profile-info">
                 <div class="set-profile-picture">
                     <div class="media justify-content-center">
-                        <span>{!! strtoupper($customer->name[0]) !!}</span> 
+                        @if($customer->thumbnail)
+                        <img src="{{ asset('assets/images/user/'.$customer->thumbnail) }}" alt="{{$customer->name}}"
+                            class="img-fluid">
+                        @else
+                        <span>{!! strtoupper($customer->name[0]) !!}</span>
+                        @endif
                     </div>
                     <div class="role-label">
                         @if(!empty($customer->getRoleNames()))
@@ -99,7 +104,8 @@
         <div class="col-lg-8">
             <div class="row">
                 <div class="col-12">
-                    <div class="productss-list-box">
+                    <div class="productss-list-box payment-history-table">
+                        <h5 class="p-3 pb-0">card History :</h5>
                         @if ( count($paymentMethods->data) > 0 )
                         <table>
                             <tr>
@@ -114,7 +120,25 @@
                             @foreach( $paymentMethods->data as $key => $paymentMethod )
                             <tr>
                                 <td>{{ $key +1 }}</td>
-                                <td>{{ $paymentMethod->card->brand }}</td>
+                                <td>
+                                    @if( $paymentMethod->card->brand == 'visa')
+                                    <i class="fa-brands fa-cc-visa"></i> {{ $paymentMethod->card->brand }}
+                                    @elseif( $paymentMethod->card->brand == 'mastercard')
+                                    <i class="fa-brands fa-cc-mastercard"></i> {{ $paymentMethod->card->brand }}
+                                    @elseif( $paymentMethod->card->brand == 'amex')
+                                    <i class="fa-brands fa-cc-amex"></i> {{ $paymentMethod->card->brand }}
+                                    @elseif( $paymentMethod->card->brand == 'discover')
+                                    <i class="fa-brands fa-cc-discover"></i> {{ $paymentMethod->card->brand }}
+                                    @elseif( $paymentMethod->card->brand == 'jcb')
+                                    <i class="fa-brands fa-cc-jcb"></i> {{ $paymentMethod->card->brand }}
+                                    @elseif( $paymentMethod->card->brand == 'diners')
+                                    <i class="fa-brands fa-cc-diners-club"></i> {{ $paymentMethod->card->brand }}
+                                    @elseif( $paymentMethod->card->brand == 'unionpay')
+                                    <i class="fa-brands fa-cc-unionpay"></i> {{ $paymentMethod->card->brand }}
+                                    @elseif( $paymentMethod->card->brand == 'unknown')
+                                    <i class="fa-solid fa-credit-card"></i> {{ $paymentMethod->card->brand }}
+                                    @endif
+                                </td>
                                 <td>********{{ $paymentMethod->card->last4 }}</td>
                                 <td>{{ $paymentMethod->card->exp_month }} / {{ $paymentMethod->card->exp_year }}</td>
                                 <td>{{ $paymentMethod->card->country }}</td>
@@ -136,8 +160,8 @@
                 </div>
                 <div class="col-12">
                     <!-- Customer Payment List -->
-                    <div class="productss-list-box mt-5">
-                        <h6 class="p-3">Payment History :</h6>
+                    <div class="productss-list-box payment-history-table mt-5">
+                        <h5 class="p-3 pb-0">Payment History :</h5>
                         @if ( count($paymentIntents) > 0 )
                         <table>
                             <tr>
@@ -145,7 +169,6 @@
                                 <th>Amount</th>
                                 <th>Payment Method</th>
                                 <th>Payment Status</th>
-                                <th>Card Brand</th>
                                 <th>Card Number</th>
                                 <th>Payment Date</th>
                             </tr>
@@ -157,25 +180,6 @@
                                 <td>$ {{ $paymentIntent->amount / 100 }}</td>
                                 <td>{{ $paymentIntent->payment_method_types[0] }}</td>
                                 <td>{{ $paymentIntent->status }}</td>
-                                <td>
-                                    @if( $paymentIntent->payment_method->card->brand == 'visa')
-                                    <i class="fa-brands fa-cc-visa"></i> {{ $paymentIntent->payment_method->card->brand }}
-                                    @elseif( $paymentIntent->payment_method->card->brand == 'mastercard')
-                                    <i class="fa-brands fa-cc-mastercard"></i> {{ $paymentIntent->payment_method->card->brand }}
-                                    @elseif( $paymentIntent->payment_method->card->brand == 'amex')
-                                    <i class="fa-brands fa-cc-amex"></i> {{ $paymentIntent->payment_method->card->brand }}
-                                    @elseif( $paymentIntent->payment_method->card->brand == 'discover')
-                                    <i class="fa-brands fa-cc-discover"></i> {{ $paymentIntent->payment_method->card->brand }}
-                                    @elseif( $paymentIntent->payment_method->card->brand == 'jcb')
-                                    <i class="fa-brands fa-cc-jcb"></i> {{ $paymentIntent->payment_method->card->brand }}
-                                    @elseif( $paymentIntent->payment_method->card->brand == 'diners')
-                                    <i class="fa-brands fa-cc-diners-club"></i> {{ $paymentIntent->payment_method->card->brand }}
-                                    @elseif( $paymentIntent->payment_method->card->brand == 'unionpay')
-                                    <i class="fa-brands fa-cc-unionpay"></i> {{ $paymentIntent->payment_method->card->brand }}
-                                    @elseif( $paymentIntent->payment_method->card->brand == 'unknown')
-                                    <i class="fa-solid fa-credit-card"></i> {{ $paymentIntent->payment_method->card->brand }}
-                                    @endif
-                                </td>
                                 <td>********{{ $paymentIntent->payment_method->card->last4 }}</td>
                                 <td>{{ date('M d, Y h:m a', $paymentIntent->created) }}</td>
                             </tr>

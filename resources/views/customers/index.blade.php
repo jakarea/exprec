@@ -1,5 +1,10 @@
 @extends('layouts.admin')
 @section('title') Admin - Customer List @endsection
+
+@section('style')
+<link href="{{ asset('assets/css/profile.css') }}" rel="stylesheet" type="text/css" />
+@endsection
+
 @section('content')
 @role("Admin")
 <main class="product-research-page-wrap">
@@ -29,17 +34,26 @@
                 <table>
                     <tr>
                         <th width="5%">No</th>
+                        <th>Avatar</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
-                        <th>Actions</th>
-
+                        <th>Actions</th> 
                     </tr>
                     <!-- task item start -->
 
                     @foreach($customers as $key => $customer)
                     <tr>
                         <td>{{ $key +1 }}</td>
+                        <td>
+                            <div class="table-avatar">
+                                @if($customer->thumbnail)
+                                <img src="{{ asset('assets/images/user/'.$customer->thumbnail) }}" alt="{{$customer->name}}" class="img-fluid">
+                                @else 
+                                    <span>{!! strtoupper($customer->name[0]) !!}</span> 
+                                @endif
+                            </div>
+                        </td>
                         <td>{{ __($customer->name) }}</td>
                         <td>{{ __($customer->email) }}</td>
                         <td>
@@ -54,7 +68,7 @@
                                 </a>
                                 @endcan
                                 @can('course-edit')
-                                <a href="{{ url('admin/elearning/courses/'.$customer->id.'/edit') }}">
+                                <a href="{{ url('customers/'.$customer->id.'/edit') }}">
                                     <i class="fas fa-pen text-primary me-2"></i>
                                 </a>
                                 @endcan
