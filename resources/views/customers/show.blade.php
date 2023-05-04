@@ -97,7 +97,6 @@
             </div>
         </div>
         <div class="col-lg-8">
-            <!-- Customers payment listing @S -->
             <div class="row">
                 <div class="col-12">
                     <div class="productss-list-box">
@@ -135,8 +134,68 @@
                         @endif
                     </div>
                 </div>
+                <div class="col-12">
+                    <!-- Customer Payment List -->
+                    <div class="productss-list-box mt-5">
+                        <h6 class="p-3">Payment History :</h6>
+                        @if ( count($paymentIntents) > 0 )
+                        <table>
+                            <tr>
+                                <th width="5%">No</th>
+                                <th>Amount</th>
+                                <th>Payment Method</th>
+                                <th>Payment Status</th>
+                                <th>Card Brand</th>
+                                <th>Card Number</th>
+                                <th>Payment Date</th>
+                            </tr>
+                            <!-- item start -->
+                            @foreach( $paymentIntents as $key => $paymentIntent )
+                            @if( $paymentIntent->customer->email == $customer->email)
+                            <tr>
+                                <td>{{ $key +1 }}</td>
+                                <td>$ {{ $paymentIntent->amount / 100 }}</td>
+                                <td>{{ $paymentIntent->payment_method_types[0] }}</td>
+                                <td>{{ $paymentIntent->status }}</td>
+                                <td>
+                                    @if( $paymentIntent->payment_method->card->brand == 'visa')
+                                    <i class="fa-brands fa-cc-visa"></i> {{ $paymentIntent->payment_method->card->brand }}
+                                    @elseif( $paymentIntent->payment_method->card->brand == 'mastercard')
+                                    <i class="fa-brands fa-cc-mastercard"></i> {{ $paymentIntent->payment_method->card->brand }}
+                                    @elseif( $paymentIntent->payment_method->card->brand == 'amex')
+                                    <i class="fa-brands fa-cc-amex"></i> {{ $paymentIntent->payment_method->card->brand }}
+                                    @elseif( $paymentIntent->payment_method->card->brand == 'discover')
+                                    <i class="fa-brands fa-cc-discover"></i> {{ $paymentIntent->payment_method->card->brand }}
+                                    @elseif( $paymentIntent->payment_method->card->brand == 'jcb')
+                                    <i class="fa-brands fa-cc-jcb"></i> {{ $paymentIntent->payment_method->card->brand }}
+                                    @elseif( $paymentIntent->payment_method->card->brand == 'diners')
+                                    <i class="fa-brands fa-cc-diners-club"></i> {{ $paymentIntent->payment_method->card->brand }}
+                                    @elseif( $paymentIntent->payment_method->card->brand == 'unionpay')
+                                    <i class="fa-brands fa-cc-unionpay"></i> {{ $paymentIntent->payment_method->card->brand }}
+                                    @elseif( $paymentIntent->payment_method->card->brand == 'unknown')
+                                    <i class="fa-solid fa-credit-card"></i> {{ $paymentIntent->payment_method->card->brand }}
+                                    @endif
+                                </td>
+                                <td>********{{ $paymentIntent->payment_method->card->last4 }}</td>
+                                <td>{{ date('M d, Y h:m a', $paymentIntent->created) }}</td>
+                            </tr>
+                            @endif
+                            @endforeach
+                            <!-- item end -->
+                        </table>
+                        @else
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="payment-method-info-item">
+                                    <span class="text-mute">Amount</span>
+                                    <h6 class="text-success">No Payment</h6>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                </div>
             </div>
-            <!-- Customers payment listing @E -->
         </div>
     </div>
 

@@ -54,28 +54,52 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        // set stripe api key
+        // Set Stripe API key
         Stripe::setApiKey(env('STRIPE_SECRET'));
-        // get customer data by id and role
+    
+        // Get customer data by ID and role
         $customer = User::role('Customer')->find($id);
-        // get subscription data from stripe by customer stripe_id
+    
+        // Get subscription data from Stripe by customer Stripe ID
         $subscriptions = \Stripe\Subscription::all([
             'customer' => $customer->stripe_id,
             'expand' => ['data.plan.product'],
         ]);
-        // get payment method data from stripe by customer stripe_id
+    
+        // Get payment method data from Stripe by customer Stripe ID
         $paymentMethods = \Stripe\PaymentMethod::all([
             'customer' => $customer->stripe_id,
             'type' => 'card',
         ]);
-        // get all payment list from stripe by customer stripe_id
-        $paymentIntents = \Stripe\PaymentIntent::all([
-            'expand' => ['data.customer'],
+    
+        // Retrieve all PaymentIntents for the specified customer with pagination
+        $limit = 100;
+        $paymentIntents = [];
+    
+        // Retrieve the first page of PaymentIntents
+        $response = \Stripe\PaymentIntent::all([
+            'limit' => $limit,
+            'expand' => ['data.customer', 'data.payment_method'],
         ]);
+    
+        $paymentIntents = array_merge($paymentIntents, $response->data);
+    
+        // Retrieve subsequent pages of PaymentIntents
+        while ($response->has_more) {
+            $response = \Stripe\PaymentIntent::all([
+                'limit' => $limit,
+                'starting_after' => end($response->data)->id,
+                'expand' => ['data.customer'],
+            ]);
+    
+            $paymentIntents = array_merge($paymentIntents, $response->data);
+        }
 
+        // dd($paymentIntents);
+    
+        // Return the customers.show view with all relevant data
         return view('customers.show', compact('customer', 'subscriptions', 'paymentMethods', 'paymentIntents'));
-        
-    }
+    }    
 
     /**
      * Show the form for editing the specified resource.
