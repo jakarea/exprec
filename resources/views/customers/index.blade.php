@@ -62,7 +62,6 @@
                         </td>
                         <td width="10%">
                             <div class="action-bttn">
-                                @can('course-list')
                                 <a href="{{ route('customers.show', $customer->id) }}">
                                     <i class="fas fa-eye text-info me-2"></i>
                                 </a>
@@ -81,7 +80,6 @@
                                             class="fas fa-trash text-danger"></i></button>
                                 </form>
                                 @endcan
-
                             </div>
                         </td>
                     </tr>
