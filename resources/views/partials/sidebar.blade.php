@@ -3,9 +3,11 @@
     <!-- header user @S -->
     <div class="header-user-box">
         <div class="media">
-            <span>
-                {!! strtoupper(Auth()->user()->name[0]) !!}
-            </span> 
+            @if(Auth()->user()->thumbnail)
+            <img src="{{ asset('assets/images/user/'.Auth()->user()->thumbnail) }}" alt="{{Auth()->user()->name}}" class="img-fluid">
+            @else
+            <span>{!! strtoupper(Auth()->user()->name[0]) !!}</span>
+            @endif 
             <div class="media-body">
                 <h5>{{Auth()->user()->name}}</h5>
                 <p>@role('Admin') Admin @else Entrepreneur @endrole</p>

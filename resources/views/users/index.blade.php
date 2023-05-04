@@ -1,5 +1,10 @@
 @extends('layouts.admin')
 @section('title') Admin - Users List @endsection
+
+@section('style')
+<link href="{{ asset('assets/css/profile.css') }}" rel="stylesheet" type="text/css" />
+@endsection
+
 @section('content') 
 @role("Admin")
 <main class="course-page-wrap ">
@@ -31,6 +36,9 @@
                         No
                     </th>
                     <th>
+                        Avatar
+                    </th>
+                    <th>
                         Name
                     </th>
                     <th>
@@ -47,6 +55,15 @@
                     @foreach($data as $key => $user)
                     <tr>
                     <td>{{ ++$i }}</td>
+                    <td>
+                        <div class="table-avatar">
+                            @if($user->thumbnail)
+                            <img src="{{ asset('assets/images/user/'.$user->thumbnail) }}" alt="{{$user->name}}" class="img-fluid">
+                            @else 
+                                <span>{!! strtoupper($user->name[0]) !!}</span> 
+                            @endif
+                        </div>
+                    </td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>

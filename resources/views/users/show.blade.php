@@ -22,41 +22,36 @@
       </div>
     </form>
   </div>
-  <!-- user header area @E -->
-
-
+  <!-- user header area @E --> 
+  
   <div class="row align-items-center">
     <div class="col-lg-5">
-      <div class="change-password-form w-100">
-        <div class="d-flex justify-content-between">
-          <h3><span>{{ $user->name}}</span>
-            @if(!empty($user->getRoleNames()))
-            @foreach($user->getRoleNames() as $v)
-            <span class="badge rounded-pill bg-dark ms-5">{{ $v }}</span>
-            @endforeach
-            @endif
-        </div>
-        </h3>
+      <div class="change-password-form w-100 customer-profile-info">
         <div class="set-profile-picture">
           <div class="media justify-content-center">
-            <img src="{{asset('assets/images/post-01.png')}}" alt="Profile" class="img-fluid">
+            @if($user->thumbnail)
+            <img src="{{ asset('assets/images/user/'.$user->thumbnail) }}" alt="{{$user->name}}"
+              class="img-fluid">
+            @else
+            <span>{!! strtoupper($user->name[0]) !!}</span>
+            @endif
+          </div>
+          <div class="role-label">
+            @if(!empty($user->getRoleNames()))
+            @foreach($user->getRoleNames() as $v)
+            <span class="badge rounded-pill bg-dark">{{ $v }}</span>
+            @endforeach
+            @endif
           </div>
         </div>
-        <!-- change pass form @S -->
-
-        <!-- input @S -->
-        <div class="form-group">
-          <label for="">Name</label>
-          <input type="text" placeholder="Name" class="form-control" value="{{ $user->name}}" disabled>
+        <div class="text-center">
+          <h3>{{ $user->name }} </h3> 
+          <div class="form-group mb-0 ">
+            <label for=""><i class="fa-solid fa-envelope"></i> Email: </label>
+            <p>{{ $user->email }}</p>
+          </div>
         </div>
-        <!-- input @E -->
-        <div class="form-group">
-          <label for="">Email</label>
-          <input type="email" placeholder="Email" class="form-control" value="{{ $user->email}}" disabled>
-        </div>
-        <!-- input @E -->
-
-        <!-- change pass form @E -->
+        <!-- details box @E --> 
       </div>
     </div>
     <div class="col-lg-7">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Stripe\Stripe;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -109,7 +110,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);   
+        return view('customers/edit',compact('user'));  
     }
 
     /**
@@ -121,7 +123,31 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // return $request->all();
+
+        //validate password and confirm password
+        $this->validate($request, [
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email,'.$id,
+            // 'password' => 'confirmed|min:6|string',
+            'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+        ]);
+ 
+        $user = User::where('id', $id)->first();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        } 
+        $userSlug = Str::slug($user->name);
+     
+        $imageName = $userSlug.'.'.request()->thumbnail->getClientOriginalExtension();
+        request()->thumbnail->move(public_path('assets/images/user'), $imageName);
+
+        $user->thumbnail = $imageName;
+
+        $user->save();
+        return redirect()->route('customers.index')->with('success', 'Your Profile has been Updated successfully!');
     }
 
     /**

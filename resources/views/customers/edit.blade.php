@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title') Admin - User Edit @endsection
+@section('title') User - Profile Edit @endsection
 @section('style')
 <link href="{{ asset('assets/css/product-researchs.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets/css/profile.css') }}" rel="stylesheet" type="text/css" />
@@ -13,9 +13,9 @@
       <div class="col-lg-12">
         <div class="create-form-wrap">
           <div class="create-form-head">
-            <h6>Edit User</h6>
-            <a href="{{ route('users.index') }}">
-              <i class="fa-solid fa-list"></i> All Users </a>
+            <h6>Edit your profile</h6>
+            <a href="{{ url('/') }}">
+              <i class="fa-solid fa-list"></i> Dashboard </a>
             </a>
           </div>
           <!-- user edit form @S -->
@@ -33,8 +33,8 @@
           @endif
           <!-- error message @E -->
 
-          {!! Form::model($user, ['method' => 'PATCH','enctype' => 'multipart/form-data','class' => 'create-form-box','route' => ['users.update',
-          $user->id]]) !!}
+          {!! Form::model($user, ['method' => 'POST', 'enctype' => 'multipart/form-data', 'class' =>
+          'create-form-box','route' => ['customers.update', $user->id]]) !!}
 
           <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12">
@@ -62,12 +62,6 @@
                     <label for="password">Confirm Password <sup class="text-danger">*</sup></label>
                     {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' =>
                     'form-control')) !!}
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="password">Select Role <sup class="text-danger">*</sup></label>
-                    {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control')) !!}
                   </div>
                 </div>
 
@@ -98,7 +92,6 @@
 <!-- === user edit page @E === -->
 
 @endsection
-
 
 @section('script')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
