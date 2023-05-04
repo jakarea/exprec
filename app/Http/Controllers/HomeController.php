@@ -132,12 +132,13 @@ class HomeController extends Controller
         }else{
             $user->password = $user->password;
         } 
-        $userSlug = Str::slug($user->name);
-     
-        $imageName = $userSlug.'.'.request()->thumbnail->getClientOriginalExtension();
-        request()->thumbnail->move(public_path('assets/images/user'), $imageName);
 
-        $user->thumbnail = $imageName;
+        if ($request->thumbnail) {
+            $userSlug = Str::slug($user->name); 
+            $imageName = $userSlug.'.'.request()->thumbnail->getClientOriginalExtension();
+            request()->thumbnail->move(public_path('assets/images/user'), $imageName); 
+            $user->thumbnail = $imageName;
+        }
 
         $user->save();
         return redirect()->route('myProfile')->with('success', 'Your Profile has been Updated successfully!');
