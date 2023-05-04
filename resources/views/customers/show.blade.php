@@ -6,7 +6,6 @@
 @endsection
 
 @section('content')
-@role("Admin")
 <main class="course-page-wrap">
     <!-- user header area @S -->
     <div class="product-filter-wrapper my-0">
@@ -142,9 +141,4 @@
     </div>
 
 </main>
-@else
-<main class="course-page-wrap d-flex justify-content-center align-items-center">
-    <h4>You Don't have access to this page!</h4>
-</main>
-@endrole
 @endsection

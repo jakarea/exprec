@@ -1,152 +1,77 @@
-@extends('layouts.admin')
-@section('title') User - Profile Details @endsection
-
-@section('style')
-<link href="{{ asset('assets/css/profile.css') }}" rel="stylesheet" type="text/css" />
+@extends('layouts.profile')
+@section('title','User Profile')
+@section('style') 
+<link href="{{ asset('assets/css/profile.css') }}" rel="stylesheet" type="text/css" />  
 @endsection
-
-@section('content')
-@role("Customer")
-<main class="course-page-wrap">
-    <!-- user header area @S -->
-    <div class="product-filter-wrapper my-0">
-        <div class="product-filter-box mt-0">
-            <div class="password-change-txt">
-                <h1 class="mb-1">My Profile</h1>
-                <p>Welcome <span class="text-danger"> {{ $customer->name }} </span> to your profile page.</p>
+@section('content')  
+<!-- === user password chnage page @S === -->
+<main class="user-password-chnage"> 
+  <div class="container">
+  <div class="row align-items-center"> 
+    <div class="col-lg-5">
+      <div class="password-change-txt">
+          <h1 class="mb-1">My Profile</h1>
+          <p>Here is your profile page.</p> 
+        </div>
+        <div class="change-password-form w-100">
+          <h3><span>{{ $user->name}}</span></h3>
+          <form action="" method="POST">
+          @csrf
+          <div class="set-profile-picture">
+            <div class="media">
+              <img src="{{asset('assets/images/post-01.png')}}" alt="Profile" class="img-fluid">
+              <div class="media-body">
+                <input type="file" id="upload" style="opacity: 0">
+                <label for="upload">  
+                    <span class="btn btn-upload-pic">Change Photo</span> 
+                </label> 
+              </div>
             </div>
-            <div class="form-grp-btn mt-0 ms-auto">
-                <a href="{{ url('/') }}" class="btn me-3">Dashboard</a>
+          </div>
+          <p class="mt-2">Once you've entered your new password and confirmed it, click the "Save Changes" button to update your password.</p>
+          <!-- change pass form @S -->
+         
+           <!-- input @S --> 
+           <div class="form-group">
+              <label for="">Name</label>
+              <input type="text" placeholder="Name" class="form-control" value="{{ $user->name}}">
             </div>
+           <!-- input @E -->
+           <div class="form-group">
+              <label for="">Email</label>
+              <input type="email" placeholder="Email" class="form-control" value="{{ $user->email}}">
+            </div>
+           <!-- input @E --> 
+           <!-- input @S -->
+           <div class="form-group">
+              <label for="">Old Password <sup class="text-danger">*</sup></label>
+              <input type="password" name="password" placeholder="*********" class="form-control @error('password') is-invalid @enderror" id="password">
+              <span class="invalid-feedback">@error('password'){{ $message }} @enderror</span> 
+            </div>
+           <!-- input @E -->
+           <!-- input @S -->
+           <div class="form-group">
+              <label for="">New Password<sup class="text-danger">*</sup></label>
+              <input type="password" name="password_confirmation" placeholder="*********" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation">
+              <span class="invalid-feedback">@error('password_confirmation'){{ $message }} @enderror</span> 
+            </div>
+           <!-- input @E -->
+           <!-- submit @S -->
+           <div class="form-submit">
+              <button class="btn btn-submit" type="submit">Save Changes</button>
+            </div>
+           <!-- submit @E -->
+          </form>
+          <!-- change pass form @E -->
         </div>
     </div>
-    <!-- user header area @E -->
-
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="change-password-form w-100 customer-profile-info">
-                <div class="edit-my-profile">
-                  <a href="{{url('/my-profile/'.$customer->id)}}"><i class="fa-solid fa-pen-nib"></i></a>
-                </div>
-                <div class="set-profile-picture">
-                    <div class="media justify-content-center">
-                        <span>{!! strtoupper($customer->name[0]) !!}</span> 
-                    </div>
-                    <div class="role-label">
-                        @if(!empty($customer->getRoleNames()))
-                        @foreach($customer->getRoleNames() as $v)
-                        <span class="badge rounded-pill bg-dark">{{ $v }}</span>
-                        @endforeach
-                        @endif
-                    </div>
-                </div>
-                <div class="text-center">
-                    <h3>{{ $customer->name }} </h3>
-                    <!-- details box @S -->
-                    <div class="form-group mt-3 mb-1 ">
-                        <label for=""><i class="fa-brands fa-cc-stripe"></i> Stripe ID: </label>
-                        <code>{{ $customer->stripe_id }}</code>
-                    </div>
-                    <!-- details box @E -->
-                    <div class="form-group mb-0 ">
-                        <label for=""><i class="fa-solid fa-envelope"></i> Email: </label>
-                        <p>{{ $customer->email }}</p>
-                    </div>
-                </div>
-                <!-- details box @E -->
-                <h6>Subscription :</h6>
-                @if ( count($subscriptions->data) > 0 )
-                @foreach( $subscriptions->data as $subscription )
-                <div class="form-group mb-0">
-                    <label for=""><i class="fa-solid fa-flag"></i> Status: </label>
-                    @if( $subscription->status == 'active')
-                    <p class="text-success">{{ $subscription->status }}</p>
-                    @else
-                    <p>{{ $subscription->status }}</p>
-                    @endif
-
-                </div>
-                <div class="form-group mb-0">
-                    <label for=""><i class="fa-solid fa-cube"></i> Plan: </label>
-                    <p>{{ $subscription->plan->product->name }}</p>
-                </div>
-                <div class="form-group my-0">
-                    <label for=""><i class="fa-solid fa-calendar"></i> Start Date: </label>
-                    <p>{{ date('Y-m-d', $subscription->current_period_start) }}</p>
-                </div>
-                <div class="form-group my-0">
-                    <label for=""><i class="fa-regular fa-calendar"></i> End Date: </label>
-                    <p>{{ date('Y-m-d', $subscription->current_period_end) }}</p>
-                </div>
-                <div class="form-group my-0">
-                    <label for=""><i class="fa-solid fa-money-bills"></i> Next Billing Amount: </label>
-                    <p>$ {{ $subscription->plan->amount / 100 }}</p>
-                </div>
-                <div class="form-group my-0">
-                    <label for=""><i class="fa-solid fa-calendar-day"></i> Next Billing Date: </label>
-                    <p>{{ date('Y-m-d', $subscription->current_period_end) }}</p>
-                </div> 
-                @endforeach
-                @else
-                <div class="row">
-                    <div class="col-6">
-                        <div class="subscription-info-item">
-                            <span class="text-mute">Status</span>
-                            <h6 class="text-success">No Subscription</h6>
-                        </div>
-                    </div>
-                </div>
-                @endif
-            </div>
-        </div>
-        <div class="col-lg-8">
-            <!-- Customers payment listing @S -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="productss-list-box">
-                        @if ( count($paymentMethods->data) > 0 )
-                        <table>
-                            <tr>
-                                <th width="5%">No</th>
-                                <th>Card Brand</th>
-                                <th>Card Number</th>
-                                <th>Card Expiry</th>
-                                <th>Card Country</th>
-
-                            </tr>
-                            <!-- item start -->
-                            @foreach( $paymentMethods->data as $key => $paymentMethod )
-                            <tr>
-                                <td>{{ $key +1 }}</td>
-                                <td>{{ $paymentMethod->card->brand }}</td>
-                                <td>********{{ $paymentMethod->card->last4 }}</td>
-                                <td>{{ $paymentMethod->card->exp_month }} / {{ $paymentMethod->card->exp_year }}</td>
-                                <td>{{ $paymentMethod->card->country }}</td>
-                            </tr>
-                            @endforeach
-                            <!-- item end -->
-                        </table>
-                        @else
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="payment-method-info-item">
-                                    <span class="text-mute">Payment Details</span>
-                                    <h6 class="text-success">No Payment Method</h6>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-            <!-- Customers payment listing @E -->
-        </div>
+    <div class="col-lg-7">
+      <div class="profile-imgs">
+      <img src="{{asset('assets/images/desk-vector.jpg')}}" alt="desk-vector" class="img-fluid">
+      </div>
     </div>
-
+  </div>
+  </div>
 </main>
-@else
-<main class="course-page-wrap d-flex justify-content-center align-items-center">
-    <h4>You Don't have access to this page!</h4>
-</main>
-@endrole
+<!-- === user password chnage page @E === -->
 @endsection
