@@ -7,6 +7,7 @@ use App\Models\User;
 use Spatie\Permission\Models\Role;
 use DB;
 use Hash;
+use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
@@ -84,7 +85,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    { 
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
@@ -116,6 +117,14 @@ class UserController extends Controller
         }
     
         $user = User::find($id);
+
+        $userSlug = Str::slug($user->name);
+     
+        $imageName = $userSlug.'.'.request()->thumbnail->getClientOriginalExtension();
+        request()->thumbnail->move(public_path('assets/images/user'), $imageName);
+        // return $imageName;
+        $user->thumbnail = $imageName;
+
         $user->update($input);
         DB::table('model_has_roles')->where('model_id',$id)->delete();
     

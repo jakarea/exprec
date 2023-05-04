@@ -114,16 +114,16 @@ class HomeController extends Controller
     public function updateMyProfile(Request $request)
     {
         // return $request->all();
-
+        $userId = Auth()->user()->id; 
         //validate password and confirm password
         $this->validate($request, [
             'name' => 'required|string',
-            'email' => 'required',
+            'email' => 'required|email|unique:users,email,'.$userId,
             // 'password' => 'confirmed|min:6|string',
             'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
-        $userId = Auth()->user()->id; 
+       
         $user = User::where('id', $userId)->first();
         $user->name = $request->name;
         $user->email = $request->email;

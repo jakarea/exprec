@@ -14,8 +14,8 @@
         <div class="create-form-wrap">
           <div class="create-form-head">
             <h6>Edit your profile</h6>
-            <a href="{{ url('change-password') }}">
-              <i class="fa-solid fa-key"></i> Change Password </a>
+            <a href="{{ url('/') }}">
+              <i class="fa-solid fa-list"></i> Dashboard </a>
             </a>
           </div>
           <!-- user edit form @S -->
@@ -34,7 +34,7 @@
           <!-- error message @E -->
 
           {!! Form::model($user, ['method' => 'POST', 'enctype' => 'multipart/form-data', 'class' =>
-          'create-form-box','route' => ['updateMyProfile', $user->id]]) !!}
+          'create-form-box','route' => ['customers.update', $user->id]]) !!}
 
           <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12">

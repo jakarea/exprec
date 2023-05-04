@@ -35,7 +35,7 @@
                 <div class="set-profile-picture">
                     <div class="media justify-content-center">
                         @if($customer->thumbnail)
-                        <img src="{{ asset('assets/images/user/'.$customer->thumbnail) }}" alt="" class="img-fluid">
+                        <img src="{{ asset('assets/images/user/'.$customer->thumbnail) }}" alt="{{$customer->name}}" class="img-fluid">
                         @else
                         <span>{!! strtoupper($customer->name[0]) !!}</span>
                         @endif

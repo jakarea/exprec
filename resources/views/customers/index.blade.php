@@ -32,8 +32,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
-                        <th>Actions</th>
-
+                        <th>Actions</th> 
                     </tr>
                     <!-- task item start -->
 
@@ -54,7 +53,7 @@
                                 </a>
                                 @endcan
                                 @can('course-edit')
-                                <a href="{{ url('admin/elearning/courses/'.$customer->id.'/edit') }}">
+                                <a href="{{ url('customers/'.$customer->id.'/edit') }}">
                                     <i class="fas fa-pen text-primary me-2"></i>
                                 </a>
                                 @endcan
