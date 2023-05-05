@@ -139,12 +139,12 @@ class CustomerController extends Controller
         if ($request->password) {
             $user->password = Hash::make($request->password);
         } 
-        $userSlug = Str::slug($user->name);
-     
-        $imageName = $userSlug.'.'.request()->thumbnail->getClientOriginalExtension();
-        request()->thumbnail->move(public_path('assets/images/user'), $imageName);
-
-        $user->thumbnail = $imageName;
+        if ($request->thumbnail) {
+            $userSlug = Str::slug($user->name); 
+            $imageName = $userSlug.'.'.request()->thumbnail->getClientOriginalExtension();
+            request()->thumbnail->move(public_path('assets/images/user'), $imageName);
+            $user->thumbnail = $imageName;
+        } 
 
         $user->save();
         return redirect()->route('customers.index')->with('success', 'Your Profile has been Updated successfully!');

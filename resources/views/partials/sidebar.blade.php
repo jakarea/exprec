@@ -87,7 +87,7 @@
                 <!-- inner submenu @E -->
             </li>
             @role('Admin')
-            @else
+            @else 
             <li class="menu-item">
                 <a href="{{ url('integrations') }}" class="{{ Request::is('integrations*')  ? ' active' : '' }} menu-link">
                 <!-- <i class="fa-brands fa-superpowers"></i> -->
@@ -96,13 +96,18 @@
                 </a> 
             </li>
             @endrole
-            @role('Admin')
+            @role('Admin') 
             <li class="menu-item">
                 <a href="{{ url('subscriptions') }}" class="{{ Request::is('subscriptions*')  ? ' active' : '' }} menu-link"> 
-                    <i class="fa-solid fa-envelope"></i>
-                    <span>Subscription List</span> 
-                </a> 
-            </li>
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <span>Subscription</span>
+                    <i class="fa-solid fa-angles-right"></i>
+                </a>
+                <!-- inner submenu @S -->
+                @include('subscription/partials/sub-sidebar')
+                <!-- inner submenu @E -->
+            </li>   
+
             <li class="menu-item">
                 <a href="{{ url('customers') }}" class="{{ Request::is('customers*')  ? ' active' : '' }} menu-link"> 
                     <i class="fa-solid fa-user-group"></i>

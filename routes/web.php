@@ -53,6 +53,10 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/my-profile/{id}', 'editMyProfile')->name('editMyProfile');
     Route::post('/my-profile/{id}', 'updateMyProfile')->name('updateMyProfile');
 
+    // refund page route
+    Route::get('/refund', 'refund')->name('paymentRefund');
+    Route::get('/refund/{id}/show', 'refundShow')->name('refundShow');
+
 });
 
 Route::middleware("auth")->group(function () {

@@ -60,12 +60,10 @@
                             <label class="badge badge-success bg-success">{{ $customer->hasRole('Customer') ? 'Customer'
                                 : 'Not a customer' }}</label>
                         </td>
-                        <td width="10%">
-                            <div class="action-bttn">
+                        <td width="10%"> ss="action-bttn">
                                 <a href="{{ route('customers.show', $customer->id) }}">
                                     <i class="fas fa-eye text-info me-2"></i>
-                                </a>
-                                @endcan
+                                </a> 
                                 @can('course-edit')
                                 <a href="{{ url('customers/'.$customer->id.'/edit') }}">
                                     <i class="fas fa-pen text-primary me-2"></i>
