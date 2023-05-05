@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Stripe\Stripe;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
-class SubscriptionController extends Controller
+
+class CustomerSubscriptionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,14 +17,17 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        // get all products from stripe
+        //
         Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        $user = User::where('email', '=', Auth::user()->email)->firstOrFail();
 
         // Get all subscriptions created in Stripe with pagination
         $limit = 10;
         $subscriptions = \Stripe\Subscription::all([
             'limit' => $limit,
-            'expand' => ['data.customer', 'data.plan.product'],
+            'customer' => $user->stripe_id,
+            'expand' => ['data.plan.product'],
         ]);
 
         $subscriptions_data = $subscriptions->data;
@@ -32,7 +37,7 @@ class SubscriptionController extends Controller
             $next_subscriptions = \Stripe\Subscription::all([
                 'limit' => $limit,
                 'starting_after' => $last_subscription->id,
-                'expand' => ['data.customer', 'data.plan.product'],
+                'expand' => ['data.plan.product'],
             ]);
             $subscriptions_data = array_merge($subscriptions_data, $next_subscriptions->data);
             $subscriptions = $next_subscriptions;
@@ -43,8 +48,11 @@ class SubscriptionController extends Controller
         $itemsPerPage = $limit;
         $currentItems = array_slice($subscriptions_data, ($currentPage - 1) * $itemsPerPage, $itemsPerPage);
         $subscriptions_paginated = new LengthAwarePaginator($currentItems, count($subscriptions_data), $itemsPerPage);
-        $subscriptions_paginated->withPath('subscriptions');
-        return view('subscription.index', compact('subscriptions_paginated'));
+        $subscriptions_paginated->withPath('customer-subscriptions');
+
+        // dd($subscriptions_paginated);
+        return "WOrking on dynamic customer subscription page";
+        // return view('subscription.index', compact('subscriptions_paginated'));
     }
 
     /**
@@ -76,41 +84,8 @@ class SubscriptionController extends Controller
      */
     public function show($id)
     {
-        Stripe::setApiKey(env('STRIPE_SECRET'));
-    
-        // Get subscription from Stripe by ID
-        $subscription = \Stripe\Subscription::retrieve($id);
-    
-        // Get customer data from Stripe by customer Stripe ID
-        $customer = \Stripe\Customer::retrieve($subscription->customer);
-        $subscription->customer = $customer;
-        // Get user associated with the customer
-        $user = User::where('stripe_id', $customer->id)->first();
-        $subscription->user = $user;
-        // Expand plan and product information
-        $subscription->plan = \Stripe\Plan::retrieve($subscription->plan->id);
-        $subscription->product = \Stripe\Product::retrieve($subscription->plan->product);
-    
-        // Get payment method data from Stripe by default payment method ID
-        $subscription->payment_method = \Stripe\PaymentMethod::retrieve($subscription->default_payment_method);
-    
-        // Get invoice data from Stripe by latest invoice ID
-        $subscription->invoice = \Stripe\Invoice::retrieve($subscription->latest_invoice);
-    
-        // Get refund data for the invoice's charge if it exists
-        if ($subscription->invoice->charge) {
-            $refund = \Stripe\Refund::all([
-                'charge' => $subscription->invoice->charge,
-            ]);
-            $subscription->refund = $refund->data;
-        } else {
-            $subscription->refund = null;
-        }
-
-        // dd($subscription);
-    
-        return view("subscription.show", compact('subscription'));
-    }    
+        //
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -133,23 +108,6 @@ class SubscriptionController extends Controller
     public function update(Request $request, $id)
     {
         //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function refunds(Request $request, $id)
-    {
-        Stripe::setApiKey(env('STRIPE_SECRET'));
-        // send refund request to stripe
-        $refunds = \Stripe\Refund::create([
-            'charge' => $id,
-        ]);
-        return redirect()->back()->with('success', 'Refund request sent successfully');
     }
 
     /**

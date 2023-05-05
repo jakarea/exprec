@@ -179,7 +179,25 @@
                                 <td>{{ $key +1 }}</td>
                                 <td>$ {{ $paymentIntent->amount / 100 }}</td>
                                 <td>{{ $paymentIntent->payment_method_types[0] }}</td>
-                                <td>{{ $paymentIntent->status }}</td>
+                                <td>
+                                @if ($paymentIntent->status == 'succeeded')
+                                    @php
+                                        $hasRefunds = false;
+                                        foreach ($refunds as $refund) {
+                                            if ($refund->payment_intent == $paymentIntent->id && $refund->status == 'succeeded') {
+                                                $hasRefunds = true;
+                                                break;
+                                            }
+                                        }
+                                    @endphp
+                                    @if ($hasRefunds)
+                                        <span class="text-danger">Refunded</span>
+                                    @else
+                                        <span class="text-success">{{ $paymentIntent->status }}</span>
+                                    @endif
+                                @endif
+
+                                </td>
                                 <td>********{{ $paymentIntent->payment_method->card->last4 }}</td>
                                 <td>{{ date('M d, Y h:i a', $paymentIntent->created) }}</td>
                             </tr>

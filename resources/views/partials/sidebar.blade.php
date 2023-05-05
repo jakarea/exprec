@@ -95,6 +95,13 @@
                     <span>Integrations</span> 
                 </a> 
             </li>
+            <li class="menu-item">
+                <a href="{{ route('customer.subscriptions.index') }}" class="{{ Request::is('customer-subscriptions*')  ? ' active' : '' }} menu-link">
+                <!-- <i class="fa-brands fa-superpowers"></i> -->
+                <i class="fa-solid fa-envelope"></i>
+                    <span>My Subscription</span> 
+                </a> 
+            </li>
             @endrole
             @role('Admin') 
             <li class="menu-item">
