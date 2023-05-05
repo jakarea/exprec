@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title') Admin - Customer Details @endsection
+@section('title') Admin - Subscription Details @endsection
 
 @section('style')
 <link href="{{ asset('assets/css/profile.css') }}" rel="stylesheet" type="text/css" />
@@ -15,7 +15,7 @@
                 <p>This is <span class="text-danger"> <a href="{{ route('customers.show', $subscription->user->id) }}" class="text-danger">{{ $subscription->customer->name }}</a></span>   subscriptions page.</p>
             </div>
             <div class="form-grp-btn mt-0 ms-auto">
-                <a href="{{ url('subscriptions') }}" class="btn me-3">All Subscriptions</a>
+                <a href="{{ url('subscriptions') }}" class="btn"><i class="fas fa-list me-2"></i> All Subscriptions</a>
             </div>
         </div>
     </div>
@@ -28,14 +28,19 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
-        @endif
-        <div class="col-3">
+        @endif  
+        <div class="col-lg-4">
             <div class="change-password-form w-100 customer-profile-info">
                 <div class="set-profile-picture">
                     <div class="media justify-content-center">
+                        @if($subscription->customer->thumbnail)
+                        <img src="{{ asset('assets/images/user/'.$subscription->customer->thumbnail) }}" alt="{{$subscription->customer->name}}"
+                            class="img-fluid">
+                        @else
                         <span>{!! strtoupper($subscription->customer->name[0]) !!}</span> 
+                        @endif
                     </div>
-                    <div class="role-label">
+                    <div class="role-label"> 
                         @if($subscription->user)
                             @if(!empty($subscription->user->getRoleNames()))
                                 @foreach($subscription->user->getRoleNames() as $v)
@@ -43,36 +48,36 @@
                                 @endforeach
                             @endif
                         @else
-                            <span class="badge rounded-pill bg-dark">No Role</span>
-                        @endif
-                    </div>
-                    <div class="text-center">
-                        <h3>{{ $subscription->customer->name }} </h3>
-                        <!-- details box @S -->
-                        <div class="form-group mt-3 mb-1 ">
-                            <label for=""><i class="fa-brands fa-cc-stripe"></i> Stripe ID: </label>
-                            <code>{{ $subscription->customer->id }}</code>
-                        </div>
-                        <!-- details box @E -->
-                        <div class="form-group mb-0 ">
-                            <label for=""><i class="fa-solid fa-envelope"></i> Email: </label>
-                            <p>{{ $subscription->customer->email }}</p>
-                        </div>
-                        <!-- Current period -->
-                        <div class="form-group mb-0 ">
-                            <label for=""><i class="fa-solid fa-calender"></i> Current Period: </label>
-                            <p>{{ date('M d, Y h:m a', $subscription->current_period_start) }} - {{ date('M d, Y h:m a', $subscription->current_period_end) }}</p>
-                        </div>
+                            <span class="badge rounded-pill bg-danger">No Role</span>
+                        @endif 
                     </div>
                 </div>
+                <div class="text-center">
+                    <h3>{{ $subscription->customer->name }}</h3>
+                    <!-- details box @S -->
+                    <div class="form-group mt-3 mb-1 ">
+                        <label for=""><i class="fa-brands fa-cc-stripe"></i> Stripe ID: </label>
+                        <code>{{ $subscription->customer->id }}</code>
+                    </div>
+                    <!-- details box @E -->
+                    <div class="form-group mb-0 ">
+                        <label for=""><i class="fa-solid fa-envelope"></i> Email: </label>
+                        <p>{{ $subscription->customer->email }}</p>
+                    </div>
+                    <div class="form-group mb-0" style="flex-direction: column; align-items: flex-start">
+                        <label for=""><i class="fa-regular fa-calendar"></i> Current Period: </label>
+                        <p class="text-start">{{ date('M d, Y h:m a', $subscription->current_period_start) }} - {{ date('M d, Y h:m a', $subscription->current_period_end) }}</p>
+                    </div>
+                </div>  
             </div>
         </div>
-        <div class="col-9">
-            <div class="productss-list-box mt-5">
-                <h6>Subscription Details</h6>
+
+        <div class="col-lg-8">
+            <div class="productss-list-box subscription-table">
+                <h5 class="p-3 pb-0">Subscription Details</h5>
                 <table>
                     <tr>
-                        <th width="5%">No</th>
+                        <th width="5%" class="text-start">No</th>
                         <th>Customer</th>
                         <th>Status</th>
                         <th>Billing</th>

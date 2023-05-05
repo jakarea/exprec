@@ -144,4 +144,14 @@ class HomeController extends Controller
         return redirect()->route('myProfile')->with('success', 'Your Profile has been Updated successfully!');
     }
 
+    public function refund()
+    {
+        return view('refund/index');  
+    }
+
+    public function refundShow()
+    {
+        return view('refund/show');  
+    }
+
 }
