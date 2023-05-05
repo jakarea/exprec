@@ -44,7 +44,6 @@ class SubscriptionController extends Controller
         $currentItems = array_slice($subscriptions_data, ($currentPage - 1) * $itemsPerPage, $itemsPerPage);
         $subscriptions_paginated = new LengthAwarePaginator($currentItems, count($subscriptions_data), $itemsPerPage);
         $subscriptions_paginated->withPath('subscriptions');
-
         return view('subscription.index', compact('subscriptions_paginated'));
     }
 
@@ -78,6 +77,23 @@ class SubscriptionController extends Controller
     public function show($id)
     {
         //
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+        // get subscription from stripe from id
+        $subscription = \Stripe\Subscription::retrieve($id);
+        $customer = \Stripe\Customer::retrieve($subscription->customer);
+        $user = User::where('stripe_id', $customer->id)->first();
+        $subscription->user = $user;
+        $subscription->customer = $customer;
+        $subscription->plan = \Stripe\Plan::retrieve($subscription->plan->id);
+        $subscription->product = \Stripe\Product::retrieve($subscription->plan->product);
+        $subscription->payment_method = \Stripe\PaymentMethod::retrieve($subscription->default_payment_method);
+        $subscription->invoice = \Stripe\Invoice::retrieve($subscription->latest_invoice);
+        $subscription->refund = \Stripe\Refund::all([
+            'charge' => $subscription->invoice->charge,
+        ]);
+        $subscription->refund = $subscription->refund->data;
+        // dd($subscription);
+        return view("subscription.show", compact('subscription'));
     }
 
     /**
@@ -101,6 +117,23 @@ class SubscriptionController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function refunds(Request $request, $id)
+    {
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+        // send refund request to stripe
+        $refunds = \Stripe\Refund::create([
+            'charge' => $id,
+        ]);
+        return redirect()->back()->with('success', 'Refund request sent successfully');
     }
 
     /**

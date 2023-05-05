@@ -73,11 +73,11 @@
                 </div>
                 <div class="form-group my-0">
                     <label for=""><i class="fa-solid fa-calendar"></i> Start Date: </label>
-                    <p>{{ date('Y-m-d', $subscription->current_period_start) }}</p>
+                    <p>{{ date('M d, Y h:i a', $subscription->current_period_start) }}</p>
                 </div>
                 <div class="form-group my-0">
                     <label for=""><i class="fa-regular fa-calendar"></i> End Date: </label>
-                    <p>{{ date('Y-m-d', $subscription->current_period_end) }}</p>
+                    <p>{{ date('M d, Y h:i a', $subscription->current_period_end) }}</p>
                 </div>
                 <div class="form-group my-0">
                     <label for=""><i class="fa-solid fa-money-bills"></i> Next Billing Amount: </label>
@@ -85,7 +85,7 @@
                 </div>
                 <div class="form-group my-0">
                     <label for=""><i class="fa-solid fa-calendar-day"></i> Next Billing Date: </label>
-                    <p>{{ date('Y-m-d', $subscription->current_period_end) }}</p>
+                    <p>{{ date('M d, Y h:i a', $subscription->current_period_end) }}</p>
                 </div>
 
                 @endforeach
@@ -181,7 +181,7 @@
                                 <td>{{ $paymentIntent->payment_method_types[0] }}</td>
                                 <td>{{ $paymentIntent->status }}</td>
                                 <td>********{{ $paymentIntent->payment_method->card->last4 }}</td>
-                                <td>{{ date('M d, Y h:m a', $paymentIntent->created) }}</td>
+                                <td>{{ date('M d, Y h:i a', $paymentIntent->created) }}</td>
                             </tr>
                             @endif
                             @endforeach

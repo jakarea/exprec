@@ -14,7 +14,7 @@
             <div class="product-filter-box mt-0">
                 <h5>Subscription Management</h5>
                 <div class="form-grp-btn mt-4 ms-auto">
-                    <a href="{{ url('/') }}" class="btn me-3">Dashboard</a>
+                    <a href="{{ url('/subscriptions') }}" class="btn me-3">Subscriptions</a>
                 </div>
             </div>
         </form>
@@ -33,6 +33,7 @@
                         <th>Status</th>
                         <th>Billing</th>
                         <th>Product</th>
+                        <th>Price</th>
                         <th>Created</th>
                         <th>Actions</th>
 
@@ -50,22 +51,18 @@
                             @endif
                         </td>
                         <td>{{ $subscription->plan->product->name }}</td>
+                        <td>$ {{ $subscription->plan->amount / 100 }}</td>
                         <td>
                             {{ date('M d, Y h:m a', $subscription->created) }}
                         </td>
                         <td>
-                            <a href="{{ url('subscription/'.$subscription->id.'/edit') }}" class="btn btn-primary btn-sm">Edit</a>
-                            <form action="{{ url('subscription/'.$subscription->id) }}" method="POST" class="d-inline-block">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this subscription?');">Delete</button>
-                            </form>
+                            <a href="{{ route('subscriptions.show', $subscription->id) }}" class="btn btn-primary btn-sm">View</a>
                         </td>
                     </tr>
                     @endforeach
                 </table>
                 @else
-                <p class="p-4 text-center">No Potential Customers Found!</p>
+                <p class="p-4 text-center">No Subscriptions Found!</p>
                 @endif
             </div>
         </div>

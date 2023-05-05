@@ -34,6 +34,7 @@
                 </div> 
             @endif
         </div> 
+    @role("Customer")
     @php
         $user = Auth::user();
         $stripe_id = $user->stripe_id;
@@ -59,6 +60,7 @@
         </div>  
     </div>
     @endif
+    @endrole
         <!-- col @S -->
         @role("Admin")
         <div class="col-lg-3 col-md-4 col-sm-6 col-12">

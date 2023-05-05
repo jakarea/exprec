@@ -66,7 +66,7 @@ class CustomerController extends Controller
             'customer' => $customer->stripe_id,
             'expand' => ['data.plan.product'],
         ]);
-    
+
         // Get payment method data from Stripe by customer Stripe ID
         $paymentMethods = \Stripe\PaymentMethod::all([
             'customer' => $customer->stripe_id,
@@ -74,7 +74,7 @@ class CustomerController extends Controller
         ]);
     
         // Retrieve all PaymentIntents for the specified customer with pagination
-        $limit = 100;
+        $limit = 10;
         $paymentIntents = [];
     
         // Retrieve the first page of PaymentIntents
@@ -90,7 +90,7 @@ class CustomerController extends Controller
             $response = \Stripe\PaymentIntent::all([
                 'limit' => $limit,
                 'starting_after' => end($response->data)->id,
-                'expand' => ['data.customer'],
+                'expand' => ['data.customer', 'data.payment_method', 'data.charges'],
             ]);
     
             $paymentIntents = array_merge($paymentIntents, $response->data);
