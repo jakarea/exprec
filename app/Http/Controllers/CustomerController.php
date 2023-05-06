@@ -57,10 +57,10 @@ class CustomerController extends Controller
     {
         // Set Stripe API key
         Stripe::setApiKey(env('STRIPE_SECRET'));
-    
+
         // Get customer data by ID and role
         $customer = User::role('Customer')->find($id);
-    
+
         // Get subscription data from Stripe by customer Stripe ID
         $subscriptions = \Stripe\Subscription::all([
             'customer' => $customer->stripe_id,
@@ -72,19 +72,26 @@ class CustomerController extends Controller
             'customer' => $customer->stripe_id,
             'type' => 'card',
         ]);
-    
+
         // Retrieve all PaymentIntents for the specified customer with pagination
         $limit = 10;
         $paymentIntents = [];
-    
+
         // Retrieve the first page of PaymentIntents
         $response = \Stripe\PaymentIntent::all([
             'limit' => $limit,
             'expand' => ['data.customer', 'data.payment_method'],
         ]);
-    
+
+        // Get all refunds with customer ID
+        $refunds = \Stripe\Refund::all([
+            'limit' => $limit,
+            'expand' => ['data.charge'],
+        ]);
+        $refunds = $refunds->data;
+
         $paymentIntents = array_merge($paymentIntents, $response->data);
-    
+
         // Retrieve subsequent pages of PaymentIntents
         while ($response->has_more) {
             $response = \Stripe\PaymentIntent::all([
@@ -92,14 +99,16 @@ class CustomerController extends Controller
                 'starting_after' => end($response->data)->id,
                 'expand' => ['data.customer', 'data.payment_method', 'data.charges'],
             ]);
-    
+
             $paymentIntents = array_merge($paymentIntents, $response->data);
         }
 
-        // dd($paymentIntents);
-    
+
+        // dd($refunds);
+
         // Return the customers.show view with all relevant data
-        return view('customers.show', compact('customer', 'subscriptions', 'paymentMethods', 'paymentIntents'));
+        return view('customers.show', compact('customer', 'subscriptions', 'paymentMethods', 'paymentIntents', 'refunds'));
+
     }    
 
     /**

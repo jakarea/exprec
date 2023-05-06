@@ -16,6 +16,7 @@ use App\Http\Controllers\AdInterestController;
 use App\Http\Controllers\PaymentListController;
 use App\Http\Controllers\EmailCampingController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\CustomerSubscriptionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,7 +34,7 @@ Auth::routes();
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/home', 'index');
-    Route::get('/subscription', [PlanController::class, 'subscription'])->name("subscription.index");
+    Route::get('/subscribers', [PlanController::class, 'subscription'])->name("subscription.index");
 
     Route::get('plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
     Route::get('/plans/{id}/checkout', [CheckoutController::class, 'createCheckoutSession'])
@@ -85,6 +86,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('subscriptions/{id}/refunds', [SubscriptionController::class, 'refunds'])->name('subscriptions.refunds');
     Route::get('subscriptions/{id}/delete', [SubscriptionController::class, 'destroy'])->name('subscriptions.delete');
     Route::get('subscriptions/{id}/show', [SubscriptionController::class, 'show'])->name('subscriptions.show');
+
+    // Customer Subscription routes
+    Route::get('customer-subscriptions', [CustomerSubscriptionController::class, 'index'])->name('customer.subscriptions.index');
 });
 
 Route::get('/home', function () {

@@ -6,7 +6,6 @@
 @endsection
 
 @section('content')
-@role("Admin")
 <main class="product-research-page-wrap">
 
     <!-- session message @S -->
@@ -45,6 +44,7 @@
 
                     </tr>
                     @foreach($subscriptions_paginated as $key => $subscription)
+
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>
@@ -94,9 +94,4 @@
     </div>
     <!-- Customers pagginate @E -->
 </main>
-@else
-<main class="course-page-wrap d-flex justify-content-center align-items-center">
-    <h4>You Don't have access to this page!</h4>
-</main>
-@endrole
 @endsection
