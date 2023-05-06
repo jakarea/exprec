@@ -16,7 +16,11 @@
                 <p>This is <span class="text-danger"> <a href="{{ route('customers.show', $subscription->user->id) }}" class="text-danger">{{ $subscription->customer->name }}</a></span>   subscriptions page.</p>
             </div>
             <div class="form-grp-btn mt-0 ms-auto">
+                @role("Admin")
                 <a href="{{ url('subscriptions') }}" class="btn me-3">All Subscriptions</a>
+                @else
+                <a href="{{ route('customer.subscriptions.index') }}" class="btn me-3">My Subscriptions</a>
+                @endrole
             </div>
         </div>
     </div>
@@ -105,19 +109,57 @@
                                 @if($refund->status == 'succeeded')
                                 <a href="#" class="btn btn-sm btn-danger">Refunded</a>
                                 @else
-                                <a href="{{ route('subscriptions.refunds', $subscription->invoice->charge) }}" class="btn btn-primary btn-sm">Refund</a>
+                                <!-- <a href="{{ route('subscriptions.refunds', $subscription->invoice->charge) }}" class="btn btn-primary btn-sm">Refund</a> -->
+                                <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Refund</a>
+                                <a href="#" class="btn btn-sm btn-danger">Cancel Subscription</a>
                                 @endif
                             @endforeach
                             @else
-                            <a href="{{ route('subscriptions.refunds', $subscription->invoice->charge) }}" class="btn btn-primary btn-sm">Refund</a>
+                            <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Refund</a>
+                            <a href="#" class="btn btn-sm btn-danger">Cancel Subscription</a>
                             @endif
                         </td>
 
                     </tr>
                 </table>
+                <div>                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h6 class="modal-title" id="staticBackdropLabel">Refunds / Subscription Cancel</h6>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form action="{{ route('refund.store') }}" method="POST" id="subscriptionCancelRequest">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <!-- Design form for refunds or cancel subscription -->
+                                        
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="reason">What is the reason?</label>
+                                                        <textarea name="reason" id="reason" cols="30" rows="5" class="form-control"></textarea>
+                                                        <input type="hidden" name="charge_id" value="{{ $subscription->invoice->charge }}">
+                                                        <input type="hidden" name="amount" value="{{ $subscription->plan->amount / 100 }}">
+                                                        <input type="hidden" name="product_name" value="{{ $subscription->product->name }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Send request</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <table>
-            <tr>
+            <!-- <tr>
                 <td>Refund</td>
                 <td colspan="7">
                     @if($subscription->refund)
@@ -133,10 +175,81 @@
                         <p>No refunds for this subscription.</p>
                     @endif
                 </td>
-            </tr>
+            </tr> -->
 
             </table>
+            @php
+                $refunds = App\Models\Refund::where('charge_id', $subscription->invoice->charge)->get();
+            @endphp
+            @if ( count($refunds) > 0 )
+            <div class="productss-list-box mt-5">
+                <h6>Refunds / Cancel Details</h6>
+                <table>
+                    <tr>
+                        <th>Customer Name</th>
+                        <th>Customer Email</th>
+                        <th>Product Name</th>
+                        <th>Product Price</th>
+                        <th>Refund Status</th>
+                        <th>Refund Date</th>
+                    </tr>
+                    @foreach ($refunds as $refund)
+                    <tr>
+                        <td>{{ $refund->user->name }}</td>
+                        <td>{{ $refund->user->email }}</td>
+                        <td>{{ $refund->product_name }}</td>
+                        <td>$ {{ $refund->amount }}</td>
+                        <td>
+                            @if($refund->status == 'approved')
+                            <span class="badge bg-success">Refunded</span>
+                            @elseif($refund->status == 'declined')
+                            <span class="badge bg-danger">Declined</span>
+                            @else
+                            <span class="badge bg-danger">Pending</span>
+                            @endif
+                        </td>
+                        <td>{{ date('M d, Y h:m a', $refund->created) }}</td>
+                    </tr>
+                    @endforeach
+                </table>
+            </div>
+            @endif
         </div>
     </div>
 </main>
+@endsection
+
+@section('script')
+<script>
+    jQuery(document).ready(function($){
+        $('#subscriptionCancelRequest').submit(function(e){
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr('action');
+            var type = form.attr('method');
+            var data = form.serialize();
+            $.ajax({
+                url: url,
+                type: type,
+                data: {data: data, _token: '{{ csrf_token() }}'},
+                dataType: 'json',
+                // beefore send change button text and disable and add spinner
+                beforeSend: function(){
+                    $('#subscriptionCancelRequest button[type="submit"]').html('<i class="fa fa-spinner fa-spin"></i> Please wait...').attr('disabled', true);
+                },
+                success: function(response){
+                    if(response.status == 'success'){
+                        $('#staticBackdrop').modal('hide');
+                        toastr.success(response.message);
+                        setTimeout(function(){
+                            window.location.reload();
+                        }, 1000);
+                    }else{
+                        toastr.error(response.message);
+                    }
+                }
+            });
+        });
+    });
+</script>
 @endsection
