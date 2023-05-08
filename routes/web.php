@@ -8,6 +8,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\HomeController; 
+use App\Http\Controllers\RefundController;
 use App\Http\Controllers\CourseController; 
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomerController;
@@ -55,8 +56,14 @@ Route::controller(HomeController::class)->group(function () {
     Route::post('/my-profile/{id}', 'updateMyProfile')->name('updateMyProfile');
 
     // refund page route
-    Route::get('/refund', 'refund')->name('paymentRefund');
-    Route::get('/refund/{id}/show', 'refundShow')->name('refundShow');
+    Route::get('/refund', [RefundController::class, 'index'])->name('refund.index');
+    Route::get('/refund/{id}/create', [RefundController::class, 'create'])->name('refund.create');
+    Route::post('/refund/store', [RefundController::class, 'store'])->name('refund.store');
+    Route::get('/refund/{id}/approve', [RefundController::class, 'approve'])->name('refund.approve');
+    Route::get('/refund/{id}/rejected', [RefundController::class, 'rejected'])->name('refund.reject');
+    Route::post('/refund/{id}/update', [RefundController::class, 'update'])->name('refund.update');
+    Route::get('/refund/{id}/delete', [RefundController::class, 'destroy'])->name('refund.delete');
+    Route::get('/refund/{id}/show', [RefundController::class, 'show'])->name('refund.show');
 
 });
 

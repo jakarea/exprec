@@ -27,7 +27,7 @@ class CustomerSubscriptionController extends Controller
         $subscriptions = \Stripe\Subscription::all([
             'limit' => $limit,
             'customer' => $user->stripe_id,
-            'expand' => ['data.plan.product'],
+            'expand' => ['data.plan.product', 'data.customer'],
         ]);
 
         $subscriptions_data = $subscriptions->data;
@@ -51,8 +51,8 @@ class CustomerSubscriptionController extends Controller
         $subscriptions_paginated->withPath('customer-subscriptions');
 
         // dd($subscriptions_paginated);
-        return "WOrking on dynamic customer subscription page";
-        // return view('subscription.index', compact('subscriptions_paginated'));
+        // return "WOrking on dynamic customer subscription page";
+        return view('subscription.index', compact('subscriptions_paginated'));
     }
 
     /**

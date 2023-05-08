@@ -58,14 +58,19 @@
         <div class="col-lg-8">
             <div class="productss-list-box subscription-table">
                 <h5 class="p-3 pb-0">Refund Details</h5>
-                <table>
-                    <tr>
-                        <th width="5%" class="text-start">No</th>
-                        <th>Customer</th>
-                        <th>Status</th> 
-                        <th>Actions</th> 
-                    </tr> 
-                </table>
+                <div class="refund-reason p-3">
+                    <p>{{ __($refund->reason) }}</p>
+                </div>
+                <div class="refund-action text-end">
+                @if($refund->status == 'pending')
+                    <a href="{{ route('refund.approve',  $refund->charge_id) }}" class="btn btn-success">Approve</a>
+                    <a href="{{ route('refund.reject',  $refund->charge_id) }}" class="btn btn-danger">Reject</a>
+                @elseif($refund->status == 'approved')
+                    <a href="#" class="btn btn-success">Already Approved</a>
+                @elseif($refund->status == 'declined')
+                    <a href="#" class="btn btn-danger">Already Rejected</a>
+                @endif
+                </div>
             </div>
         </div>
     </div>
