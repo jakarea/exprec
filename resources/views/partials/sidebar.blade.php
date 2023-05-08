@@ -87,7 +87,7 @@
                 <!-- inner submenu @E -->
             </li>
             @role('Admin')
-            @else
+            @else 
             <li class="menu-item">
                 <a href="{{ url('integrations') }}" class="{{ Request::is('integrations*')  ? ' active' : '' }} menu-link">
                 <!-- <i class="fa-brands fa-superpowers"></i> -->
@@ -95,14 +95,26 @@
                     <span>Integrations</span> 
                 </a> 
             </li>
-            @endrole
-            @role('Admin')
             <li class="menu-item">
-                <a href="{{ url('subscriptions') }}" class="{{ Request::is('subscriptions*')  ? ' active' : '' }} menu-link"> 
-                    <i class="fa-solid fa-envelope"></i>
-                    <span>Subscription List</span> 
+                <a href="{{ route('customer.subscriptions.index') }}" class="{{ Request::is('customer-subscriptions*')  ? ' active' : '' }} menu-link">
+                <!-- <i class="fa-brands fa-superpowers"></i> -->
+                <i class="fa-solid fa-envelope"></i>
+                    <span>My Subscription</span> 
                 </a> 
             </li>
+            @endrole
+            @role('Admin') 
+            <li class="menu-item">
+                <a href="{{ url('subscriptions') }}" class="{{ Request::is('subscriptions*')  ? ' active' : '' }} menu-link"> 
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <span>Subscription</span>
+                    <i class="fa-solid fa-angles-right"></i>
+                </a>
+                <!-- inner submenu @S -->
+                @include('subscription/partials/sub-sidebar')
+                <!-- inner submenu @E -->
+            </li>   
+
             <li class="menu-item">
                 <a href="{{ url('customers') }}" class="{{ Request::is('customers*')  ? ' active' : '' }} menu-link"> 
                     <i class="fa-solid fa-user-group"></i>

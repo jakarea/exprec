@@ -96,7 +96,7 @@ class CheckoutController extends Controller
             // login user
             $changePassword = true;
             auth()->login($user);
-            Mail::to($user)->send(new TempPassword(['password' => $password, 'email' => $user->email, 'name' => $user->name]));
+            // Mail::to($user)->send(new TempPassword(['password' => $password, 'email' => $user->email, 'name' => $user->name]));
         }
 
 

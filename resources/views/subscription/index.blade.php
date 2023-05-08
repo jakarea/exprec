@@ -1,7 +1,11 @@
 @extends('layouts.admin')
 @section('title') Admin - Subscription Plan List @endsection
+
+@section('style')
+<link href="{{ asset('assets/css/common.css') }}" rel="stylesheet" type="text/css" />
+@endsection
+
 @section('content')
-@role("Admin")
 <main class="product-research-page-wrap">
 
     <!-- session message @S -->
@@ -14,7 +18,7 @@
             <div class="product-filter-box mt-0">
                 <h5>Subscription Management</h5>
                 <div class="form-grp-btn mt-4 ms-auto">
-                    <a href="{{ url('/subscriptions') }}" class="btn me-3">Subscriptions</a>
+                    <a href="{{ url('/') }}" class="btn me-3"><i class="fas fa-list me-2"></i> Dashboard</a>
                 </div>
             </div>
         </form>
@@ -29,6 +33,7 @@
                 <table>
                     <tr>
                         <th width="5%">No</th>
+                        <th>Avatar</th>
                         <th>Customer</th>
                         <th>Status</th>
                         <th>Billing</th>
@@ -39,8 +44,18 @@
 
                     </tr>
                     @foreach($subscriptions_paginated as $key => $subscription)
+
                     <tr>
                         <td>{{ $key + 1 }}</td>
+                        <td>
+                            <div class="table-avatar">
+                                @if($subscription->customer->thumbnail)
+                                <img src="{{ asset('assets/images/user/'.$subscription->customer->thumbnail) }}" alt="{{$subscription->customer->name}}" class="img-fluid">
+                                @else 
+                                    <span>{!! strtoupper($subscription->customer->name[0]) !!}</span> 
+                                @endif
+                            </div>
+                        </td>
                         <td>{{ $subscription->customer->email }}</td>
                         <td>{{ $subscription->status }}</td>
                         <td>
@@ -56,7 +71,7 @@
                             {{ date('M d, Y h:m a', $subscription->created) }}
                         </td>
                         <td>
-                            <a href="{{ route('subscriptions.show', $subscription->id) }}" class="btn btn-primary btn-sm">View</a>
+                            <a href="{{ route('subscriptions.show', $subscription->id) }}" class="btn btn-table">View</a>
                         </td>
                     </tr>
                     @endforeach
@@ -79,9 +94,4 @@
     </div>
     <!-- Customers pagginate @E -->
 </main>
-@else
-<main class="course-page-wrap d-flex justify-content-center align-items-center">
-    <h4>You Don't have access to this page!</h4>
-</main>
-@endrole
 @endsection

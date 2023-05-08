@@ -76,25 +76,41 @@ class SubscriptionController extends Controller
      */
     public function show($id)
     {
-        //
         Stripe::setApiKey(env('STRIPE_SECRET'));
-        // get subscription from stripe from id
+    
+        // Get subscription from Stripe by ID
         $subscription = \Stripe\Subscription::retrieve($id);
+    
+        // Get customer data from Stripe by customer Stripe ID
         $customer = \Stripe\Customer::retrieve($subscription->customer);
+        $subscription->customer = $customer;
+        // Get user associated with the customer
         $user = User::where('stripe_id', $customer->id)->first();
         $subscription->user = $user;
-        $subscription->customer = $customer;
+        // Expand plan and product information
         $subscription->plan = \Stripe\Plan::retrieve($subscription->plan->id);
         $subscription->product = \Stripe\Product::retrieve($subscription->plan->product);
+    
+        // Get payment method data from Stripe by default payment method ID
         $subscription->payment_method = \Stripe\PaymentMethod::retrieve($subscription->default_payment_method);
+    
+        // Get invoice data from Stripe by latest invoice ID
         $subscription->invoice = \Stripe\Invoice::retrieve($subscription->latest_invoice);
-        $subscription->refund = \Stripe\Refund::all([
-            'charge' => $subscription->invoice->charge,
-        ]);
-        $subscription->refund = $subscription->refund->data;
+    
+        // Get refund data for the invoice's charge if it exists
+        if ($subscription->invoice->charge) {
+            $refund = \Stripe\Refund::all([
+                'charge' => $subscription->invoice->charge,
+            ]);
+            $subscription->refund = $refund->data;
+        } else {
+            $subscription->refund = null;
+        }
+
         // dd($subscription);
+    
         return view("subscription.show", compact('subscription'));
-    }
+    }    
 
     /**
      * Show the form for editing the specified resource.

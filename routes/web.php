@@ -8,6 +8,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\HomeController; 
+use App\Http\Controllers\RefundController;
 use App\Http\Controllers\CourseController; 
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomerController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\AdInterestController;
 use App\Http\Controllers\PaymentListController;
 use App\Http\Controllers\EmailCampingController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\CustomerSubscriptionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,7 +35,7 @@ Auth::routes();
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/home', 'index');
-    Route::get('/subscription', [PlanController::class, 'subscription'])->name("subscription.index");
+    Route::get('/subscribers', [PlanController::class, 'subscription'])->name("subscription.index");
 
     Route::get('plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
     Route::get('/plans/{id}/checkout', [CheckoutController::class, 'createCheckoutSession'])
@@ -52,6 +54,18 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/my-profile', 'myProfile')->name('myProfile');
     Route::get('/my-profile/{id}', 'editMyProfile')->name('editMyProfile');
     Route::post('/my-profile/{id}', 'updateMyProfile')->name('updateMyProfile');
+
+    // refund page route
+    Route::get('/refund', [RefundController::class, 'index'])->name('refund.index');
+    Route::get('/refund/{id}/create', [RefundController::class, 'create'])->name('refund.create');
+    Route::post('/refund/store', [RefundController::class, 'store'])->name('refund.store');
+    Route::post('/refund/cancel', [RefundController::class, 'cancel'])->name('refund.cancel');
+    Route::get('/refund/{id}/cancelSubscription', [RefundController::class, 'cancelSubscription'])->name('refund.CancelSubscription');
+    Route::get('/refund/{id}/approve', [RefundController::class, 'approve'])->name('refund.approve');
+    Route::get('/refund/{id}/rejected', [RefundController::class, 'rejected'])->name('refund.reject');
+    Route::post('/refund/{id}/update', [RefundController::class, 'update'])->name('refund.update');
+    Route::get('/refund/{id}/delete', [RefundController::class, 'destroy'])->name('refund.delete');
+    Route::get('/refund/{id}/show', [RefundController::class, 'show'])->name('refund.show');
 
 });
 
@@ -81,6 +95,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('subscriptions/{id}/refunds', [SubscriptionController::class, 'refunds'])->name('subscriptions.refunds');
     Route::get('subscriptions/{id}/delete', [SubscriptionController::class, 'destroy'])->name('subscriptions.delete');
     Route::get('subscriptions/{id}/show', [SubscriptionController::class, 'show'])->name('subscriptions.show');
+
+    // Customer Subscription routes
+    Route::get('customer-subscriptions', [CustomerSubscriptionController::class, 'index'])->name('customer.subscriptions.index');
 });
 
 Route::get('/home', function () {

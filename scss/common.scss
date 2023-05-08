@@ -1,0 +1,35 @@
+@use './util/variabls' as v;
+@use './util/mixin' as m;
+@use './util/media-query' as q;
+
+
+.productss-list-box{
+    .btn-table{
+        display: inline-block; 
+        @include m.button(.9rem,v.$light,v.$gdbg);
+        background: v.$gdbg;
+        border-radius: .4rem;
+        padding: .3rem .8rem;
+    }
+}
+
+.table-avatar{
+    img{
+        width: 3rem!important;
+        height: 3rem!important;
+        border-radius: 50%!important;
+        object-fit: cover;
+    }
+    span {
+        width: 3rem;
+        height: 3rem;
+        background: v.$gdbg;
+        border-radius: 50%;
+        color: v.$light;
+        font-size: 1rem;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

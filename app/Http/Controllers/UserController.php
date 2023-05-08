@@ -114,13 +114,14 @@ class UserController extends Controller
         $user->email = $request->email;
         if ($request->password) {
             $user->password = Hash::make($request->password);
-        } 
-        $userSlug = Str::slug($user->name);
+        }  
      
-        $imageName = $userSlug.'.'.request()->thumbnail->getClientOriginalExtension();
-        request()->thumbnail->move(public_path('assets/images/user'), $imageName);
-        // return $imageName;
-        $user->thumbnail =  $imageName;
+        if ($request->thumbnail) {
+             $userSlug = Str::slug($user->name);
+             $imageName = $userSlug.'.'.request()->thumbnail->getClientOriginalExtension();
+            request()->thumbnail->move(public_path('assets/images/user'), $imageName);
+            $user->thumbnail =  $imageName;
+        } 
 
         $user->save();
         DB::table('model_has_roles')->where('model_id',$id)->delete();

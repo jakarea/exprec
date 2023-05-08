@@ -72,10 +72,20 @@
   font-size: 0.8rem;
   color: #8C8FAE;
 }
-.sidebar-wrapper .sidebar-nav-area .menubar .menu-item .menu-link .fa-user-group,
+.sidebar-wrapper .sidebar-nav-area .menubar .menu-item .menu-link .fa-file-invoice-dollar,
 .sidebar-wrapper .sidebar-nav-area .menubar .menu-item .menu-link .fa-users,
 .sidebar-wrapper .sidebar-nav-area .menubar .menu-item .menu-link .fa-user {
   font-size: 1.1rem;
+  color: #8C8FAE;
+}
+.sidebar-wrapper .sidebar-nav-area .menubar .menu-item .menu-link .fa-right-lef,
+.sidebar-wrapper .sidebar-nav-area .menubar .menu-item .menu-link .fa-clock-rotate-left {
+  font-size: 0.5rem !important;
+  color: #8C8FAE;
+  margin-right: 0.4rem;
+}
+.sidebar-wrapper .sidebar-nav-area .menubar .menu-item .menu-link .fa-user-group {
+  font-size: 1rem;
   color: #8C8FAE;
 }
 .sidebar-wrapper .sidebar-nav-area .menubar .menu-item .menu-link i.fa-superpowers,
@@ -199,6 +209,7 @@
   top: -6.2rem;
   z-index: 3000;
   display: none;
+  padding-top: 0.3rem;
 }
 
 .sidebar-nav-area .menubar .menu-item:hover .pages-submenu-wrap {

@@ -326,6 +326,17 @@
     }
 }
 
+.subscription-table{
+    h5 {
+        @include m.para(1.4rem, 600, v.$btnbg);
+    }
+    tr{
+        td{
+            line-height: 70%!important;
+        }
+    }
+}
+
 
 @include q.responsive(phone) {
     .user-password-chnage .password-change-txt {

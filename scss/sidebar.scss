@@ -75,10 +75,22 @@
                         font-size: 0.8rem;
                         color: v.$fourth;
                     }
-                    .fa-user-group,
+                   
+                    
+                    .fa-file-invoice-dollar, 
                     .fa-users,
                     .fa-user{
                         font-size: 1.1rem;
+                        color: v.$fourth;
+                    }
+                    .fa-right-lef,
+                    .fa-clock-rotate-left{
+                        font-size: .5rem!important;
+                        color: v.$fourth;
+                        margin-right: 0.4rem;
+                    }
+                    .fa-user-group{
+                        font-size: 1rem;
                         color: v.$fourth;
                     }
                     i.fa-superpowers,
@@ -235,6 +247,7 @@
     top: -6.2rem;
     z-index: 3000;
     display: none;
+    padding-top: .3rem;
 }
 .sidebar-nav-area {
     .menubar {

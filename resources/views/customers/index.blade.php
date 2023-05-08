@@ -65,21 +65,6 @@
                                 <a href="{{ route('customers.show', $customer->id) }}">
                                     <i class="fas fa-eye text-info me-2"></i>
                                 </a>
-                                @endcan
-                                @can('course-edit')
-                                <a href="{{ url('customers/'.$customer->id.'/edit') }}">
-                                    <i class="fas fa-pen text-primary me-2"></i>
-                                </a>
-                                @endcan
-                                @can('course-delete')
-                                <form method="post" class="d-inline"
-                                    action="{{ url('admin/elearning/courses/'.$customer->id.'/destroy') }}">
-                                    @csrf
-                                    @method("DELETE")
-                                    <button type="submit" class="btn p-0"><i
-                                            class="fas fa-trash text-danger"></i></button>
-                                </form>
-                                @endcan
                             </div>
                         </td>
                     </tr>

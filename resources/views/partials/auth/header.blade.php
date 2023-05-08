@@ -25,7 +25,7 @@
                     @endif
                     @if (Route::has('register'))
                     <li class="link-item">
-                        <a href="{{ url('/subscription') }}" class="link-click">Register</a>
+                        <a href="{{ route('subscription.index') }}" class="link-click">Register</a>
                     </li>
                     @endif 
                 </ul>
