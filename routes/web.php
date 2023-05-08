@@ -59,6 +59,8 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/refund', [RefundController::class, 'index'])->name('refund.index');
     Route::get('/refund/{id}/create', [RefundController::class, 'create'])->name('refund.create');
     Route::post('/refund/store', [RefundController::class, 'store'])->name('refund.store');
+    Route::post('/refund/cancel', [RefundController::class, 'cancel'])->name('refund.cancel');
+    Route::get('/refund/{id}/cancelSubscription', [RefundController::class, 'cancelSubscription'])->name('refund.CancelSubscription');
     Route::get('/refund/{id}/approve', [RefundController::class, 'approve'])->name('refund.approve');
     Route::get('/refund/{id}/rejected', [RefundController::class, 'rejected'])->name('refund.reject');
     Route::post('/refund/{id}/update', [RefundController::class, 'update'])->name('refund.update');

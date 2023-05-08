@@ -33,38 +33,56 @@
             <div class="change-password-form w-100 customer-profile-info">
                 <div class="set-profile-picture">
                     <div class="media justify-content-center"> 
-                        <img src="{{ asset('assets/images/user/akram-hossain.png') }}" alt="a" class="img-fluid"> 
+                    @if($refund->user->thumbnail)
+                    <img src="{{ asset('assets/images/user/'.$refund->user->thumbnail) }}" alt="{{$refund->user->name}}"
+                        class="img-fluid">
+                    @else
+                    <span>{!! strtoupper($refund->user->name[0]) !!}</span>
+                    @endif
                     </div>
                     <div class="role-label"> 
-                        <span class="badge rounded-pill bg-dark">Admin</span>
+                    @if($refund->user)
+                        @if(!empty($refund->user->getRoleNames()))
+                            @foreach($refund->user->getRoleNames() as $v)
+                            <span class="badge rounded-pill bg-dark">{{ $v }}</span>
+                            @endforeach
+                        @endif
+                    @else
+                        <span class="badge rounded-pill bg-dark">No Role</span>
+                    @endif
                     </div>
                 </div>
                 <div class="text-center">
-                    <h3>Jhon Doe</h3>
+                    <h3>{{ $refund->user->name }}</h3>
                     <!-- details box @S -->
                     <div class="form-group mt-3 mb-1 ">
                         <label for=""><i class="fa-brands fa-cc-stripe"></i> Stripe ID: </label>
-                        <code>1234567</code>
+                        <code>{{ $refund->user->stripe_id }}</code>
                     </div>
                     <!-- details box @E -->
                     <div class="form-group mb-0 ">
                         <label for=""><i class="fa-solid fa-envelope"></i> Email: </label>
-                        <p>jhondoe@mail.com</p>
+                        <p>{{ $refund->user->email }}</p>
                     </div> 
                 </div>  
             </div>
         </div>
 
         <div class="col-lg-8">
-            <div class="productss-list-box subscription-table">
-                <h5 class="p-3 pb-0">Refund Details</h5>
+            <div class="productss-list-box subscription-table mb-3">
+                <h5 class="p-3 pb-0">Refund Reason</h5>
                 <div class="refund-reason p-3">
                     <p>{{ __($refund->reason) }}</p>
                 </div>
                 <div class="refund-action text-end">
                 @if($refund->status == 'pending')
-                    <a href="{{ route('refund.approve',  $refund->charge_id) }}" class="btn btn-success">Approve</a>
-                    <a href="{{ route('refund.reject',  $refund->charge_id) }}" class="btn btn-danger">Reject</a>
+                    @if($refund->type == 'refund')
+                    <a href="{{ route('refund.approve',  $refund->charge_id) }}" class="btn btn-success">Approve Refund</a>
+                    <a href="{{ route('refund.reject',  $refund->charge_id) }}" class="btn btn-danger">Reject Refund</a>
+                    @else
+                    <a href="{{ route('refund.CancelSubscription',  $refund->charge_id) }}" class="btn btn-success">Approve Cancel Subscription</a>
+                    <a href="{{ route('refund.reject',  $refund->charge_id) }}" class="btn btn-danger">Reject Subscription</a>
+                    @endif
                 @elseif($refund->status == 'approved')
                     <a href="#" class="btn btn-success">Already Approved</a>
                 @elseif($refund->status == 'declined')
@@ -72,6 +90,33 @@
                 @endif
                 </div>
             </div>
+            @if( count ($subscription->refunds) > 0)
+            <div class="productss-list-box subscription-table">
+                <h5 class="p-3 pb-0">Refund History</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Refund ID</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Created At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($subscription->refunds as $refund)
+                            <tr>
+                                <td>{{ $refund->id }}</td>
+                                <td>$ {{ $refund->amount / 100 }}</td>
+                                <td>{{ $refund->status }}</td>
+                                <td>{{ date('M d, Y', $refund->created) }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @endif
         </div>
     </div>
 </main>

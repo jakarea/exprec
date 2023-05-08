@@ -78,7 +78,6 @@
                 <table>
                     <tr>
                         <th width="5%">No</th>
-                        <th>Customer</th>
                         <th>Status</th>
                         <th>Billing</th>
                         <th>Product</th>
@@ -89,7 +88,6 @@
                     </tr>
                     <tr>
                         <td>{{ $subscription->id }}</td>
-                        <td>{{ $subscription->customer->email }}</td>
                         <td>{{ $subscription->status }}</td>
                         <td>
                             @if($subscription->collection_method == 'charge_automatically')
@@ -111,27 +109,60 @@
                                 @else
                                 <!-- <a href="{{ route('subscriptions.refunds', $subscription->invoice->charge) }}" class="btn btn-primary btn-sm">Refund</a> -->
                                 <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Refund</a>
-                                <a href="#" class="btn btn-sm btn-danger">Cancel Subscription</a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#CancelSubscription" class="btn btn-sm btn-danger">Cancel Subscription</a>
                                 @endif
                             @endforeach
                             @else
                             <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Refund</a>
-                            <a href="#" class="btn btn-sm btn-danger">Cancel Subscription</a>
+                            <a data-bs-toggle="modal" data-bs-target="#CancelSubscription" href="#" class="btn btn-sm btn-danger">Cancel Subscription</a>
                             @endif
                         </td>
 
                     </tr>
                 </table>
                 <div>                    
-                    <!-- Modal -->
+                    <!-- Modal Refunds-->
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h6 class="modal-title" id="staticBackdropLabel">Refunds / Subscription Cancel</h6>
+                                    <h6 class="modal-title" id="staticBackdropLabel">Refunds Supscription</h6>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <form action="{{ route('refund.store') }}" method="POST" id="subscriptionCancelRequest">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <!-- Design form for refunds or cancel subscription -->
+                                        
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="reason">What is the reason?</label>
+                                                        <textarea name="reason" id="reason" cols="30" rows="5" class="form-control"></textarea>
+                                                        <input type="hidden" name="charge_id" value="{{ $subscription->invoice->charge }}">
+                                                        <input type="hidden" name="amount" value="{{ $subscription->plan->amount / 100 }}">
+                                                        <input type="hidden" name="product_name" value="{{ $subscription->product->name }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Send request</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal Cancel-->
+                    <div class="modal fade" id="CancelSubscription" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="CancelSubscriptionLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h6 class="modal-title" id="CancelSubscriptionLabel">Subscription Cancel</h6>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form action="{{ route('refund.cancel') }}" method="POST">
                                     @csrf
                                     <div class="modal-body">
                                         <!-- Design form for refunds or cancel subscription -->

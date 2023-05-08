@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Stripe\Stripe;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -20,39 +21,20 @@ class CustomerSubscriptionController extends Controller
         //
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        $user = User::where('email', '=', Auth::user()->email)->firstOrFail();
-
-        // Get all subscriptions created in Stripe with pagination
-        $limit = 10;
-        $subscriptions = \Stripe\Subscription::all([
-            'limit' => $limit,
-            'customer' => $user->stripe_id,
-            'expand' => ['data.plan.product', 'data.customer'],
-        ]);
-
-        $subscriptions_data = $subscriptions->data;
-
-        while ($subscriptions->has_more) {
-            $last_subscription = end($subscriptions_data);
-            $next_subscriptions = \Stripe\Subscription::all([
-                'limit' => $limit,
-                'starting_after' => $last_subscription->id,
-                'expand' => ['data.plan.product'],
-            ]);
-            $subscriptions_data = array_merge($subscriptions_data, $next_subscriptions->data);
-            $subscriptions = $next_subscriptions;
+        $user = User::where('email', Auth::user()->email)->first();
+        $subscription_id  = DB::table('subscriptions')->where('user_id', $user->id)->first();  
+        if ( !empty($subscription_id) ) {
+            $subscriptions = \Stripe\Subscription::retrieve(['id' => $subscription_id->stripe_id,]);
+            $subscriptions->user = $user;
+            $subscriptions->plan = \Stripe\Plan::retrieve(['id' => $subscriptions->plan->id,]);
+            $subscriptions->plan->product = \Stripe\Product::retrieve(['id' => $subscriptions->plan->product,]);
+            
+            return view('subscription.customer.index', compact('subscriptions'));
         }
-
-        // Paginate the subscriptions data
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $itemsPerPage = $limit;
-        $currentItems = array_slice($subscriptions_data, ($currentPage - 1) * $itemsPerPage, $itemsPerPage);
-        $subscriptions_paginated = new LengthAwarePaginator($currentItems, count($subscriptions_data), $itemsPerPage);
-        $subscriptions_paginated->withPath('customer-subscriptions');
-
-        // dd($subscriptions_paginated);
-        // return "WOrking on dynamic customer subscription page";
-        return view('subscription.index', compact('subscriptions_paginated'));
+        else
+        {
+            return redirect()->back()->with('error', 'You have not subscribed to any plan yet.');
+        }
     }
 
     /**
