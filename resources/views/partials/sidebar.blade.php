@@ -88,18 +88,19 @@
             </li>
             @role('Admin')
             @else 
+            
+            <li class="menu-item">
+                <a href="{{ route('customer.subscriptions.index') }}" class="{{ Request::is('customer-subscriptions*')  ? ' active' : '' }} menu-link">
+                <!-- <i class="fa-brands fa-superpowers"></i> -->
+                <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <span>My Subscription</span> 
+                </a> 
+            </li>
             <li class="menu-item">
                 <a href="{{ url('integrations') }}" class="{{ Request::is('integrations*')  ? ' active' : '' }} menu-link">
                 <!-- <i class="fa-brands fa-superpowers"></i> -->
                 <i class="fa-solid fa-plug"></i>
                     <span>Integrations</span> 
-                </a> 
-            </li>
-            <li class="menu-item">
-                <a href="{{ route('customer.subscriptions.index') }}" class="{{ Request::is('customer-subscriptions*')  ? ' active' : '' }} menu-link">
-                <!-- <i class="fa-brands fa-superpowers"></i> -->
-                <i class="fa-solid fa-envelope"></i>
-                    <span>My Subscription</span> 
                 </a> 
             </li>
             @endrole

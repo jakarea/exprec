@@ -166,6 +166,7 @@
 .sidebar-custom-width .header-user-box .media {
   justify-content: center;
 }
+.sidebar-custom-width .header-user-box .media span,
 .sidebar-custom-width .header-user-box .media img {
   margin-right: 0;
 }

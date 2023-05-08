@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title') User - Profile Edit @endsection
+@section('title') User - My Profile Update @endsection
 @section('style')
 <link href="{{ asset('assets/css/product-researchs.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets/css/profile.css') }}" rel="stylesheet" type="text/css" />
@@ -13,7 +13,7 @@
       <div class="col-lg-12">
         <div class="create-form-wrap">
           <div class="create-form-head">
-            <h6>Edit your profile</h6>
+            <h6>Update your profile</h6>
             <a href="{{ url('/') }}">
               <i class="fa-solid fa-list"></i> Dashboard </a>
             </a>
@@ -69,11 +69,12 @@
             </div>
           </div>
           <div class="row align-items-center">
-            <div class="col-lg-4"> 
-                <div class="file-wrapper" @if($user->thumbnail) style="background-image: url({{asset('assets/images/user/'.$user->thumbnail)}})" @endif>
-                  <input type="file" name="thumbnail" accept="image/*" />
-                  <div class="close-btn"><i class="fas fa-close"></i></div>
-                </div> 
+            <div class="col-lg-4">
+              <div class="file-wrapper" @if($user->thumbnail) style="background-image:
+                url({{asset('assets/images/user/'.$user->thumbnail)}})" @endif>
+                <input type="file" name="thumbnail" accept="image/*" />
+                <div class="close-btn"><i class="fas fa-close"></i></div>
+              </div>
             </div>
             <div class="col-lg-8">
               <div class="submit-bttns">
@@ -104,7 +105,7 @@ $('.close-btn').on('click', function(){
    let file = $('input[name="thumbnail"]');
    $('.file-wrapper').css('background-image', 'unset');
    $('.file-wrapper').removeClass('file-set');
-   file.replaceWith( file = file.clone( true ) );
+  file.replaceWith( file = file.clone( true ) );
 });
 
 //FILE
