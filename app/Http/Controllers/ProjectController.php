@@ -23,16 +23,19 @@ class ProjectController extends Controller
             'previous_project' => 'required_without_all:name',
             'name' => 'required_without_all:previous_project',
             'project_details' => 'required',
+        ],[
+            'project_details.required' => 'Selection interest cant be empty',
+            'previous_project.required' => 'Please select or insert a new project name',
         ]);
         $old_data = [];
-
+        $newdata = json_decode($request->project_details);
         $project_id = $request->previous_project;
 
         if($project_id){
             $project = Project::where(['id' => $project_id])->first();
 
-            $old_data = json_decode($project['details']);
-            $newdata = array_merge($old_data,json_decode($request->project_details));
+            if($project['details'])
+                $newdata = array_merge($old_data,json_decode($request->project_details));
             $project->details = $newdata; 
             $project->save();
         }else{

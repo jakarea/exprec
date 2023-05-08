@@ -135,7 +135,7 @@
                     </ul>
                     
                     <div class="adspy-filter-product-bttns">
-                          <a href="facebook/{{$ad_id}}" target="_blank">See Ad details</a> 
+                          <a href="adspy/facebook/{{$ad_id}}" target="_blank">See Ad details</a> 
                       </div>
                   </div> 
                 </div>@endforeach
