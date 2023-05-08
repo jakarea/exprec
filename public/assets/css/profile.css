@@ -324,6 +324,69 @@
   line-height: 70% !important;
 }
 
+.refund-bttns .btn-refund {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 140%;
+  background: #727DFF;
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  padding: 0.3rem 1rem;
+}
+.refund-bttns .btn-cancel {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 140%;
+  background: linear-gradient(98.03deg, #FF6262 18.68%, #F37F14 88.52%);
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  padding: 0.3rem 1rem;
+}
+
+.refund-modal h6 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2C2C2C;
+  line-height: 140%;
+}
+.refund-modal .form-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #8C8FAE;
+  line-height: 140%;
+  margin-bottom: 0.4rem;
+}
+.refund-modal .form-group textarea {
+  border: 1px solid #DEE3EB;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #2C2C2C;
+  line-height: 140%;
+  resize: none;
+}
+.refund-modal .modal-footer .btn-closes {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 140%;
+  background: #8C8FAE;
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  padding: 0.3rem 1rem;
+}
+.refund-modal .modal-footer .btn-request {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 140%;
+  background: linear-gradient(98.03deg, #FF6262 18.68%, #F37F14 88.52%);
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  padding: 0.3rem 1rem;
+}
+
 @media (min-width: 320px) and (max-width: 574px) {
   .user-password-chnage .password-change-txt h1 {
     font-size: 1.4rem;

@@ -246,7 +246,7 @@ $languages = array(
 					@endforeach
 					<span id="saveCurrentQuery"><img src="{{ asset('assets/images/save-icon.svg') }}" alt="" class="img-fluid"> Save current query</span>
 				</div>
-				<div class="addspy-multi-select">
+				{{-- <div class="addspy-multi-select">
 					<div class="d-flex">
 						<h6>Multi select:</h6>
 						<p>⌘+A</p>
@@ -263,7 +263,7 @@ $languages = array(
 						</select>
 						<i class="fas fa-angle-down"></i>
 					</div>
-				</div>
+				</div> --}}
 			</div>
 		</div>
 		<div class="parent-wrapper">

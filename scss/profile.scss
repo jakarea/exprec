@@ -337,6 +337,43 @@
     }
 }
 
+.refund-bttns{
+    .btn-refund{
+        @include m.button(1rem,v.$light,v.$blu);
+        padding: .3rem 1rem; 
+    }
+    .btn-cancel{
+        @include m.button(1rem,v.$light,v.$gdbg);
+        padding: .3rem 1rem; 
+    }
+}
+
+.refund-modal{
+    h6{
+        @include m.para(1.4rem, 600, v.$btnbg);
+    }
+    .form-group{
+        label{
+            @include m.para(0.9rem, 500, v.$fourth);
+            margin-bottom: 0.4rem;
+        }
+        textarea{
+            border: 1px solid v.$third;
+            @include m.para(1rem, 400, v.$btnbg);
+            resize: none
+        }
+    }
+    .modal-footer{
+        .btn-closes{
+            @include m.button(1rem,v.$light,v.$fourth);
+            padding: .3rem 1rem; 
+        }
+        .btn-request{
+            @include m.button(1rem,v.$light,v.$gdbg);
+            padding: .3rem 1rem; 
+        }
+    }
+}
 
 @include q.responsive(phone) {
     .user-password-chnage .password-change-txt {

@@ -3,6 +3,7 @@
 
 @section('style')
 <link href="{{ asset('assets/css/profile.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/css/common.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
@@ -43,14 +44,14 @@
                             <td>
                                 <div class="table-avatar">
                                     @if($subscriptions->user->thumbnail)
-                                    <img src="{{ asset('assets/images/user/'.$subscriptions->user->thumbnail) }}" alt="{{$subscriptions->customer->name}}" class="img-fluid">
+                                    <img src="{{ asset('assets/images/user/'.$subscriptions->user->thumbnail) }}" alt="{{$subscriptions->user->name}}" class="img-fluid">
                                     @else 
                                         <span>{!! strtoupper($subscriptions->user->name[0]) !!}</span> 
                                     @endif
                                 </div>
                             </td>
                             <td>{{ $subscriptions->user->email }}</td>
-                            <td>{{ $subscriptions->status }}</td>
+                            <td><span class="badge text-bg-success">{{ $subscriptions->status }}</span></td>
                             <td>{{ $subscriptions->plan->product->name }}</td>
                             <td>$ {{ $subscriptions->plan->amount / 100 }}</td>
                             <td>{{ date('M d, Y', $subscriptions->created) }}</td>
