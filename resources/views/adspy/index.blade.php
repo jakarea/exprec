@@ -3,6 +3,7 @@
 
 @section('style') 
 <link href="{{ asset('assets/css/adspy.css') }}" rel="stylesheet" type="text/css" />  
+<link href="{{ asset('assets/css/video-controller.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
