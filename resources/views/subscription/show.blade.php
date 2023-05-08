@@ -10,16 +10,15 @@
     <!-- user header area @S -->
     <div class="product-filter-wrapper my-0">
         <div class="product-filter-box mt-0">
-        
             <div class="password-change-txt">
                 <h1 class="mb-1">Subscriptions Details</h1>
-                <p>This is <span class="text-danger"> <a href="{{ route('customers.show', $subscription->user->id) }}" class="text-danger">{{ $subscription->customer->name }}</a></span>   subscriptions page.</p>
+                <p>This is subscriptions page.</p>
             </div>
             <div class="form-grp-btn mt-0 ms-auto">
                 @role("Admin")
-                <a href="{{ url('subscriptions') }}" class="btn me-3">All Subscriptions</a>
+                <a href="{{ url('subscriptions') }}" class="btn me-3"><i class="fas fa-list"></i> All Subscriptions</a>
                 @else
-                <a href="{{ route('customer.subscriptions.index') }}" class="btn me-3">My Subscriptions</a>
+                <a href="{{ route('customer.subscriptions.index') }}" class="btn me-3"><i class="fas fa-list"></i> My Subscriptions</a>
                 @endrole
             </div>
         </div>
@@ -34,55 +33,60 @@
             </div>
         </div>
         @endif
-        <div class="col-3">
+        <div class="col-lg-3"> 
             <div class="change-password-form w-100 customer-profile-info">
                 <div class="set-profile-picture">
                     <div class="media justify-content-center">
-                        <span>{!! strtoupper($subscription->customer->name[0]) !!}</span> 
+                        @if($subscription->user->thumbnail)
+                        <img src="{{ asset('assets/images/user/'.$subscription->user->thumbnail) }}" alt="Customer"
+                            class="img-fluid">
+                        @else
+                        <span>{!! strtoupper($subscription->customer->name[0]) !!}</span>
+                        @endif
                     </div>
                     <div class="role-label">
                         @if($subscription->user)
-                            @if(!empty($subscription->user->getRoleNames()))
-                                @foreach($subscription->user->getRoleNames() as $v)
-                                <span class="badge rounded-pill bg-dark">{{ $v }}</span>
-                                @endforeach
-                            @endif
+                        @if(!empty($subscription->user->getRoleNames()))
+                        @foreach($subscription->user->getRoleNames() as $v)
+                        <span class="badge rounded-pill bg-dark">{{ $v }}</span>
+                        @endforeach
+                        @endif
                         @else
-                            <span class="badge rounded-pill bg-dark">No Role</span>
+                        <span class="badge rounded-pill bg-dark">No Role</span>
                         @endif
                     </div>
-                    <div class="text-center">
-                        <h3>{{ $subscription->customer->name }} </h3>
-                        <!-- details box @S -->
-                        <div class="form-group mt-3 mb-1 ">
-                            <label for=""><i class="fa-brands fa-cc-stripe"></i> Stripe ID: </label>
-                            <code>{{ $subscription->customer->id }}</code>
-                        </div>
-                        <!-- details box @E -->
-                        <div class="form-group mb-0 ">
-                            <label for=""><i class="fa-solid fa-envelope"></i> Email: </label>
-                            <p>{{ $subscription->customer->email }}</p>
-                        </div>
-                        <!-- Current period -->
-                        <div class="form-group mb-0 ">
-                            <label for=""><i class="fa-solid fa-calender"></i> Current Period: </label>
-                            <p>{{ date('M d, Y h:m a', $subscription->current_period_start) }} - {{ date('M d, Y h:m a', $subscription->current_period_end) }}</p>
-                        </div>
-                    </div>
                 </div>
-            </div>
+                <div class="text-center">
+                    <h3>{{ $subscription->customer->name }}</h3>
+                    <!-- details box @S -->
+                    <div class="form-group mt-3 mb-1 flex-column">
+                        <label for=""><i class="fa-brands fa-cc-stripe"></i> Stripe ID: </label>
+                        <code>{{ $subscription->customer->id }}</code>
+                    </div>
+                    <!-- details box @E -->
+                    <div class="form-group mb-1 flex-column">
+                        <label for=""><i class="fa-solid fa-envelope"></i> Email: </label>
+                        <p>{{ $subscription->customer->email }}</p>
+                    </div>
+                    <div class="form-group mb-0 flex-column">
+                        <label for=""><i class="fa-solid fa-calendar"></i> Current Period: </label>
+                        <p>{{ date('M d, Y h:m a', $subscription->current_period_start) }} - {{ date('M d, Y h:m a',
+                            $subscription->current_period_end) }}</p>
+                    </div>
+                </div> 
+            </div> 
         </div>
-        <div class="col-9">
-            <div class="productss-list-box mt-5">
-                <h6>Subscription Details</h6>
+        <div class="col-lg-9">
+            <div class="productss-list-box payment-history-table">
+                <h5 class="p-3 pb-0">Subscription Details:</h5> 
                 <table>
                     <tr>
-                        <th width="5%">No</th>
+                        <th width="5%" class="text-start">No</th>
                         <th>Status</th>
                         <th>Billing</th>
                         <th>Product</th>
                         <th>Price</th>
-                        <th>Created</th>
+                        {{-- <th>Created</th> --}}
                         <th>Actions</th>
 
                     </tr>
@@ -98,90 +102,108 @@
                         </td>
                         <td>{{ $subscription->product->name }}</td>
                         <td>$ {{ $subscription->plan->amount / 100 }}</td>
-                        <td>
+                        {{-- <td>
                             {{ date('M d, Y h:m a', $subscription->created) }}
-                        </td>
-                        <td>
+                        </td> --}}
+                        <td class="refund-bttns">
                             @if ( $subscription->refund )
                             @foreach($subscription->refund as $refund)
-                                @if($refund->status == 'succeeded')
-                                <a href="#" class="btn btn-sm btn-danger">Refunded</a>
-                                @else
-                                <!-- <a href="{{ route('subscriptions.refunds', $subscription->invoice->charge) }}" class="btn btn-primary btn-sm">Refund</a> -->
-                                <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Refund</a>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#CancelSubscription" class="btn btn-sm btn-danger">Cancel Subscription</a>
-                                @endif
+                            @if($refund->status == 'succeeded')
+                            <a href="#" class="btn btn-sm btn-danger">Refunded</a>
+                            @else
+                            <!-- <a href="{{ route('subscriptions.refunds', $subscription->invoice->charge) }}" class="btn btn-primary btn-sm">Refund</a> -->
+                            <a href="#" class="btn btn-refund" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">Refund</a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#CancelSubscription"
+                                class="btn btn-sm btn-danger">Cancel Subscription</a>
+                            @endif
                             @endforeach
                             @else
-                            <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Refund</a>
-                            <a data-bs-toggle="modal" data-bs-target="#CancelSubscription" href="#" class="btn btn-sm btn-danger">Cancel Subscription</a>
+                            <a href="#" class="btn btn-refund" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">Refund</a>
+                            <a data-bs-toggle="modal" data-bs-target="#CancelSubscription" href="#"
+                                class="btn btn-cancel">Cancel</a>
                             @endif
                         </td>
 
                     </tr>
                 </table>
-                <div>                    
+                <div>
                     <!-- Modal Refunds-->
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal refund-modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h6 class="modal-title" id="staticBackdropLabel">Refunds Supscription</h6>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                                 </div>
                                 <form action="{{ route('refund.store') }}" method="POST" id="subscriptionCancelRequest">
                                     @csrf
                                     <div class="modal-body">
                                         <!-- Design form for refunds or cancel subscription -->
-                                        
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="reason">What is the reason?</label>
-                                                        <textarea name="reason" id="reason" cols="30" rows="5" class="form-control"></textarea>
-                                                        <input type="hidden" name="charge_id" value="{{ $subscription->invoice->charge }}">
-                                                        <input type="hidden" name="amount" value="{{ $subscription->plan->amount / 100 }}">
-                                                        <input type="hidden" name="product_name" value="{{ $subscription->product->name }}">
-                                                    </div>
+
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="reason">What is the reason?</label>
+                                                    <textarea name="reason" id="reason" cols="30" rows="5"
+                                                        class="form-control" placeholder="Describe here"></textarea>
+                                                    <input type="hidden" name="charge_id"
+                                                        value="{{ $subscription->invoice->charge }}">
+                                                    <input type="hidden" name="amount"
+                                                        value="{{ $subscription->plan->amount / 100 }}">
+                                                    <input type="hidden" name="product_name"
+                                                        value="{{ $subscription->product->name }}">
                                                 </div>
                                             </div>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Send request</button>
+                                        <button type="button" class="btn btn-closes"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-request">Send request</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <!-- Modal Cancel-->
-                    <div class="modal fade" id="CancelSubscription" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="CancelSubscriptionLabel" aria-hidden="true">
+                    <div class="modal refund-modal fade" id="CancelSubscription" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="CancelSubscriptionLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h6 class="modal-title" id="CancelSubscriptionLabel">Subscription Cancel</h6>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                                 </div>
                                 <form action="{{ route('refund.cancel') }}" method="POST">
                                     @csrf
                                     <div class="modal-body">
                                         <!-- Design form for refunds or cancel subscription -->
-                                        
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="reason">What is the reason?</label>
-                                                        <textarea name="reason" id="reason" cols="30" rows="5" class="form-control"></textarea>
-                                                        <input type="hidden" name="charge_id" value="{{ $subscription->invoice->charge }}">
-                                                        <input type="hidden" name="amount" value="{{ $subscription->plan->amount / 100 }}">
-                                                        <input type="hidden" name="product_name" value="{{ $subscription->product->name }}">
-                                                    </div>
+
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="reason">What is the reason?</label>
+                                                    <textarea name="reason" id="reason" cols="30" rows="5"
+                                                        class="form-control" placeholder="Describe here"></textarea>
+                                                    <input type="hidden" name="charge_id"
+                                                        value="{{ $subscription->invoice->charge }}">
+                                                    <input type="hidden" name="amount"
+                                                        value="{{ $subscription->plan->amount / 100 }}">
+                                                    <input type="hidden" name="product_name"
+                                                        value="{{ $subscription->product->name }}">
                                                 </div>
                                             </div>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Send request</button>
+                                        <button type="button" class="btn btn-closes"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-request">Send request</button>
                                     </div>
                                 </form>
                             </div>
@@ -190,7 +212,7 @@
                 </div>
             </div>
             <table>
-            <!-- <tr>
+                <!-- <tr>
                 <td>Refund</td>
                 <td colspan="7">
                     @if($subscription->refund)
@@ -210,7 +232,7 @@
 
             </table>
             @php
-                $refunds = App\Models\Refund::where('charge_id', $subscription->invoice->charge)->get();
+            $refunds = App\Models\Refund::where('charge_id', $subscription->invoice->charge)->get();
             @endphp
             @if ( count($refunds) > 0 )
             <div class="productss-list-box mt-5">

@@ -172,7 +172,7 @@
           if($i > 4) break;
           @endphp
           <div class="col-lg-6">
-            <div class="personalized-list-box">
+            <div class="personalized-list-box mt-4">
               <div class="d-flex">
                 <h5>{{ $name}}</h5>
                 <a href="#"><i class="fa-solid fa-ellipsis"></i></a>

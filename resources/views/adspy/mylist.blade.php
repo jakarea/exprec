@@ -55,8 +55,8 @@
           <li><a href="#">Pinterest Ads</a></li>
         </ul>
         <div class="banner-arrow-box">
-          <a href="#"><i class="fas fa-angle-left"></i></a>
-          <a href="#"><i class="fas fa-angle-right"></i></a>
+          {{-- <a href="#"><i class="fas fa-angle-left"></i></a>
+          <a href="#"><i class="fas fa-angle-right"></i></a> --}}
         </div>
       </div>
       <div class="wining-products-box">
