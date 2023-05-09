@@ -24,7 +24,7 @@
         </a>
       </li> 
       <li class="sub-sidebar-submenu">
-        <a href="#" class="{{ Request::is('email-marketing/audience/list-segments')  ? ' active' : '' }}">
+        <a href="#" class="{{ Request::is('email-marketing/audience/list-segments') || Request::is('email-marketing/profile')  ? ' active' : '' }}">
           <img src="{{ asset('assets/images/audience-icon.svg') }}" alt="Dash" class="img-fluid"> 
           <span>Audience</span>
           <i class="fas fa-angle-right"></i>
@@ -36,14 +36,14 @@
             </a>
           </li> 
           <li>
-            <a href="#"> 
+            <a href="{{url('email-marketing/profile')}}" class="{{ Request::is('email-marketing/profile')  ? ' active' : '' }}"> 
               <span>Profiles</span>
             </a>
           </li> 
         </ul>
       </li>
       <li class="sub-sidebar-submenu">
-        <a href="#" class="{{ Request::is('email-marketing/content/templates') || Request::is('email-marketing/images-brand')  ? ' active' : '' }}">
+        <a href="#" class="{{ Request::is('email-marketing/content/templates') || Request::is('email-marketing/images-brand') || Request::is('email-marketing/products')  ? ' active' : '' }}">
           <img src="{{ asset('assets/images/content-icon.svg') }}" alt="Dash" class="img-fluid"> 
           <span>Content</span>
           <i class="fas fa-angle-right"></i>
@@ -55,7 +55,7 @@
             </a>
           </li> 
           <li>
-            <a href="#"> 
+            <a href="{{url('email-marketing/products')}}" class="{{ Request::is('email-marketing/products')  ? ' active' : '' }}"> 
               <span>Products</span>
             </a>
           </li> 
