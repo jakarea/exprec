@@ -136,8 +136,16 @@ Route::middleware(['subscribed'])->group(function () {
         Route::get('/dashboard', 'dashboard'); 
         Route::get('/flows', 'flows');  
         Route::get('/1', 'e_camping_1');     
-        Route::get('/2', 'e_camping_2');              
-    });
+        Route::get('/2', 'e_camping_2');  
+        
+        // e camping new html pages
+        Route::get('/campaigns-2', function () { return view('email-camping/campaigns-2'); });
+        Route::get('/flows-2', function () { return view('email-camping/flows-2'); });
+        Route::get('/signup-form-2', function () { return view('email-camping/signup-form-2'); });
+        Route::get('/products', function () { return view('email-camping/products'); });
+        Route::get('/profile', function () { return view('email-camping/profile'); });
+
+    }); 
     
     Route::middleware(['auth'])->get('/integrations', [EmailCampingController::class, 'integrations']);
 
