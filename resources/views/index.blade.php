@@ -35,39 +35,24 @@
             @endif
         </div> 
     @role("Customer")
-    @php
-        $user = Auth::user();
-        $stripe_id = $user->stripe_id;
-    if ( !empty($stripe_id) ) {
-        $stripe = new \Stripe\StripeClient( env('STRIPE_SECRET') );
-        $subscription = $stripe->subscriptions->all(['customer' => $stripe_id]);
-        $subscription_end_date = $subscription->data[0]->current_period_end;
-        $subscription_end_date = date('d-m-Y', $subscription_end_date);
-        $subscription_end_date2 = $subscription->data[0]->current_period_end;
-        $remaining_days = ceil(($subscription_end_date2 - time()) / 86400);
-    }
-    @endphp
-    @if ( !empty($subscription) && $subscription->data[0]->status == 'active' && $remaining_days > 7 )
-    <div class="col-lg-12 col-md-12 col-sm-12 col-12">  
-        <div class="alert alert-success alert-dismissible fade show alert-custom-txt" role="alert">
-            <div class="media">
-                <div class="media-body">
-                    <h6 class="alert-heading">Subscription</h6>
-                    <p>Your subscription will end on {{ $subscription_end_date }}, You have remain only {{ $remaining_days }} days!</p>
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div> 
-        </div>  
-    </div>
-    @endif
+
     @endrole
         <!-- col @S -->
         @role("Admin")
         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
             <div class="total-session-box">
-                <h6>Total Customers</h6>
+                <h6>Customers</h6>
                 <div class="d-flex">
-                    <h2>{{ $userCount }}</h2>
+                    <h2>{{ totalCustomer() }}</h2>
+                    <i class="fas fa-users"></i>
+                </div> 
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+            <div class="total-session-box">
+                <h6>Paid Customers</h6>
+                <div class="d-flex">
+                    <h2>{{ totalPaidCustomer() }}</h2>
                     <i class="fas fa-users"></i>
                 </div> 
             </div>
@@ -77,9 +62,9 @@
         <!-- col @S -->
         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
             <div class="total-session-box">
-                <h6>Total Products</h6>
+                <h6>Products</h6>
                 <div class="d-flex">
-                    <h2>{{$productsCount}}</h2>
+                    <h2>{{ totalProduct() }}</h2>
                     <i class="fas fa-cart-shopping"></i>
                 </div> 
             </div>
@@ -88,9 +73,9 @@
         <!-- col @S -->
         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
             <div class="total-session-box">
-                <h6>Total Courses</h6>
+                <h6>Courses</h6>
                 <div class="d-flex">
-                    <h2>{{$courseCount}}</h2>
+                    <h2>{{ totalCourse() }}</h2>
                     <i class="fas fa-business-time"></i>
                 </div> 
             </div>
@@ -99,9 +84,9 @@
         <!-- col @S -->
         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
             <div class="total-session-box">
-                <h6>Total Tools</h6>
+                <h6>Tools</h6>
                 <div class="d-flex">
-                    <h2>05</h2>
+                    <h2>{{ totalTools() }}</h2>
                     <i class="fas fa-screwdriver-wrench"></i>
                 </div> 
             </div>
@@ -118,14 +103,28 @@
             </div>
         </div>
         <!-- col @E -->
-        <!-- col @S -->
         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
             <div class="total-session-box">
                 <h6>Subscriptions</h6>
                 <div class="d-flex">
-                    <h2>00</h2>
+                    <h2>{{ totalSubscription() }}</h2>
                     <i class="fas fa-ticket"></i>
                 </div> 
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+            <div class="total-session-box">
+                <h6>Refunds Subscriptions</h6>
+                <div class="d-flex">
+                    <h2>{{ totalSubscriptionRefund() }}</h2>
+                    <i class="fas fa-ticket"></i>
+                </div> 
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="total-session-box">
+                <h6>Platform overview</h6>
+                <div id="chart"></div>
             </div>
         </div>
     </div>
@@ -134,6 +133,53 @@
 
 @endsection
 @section('script') 
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<!-- ChartJs Start -->
+<script>
+    $(document).ready(function() {
+        var options = {
+            series: [{
+                name: 'Customer',
+                data: {!! json_encode(dynamicChartData()['customer']) !!},
+                }, {
+                name: 'Paid Customer',
+                data: {!! json_encode(dynamicChartData()['paidCustomer']) !!},
+                }, {
+                name: 'Subscription',
+                data: {!! json_encode(dynamicChartData()['subscription']) !!},
+                }, {
+                name: 'Refund Subscription',
+                data: {!! json_encode(dynamicChartData()['refund']) !!},
+            }],
+            fill: {
+                type: 'solid',
+                color: ['#FF6262', '#ffeded'],
+            },
+            chart: {
+                height: 350,
+                type: 'bar',
+                color: ['#FF6262', '#ffeded'],
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '100%',
+                    endingShape: 'rounded'
+                },
+            },
+            stroke: {
+                curve: 'smooth',
+            },
+            xaxis: {
+                categories: {!! json_encode(dynamicChartData()['month']) !!},
+            },
+            tooltip: {},
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+    });
+</script>
     <!-- changePassword is equal true -->
     @php
         $changePassword = session()->get('changePassword');
