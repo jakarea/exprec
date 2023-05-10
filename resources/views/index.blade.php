@@ -123,8 +123,20 @@
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="total-session-box">
-                <h6>Platform overview</h6>
-                <div id="chart"></div>
+                <h6>Total Earning</h6>
+                <div id="Earningchart"></div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+            <div class="total-session-box">
+                <h6>Total Customer</h6>
+                <div id="TotalCustomerchart"></div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-6">
+            <div class="total-session-box">
+                <h6>New Subscribed Student (Last Month Data)</h6>
+                <div id="LastCustomerchart"></div>
             </div>
         </div>
     </div>
@@ -137,47 +149,134 @@
 <!-- ChartJs Start -->
 <script>
     $(document).ready(function() {
-        var options = {
-            series: [{
-                name: 'Customer',
-                data: {!! json_encode(dynamicChartData()['customer']) !!},
-                }, {
-                name: 'Paid Customer',
-                data: {!! json_encode(dynamicChartData()['paidCustomer']) !!},
-                }, {
-                name: 'Subscription',
-                data: {!! json_encode(dynamicChartData()['subscription']) !!},
-                }, {
-                name: 'Refund Subscription',
-                data: {!! json_encode(dynamicChartData()['refund']) !!},
-            }],
-            fill: {
-                type: 'solid',
-                color: ['#FF6262', '#ffeded'],
-            },
-            chart: {
-                height: 350,
-                type: 'bar',
-                color: ['#FF6262', '#ffeded'],
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: false,
-                    columnWidth: '100%',
-                    endingShape: 'rounded'
+        function Earningchart() {
+            var options = {
+                series: [{
+                    name: 'Earning',
+                    data: {!! json_encode(dynamicChartData()['earnings']) !!},
+                }],
+                fill: {
+                    type: 'solid',
+                    color: ['#FF6262'],
                 },
-            },
-            stroke: {
-                curve: 'smooth',
-            },
-            xaxis: {
-                categories: {!! json_encode(dynamicChartData()['month']) !!},
-            },
-            tooltip: {},
-        };
+                chart: {
+                    height: 350,
+                    type: 'line',
+                    color: ['#FF6262'],
+                },
+                dataLabels: {
+                    style: {
+                        colors: ['#FF6262']
+                    }
+                },
+                markers: {
+                    colors: ['#FF6262']
+                },
+                zoom: {
+                    enabled: true
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '100%',
+                        endingShape: 'rounded'
+                    },
+                },
+                stroke: {
+                    curve: 'smooth',
+                    colors: ['#FF6262'],
+                },
+                xaxis: {
+                    categories: {!! json_encode(dynamicChartData()['month']) !!},
+                },
+                tooltip: {
+                    y: {
+                        formatter: function (val) {
+                        return "$ " + val
+                        }
+                    }
+                },
+            };
 
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
+            var chart = new ApexCharts(document.querySelector("#Earningchart"), options);
+            chart.render();
+        }
+        Earningchart();
+
+        function TotalCustomer() {
+            var options = {
+                color: ['#FF6262'],
+                series: [{
+                    name: 'Customer',
+                    data: {!! json_encode(dynamicChartData()['customer']) !!},
+                }],
+                fill: {
+                    type: 'solid',
+                    color: ['#FF6262'],
+                },
+                colors: ['#FF6262'],
+                chart: {
+                    height: 350,
+                    type: 'bar',
+                    color: ['#FF6262'],
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '100%',
+                        endingShape: 'rounded',
+                    },
+                },
+                stroke: {
+                    curve: 'smooth',
+                },
+                xaxis: {
+                    categories: {!! json_encode(dynamicChartData()['month']) !!},
+                },
+                tooltip: {},
+            };
+
+            var chart = new ApexCharts(document.querySelector("#TotalCustomerchart"), options);
+            chart.render();
+        }
+        TotalCustomer();
+
+        function LastCustomer() {
+            var options = {
+                series: [{
+                    name: 'Last Month Customer',
+                    data: {!! json_encode(dynamicChartData()['paidCustomer']) !!},
+                }],
+                fill: {
+                    type: 'solid',
+                    color: ['#FF6262'],
+                },
+                colors: ['#FF6262'],
+                chart: {
+                    height: 350,
+                    type: 'bar',
+                    color: ['#FF6262'],
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '100%',
+                        endingShape: 'rounded'
+                    },
+                },
+                stroke: {
+                    curve: 'smooth',
+                },
+                xaxis: {
+                    categories: {!! json_encode(dynamicChartData()['month']) !!},
+                },
+                tooltip: {},
+            };
+
+            var chart = new ApexCharts(document.querySelector("#LastCustomerchart"), options);
+            chart.render();
+        }
+        LastCustomer();
     });
 </script>
     <!-- changePassword is equal true -->
