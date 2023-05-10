@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->text('ad_id');
             $table->text('user_ids')->nullable();
+            $table->text('project_ids')->nullable();
             $table->longText('data');
             $table->tinyInteger('is_saved')->default(0);
             $table->timestamps();
