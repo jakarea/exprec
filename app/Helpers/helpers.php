@@ -1,7 +1,11 @@
 <?php
 
+use Carbon\Carbon;
 use Stripe\Stripe;
+use App\Jobs\TotalStripesEarning;
+use App\Jobs\StripeSubscriptionList;
 use Illuminate\Support\Facades\Cache;
+use App\Jobs\StripeSubscriptionRefundList;
 /**
  * Created by Md Ariful Islam.
  * this is a helper file for global function that can be used in any where
@@ -38,7 +42,9 @@ function totalCustomer()
 */
 function totalPaidCustomer()
 {
-    $data = getCustomer()->count();
+    $data = $data = \App\Models\User::wherehas('roles', function ($q) {
+        $q->where('name', 'Customer');
+    })->where('stripe_id', '!=', '')->count();
     return $data;
 }
 
@@ -78,14 +84,13 @@ function totalTools()
 */
 function totalSubscription()
 {
-    // get all subscription from stripe
-    $stripe = new \Stripe\StripeClient( env('STRIPE_SECRET') );
-    $subscription = $stripe->subscriptions->all();
-    $data = count($subscription->data);
-    while ($subscription->has_more) {
-        $subscription = $stripe->subscriptions->all(['starting_after' => $subscription->data[count($subscription->data) - 1]->id]);
-        $data += count($subscription->data);
+    $data = 0;
+    $subscriptionList = (new StripeSubscriptionList())->delay(Carbon::now()->addSeconds(3));
+    $subscription = $subscriptionList->handle();
+    if (count($subscription) > 0) {
+        $data += count($subscription);
     }
+
     return $data;
 }
 
@@ -96,13 +101,13 @@ function totalSubscription()
 function totalSubscriptionRefund()
 {
     // get all subscription from stripe
-    $stripe = new \Stripe\StripeClient( env('STRIPE_SECRET') );
-    $subscription = $stripe->refunds->all();
-    $data = count($subscription->data);
-    while ($subscription->has_more) {
-        $subscription = $stripe->refunds->all(['starting_after' => $subscription->data[count($subscription->data) - 1]->id]);
-        $data += count($subscription->data);
+    $data = 0;
+    $subscriptionList = (new StripeSubscriptionRefundList())->delay(Carbon::now()->addSeconds(3));
+    $subscription = $subscriptionList->handle();
+    if (count($subscription) > 0) {
+        $data += count($subscription);
     }
+    
     return $data;
 }
 
@@ -114,26 +119,18 @@ function dynamicChartData()
 {
    // Get Subscription, Customer, Paid Customer, Refund Based on monthly also need 12 month name for label data
     $month = array();
-    $subscription = array();
     $customer = array();
     $paidCustomer = array();
-    $refund = array();
+    $earnings = array();
 
     for ($i = 0; $i < 12; $i++) {
         $month[] = date('M', strtotime("-$i month"));
 
         // Check if the data is in the cache
-        $subscriptionData = Cache::get('subscriptionData'.$i);
         $customerData = Cache::get('customerData'.$i);
         $paidCustomerData = Cache::get('paidCustomerData'.$i);
-        $refundData = Cache::get('refundData'.$i);
+        $earning = Cache::get('earning'.$i);
 
-        if (!$subscriptionData) {
-            // If the data is not in the cache, send an API request to retrieve it and store it in the cache
-            $stripe = new \Stripe\StripeClient( env('STRIPE_SECRET') );
-            $subscriptionData = $stripe->subscriptions->all(['limit' => 1000, 'created' => ['gte' => strtotime(date('Y-m-01 00:00:00', strtotime("-$i month"))), 'lte' => strtotime(date('Y-m-t 23:59:59', strtotime("-$i month")))]])->count();
-            Cache::put('subscriptionData'.$i, $subscriptionData, now()->addHours(24));
-        }
 
         if (!$customerData) {
             $customerData = \App\Models\User::wherehas('roles', function ($q) {
@@ -149,24 +146,39 @@ function dynamicChartData()
             Cache::put('paidCustomerData'.$i, $paidCustomerData, now()->addHours(24));
         }
 
-        if (!$refundData) {
-            $stripe = new \Stripe\StripeClient( env('STRIPE_SECRET') );
-            $refundData = $stripe->refunds->all(['limit' => 1000, 'created' => ['gte' => strtotime(date('Y-m-01 00:00:00', strtotime("-$i month"))), 'lte' => strtotime(date('Y-m-t 23:59:59', strtotime("-$i month")))]])->count();
-            Cache::put('refundData'.$i, $refundData, now()->addHours(24));
+        if (!$earning) {
+            $earning = 0;
+            $cacheKey = 'earning'.$i;
+                
+            if (Cache::has($cacheKey)) {
+                $earning = Cache::get($cacheKey);
+            } else {
+                set_time_limit(120); // Increase maximum execution time to 120 seconds
+                
+                $earningsData = (new TotalStripesEarning())->handle();
+        
+                foreach ($earningsData as $key => $value) {
+                    if (date('m', $value->created) == date('m', strtotime("-$i month")) && date('Y', $value->created) == date('Y', strtotime("-$i month"))) {
+                        $earning += $value->amount / 100;
+                    }
+                }
+        
+                Cache::put($cacheKey, $earning, now()->addHours(24));
+            }
         }
+        
+        
 
-        $subscription[] = $subscriptionData;
         $customer[] = $customerData;
         $paidCustomer[] = $paidCustomerData;
-        $refund[] = $refundData;
+        $earnings[] = $earning;
     }
 
     $data = [
         'month' => $month,
-        'subscription' => $subscription,
         'customer' => $customer,
         'paidCustomer' => $paidCustomer,
-        'refund' => $refund,
+        'earnings' => $earnings
     ];
 
     return $data;
