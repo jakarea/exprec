@@ -183,17 +183,18 @@
 .flow-filter-table table tr td h6.error-txt {
   color: #FF6262;
 }
-.flow-filter-table table tr .table-swipe {
+
+.table-swipe {
   text-align: right;
 }
-.flow-filter-table table tr .table-swipe a {
+.table-swipe a {
   display: inline-block;
 }
-.flow-filter-table table tr .table-swipe a i {
+.table-swipe a i {
   font-size: 1.3rem;
   color: #FF6262;
 }
-.flow-filter-table table tr .table-swipe span {
+.table-swipe span {
   font-size: 1.15rem;
   font-weight: 400;
   color: #FF6262;
@@ -543,6 +544,296 @@
   color: #ffffff;
 }
 
+.products-head h5 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2C2C2C;
+  line-height: 140%;
+}
+.products-head h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #7D8592;
+  line-height: 140%;
+  margin: 0.3rem 0;
+}
+.products-head p {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #7D8592;
+  line-height: 140%;
+  margin: 0.6rem 0;
+}
+.products-head p img {
+  margin-right: 0.4rem;
+}
+
+.products-head-bttns {
+  margin-top: 0.7rem;
+}
+.products-head-bttns a:first-child {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 140%;
+  background: linear-gradient(98.03deg, #FF6262 18.68%, #F37F14 88.52%);
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  border: 1px solid #E5E9F2;
+  font-weight: 700;
+  border-radius: 3rem;
+  transition: all linear 0.2s;
+  margin-right: 1rem;
+}
+.products-head-bttns a:first-child:hover {
+  background: #2C2C2C;
+}
+.products-head-bttns a:last-child {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #8495AE;
+  line-height: 140%;
+  background: #ffffff;
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  border: 1px solid #E5E9F2;
+  font-weight: 700;
+  transition: all linear 0.2s;
+  border-radius: 3rem;
+}
+.products-head-bttns a:last-child:hover {
+  background: linear-gradient(98.03deg, #FF6262 18.68%, #F37F14 88.52%);
+  color: #ffffff;
+}
+
+.inside-products-wrap {
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: #ffffff;
+  margin-top: 1.5rem;
+}
+.inside-products-wrap h5 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2C2C2C;
+  line-height: 140%;
+}
+.inside-products-wrap h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #7D8592;
+  line-height: 140%;
+  margin: 0.3rem 0;
+}
+
+.inside-product-box {
+  padding: 0.7rem;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 3px 22px 50px -2px #F4F8FC;
+  margin-top: 1.5rem;
+}
+.inside-product-box .inside-thumb img {
+  display: block;
+  width: 100%;
+}
+.inside-product-box .inside-txt {
+  padding: 1rem;
+}
+.inside-product-box .inside-txt h6 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2C2C2C;
+  line-height: 140%;
+  margin-bottom: 0.5rem;
+}
+.inside-product-box .inside-txt h6 i {
+  margin-left: 1rem;
+}
+.inside-product-box .inside-txt p {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #8C8FAE;
+  line-height: 140%;
+  line-height: 166%;
+}
+
+.img-upload input {
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+.img-upload label {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 140%;
+  background: linear-gradient(98.03deg, #FF6262 18.68%, #F37F14 88.52%);
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  border: 1px solid #E5E9F2;
+  font-weight: 700;
+  border-radius: 3rem;
+  transition: all linear 0.2s;
+  cursor: pointer;
+}
+.img-upload label:hover {
+  background: #2C2C2C;
+}
+.img-upload p {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #8C8FAE;
+  line-height: 140%;
+  margin-top: 0.2rem;
+}
+
+.photo-frame img {
+  width: 110px;
+  height: 67px;
+  border-radius: 0.5rem;
+  border: 1px solid #8C8FAE;
+}
+.photo-frame span {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #8C8FAE;
+  line-height: 140%;
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+.img-brand-head h6 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2C2C2C;
+  line-height: 140%;
+  margin-top: 0.5rem;
+}
+
+.font-customization-form-wrap {
+  padding: 1.5rem 2.5rem;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+.font-customization-form-wrap h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2C2C2C;
+  line-height: 140%;
+  margin-bottom: 1rem;
+}
+.font-customization-form-wrap .nav .nav-item .nav-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #A5B4CB;
+  line-height: 140%;
+  border-radius: 0;
+  border-bottom: 2px solid #ffffff;
+}
+.font-customization-form-wrap .nav .nav-item .nav-link.active {
+  background-color: #ffffff;
+  color: #FF6262;
+  border-color: #FF6262;
+}
+.font-customization-form-wrap .add-font-form-wrap .form-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+.font-customization-form-wrap .add-font-form-wrap .form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2C2C2C;
+  line-height: 140%;
+  margin-bottom: 0.6rem;
+  display: block;
+}
+.font-customization-form-wrap .add-font-form-wrap .form-group span.sub {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #7D8592;
+  line-height: 140%;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+.font-customization-form-wrap .add-font-form-wrap .form-group .form-control {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #2C2C2C;
+  line-height: 140%;
+  height: 3rem;
+  border-radius: 8px;
+}
+.font-customization-form-wrap .add-font-form-wrap .form-group i.fa-angle-down {
+  position: absolute;
+  right: 1rem;
+  top: 55%;
+  font-size: 1.3rem;
+  color: #8C8FAE;
+}
+.font-customization-form-wrap .add-font-form-wrap .your-font-group {
+  margin-bottom: 1rem;
+}
+.font-customization-form-wrap .add-font-form-wrap .your-font-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2C2C2C;
+  line-height: 140%;
+  margin-bottom: 0.6rem;
+  display: block;
+}
+.font-customization-form-wrap .add-font-form-wrap .your-font-group .font-box {
+  background: #EBF0F9;
+  border-radius: 12px;
+  padding: 2rem 1.2rem;
+}
+.font-customization-form-wrap .add-font-form-wrap .your-font-group .font-box h5 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2C2C2C;
+  line-height: 140%;
+}
+.font-customization-form-wrap .add-font-form-wrap .your-font-group .font-box h5 span {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #8C8FAE;
+  line-height: 140%;
+  margin: 0 0.3rem;
+}
+.font-customization-form-wrap .add-font-form-wrap .your-font-group .font-box h5 i {
+  color: #8C8FAE;
+}
+.font-customization-form-wrap .add-font-form-wrap .your-font-group .font-box p {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #2C2C2C;
+  line-height: 140%;
+  margin-top: 1rem;
+}
+.font-customization-form-wrap .add-font-form-wrap .form-submit .btn-submit {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 140%;
+  background: #2C2C2C;
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  border: 1px solid #E5E9F2;
+  font-weight: 700;
+  border-radius: 3rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  transition: all linear 0.2s;
+  cursor: pointer;
+}
+.font-customization-form-wrap .add-font-form-wrap .form-submit .btn-submit:hover {
+  background: linear-gradient(98.03deg, #FF6262 18.68%, #F37F14 88.52%);
+}
+
 @media (min-width: 320px) and (max-width: 574px) {
   .email-camping-head {
     margin-bottom: 1.2rem;
@@ -648,7 +939,12 @@
   table tr td {
     white-space: nowrap !important;
   }
-  table tr td h4, table tr td h5, table tr td h6, table tr td p, table tr td span, table tr td a {
+  table tr td h4,
+  table tr td h5,
+  table tr td h6,
+  table tr td p,
+  table tr td span,
+  table tr td a {
     white-space: nowrap !important;
   }
   .profile-head a {
@@ -685,7 +981,12 @@
   table tr td {
     white-space: nowrap !important;
   }
-  table tr td h4, table tr td h5, table tr td h6, table tr td p, table tr td span, table tr td a {
+  table tr td h4,
+  table tr td h5,
+  table tr td h6,
+  table tr td p,
+  table tr td span,
+  table tr td a {
     white-space: nowrap !important;
   }
   .send-item-box .media {
