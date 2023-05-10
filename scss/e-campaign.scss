@@ -791,6 +791,258 @@
 }
 
 
+// metrics css @S
+.metrics-head {
+    @include m.df(space-between);
+
+    .metrics-head-bttns {
+        a {
+            display: inline-block;
+
+            &:first-child {
+                @include m.button(1.1rem, #8495AE, v.$light);
+                border: 1px solid #E5E9F2;
+                font-weight: 700;
+                border-radius: 3rem;
+                transition: all linear .2s;
+
+                &:hover {
+                    background-color: v.$btnbg;
+                    color: v.$light;
+                }
+            }
+
+            &:last-child {
+                @include m.button(1.1rem, v.$light, v.$btnbg);
+                border: 1px solid #E5E9F2;
+                font-weight: 700;
+                border-radius: 3rem;
+                transition: all linear .2s;
+                margin-left: 1rem;
+
+                &:hover {
+                    background-color: v.$light;
+                    color: v.$btnbg;
+                }
+            }
+        }
+    }
+}
+
+.matrics-list-wrap {
+    @include m.box(1rem, 10px, v.$light);
+
+    h4 {
+        @include m.para(1.1rem, 400, v.$btnbg);
+        border-bottom: 1px solid #EBF0F9;
+        margin-bottom: 0.96rem;
+        padding-bottom: 0.96rem;
+    }
+
+    ul {
+        li {
+            a {
+                @include m.df;
+                @include m.para(0.95rem, 400, v.$blu);
+                margin-bottom: 0.8rem;
+
+                img {
+                    margin-right: 0.3rem;
+                }
+            }
+
+            &:last-child {
+                a {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+// metrics css @E
+
+// bench mark css @S
+.save-time-form-wrap {
+    margin-bottom: 1.5rem;
+    background: linear-gradient(0deg, rgba(114, 125, 255, 0.1), rgba(114, 125, 255, 0.1)), #FFFFFF;
+    border: 1px solid v.$blu;
+    border-radius: 10px;
+    padding: 1rem;
+
+    .d-flex {
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    h5 {
+        @include m.para(1.1rem, 700, v.$btnbg);
+        margin-bottom: 0.6rem;
+    }
+
+    p {
+        @include m.para(1rem, 400, #A0A3BD);
+        line-height: 160%;
+
+        a {
+            color: v.$blu;
+            text-decoration: underline;
+        }
+    }
+
+    a {
+        display: inline-block;
+
+        i {
+            color: #A0A3BD;
+            font-size: 1.3rem;
+        }
+    }
+}
+
+.bench-filter-box {
+    h6 {
+        @include m.para(1.1rem, 600, v.$btnbg);
+        margin-bottom: 0.7rem;
+    }
+}
+
+.bench-mark-bttn {
+    @include m.df(flex-end);
+
+    p {
+        @include m.para(0.9rem, 400, v.$fourth);
+        margin-right: 1rem;
+
+        i {
+            font-size: 1.6rem;
+            margin-left: 0.3rem;
+        }
+    }
+
+    a {
+        display: inline-block;
+        @include m.button(1.1rem, #8495AE, v.$light);
+        border: 1px solid #E5E9F2;
+        font-weight: 700;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        border-radius: 3rem;
+
+        &:hover {
+            background-color: v.$btnbg;
+            color: v.$light;
+        }
+    }
+}
+
+.explore-bench-mark-wrap {
+    @include m.box(1rem, 10px, v.$light);
+
+    h6 {
+        @include m.para(1.1rem, 600, v.$btnbg);
+    }
+
+    .bench-mark-explore-box {
+        background: #EBF0F9;
+        border-radius: 12px;
+        margin-top: 1rem;
+        padding: .6rem .8rem;
+
+        .media {
+            align-items: center;
+
+            img {
+                margin-right: 1rem;
+                width: 72px;
+            }
+
+            h5 {
+                @include m.para(1.1rem, 700, v.$btnbg);
+            }
+        }
+    }
+}
+
+// bench mark css @E
+.sms-sidebar-box {
+    .nav {
+        justify-content: space-between;
+        border-bottom: 1px solid v.$third;
+
+        .nav-item {
+            .nav-link {
+                @include m.para(0.7rem, 500, v.$btnbg);
+                border-radius: 0;
+                padding: 1rem .9rem;
+                display: inline-block;
+            }
+
+            .nav-link.active {
+                background-color: v.$light;
+                color: v.$blu;
+            }
+        }
+    }
+}
+
+.sms-body-wrap {
+    padding-left: 12.6rem;
+}
+
+.styles-items-boxs {
+    padding: .5rem;
+
+    .media {
+        border: 1px solid #EBF0F9;
+        border-radius: 5px;
+        padding: .4rem;
+        align-items: center;
+        margin-bottom: 1rem;
+        min-height: 45px;
+        cursor: pointer;
+        img{
+            margin-right: 0.4rem;
+        }
+        .media-body{
+            h6{
+                @include m.para(0.75rem, 600, v.$btnbg);
+            }
+            p{
+                @include m.para(0.6rem, 400, v.$fourth);
+            }
+        }
+        &:hover{
+            background-color: #EBF0F9;
+        }
+    }
+}
+
+.top-status{
+    background: #E5E7FF;
+    padding: .6rem 1rem;
+    margin-left: -1rem;
+    text-align: center;
+    p{
+        @include m.para(0.8rem, 400, v.$btnbg);
+        a{
+            color: v.$blu;
+        }
+    }
+}
+
+.phone-image{
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.sms-sidebar-box{
+    padding-top: 1.5rem;
+}
+
+.product-list-head{
+    margin-top: 1.5rem;
+}
 
 // responsive css @S
 @include q.responsive(phone) {
@@ -883,8 +1135,10 @@
     }
 
     .profile-head {
-        flex-direction: column;
-        align-items: flex-start;
+         a{
+            font-size: .8rem;
+            padding: .7rem .8rem;
+         }
     }
 
     .profile-filter-box.email-camp-search .form-control {
@@ -959,6 +1213,115 @@
         font-size: .9rem;
     }
 
+    .flow-dropdown-filter .form-control, .flow-search-filter .form-control{
+        height: 2.5rem;
+        font-size: .85rem;
+    }
+    .flow-dropdown-filter i, .flow-search-filter i{
+        font-size: .8rem;
+    }
+    .form-clear a{
+        margin-top: 0.5rem;
+    }
+
+    .sms-body-wrap{
+        padding-left: 1rem;
+    }
+    .editing-panel-header .nav .nav-item .nav-link{
+        padding-left: 0.7rem;
+        padding-right: 0.7rem;
+    }
+    .top-status{
+        margin-top: 1rem;
+    }
+
+    .product-list-head h1{
+        font-size: .9rem;
+    }
+    .profile-count-box h4{
+        font-size: 1.5rem;
+    }
+    .inside-products-wrap h6,
+    .products-head h6{
+        font-size: .8rem;
+    }
+    .metrics-head .metrics-head-bttns a,
+    .products-head-bttns a{
+        font-size: .75rem!important;
+        padding: .6rem .7rem!important;
+    }
+    .inside-product-box .inside-txt h6{
+        font-size: 1rem;
+    }
+
+    .img-upload{
+        margin-bottom: 1rem;
+        label{
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    .product-list-table table tr th{
+        img{
+            width: 0;
+            height: 0;
+            display: none;
+        }
+    }
+
+    .img-brand-head h6{
+        font-size: .9rem;
+        font-weight: 500;
+    }
+    .font-customization-form-wrap{
+        padding: 1.2rem;
+    }
+    .font-customization-form-wrap .nav .nav-item .nav-link{
+        padding: .4rem .5rem;
+    }
+    .font-customization-form-wrap .add-font-form-wrap .form-group .form-control{
+        height: 2.5rem;
+        font-size: 1rem;
+    }
+    .font-customization-form-wrap .add-font-form-wrap .your-font-group .font-box{
+        margin-bottom: 1rem;
+    }
+    .font-customization-form-wrap .add-font-form-wrap .form-submit .btn-submit{
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    .metrics-head{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .bench-mark-bttn{
+        margin-bottom: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        p{
+            margin-bottom: 0.6rem;
+        }
+        a{
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+    }
+    .camping-empty-box-wrap .camping-empty-txt{
+        margin-top: 2rem;
+    }
+    .camping-empty-box-wrap{
+        padding: 1.2rem;
+    }
+    .explore-bench-mark-wrap .bench-mark-explore-box .media h5{
+        font-size: 1rem;
+    }
+
 }
 
 @include q.responsive(landphone) {
@@ -974,6 +1337,11 @@
         font-size: .9rem;
 
         img {
+            display: none;
+        }
+    }
+    .schedule-form-box .media .media-body p{
+        br{
             display: none;
         }
     }
@@ -1028,6 +1396,35 @@
     .profile-bttn-box {
         margin-top: 1rem;
     }
+
+    .sms-body-wrap{
+        padding-left: 1rem;
+    }
+    .editing-panel-header .nav .nav-item .nav-link{
+        padding-left: 0.9rem;
+        padding-right: 0.9rem;
+    }
+    .top-status{
+        margin-top: 1rem;
+    }
+
+    .product-list-table table tr th{
+        img{
+            width: 0;
+            height: 0;
+            display: none;
+        }
+    }
+
+    .metrics-head .metrics-head-bttns a {
+        font-size: .9rem!important;
+        padding: .8rem 1rem!important;
+    }
+
+    .bench-mark-bttn{
+        justify-content: flex-start;
+        margin-bottom: 1rem;
+    }
 }
 
 @include q.responsive(tablet) {
@@ -1048,14 +1445,38 @@
     .profile-bttn-box {
         margin-top: 1rem;
     }
+
+    .form-clear a{
+        margin-bottom: 1rem;
+    }
+
+    .product-list-table{
+        margin-top: 1rem;
+    }
+
+    .flow-filter-table table tr th{
+        font-size: .9rem;
+    }
+    .schedule-form-box .media .media-body p{
+        br{
+            display: none;
+        }
+    }
 }
 
 @include q.responsive(landtablet) {
     .send-item-box {
         min-height: 90%;
     }
+    .inside-product-box .inside-txt h6{
+        font-size: 1rem;
+    }
 }
 
-@include q.responsive(regular) {}
+@include q.responsive(regular) {
+    .inside-product-box .inside-txt h6{
+        font-size: 1rem;
+    }
+}
 
 // responsive css @E

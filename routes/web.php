@@ -146,6 +146,9 @@ Route::middleware(['subscribed'])->group(function () {
         Route::get('/profile', function () { return view('email-camping/profile'); });
         Route::get('/audience', function () { return view('email-camping/audience'); });
         Route::get('/images-brand-2', function () { return view('email-camping/images-brand-2'); });
+        Route::get('/metrics', function () { return view('email-camping/metrics'); });
+        Route::get('/bench-mark', function () { return view('email-camping/bench-mark'); });
+        Route::get('/sms-option', function () { return view('email-camping/sms-option'); });
 
     }); 
     

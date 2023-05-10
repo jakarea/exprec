@@ -55,10 +55,10 @@
                         <i class="fas fa-angle-down"></i>
                     </div>
                 </div>
-                <div class="col-lg-1 col-5 col-sm-3 col-md-3 form-clear">
+                <div class="col-lg-1 col-5 col-sm-3 col-md-2 form-clear">
                     <a href="#">Clear</a>
                 </div>
-                <div class="col-lg-3 col-5 col-sm-3 col-md-3">
+                <div class="col-lg-3 col-12 col-sm-5 col-md-5">
                     <div class="img-upload">
                         <input type="file" id="myFile">
                         <label for="myFile">Upload Image</label>

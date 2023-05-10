@@ -67,7 +67,7 @@
         </ul>
       </li> 
       <li class="sub-sidebar-submenu">
-        <a href="#" class="{{ Request::is('email-marketing/dashboard')  ? ' active' : '' }}">
+        <a href="#" class="{{ Request::is('email-marketing/dashboard') || Request::is('email-marketing/metrics') || Request::is('email-marketing/bench-mark') ? ' active' : '' }}">
           <img src="{{ asset('assets/images/analytics-icon.svg') }}" alt="Dash" class="img-fluid"> 
           <span>Analytics</span>
           <i class="fas fa-angle-right"></i>
@@ -79,12 +79,12 @@
             </a>
           </li> 
           <li>
-            <a href="#"> 
+            <a href="{{url('email-marketing/metrics')}}" class="{{ Request::is('email-marketing/metrics')  ? ' active' : '' }}"> 
               <span>Metrics</span>
             </a>
           </li> 
           <li>
-            <a href="#"> 
+            <a href="{{url('email-marketing/bench-mark')}}" class="{{ Request::is('email-marketing/bench-mark')  ? ' active' : '' }}"> 
               <span>Benchmarks</span>
             </a>
           </li> 
