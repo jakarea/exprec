@@ -10,7 +10,7 @@
 @section('content')
 <main class="email-camping-page-wrap">
     <div class="editing-panel-header">
-        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <ul class="nav nav-pills" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="pills-segment-jakarea-tab" data-bs-toggle="pill" data-bs-target="#pills-segment-jakarea"
                     type="button" role="tab" aria-controls="pills-segment-jakarea" aria-selected="true">List &amp; Segments Test
