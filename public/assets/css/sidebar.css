@@ -84,6 +84,10 @@
   color: #8C8FAE;
   margin-right: 0.4rem;
 }
+.sidebar-wrapper .sidebar-nav-area .menubar .menu-item .menu-link i.fa-calculator {
+  font-size: 1.3rem;
+  color: #8C8FAE;
+}
 .sidebar-wrapper .sidebar-nav-area .menubar .menu-item .menu-link .fa-user-group {
   font-size: 1rem;
   color: #8C8FAE;
@@ -157,6 +161,7 @@
   left: 0;
   bottom: 0;
   width: 100%;
+  margin-bottom: 0;
 }
 
 .sidebar-custom-width {
