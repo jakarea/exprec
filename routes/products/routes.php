@@ -3,7 +3,7 @@ use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController; 
 use App\Http\Controllers\Admin\AdminProductController; 
 
-Route::middleware(['subscribed'])->group(function () {
+Route::middleware(['auth', 'check.subscription'])->group(function () {
     // product route
     Route::prefix('products')->middleware(['auth'])->controller(ProductController::class)->group(function () {      
         Route::get('/', 'index')->name('product_research');

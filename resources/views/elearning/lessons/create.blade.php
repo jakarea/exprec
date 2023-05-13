@@ -21,7 +21,7 @@
              <i class="fa-solid fa-list"></i> All Lessons </a>
          </div>
         <!-- course create form @S -->
-        <form action="{{route('lesson_store')}}" method="POST" class="create-form-box" enctype="multipart/form-data">
+        <form action="{{route('lesson_store')}}" method="POST" class="create-form-box" id="create_lesson" enctype="multipart/form-data">
           @csrf 
           <div class="row">
              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
@@ -99,7 +99,7 @@
                  <div class="col-md-12">
                   <div class="form-group">
                     <label for="short_description">Short Description <sup class="text-danger">*</sup></label>
-                    <textarea name="short_description" id="short_description" class="form-control @error('short_description') is-invalid @enderror" placeholder="Enter Short Description">{{ old('short_description')}}</textarea>
+                    <textarea name="short_description" class="form-control @error('short_description') is-invalid @enderror" placeholder="Enter Short Description">{{ old('short_description')}}</textarea>
                     <span class="invalid-feedback">@error('short_description'){{ $message }} @enderror</span>
                   </div>
                 </div> 
@@ -112,7 +112,7 @@
                  <div class="col-md-6">
                   <div class="form-group">
                   <label for="video_url">Video File </label>
-                    <input type="file" name="video_file"  class="form-control @error('video_file') is-invalid @enderror" value="{{ old('video_file')}}"/>
+                    <input type="file" name="video_file" id="uploadVideoFile"  class="form-control @error('video_file') is-invalid @enderror" value="{{ old('video_file')}}"/>
                     <small> This is support only video! </small>
                   </div>
                    <div class="form-group d-none">
@@ -145,7 +145,7 @@
              <div class="col-12">
                <div class="submit-bttns">
                  <button type="reset" class="btn btn-reset">Clear</button>
-                 <button type="submit" class="btn btn-submit">Submit</button>
+                 <button type="submit" class="btn btn-submit" id="but_submit">Submit</button>
                </div>
              </div>
            </div>
@@ -170,5 +170,4 @@
 <script src="{{asset('assets/js/tinymce.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/tag-handler.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/file-upload.js')}}" type="text/javascript"></script>
-
 @endsection

@@ -21,8 +21,11 @@
     <div class="course-category-box">
         <ul>
             <li><span>Show by Category</span></li>
-            <li><a href="#">Dropshipping</a></li>
-            <li><a href="#">Ecommerce</a></li>
+            @if( getCourseCategory())
+                @foreach(getCourseCategory() as $category)
+                    <li><a href="{{ route('course.category', \Str::slug($category)) }}">{{$category}}</a></li>
+                @endforeach
+            @endif
         </ul>
     </div>
     <!-- course category @E -->

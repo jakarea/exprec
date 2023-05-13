@@ -46,9 +46,9 @@ return [
     'connections' => [
 
         'main' => [
-            'client_id' => env('VIMEO_CLIENT', 'f3422373260b837a0326c40abd507e0ae721707a'),
-            'client_secret' => env('VIMEO_SECRET', '/lcNhvt0rlnETwlrhPa/fmpWw0SU3wqLajoj9wu5QAkCgd+QkTUj9lPYpjOA5XP+pxZt4kIkBnSgH50cZqgKAJ/li0pSyLtVLA4mGTQlUJ3i8ayYvqC6g0LGh7HvYyu5'),
-            'access_token' => env('VIMEO_ACCESS', '71b2ccda27b4d51738eab2cca98a6bb4'),
+            'client_id' => env('VIMEO_CLIENT', '9b9327a8ad7087c1026d89a0e44dc86dee9fa385'),
+            'client_secret' => env('VIMEO_SECRET', 'VuARaezQdBxBpxeFs4esXAvX8EEZ/FzTcAxVnxsUzb92QY8UVJNhXFpZaFcxwAntc6BrkcKTrXhQsLZpCouhvWQWTf3JQT2DW6FWtd8RvSTTwUj/GtixFoczkr4N81j7'),
+            'access_token' => env('VIMEO_ACCESS', '4324498bedca1cbf865b359196f066a0'),
         ],
 
         'alternative' => [
