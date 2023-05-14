@@ -153,7 +153,9 @@
             var options = {
                 series: [{
                     name: 'Earning',
-                    data: {!! json_encode(dynamicChartData()['earnings']) !!},
+                    data: {!! json_encode(dynamicChartData()['earnings']) !!}.map(function(item) {
+                        return parseFloat(item).toFixed(2);
+                    }),
                 }],
                 fill: {
                     type: 'solid',

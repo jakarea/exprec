@@ -28,26 +28,12 @@
     @if(count($lessons) > 0)
         <table>
             <tr> 
-            <th width="5%">
-                No
-            </th> 
-            <th>
-                Title
-            </th>
-            <th>
-                Module 
-            </th>
-            <th>
-                Course
-            </th>
-           
-            <th>
-               Video URL
-            </th> 
-            <th>
-                Actions
-            </th>
-           
+                <th width="5%">No</th> 
+                <th>Title</th>
+                <th>Module </th>
+                <th>Course</th>
+                <th>Video URL</th> 
+                <th>Actions</th>
             </tr>
             <!-- task item start -->
            
@@ -68,7 +54,14 @@
                 <td>{{ $lesson->module->title  }}</td>  
                 <td>{{ $lesson->course->title   }}</td>  
                 
-                <td><a href="{{ $lesson->video_url }}" target="_blank">{{ $lesson->video_url  }}</a></td>  
+                <td>
+                    <!-- check if video url isn't url then show processing else show url -->
+                    @if(!filter_var($lesson->video_url, FILTER_VALIDATE_URL))
+                        <span class="text-danger">Processing</span>
+                    @else
+                        <a href="{{ $lesson->video_url }}" target="_blank">{{ $lesson->video_url }}</a>
+                    @endif
+                </td>  
                
                 <td width="10%">
                     <div class="action-bttn"> 

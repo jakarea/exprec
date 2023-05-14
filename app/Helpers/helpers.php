@@ -183,3 +183,23 @@ function dynamicChartData()
 
     return $data;
 }
+
+/**
+ * Get first lesson by course id
+ */
+function getFirstLesson($courseId)
+{
+    $lesson = \App\Models\Lesson::where('course_id', $courseId)->orderBy('order', 'asc')->first();
+    return $lesson;
+}
+
+/**
+ * Get Course category ['develoment', 'design', 'marketing', 'business', 'lifestyle', 'photography']
+ */
+function getCourseCategory()
+{
+    $categories = \App\Models\Course::pluck('categories')->toArray();
+    $categories = array_map('trim', $categories); // Trim whitespace from category names
+    $categories = array_unique(explode(',', implode(',', $categories)));
+    return $categories;
+}

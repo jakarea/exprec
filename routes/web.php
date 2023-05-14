@@ -69,13 +69,16 @@ Route::controller(HomeController::class)->group(function () {
 
 });
 
-Route::middleware("auth")->group(function () {
-    Route::get('plans', [PlanController::class, 'index']);
-    Route::post('subscription/store', [PlanController::class, 'subscriptionStore'])->name("subscription.create");
-    Route::resource('paymentlist', PaymentListController::class);
+Route::get('/home', function () {
+    return redirect('/');
 });
 
-Route::group(['middleware' => ['auth']], function() {
+Route::middleware(['auth', 'check.subscription'])->group(function (){
+    // Plan routes
+    Route::get('plans', [PlanController::class, 'index']);
+    Route::post('subscription/store', [PlanController::class, 'subscriptionStore'])->name("subscription.create");
+    Route::resource('paymentlist', PaymentListController::class); 
+    // Roles
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     // Customer routes
@@ -98,14 +101,6 @@ Route::group(['middleware' => ['auth']], function() {
 
     // Customer Subscription routes
     Route::get('customer-subscriptions', [CustomerSubscriptionController::class, 'index'])->name('customer.subscriptions.index');
-});
-
-Route::get('/home', function () {
-    return redirect('/');
-});
-
-Route::middleware(['subscribed'])->group(function () {
-    // protected routes 
     // interest project route
     Route::prefix('add-interest')->middleware(['auth'])->controller(ProjectController::class)->group(function () {
         Route::get('/projects', 'index')->name('projectlist');   

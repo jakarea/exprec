@@ -12,11 +12,12 @@ use App\Http\Controllers\Elearning\ElearningController;
 //     Route::get('/favorite', 'suggested');   
 // });
 
-Route::middleware(['subscribed'])->group(function () {
+Route::middleware(['auth', 'check.subscription'])->group(function () {
 
     Route::prefix('elearning')->middleware(['auth'])->controller(ElearningController::class)->group(function () {   
         Route::get('/', 'index');  
         Route::get('/courses/{slug}', 'course');
+        Route::get('/category/{category}', 'category')->name('course.category');
         Route::get('/mylearning', 'mylearning');   
         Route::get('/favorite', 'suggested');
     });
