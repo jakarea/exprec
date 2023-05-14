@@ -67,6 +67,8 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/refund/{id}/delete', [RefundController::class, 'destroy'])->name('refund.delete');
     Route::get('/refund/{id}/show', [RefundController::class, 'show'])->name('refund.show');
 
+    // api calculator route
+    Route::get('/calculator', 'calculator')->name('apiCalculator');
 });
 
 Route::get('/home', function () {

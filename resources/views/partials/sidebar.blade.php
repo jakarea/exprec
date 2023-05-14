@@ -1,5 +1,4 @@
-<div class="sidebar-wrapper">
-   
+<div class="sidebar-wrapper"> 
     <!-- header user @S -->
     <div class="header-user-box">
         <div class="media">
@@ -97,10 +96,15 @@
                 </a> 
             </li>
             <li class="menu-item">
-                <a href="{{ url('integrations') }}" class="{{ Request::is('integrations*')  ? ' active' : '' }} menu-link">
-                <!-- <i class="fa-brands fa-superpowers"></i> -->
+                <a href="{{ url('integrations') }}" class="{{ Request::is('integrations*')  ? ' active' : '' }} menu-link"> 
                 <i class="fa-solid fa-plug"></i>
                     <span>Integrations</span> 
+                </a> 
+            </li>
+            <li class="menu-item">
+                <a href="{{ url('calculator') }}" class="{{ Request::is('calculator*')  ? ' active' : '' }} menu-link"> 
+                <i class="fa-solid fa-calculator"></i>
+                    <span>API Calculator</span> 
                 </a> 
             </li>
             @endrole

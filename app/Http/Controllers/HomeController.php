@@ -154,4 +154,9 @@ class HomeController extends Controller
         return view('refund/show');  
     }
 
+    public function calculator()
+    {
+        return view('calculator/index');
+    }
+
 }

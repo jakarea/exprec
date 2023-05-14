@@ -3,23 +3,24 @@
 @use './util/media-query' as q;
 
 
-.productss-list-box{
-    .btn-table{
-        display: inline-block; 
-        @include m.button(.9rem,v.$light,v.$gdbg);
+.productss-list-box {
+    .btn-table {
+        display: inline-block;
+        @include m.button(.9rem, v.$light, v.$gdbg);
         background: v.$gdbg;
         border-radius: .4rem;
         padding: .3rem .8rem;
     }
 }
 
-.table-avatar{
-    img{
-        width: 3rem!important;
-        height: 3rem!important;
-        border-radius: 50%!important;
+.table-avatar {
+    img {
+        width: 3rem !important;
+        height: 3rem !important;
+        border-radius: 50% !important;
         object-fit: cover;
     }
+
     span {
         width: 3rem;
         height: 3rem;
@@ -32,4 +33,12 @@
         align-items: center;
         justify-content: center;
     }
+}
+
+.btn-submitss {
+    display: inline-block;
+    @include m.button(.9rem, v.$light, v.$gdbg);
+    background: v.$gdbg;
+    border-radius: .4rem;
+    padding: .3rem .8rem;
 }
