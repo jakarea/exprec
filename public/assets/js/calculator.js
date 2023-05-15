@@ -1,38 +1,39 @@
 
 // all inputs selector
 let inputSelectors = document.querySelector('.create-form-wrap');
-let avrageOrderValue = inputSelectors.querySelector('#avrage_order_value');
-let avrageFees = inputSelectors.querySelector('#avrage_fees');
-let avrageCogs = inputSelectors.querySelector('#avrage_cogs');
-let profitTarget = inputSelectors.querySelector('#profit_target');
-let addToCart = inputSelectors.querySelector('#add_to_cart');
-let reachedCheckout = inputSelectors.querySelector('#reached_checkout');
-let purchased = inputSelectors.querySelector('#purchased');
-let currencyName = inputSelectors.querySelector('#currency_name');
+let B2 = inputSelectors.querySelector('#B2');
+let B3 = inputSelectors.querySelector('#B3');
+let B4 = inputSelectors.querySelector('#B4');
+let B5 = inputSelectors.querySelector('#B5');
+let B8 = inputSelectors.querySelector('#B8');
+let B9 = inputSelectors.querySelector('#B9');
+let B10 = inputSelectors.querySelector('#B10');
+let currencyInput = inputSelectors.querySelector('#currency_input');
 
 // submit bttns 
-let submitBttn = inputSelectors.querySelector('.btn-submit');
+let formSubmitBttn = inputSelectors.querySelector('#formSubmitBttn');
 
 // all output selectors
-let costPerPurchase = inputSelectors.querySelector('#cost_per_purchase');
-let targetCostPerPurchase = inputSelectors.querySelector('#t_cost_per_purchase');
-let costPerInitiate = inputSelectors.querySelector('#cost_per_initiate');
-let targetCostPerInitiate = inputSelectors.querySelector('#t_cost_per_initiate');
-let costPerAddToCart = inputSelectors.querySelector('#cost_per_add_to_cart');
-let targetCostPerAddToCart = inputSelectors.querySelector('#t_cost_per_add_to_cart');
-let costPerViewContent = inputSelectors.querySelector('#cost_per_view_content');
-let targetCostPerViewContent = inputSelectors.querySelector('#t_cost_per_view_content');
-let businessPerConversation = inputSelectors.querySelector('#business_per_conversation');
-let currencyOutput = inputSelectors.querySelector('#currency_output');
+let G2 = inputSelectors.querySelector('#G2');
+let K2 = inputSelectors.querySelector('#K2');
+let G3 = inputSelectors.querySelector('#G3');
+let K3 = inputSelectors.querySelector('#K3');
+let G4 = inputSelectors.querySelector('#G4');
+let K4 = inputSelectors.querySelector('#K4');
+let G5 = inputSelectors.querySelector('#G5');
+let G6 = inputSelectors.querySelector('#G6');
+let K5 = inputSelectors.querySelector('#K5');
+let K6 = inputSelectors.querySelector('#K6');
+let G8 = inputSelectors.querySelector('#G8');
+let B13 = inputSelectors.querySelector('#B13');
 
 // form
 let mainForm = document.querySelector('#main_form');
 
 const getFormdata = (event) => {
     event.preventDefault();
-    if (avrageOrderValue) {
-        let avrgVal = (avrageOrderValue.value * 20) / 100;
-        costPerPurchase.value = avrgVal;
+    if (B2) {
+        alert("Form Submited Success");
     }
 
 }

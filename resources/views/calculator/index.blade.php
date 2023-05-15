@@ -29,29 +29,29 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">$</span>
-                                                <input type="text" class="form-control" id="avrage_order_value">
+                                                <input type="text" class="form-control" id="B2">
                                                 
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-7">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-8">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="custom-hr">
-                                            <h5>Keven Kpis</h5>
+                                            <h5>Breakeven KPIs <sup style="font-size: .8rem">(no profit, no loss)</sup></h5>
                                             <hr>
                                         </div>
                                         <div class="form-group">
                                             <div class="row align-items-center">
                                                 <div class="col-md-7">
-                                                    <label for="" class="mb-0">Cost per purchase:</label>
+                                                    <label for="" class="mb-0">Cost Per Purchase <sup>(CPP)</sup></label>
                                                 </div>
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled id="cost_per_purchase">
+                                                        <input type="text" class="form-control" disabled id="G2">
                                                         
                                                     </div>
                                                 </div>
@@ -60,18 +60,18 @@
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="custom-hr">
-                                            <h5>Keven Kpis Target</h5>
+                                            <h5>Profit Target KPIs</h5>
                                             <hr>
                                         </div>
                                         <div class="form-group">
                                             <div class="row align-items-center">
                                                 <div class="col-md-7">
-                                                    <label for="" class="mb-0">Cost per purchase:</label>
+                                                    <label for="" class="mb-0">Cost Per Purchase <sup>(CPP)</sup>:</label>
                                                 </div>
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled id="t_cost_per_purchase">
+                                                        <input type="text" class="form-control" disabled id="K2">
                                                         
                                                     </div>
                                                 </div>
@@ -98,25 +98,25 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">%</span>
-                                                <input type="text" class="form-control" id="avrage_fees">
+                                                <input type="text" class="form-control" id="B3">
                                                 
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-7">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-8">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="form-group">
                                             <div class="row align-items-center">
-                                                <div class="col-md-7">
-                                                    <label for="" class="mb-0">Cost per initiate:</label>
+                                                <div class="col-md-8">
+                                                    <label for="" class="mb-0">Cost Per Initiate Checkout <sup>(CPIC)</sup> :</label>
                                                 </div>
-                                                <div class="col-md-5">
+                                                <div class="col-md-4">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled id="cost_per_initiate">
+                                                        <input type="text" class="form-control" disabled id="G3">
                                                         
                                                     </div>
                                                 </div>
@@ -126,13 +126,13 @@
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="form-group">
                                             <div class="row align-items-center">
-                                                <div class="col-md-7">
-                                                    <label for="" class="mb-0">Cost per initiate:</label>
+                                                <div class="col-md-8">
+                                                    <label for="" class="mb-0">Cost Per Initiate Checkout <sup>(CPIC)</sup>:</label>
                                                 </div>
-                                                <div class="col-md-5">
+                                                <div class="col-md-4">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled id="t_cost_per_initiate">
+                                                        <input type="text" class="form-control" disabled id="K3">
                                                         
                                                     </div>
                                                 </div>
@@ -159,25 +159,25 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">$</span>
-                                                <input type="text" class="form-control" id="avrage_cogs">
+                                                <input type="text" class="form-control" id="B4">
                                                 
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-7">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-8">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="form-group">
                                             <div class="row align-items-center">
                                                 <div class="col-md-7">
-                                                    <label for="" class="mb-0">Cost per Add to cart:</label>
+                                                    <label for="" class="mb-0">Cost Per Add to Cart <sup>(CPATC)</sup>:</label>
                                                 </div>
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled id="cost_per_add_to_cart">
+                                                        <input type="text" class="form-control" disabled id="G4">
                                                         
                                                     </div>
                                                 </div>
@@ -188,12 +188,12 @@
                                         <div class="form-group">
                                             <div class="row align-items-center">
                                                 <div class="col-md-7">
-                                                    <label for="" class="mb-0">Cost per Add to cart:</label>
+                                                    <label for="" class="mb-0">Cost Per Add to Cart <sup>(CPATC)</sup>:</label>
                                                 </div>
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled id="t_cost_per_add_to_cart">
+                                                        <input type="text" class="form-control" disabled id="K4">
                                                         
                                                     </div>
                                                 </div>
@@ -220,25 +220,25 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">%</span>
-                                                <input type="text" class="form-control" id="profit_target">
+                                                <input type="text" class="form-control" id="B5">
                                                 
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-7">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-8">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="form-group">
                                             <div class="row align-items-center">
                                                 <div class="col-md-7">
-                                                    <label for="" class="mb-0">Cost per view con:</label>
+                                                    <label for="" class="mb-0">Cost Per View Content <sup>(CPVC)</sup>:</label>
                                                 </div>
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled id="cost_per_view_content">
+                                                        <input type="text" class="form-control" disabled id="G5">
                                                         
                                                     </div>
                                                 </div>
@@ -249,12 +249,12 @@
                                         <div class="form-group">
                                             <div class="row align-items-center">
                                                 <div class="col-md-7">
-                                                    <label for="" class="mb-0">Cost per view con:</label>
+                                                    <label for="" class="mb-0">Cost Per View Content <sup>(CPVC)</sup>:</label>
                                                 </div>
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled id="t_cost_per_view_content">
+                                                        <input type="text" class="form-control" disabled id="K5">
                                                         
                                                     </div>
                                                 </div>
@@ -264,6 +264,56 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="custom-hr">
+                                    <hr>
+                                </div>
+                            </div>
+                        </div> 
+
+                        <div class="row mt-2 justify-content-end">
+                             
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-8">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-7">
+                                                    <label for="" class="mb-0">Return on Ad Spend <sup>(ROAS)</sup>:</label>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="text" class="form-control" disabled id="G6">
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-7">
+                                                    <label for="" class="mb-0">Return on Ad Spend <sup>(ROAS)</sup>:</label>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="text" class="form-control" disabled id="K6">
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
 
                         {{-- advance option @S --}}
                         <div class="row mt-2 justify-content-between">
@@ -282,7 +332,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">%</span>
-                                                <input type="text" class="form-control" id="add_to_cart">
+                                                <input type="text" class="form-control" id="B8">
                                                 
                                             </div>
                                         </div>
@@ -295,12 +345,12 @@
                                         <div class="form-group">
                                             <div class="row align-items-center">
                                                 <div class="col-md-7">
-                                                    <label for="" class="mb-0">Business PUR Conversion:</label>
+                                                    <label for="" class="mb-0">Baseline PUR Conversion Rate <sup>(Est.*)</sup>:</label>
                                                 </div>
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled id="business_per_conversation">
+                                                        <input type="text" class="form-control" disabled id="G8">
                                                         
                                                     </div>
                                                 </div>
@@ -327,7 +377,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">%</span>
-                                                <input type="text" class="form-control" id="reached_checkout">
+                                                <input type="text" class="form-control" id="B9">
                                                 
                                             </div>
                                         </div>
@@ -339,9 +389,8 @@
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                         <div class="form-group">
                                             <div class="row align-items-center">
-                                                <div class="col-md-12">
-                                                    <label for="" class="mb-0">*Lorem ipsum dolor sit amet, consectetur
-                                                        adipisicing elit. Animi, dignissimos!</label>
+                                                <div class="col-md-12 text-end">
+                                                    <label for="" class="mb-0">* calculated using a 1:1 ratio of earnings to sessions</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -366,32 +415,31 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">%</span>
-                                                <input type="text" class="form-control" id="purchased">
+                                                <input type="text" class="form-control" id="B10">
                                                 
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-7">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                                 <div class="row justify-content-end">
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                         <div class="form-group">
                                             <div class="row align-items-center">
                                                 <div class="col-md-7">
-                                                    <label for="" class="mb-0">Currency Conversion(*if ad acc is not
-                                                        USD):</label>
+                                                    <label for="" class="mb-0">Currency Conversion <sup>(if ad acc is not USD)</sup>:</label>
                                                 </div>
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$1 USD &nbsp; = </span>
-                                                        <select name="" id="currency_name" class="form-control">
+                                                        <select name="" id="currency_input" class="form-control">
                                                             <option value="">BDT</option>
                                                             <option value="">INR</option>
                                                             <option value="">PK</option>
                                                             <option value="">EU</option>
                                                         </select>
-                                                        <span class="input-group-text" id="currency_output">2.00</span>
+                                                        <span class="input-group-text" id="B13">2.00</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -414,7 +462,7 @@
                                 <div class="submit-bttns">
                                     <button type="button" class="btn btn-reset" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal">Save Result</button>
-                                    <button type="submit" class="btn btn-submit">Calculate</button>
+                                    <button type="submit" class="btn btn-submit" id="formSubmitBttn">Calculate</button>
                                 </div>
                             </div>
                         </div> 
