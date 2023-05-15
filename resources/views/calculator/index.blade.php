@@ -12,11 +12,10 @@
     <div class="product-research-create-wrap">
         <div class="row">
             <div class="col-lg-12">
-                <div class="create-form-wrap">
+                <div class="create-form-wrap"> 
                     {{-- calculator form --}}
-                    <form action="" method="POST" class="create-form-box" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row mt-4 justify-content-between">
+                    <form action="" class="create-form-box reduce-margin" id="main_form">
+                        <div class="row mt-2 justify-content-between">
                             <div class="col-12 col-sm-12 col-md-6 col-lg-4">
                                 <div class="custom-hr">
                                     <h5>Fill The Input </h5>
@@ -30,8 +29,8 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">$</span>
-                                                <input type="text" class="form-control">
-                                                {{-- <span class="input-group-text">.00</span> --}}
+                                                <input type="text" class="form-control" id="avrage_order_value">
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -52,8 +51,8 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled>
-                                                        {{-- <span class="input-group-text">.00</span> --}}
+                                                        <input type="text" class="form-control" disabled id="cost_per_purchase">
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -72,8 +71,8 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled>
-                                                        {{-- <span class="input-group-text">.00</span> --}}
+                                                        <input type="text" class="form-control" disabled id="t_cost_per_purchase">
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -99,8 +98,8 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">%</span>
-                                                <input type="text" class="form-control">
-                                                {{-- <span class="input-group-text">.00</span> --}}
+                                                <input type="text" class="form-control" id="avrage_fees">
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -117,8 +116,8 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled>
-                                                        {{-- <span class="input-group-text">.00</span> --}}
+                                                        <input type="text" class="form-control" disabled id="cost_per_initiate">
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -133,8 +132,8 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled>
-                                                        {{-- <span class="input-group-text">.00</span> --}}
+                                                        <input type="text" class="form-control" disabled id="t_cost_per_initiate">
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -160,8 +159,8 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">$</span>
-                                                <input type="text" class="form-control">
-                                                {{-- <span class="input-group-text">.00</span> --}}
+                                                <input type="text" class="form-control" id="avrage_cogs">
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -178,8 +177,8 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled>
-                                                        {{-- <span class="input-group-text">.00</span> --}}
+                                                        <input type="text" class="form-control" disabled id="cost_per_add_to_cart">
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -194,8 +193,8 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled>
-                                                        {{-- <span class="input-group-text">.00</span> --}}
+                                                        <input type="text" class="form-control" disabled id="t_cost_per_add_to_cart">
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -221,8 +220,8 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">%</span>
-                                                <input type="text" class="form-control">
-                                                {{-- <span class="input-group-text">.00</span> --}}
+                                                <input type="text" class="form-control" id="profit_target">
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -239,8 +238,8 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled>
-                                                        {{-- <span class="input-group-text">.00</span> --}}
+                                                        <input type="text" class="form-control" disabled id="cost_per_view_content">
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -255,8 +254,8 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled>
-                                                        {{-- <span class="input-group-text">.00</span> --}}
+                                                        <input type="text" class="form-control" disabled id="t_cost_per_view_content">
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -266,8 +265,8 @@
                             </div>
                         </div>
 
-                        {{-- advance form @S --}}
-                        <div class="row mt-4 justify-content-between">
+                        {{-- advance option @S --}}
+                        <div class="row mt-2 justify-content-between">
                             <div class="col-12">
                                 <div class="custom-hr">
                                     <h5>Advance Calculator </h5>
@@ -283,8 +282,8 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">%</span>
-                                                <input type="text" class="form-control">
-                                                {{-- <span class="input-group-text">.00</span> --}}
+                                                <input type="text" class="form-control" id="add_to_cart">
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -301,8 +300,8 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled>
-                                                        {{-- <span class="input-group-text">.00</span> --}}
+                                                        <input type="text" class="form-control" disabled id="business_per_conversation">
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -328,8 +327,8 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">%</span>
-                                                <input type="text" class="form-control">
-                                                {{-- <span class="input-group-text">.00</span> --}}
+                                                <input type="text" class="form-control" id="reached_checkout">
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -367,8 +366,8 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">%</span>
-                                                <input type="text" class="form-control">
-                                                {{-- <span class="input-group-text">.00</span> --}}
+                                                <input type="text" class="form-control" id="purchased">
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -386,13 +385,13 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$1 USD &nbsp; = </span>
-                                                        <select name="" id="" class="form-control">
+                                                        <select name="" id="currency_name" class="form-control">
                                                             <option value="">BDT</option>
                                                             <option value="">INR</option>
                                                             <option value="">PK</option>
                                                             <option value="">EU</option>
                                                         </select>
-                                                        <span class="input-group-text">2.00</span>
+                                                        <span class="input-group-text" id="currency_output">2.00</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -408,7 +407,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- advance form @E --}}
+                        {{-- advance option @E --}}
 
                         <div class="row">
                             <div class="col-12">
@@ -418,7 +417,7 @@
                                     <button type="submit" class="btn btn-submit">Calculate</button>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
                     </form>
                     {{-- calculator form @E --}}
                 </div>
@@ -471,9 +470,6 @@
 @endrole
 @endsection
 
-@section('script')
-<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-<script src="{{asset('assets/js/kpi_calculator.js')}}" type="module"></script>
+@section('script') 
+<script src="{{asset('assets/js/calculator.js')}}" type="module"></script>
 @endsection

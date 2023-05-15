@@ -45,3 +45,11 @@
   border-radius: 0.4rem;
   padding: 0.3rem 0.8rem;
 }
+
+.reduce-margin.create-form-box .form-group {
+  margin-bottom: 0rem !important;
+}
+
+#currency_name {
+  text-align: center;
+}
