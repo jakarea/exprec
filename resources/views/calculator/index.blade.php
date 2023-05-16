@@ -12,11 +12,10 @@
     <div class="product-research-create-wrap">
         <div class="row">
             <div class="col-lg-12">
-                <div class="create-form-wrap">
+                <div class="create-form-wrap"> 
                     {{-- calculator form --}}
-                    <form action="" method="POST" class="create-form-box" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row mt-4 justify-content-between">
+                    <form action="" class="create-form-box reduce-margin" id="main_form">
+                        <div class="row mt-2 justify-content-between">
                             <div class="col-12 col-sm-12 col-md-6 col-lg-4">
                                 <div class="custom-hr">
                                     <h5>Fill The Input </h5>
@@ -30,30 +29,29 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">$</span>
-                                                <input type="text" class="form-control">
-                                                {{-- <span class="input-group-text">.00</span> --}}
+                                                <input type="text" class="form-control" id="B2">
+                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-7">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-8">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="custom-hr">
-                                            <h5>Keven Kpis</h5>
+                                            <h5>Breakeven KPIs <sup style="font-size: .8rem">(no profit, no loss)</sup></h5>
                                             <hr>
                                         </div>
                                         <div class="form-group">
                                             <div class="row align-items-center">
                                                 <div class="col-md-7">
-                                                    <label for="" class="mb-0">Cost per purchase:</label>
+                                                    <label for="" class="mb-0">Cost Per Purchase <sup>(CPP)</sup></label>
                                                 </div>
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled>
-                                                        {{-- <span class="input-group-text">.00</span> --}}
+                                                        <input type="text" class="form-control" id="G2" disabled> 
                                                     </div>
                                                 </div>
                                             </div>
@@ -61,19 +59,19 @@
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="custom-hr">
-                                            <h5>Keven Kpis Target</h5>
+                                            <h5>Profit Target KPIs</h5>
                                             <hr>
                                         </div>
                                         <div class="form-group">
                                             <div class="row align-items-center">
                                                 <div class="col-md-7">
-                                                    <label for="" class="mb-0">Cost per purchase:</label>
+                                                    <label for="" class="mb-0">Cost Per Purchase <sup>(CPP)</sup>:</label>
                                                 </div>
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled>
-                                                        {{-- <span class="input-group-text">.00</span> --}}
+                                                        <input type="text" class="form-control" disabled id="K2">
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -99,26 +97,26 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">%</span>
-                                                <input type="text" class="form-control">
-                                                {{-- <span class="input-group-text">.00</span> --}}
+                                                <input type="text" class="form-control" id="B3">
+                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-7">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-8">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="form-group">
                                             <div class="row align-items-center">
-                                                <div class="col-md-7">
-                                                    <label for="" class="mb-0">Cost per initiate:</label>
+                                                <div class="col-md-8">
+                                                    <label for="" class="mb-0">Cost Per Initiate Checkout <sup>(CPIC)</sup> :</label>
                                                 </div>
-                                                <div class="col-md-5">
+                                                <div class="col-md-4">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled>
-                                                        {{-- <span class="input-group-text">.00</span> --}}
+                                                        <input type="text" class="form-control" id="G3" disabled> 
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -127,14 +125,14 @@
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="form-group">
                                             <div class="row align-items-center">
-                                                <div class="col-md-7">
-                                                    <label for="" class="mb-0">Cost per initiate:</label>
+                                                <div class="col-md-8">
+                                                    <label for="" class="mb-0">Cost Per Initiate Checkout <sup>(CPIC)</sup>:</label>
                                                 </div>
-                                                <div class="col-md-5">
+                                                <div class="col-md-4">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled>
-                                                        {{-- <span class="input-group-text">.00</span> --}}
+                                                        <input type="text" class="form-control" disabled id="K3">
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -160,26 +158,26 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">$</span>
-                                                <input type="text" class="form-control">
-                                                {{-- <span class="input-group-text">.00</span> --}}
+                                                <input type="text" class="form-control" id="B4">
+                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-7">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-8">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="form-group">
                                             <div class="row align-items-center">
                                                 <div class="col-md-7">
-                                                    <label for="" class="mb-0">Cost per Add to cart:</label>
+                                                    <label for="" class="mb-0">Cost Per Add to Cart <sup>(CPATC)</sup>:</label>
                                                 </div>
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled>
-                                                        {{-- <span class="input-group-text">.00</span> --}}
+                                                        <input type="text" class="form-control" disabled id="G4">
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -189,13 +187,13 @@
                                         <div class="form-group">
                                             <div class="row align-items-center">
                                                 <div class="col-md-7">
-                                                    <label for="" class="mb-0">Cost per Add to cart:</label>
+                                                    <label for="" class="mb-0">Cost Per Add to Cart <sup>(CPATC)</sup>:</label>
                                                 </div>
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled>
-                                                        {{-- <span class="input-group-text">.00</span> --}}
+                                                        <input type="text" class="form-control" disabled id="K4">
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -221,26 +219,26 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">%</span>
-                                                <input type="text" class="form-control">
-                                                {{-- <span class="input-group-text">.00</span> --}}
+                                                <input type="text" class="form-control" id="B5">
+                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-7">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-8">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="form-group">
                                             <div class="row align-items-center">
                                                 <div class="col-md-7">
-                                                    <label for="" class="mb-0">Cost per view con:</label>
+                                                    <label for="" class="mb-0">Cost Per View Content <sup>(CPVC)</sup>:</label>
                                                 </div>
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled>
-                                                        {{-- <span class="input-group-text">.00</span> --}}
+                                                        <input type="text" class="form-control" disabled id="G5">
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -250,13 +248,13 @@
                                         <div class="form-group">
                                             <div class="row align-items-center">
                                                 <div class="col-md-7">
-                                                    <label for="" class="mb-0">Cost per view con:</label>
+                                                    <label for="" class="mb-0">Cost Per View Content <sup>(CPVC)</sup>:</label>
                                                 </div>
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled>
-                                                        {{-- <span class="input-group-text">.00</span> --}}
+                                                        <input type="text" class="form-control" disabled id="K5">
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -266,8 +264,56 @@
                             </div>
                         </div>
 
-                        {{-- advance form @S --}}
-                        <div class="row mt-4 justify-content-between">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="custom-hr">
+                                    <hr>
+                                </div>
+                            </div>
+                        </div> 
+
+                        <div class="row mt-2 justify-content-end">
+                             
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-8">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-7">
+                                                    <label for="" class="mb-0">Return on Ad Spend <sup>(ROAS)</sup>:</label>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="text" class="form-control" disabled id="G6">
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-7">
+                                                    <label for="" class="mb-0">Return on Ad Spend <sup>(ROAS)</sup>:</label>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="text" class="form-control" disabled id="K6">
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+ 
+                        {{-- advance option @S --}}
+                        <div class="row mt-2 justify-content-between">
                             <div class="col-12">
                                 <div class="custom-hr">
                                     <h5>Advance Calculator </h5>
@@ -283,8 +329,8 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">%</span>
-                                                <input type="text" class="form-control">
-                                                {{-- <span class="input-group-text">.00</span> --}}
+                                                <input type="text" class="form-control" id="B8">
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -296,13 +342,13 @@
                                         <div class="form-group">
                                             <div class="row align-items-center">
                                                 <div class="col-md-7">
-                                                    <label for="" class="mb-0">Business PUR Conversion:</label>
+                                                    <label for="" class="mb-0">Baseline PUR Conversion Rate <sup>(Est.*)</sup>:</label>
                                                 </div>
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled>
-                                                        {{-- <span class="input-group-text">.00</span> --}}
+                                                        <input type="text" class="form-control" disabled id="G8">
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -328,8 +374,8 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">%</span>
-                                                <input type="text" class="form-control">
-                                                {{-- <span class="input-group-text">.00</span> --}}
+                                                <input type="text" class="form-control" id="B9">
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -340,9 +386,8 @@
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                         <div class="form-group">
                                             <div class="row align-items-center">
-                                                <div class="col-md-12">
-                                                    <label for="" class="mb-0">*Lorem ipsum dolor sit amet, consectetur
-                                                        adipisicing elit. Animi, dignissimos!</label>
+                                                <div class="col-md-12 text-end">
+                                                    <label for="" class="mb-0">* calculated using a 1:1 ratio of earnings to sessions</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -367,32 +412,31 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">%</span>
-                                                <input type="text" class="form-control">
-                                                {{-- <span class="input-group-text">.00</span> --}}
+                                                <input type="text" class="form-control" id="B10">
+                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-7">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                                 <div class="row justify-content-end">
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                         <div class="form-group">
                                             <div class="row align-items-center">
                                                 <div class="col-md-7">
-                                                    <label for="" class="mb-0">Currency Conversion(*if ad acc is not
-                                                        USD):</label>
+                                                    <label for="" class="mb-0">Currency Conversion <sup>(if ad acc is not USD)</sup>:</label>
                                                 </div>
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$1 USD &nbsp; = </span>
-                                                        <select name="" id="" class="form-control">
-                                                            <option value="">BDT</option>
-                                                            <option value="">INR</option>
-                                                            <option value="">PK</option>
-                                                            <option value="">EU</option>
+                                                        <select name="" id="B13" class="form-control">
+                                                            <option value="1">BDT</option>
+                                                            <option value="2">INR</option>
+                                                            <option value="3">PK</option>
+                                                            <option value="4">EU</option>
                                                         </select>
-                                                        <span class="input-group-text">2.00</span>
+                                                        <span class="input-group-text" id="currency_output">2.00</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -408,17 +452,17 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- advance form @E --}}
+                        {{-- advance option @E --}}
 
                         <div class="row">
                             <div class="col-12">
                                 <div class="submit-bttns">
                                     <button type="button" class="btn btn-reset" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal">Save Result</button>
-                                    <button type="submit" class="btn btn-submit">Calculate</button>
+                                    <button type="submit" class="btn btn-submit" id="formSubmitBttn">Calculate</button>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
                     </form>
                     {{-- calculator form @E --}}
                 </div>
@@ -471,9 +515,6 @@
 @endrole
 @endsection
 
-@section('script')
-<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-<script src="{{asset('assets/js/kpi_calculator.js')}}" type="module"></script>
+@section('script') 
+<script src="{{asset('assets/js/calculator.js')}}" type="module"></script>
 @endsection
