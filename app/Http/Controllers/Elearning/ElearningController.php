@@ -30,4 +30,15 @@ class ElearningController extends Controller
         $enrolments = Enrollment::where('user_id', auth()->user()->id)->get();
         return view('course/enrolments',compact('enrolments'));
     }
+
+    public function category($category)
+    {
+        // request Developement
+        $category = str_replace('-', ' ', strtoupper($category));
+
+        $courses = Course::where('categories', 'LIKE', "%{$category}%")->orderBy('id', 'desc')->with('enrollments')->paginate(12);
+
+        return view('course/index', compact('courses'));
+    }
+    
 }

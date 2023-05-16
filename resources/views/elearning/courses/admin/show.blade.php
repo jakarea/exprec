@@ -20,7 +20,7 @@
         <div class="media-body">
             <h1 class="addspy-main-title">{{$course->title}}</h1>
             <p>{{$course->short_description}}</p>
-            <a href="#">Continue</a>
+            <!-- <a href="#">Continue</a> -->
         </div> 
         </div>
     </div>
@@ -78,7 +78,7 @@
                 <div class="content-txt-box">
                     <div class="d-flex">
                         <h3>{{$course->title}}</h3>
-                        <a href="#" class="min_width">Continue</a>
+                        <!-- <a href="#" class="min_width">Continue</a> -->
                     </div>
                     {!! $course->long_description !!} 
                 </div>
@@ -94,7 +94,7 @@
                 <div class="course-content-box">
                     <div class="d-flex">
                         <h5>Course’s content</h5>
-                        <p>Last Updated : 2 hours ago</p>
+                        <p>Last Updated : {{ $course->updated_at->format('d M Y') }}</p>
                     </div>
                     <div class="row border-right-custom">
                         @foreach($attachements as $key => $attachement)

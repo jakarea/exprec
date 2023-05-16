@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Elearning;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Module;
 use App\Models\Course;
-use Illuminate\Support\Str;
 use App\Models\Lesson;
+use App\Models\Module;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Jobs\UploadVimeoVideo;
 use Vimeo\Laravel\Facades\Vimeo;
+use App\Http\Controllers\Controller;
+
 class LessonController extends Controller
 {
     /**
@@ -75,24 +77,18 @@ class LessonController extends Controller
         }
 
         if ($request->hasFile('video_file')) {
-            // upload video into vimeo through API
-            $response = Vimeo::upload(
-                $request->file('video_file')->getPathname(),
-                [
-                    'name' => $request->file('video_file')->getClientOriginalName(),
-                    'description' => 'Uploaded from my Laravel application',
-                    'privacy' => [
-                        'view' => 'nobody',
-                    ],
-                ]
-            );
-            
-            $lesson->video_url = $response;
-        } 
+            // upload video local storage then send to UploadVimeoVideo job to upload to vimeo
+            $video = $request->file('video_file');
+            $name = $lesson->slug.'.'.$video->getClientOriginalExtension();
+            $destinationPath = public_path('/');
+            $video->move($destinationPath, $name);
+            $lesson->video_url = $name;
+            UploadVimeoVideo::dispatch($lesson);
+        }        
         
-        $lesson->save();
         $lesson->slug = $lesson->slug . '-' . $lesson->id;
         $lesson->save();
+
         return redirect('admin/elearning/lessons')->with('success', 'Lesson saved!');
     }
 

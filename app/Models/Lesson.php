@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Jobs\UploadVimeoVideo;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Lesson extends Model
 {
@@ -35,4 +37,24 @@ class Lesson extends Model
         $attachments = Lesson::where('course_id', $course_id)->get();
         return $attachments;
     }
+
+    public function getVideoUploadProgressAttribute()
+    {
+        $job = $this->vimeoUploadJob();
+        if ($job && $job->progress() !== null) {
+            return $job->progress();
+        }
+        return 0;
+    }
+
+    private function vimeoUploadJob()
+    {
+        $job = \DB::table('jobs')->where('payload', 'like', '%"lessonId":'.$this->lessonId.'%')->first();
+        if ($job) {
+            return unserialize($job->payload)->lesson;
+        }
+        return null;
+    }
+    
+
 }

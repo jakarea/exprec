@@ -37,7 +37,7 @@ span.finsihLesson {
             <div class="media-body">
                 <h1 class="addspy-main-title">{{$course->title}}</h1>
                 <p>{{$course->short_description}}</p>
-                <a href="#">Continue</a>
+                <!-- <a href="#">Continue</a> -->
             </div> 
         </div>
     </div>
@@ -112,9 +112,15 @@ span.finsihLesson {
             <div class="mylearning-video-content-box custom-margin-top">
                 <div class="video-iframe-vox">
                 @if($course->enrollments->where('user_id', Auth::user()->id)->where('course_id', $course->id)->count() > 0)
-                <div class="video-iframe-vox">
-                    <div class="vimeo-player w-100" data-vimeo-url="https://vimeo.com/305108069" data-vimeo-width="1000" data-vimeo-height="360"></div>
-                </div> 
+                    @if( getFirstLesson($course->id) )
+                        <div class="video-iframe-vox">
+                            <div class="vimeo-player w-100" data-vimeo-url="{{ getFirstLesson($course->id)->video_url }}" data-vimeo-width="1000" data-vimeo-height="360"></div>
+                        </div> 
+                    @else
+                        <div class="video-iframe-vox">
+                            <div class="vimeo-player w-100" data-vimeo-url="https://vimeo.com/305108069" data-vimeo-width="1000" data-vimeo-height="360"></div>
+                        </div>
+                    @endif
                 @else
                 <a href="#">
                         <img src="{{asset('assets/images/course/'. $course->thumbnail)}}" alt="{{ $course->thumbnail }}" class="img-fluid">
