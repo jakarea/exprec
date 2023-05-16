@@ -104,7 +104,7 @@
             <li class="menu-item">
                 <a href="{{ url('calculator') }}" class="{{ Request::is('calculator*')  ? ' active' : '' }} menu-link"> 
                 <i class="fa-solid fa-calculator"></i>
-                    <span>API Calculator</span> 
+                    <span>KPI Calculator</span> 
                 </a> 
             </li>
             @endrole

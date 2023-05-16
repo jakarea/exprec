@@ -51,8 +51,7 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled id="G2">
-                                                        
+                                                        <input type="text" class="form-control" id="G2" disabled> 
                                                     </div>
                                                 </div>
                                             </div>
@@ -116,7 +115,7 @@
                                                 <div class="col-md-4">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control" disabled id="G3">
+                                                        <input type="text" class="form-control" id="G3" disabled> 
                                                         
                                                     </div>
                                                 </div>
@@ -312,9 +311,7 @@
                                 </div>
                             </div>
                         </div>
-
-
-
+ 
                         {{-- advance option @S --}}
                         <div class="row mt-2 justify-content-between">
                             <div class="col-12">
@@ -433,13 +430,13 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$1 USD &nbsp; = </span>
-                                                        <select name="" id="currency_input" class="form-control">
-                                                            <option value="">BDT</option>
-                                                            <option value="">INR</option>
-                                                            <option value="">PK</option>
-                                                            <option value="">EU</option>
+                                                        <select name="" id="B13" class="form-control">
+                                                            <option value="1">BDT</option>
+                                                            <option value="2">INR</option>
+                                                            <option value="3">PK</option>
+                                                            <option value="4">EU</option>
                                                         </select>
-                                                        <span class="input-group-text" id="B13">2.00</span>
+                                                        <span class="input-group-text" id="currency_output">2.00</span>
                                                     </div>
                                                 </div>
                                             </div>
