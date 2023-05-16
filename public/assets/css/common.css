@@ -53,3 +53,7 @@
 #currency_name {
   text-align: center;
 }
+
+.reduce-margin.create-form-box .custom-hr hr {
+  margin: 0.5rem 0;
+}
