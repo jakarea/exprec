@@ -50,7 +50,7 @@
 
       <div class="wining-product-head">
         <ul>
-          <li><a href="#" class="active">Facebook Ads</a></li>
+          <li><a href="{{ url('/adspy/facebook')}}" class="active">Facebook Ads</a></li>
           <li><a href="#">Tiktok Ads</a></li>
           <li><a href="#">Pinterest Ads</a></li>
         </ul>

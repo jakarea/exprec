@@ -102,7 +102,30 @@
                 </div> 
             </div>
         </div>
+
+        @role('Customer')
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+            <div class="total-session-box">
+                <h6>Project</h6>
+                <div class="d-flex">
+                    <h2>{{ totalProjects() }}</h2>
+                    <i class="fas fa-ticket"></i>
+                </div> 
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+            <div class="total-session-box">
+                <h6>Ads</h6>
+                <div class="d-flex">
+                    <h2>{{ totalAds() }}</h2>
+                    <i class="fas fa-ticket"></i>
+                </div> 
+            </div>
+        </div>
+        @endrole
         <!-- col @E -->
+        @role('Admin')
         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
             <div class="total-session-box">
                 <h6>Subscriptions</h6>
@@ -112,6 +135,7 @@
                 </div> 
             </div>
         </div>
+       
         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
             <div class="total-session-box">
                 <h6>Refunds Subscriptions</h6>
@@ -121,6 +145,7 @@
                 </div> 
             </div>
         </div>
+       
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="total-session-box">
                 <h6>Total Earning</h6>
@@ -139,6 +164,7 @@
                 <div id="LastCustomerchart"></div>
             </div>
         </div>
+        @endrole
     </div>
 </main>
 <!-- === main home page @E === -->
