@@ -24,6 +24,16 @@ class CheckSubscription
             return redirect()->route('login');
         }
 
+        // get user who has role admin
+        $admin = User::whereHas('roles', function($q){
+            $q->where('name', 'admin');
+        })->first();
+        
+        // if user has role admin
+        if ($admin) {
+            return $next($request);
+        }
+        
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
         if (! auth()->user()->stripe_id) {
@@ -38,15 +48,7 @@ class CheckSubscription
         }
         
         $user = DB::table('subscriptions')->where('user_id', auth()->user()->id)->first('stripe_id');
-        // get user who has role admin
-        $admin = User::whereHas('roles', function($q){
-            $q->where('name', 'admin');
-        })->first();
         
-        // if user has role admin
-        if ($admin) {
-            return $next($request);
-        }
         // if user has role customer
         if ($user && $user->stripe_id) {
             // Retrieve the customer object
