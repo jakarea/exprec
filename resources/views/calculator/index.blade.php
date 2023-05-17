@@ -419,7 +419,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                            {{-- <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                                 <div class="row justify-content-end">
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                         <div class="form-group">
@@ -433,14 +433,14 @@
                                                         <select name="" id="B13" class="form-control"> 
                                                             <option value="2">USD</option> 
                                                         </select>
-                                                        <span class="input-group-text" id="currency_output">2.00</span>
+                                                        <span class="input-group-text" id="currency_output">1.00</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="row">
                             <div class="col-12">
