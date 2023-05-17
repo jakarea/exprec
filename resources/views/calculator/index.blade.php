@@ -109,10 +109,10 @@
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="form-group">
                                             <div class="row align-items-center">
-                                                <div class="col-md-8">
+                                                <div class="col-md-7">
                                                     <label for="" class="mb-0">Cost Per Initiate Checkout <sup>(CPIC)</sup> :</label>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
                                                         <input type="text" class="form-control" id="G3" disabled> 
@@ -125,10 +125,10 @@
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="form-group">
                                             <div class="row align-items-center">
-                                                <div class="col-md-8">
+                                                <div class="col-md-7">
                                                     <label for="" class="mb-0">Cost Per Initiate Checkout <sup>(CPIC)</sup>:</label>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
                                                         <input type="text" class="form-control" disabled id="K3">
@@ -419,7 +419,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                            {{-- <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                                 <div class="row justify-content-end">
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                         <div class="form-group">
@@ -430,20 +430,17 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$1 USD &nbsp; = </span>
-                                                        <select name="" id="B13" class="form-control">
-                                                            <option value="1">BDT</option>
-                                                            <option value="2">INR</option>
-                                                            <option value="3">PK</option>
-                                                            <option value="4">EU</option>
+                                                        <select name="" id="B13" class="form-control"> 
+                                                            <option value="2">USD</option> 
                                                         </select>
-                                                        <span class="input-group-text" id="currency_output">2.00</span>
+                                                        <span class="input-group-text" id="currency_output">1.00</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="row">
                             <div class="col-12">
