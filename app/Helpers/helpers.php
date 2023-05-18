@@ -54,7 +54,11 @@ function totalPaidCustomer()
 */
 function totalProduct()
 {
-    $data = \App\Models\ProductResearch::count();
+    if(Auth::user()->hasRole('Admin')){
+        $data = \App\Models\ProductResearch::count();
+    }else{
+        $data = \App\Models\FavoriteProduct::where('user_id',Auth::user()->id)->count();
+    }
     return $data;
 }
 
@@ -64,10 +68,26 @@ function totalProduct()
 */
 function totalCourse()
 {
-    $data = \App\Models\Course::count();
+    if(Auth::user()->hasRole('Admin')){
+        $data = \App\Models\Course::count();
+    }else{
+        $data = \App\Models\Enrollment::where('user_id',Auth::user()->id)->count();
+    }
     return $data;
 }
 
+
+function totalProjects(){
+    $data = \App\Models\Project::where('user_id',Auth::user()->id)->count();
+
+    return $data;
+}
+
+function totalAds(){
+    $user_id = Auth::user()->id;
+    $data = \App\Models\Ads::where('user_ids','LIKE',"%{$user_id}%")->count();
+    return $data;
+}
 /*
 * Total number of tools
 * @return int
@@ -202,4 +222,25 @@ function getCourseCategory()
     $categories = array_map('trim', $categories); // Trim whitespace from category names
     $categories = array_unique(explode(',', implode(',', $categories)));
     return $categories;
+}
+
+
+function is_image_exist($url){
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL,$url);
+    // don't download content
+    curl_setopt($ch, CURLOPT_NOBODY, 1);
+    curl_setopt($ch, CURLOPT_FAILONERROR, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    $result = curl_exec($ch);
+    curl_close($ch);
+    if($result !== FALSE)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
