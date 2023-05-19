@@ -68,7 +68,10 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/refund/{id}/show', [RefundController::class, 'show'])->name('refund.show');
 
     // api calculator route
-    Route::get('/calculator', 'calculator')->name('kpiCalculator');
+    Route::get('kpi/calculator', 'calculator')->name('kpiCalculator');
+
+    // timeline page
+    Route::get('/timeline', 'timeline');
 });
 
 Route::get('/home', function () {

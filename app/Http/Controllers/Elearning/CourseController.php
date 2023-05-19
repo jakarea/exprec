@@ -101,7 +101,7 @@ class CourseController extends Controller
             'duration' => $request->duration,
             'short_description' => $request->short_description,
             'long_description' => $request->long_description,
-            'categories' => implode(',',$request->categories),
+            'categories' => is_array($request->categories) ? implode(',',$request->categories) : $request->categories,
             'number_of_module' => $request->number_of_module,
             'number_of_lesson' => $request->number_of_lesson,
             'number_of_quiz' => $request->number_of_quiz,

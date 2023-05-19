@@ -46,13 +46,13 @@
 
     <!-- wining product @S -->
     <div class="wining-product-wrapper">
-      <h4><img src="{{asset('assets/images/fire.png')}}" alt="Fire Image" class="img-fluid"> Top 10 winning products of the day</h4>
+      <h4><img src="{{asset('assets/images/fire.png')}}" alt="Fire Image" class="img-fluid">Facebook Ads of the day</h4>
 
       <div class="wining-product-head">
         <ul>
           <li><a href="{{ url('/adspy/facebook')}}" class="active">Facebook Ads</a></li>
-          <li><a href="#">Tiktok Ads</a></li>
-          <li><a href="#">Pinterest Ads</a></li>
+          {{-- <li><a href="#">Tiktok Ads</a></li>
+          <li><a href="#">Pinterest Ads</a></li> --}}
         </ul>
         <div class="banner-arrow-box">
           {{-- <a href="#"><i class="fas fa-angle-left"></i></a>
@@ -139,7 +139,7 @@
 
     <!-- discover potential @S -->
     <div class="discover-potential-wrap">
-      <h4><img src="{{asset('assets/images/fire.png')}}" alt="Fire" class="img-fluid"> Discover the full potential</h4>
+      {{-- <h4><img src="{{asset('assets/images/fire.png')}}" alt="Fire" class="img-fluid"> Discover the full potential</h4> --}}
 
       <div class="potential-list-wrap">
         <!-- item @S -->
@@ -216,7 +216,7 @@
     <!-- discover potential @E -->
 
     <!-- add spy banner @S -->
-    <div class="addspy-banner-wrap addspy-banner-two">
+    {{-- <div class="addspy-banner-wrap addspy-banner-two">
       <div class="media">
         <div class="media-body">
           <h1 class="addspy-main-title">Unique partnership with <span>Shopify</span></h1>
@@ -228,7 +228,7 @@
         </div>
         <img src="{{asset('assets/images/shopify-image.png')}}" alt="Rocket Images" class="img-fluid">
       </div>
-    </div>
+    </div> --}}
     <!-- add spy banner @E -->
   </main>
   @endrole

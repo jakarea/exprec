@@ -102,7 +102,7 @@
                 </a> 
             </li>
             <li class="menu-item">
-                <a href="{{ url('calculator') }}" class="{{ Request::is('calculator*')  ? ' active' : '' }} menu-link"> 
+                <a href="{{ url('kpi/calculator') }}" class="{{ Request::is('kpi/calculator*')  ? ' active' : '' }} menu-link"> 
                 <i class="fa-solid fa-calculator"></i>
                     <span>KPI Calculator</span> 
                 </a> 
