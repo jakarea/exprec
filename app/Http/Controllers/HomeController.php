@@ -159,4 +159,9 @@ class HomeController extends Controller
         return view('calculator/index');
     }
 
+    public function timeline()
+    {
+        return view('timeline/index');
+    }
+
 }
