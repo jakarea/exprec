@@ -10,9 +10,11 @@ use Illuminate\Http\Request;
 use App\Jobs\UploadVimeoVideo;
 use Vimeo\Laravel\Facades\Vimeo;
 use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 class LessonController extends Controller
 {
+    use DispatchesJobs;
     /**
      * Display a listing of the resource.
      *
@@ -83,7 +85,7 @@ class LessonController extends Controller
             $destinationPath = public_path('/');
             $video->move($destinationPath, $name);
             $lesson->video_url = $name;
-            UploadVimeoVideo::dispatch($lesson);
+            UploadVimeoVideo::dispatchNow($lesson);
         }        
         
         $lesson->slug = $lesson->slug . '-' . $lesson->id;
@@ -115,50 +117,39 @@ class LessonController extends Controller
 
         // return $request->all();
 
-        $lesson = Lesson::where('slug', $slug)->first();
-        $lesson->title = $request->title;
-        $lesson->slug = Str::slug($request->title);
-        $lesson->module_id = $request->module_id;
-        $lesson->course_id = $request->course_id;
-        $lesson->video_url = $request->video_url;
-        $lesson->duration = $request->duration;
-        $lesson->attachment = $request->attachment;
-        $lesson->attachment_name = $request->attachment_name;
-        $lesson->short_description = $request->short_description;
-        $lesson->order = $request->order;
-        $lesson->status = $request->status;
-        $lesson->save();
+        $lesson = Lesson::where('slug', $slug)->update([
+            'title' => $request->title,
+            'slug' => Str::slug($request->title),
+            'module_id' => $request->module_id,
+            'course_id' => $request->course_id,
+            'duration' => $request->duration, 
+            'attachment_name' => $request->attachment_name,
+            'short_description' => $request->short_description,
+            'order' => $request->order,
+            'status' => $request->status,
+        ]);
+
         $lesson->slug = $lesson->slug . '-' . $lesson->id;
          //if attachment is valid then save it
         if ($request->hasFile('attachment')) {
-            //delete old attachment
-            $oldThumbnail = public_path('/assets/images/lesson'.$lesson->attachment);
-            if (file_exists($oldThumbnail)) {
-                @unlink($oldThumbnail);
-            }
             $image = $request->file('attachment');
             $name = $lesson->slug.'.'.$image->getClientOriginalExtension();
             $destinationPath = public_path('/assets/images/lesson');
             $image->move($destinationPath, $name);
             $lesson->attachment = $name;
         }
-        
-        if ($request->hasFile('video_file')) {
-            // upload video into vimeo through API
-            $response = Vimeo::upload(
-                $request->file('video_file')->getPathname(),
-                [
-                    'name' => $request->file('video_file')->getClientOriginalName(),
-                    'description' => 'Uploaded from my Laravel application',
-                    'privacy' => [
-                        'view' => 'nobody',
-                    ],
-                ]
-            );
-            
-            $lesson->video_url = $response;
-        } 
 
+        if ($request->hasFile('video_file')) {
+            // upload video local storage then send to UploadVimeoVideo job to upload to vimeo
+            $video = $request->file('video_file');
+            $name = $lesson->slug.'.'.$video->getClientOriginalExtension();
+            $destinationPath = public_path('/');
+            $video->move($destinationPath, $name);
+            $lesson->video_url = $name;
+            UploadVimeoVideo::dispatchNow($lesson);
+        }        
+        
+        $lesson->slug = $lesson->slug . '-' . $lesson->id;
         $lesson->save();
         return redirect('admin/elearning/lessons')->with('success', 'Lesson updated!');
     }

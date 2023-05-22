@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -68,4 +69,16 @@ class Kernel extends HttpKernel
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
         'check.subscription' => \App\Http\Middleware\CheckSubscription::class,
     ];
+
+    /*
+    * The application's route middleware groups.
+    *
+    * @var array
+    */
+    protected function schedule(Schedule $schedule)
+    {
+        $schedule->command('queue:listen')->everyFiveMinutes()->withoutOverlapping();
+        // Add other scheduled commands here...
+    }
+    
 }
