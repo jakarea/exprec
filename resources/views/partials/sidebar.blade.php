@@ -18,14 +18,17 @@
     <!-- sidebar menu @S -->
     <div class="sidebar-nav-area">
         <ul class="menubar">
+            @role('Admin')
+            @else
             <li class="menu-item">
-                <a href="{{ url('/') }}" class="{{ Request::is('/')  ? ' active' : '' }} menu-link">
+                <a href="{{ url('/personal-space') }}" class="{{ Request::is('personal-space*')  ? ' active' : '' }} menu-link">
                     <img src="{{ asset('assets/images/ps-icon.svg') }}" alt="Personal Space" title="Personal Space" class="img-fluid" />
                     <span>Personal space</span>
                 </a>
             </li>
+            @endrole
             <li class="menu-item">
-                <a href="{{ url('/') }}" class="menu-link">
+                <a href="{{ url('/') }}" class="{{ Request::is('/')  ? ' active' : '' }} menu-link">
                     <img src="{{ asset('assets/images/dashboard-icon.svg') }}" alt="Dashboard" title="Dashboard" class="img-fluid" />
                     <span>Dashboard</span>
                     
