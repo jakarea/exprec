@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','Timeline Page ')
+@section('title','Personal Space Page ')
 @section('style')
 <link href="{{ asset('assets/css/timeline.css') }}" rel="stylesheet" type="text/css" />
 @endsection
@@ -13,7 +13,7 @@
             {{-- todo list @S --}}
             <div class="todo-list-wrap">
                 <div class="todo-head">
-                    <h3>To Do List</h3>
+                    <h3>Personal Space</h3>
                 </div>
                 <div class="todos-main-area">
                     {{-- main list @S --}}

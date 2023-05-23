@@ -34,6 +34,7 @@ Auth::routes();
 // general page route
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
+    Route::get('/personal-space', 'personalSpace')->name('personal.space');
     Route::get('/home', 'index');
     Route::get('/subscribers', [PlanController::class, 'subscription'])->name("subscription.index");
 

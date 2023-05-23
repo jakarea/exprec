@@ -159,9 +159,9 @@ class HomeController extends Controller
         return view('calculator/index');
     }
 
-    public function timeline()
+    public function personalSpace()
     {
-        return view('timeline/index');
+        return view('personal-space');
     }
 
 }

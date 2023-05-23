@@ -33,11 +33,11 @@
                         <a href="{{ url('/') }}" class="link-click">Personal Space</a>
                     </li>
                     <li class="link-item">
-                        <a href="{{ url('/') }}" class="link-click">Dashboard</a>
+                        <a href="{{ url('/personal-space') }}" class="link-click">Dashboard</a>
                     </li>
                     <li class="link-item">
                         <a href="{{ url('/elearning') }}" class="link-click">E-Learning</a>
-                    </li>
+                    </li> 
                 </ul>
             </div>
             <!-- header navbar @E -->
