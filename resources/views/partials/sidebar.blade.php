@@ -105,11 +105,23 @@
                 </a> 
             </li>
             <li class="menu-item">
-                <a href="{{ url('kpi/calculator') }}" class="{{ Request::is('kpi/calculator*')  ? ' active' : '' }} menu-link"> 
+                <a href="{{ url('kpi-calculator') }}" class="{{ Request::is('kpi-calculator*')  ? ' active' : '' }} menu-link"> 
                 <i class="fa-solid fa-calculator"></i>
                     <span>KPI Calculator</span> 
                 </a> 
             </li>
+        
+            <li class="menu-item">
+                <a href="{{ url('/projects') }}" class="{{ Request::is('projects*')  ? ' active' : '' }} menu-link">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span>Projects</span>
+                    <i class="fa-solid fa-angles-right"></i>
+                </a>
+                <!-- inner submenu @S -->
+                @include('interest/partials/sub-sidebar')
+                <!-- inner submenu @E -->
+            </li>
+
             @endrole
             @role('Admin') 
             <li class="menu-item">

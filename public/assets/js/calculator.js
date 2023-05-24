@@ -24,7 +24,7 @@ const getFormdata = (event) => {
     let G5El = inputSelectors.querySelector('#G5');
     let G6El = inputSelectors.querySelector('#G6');
     let G8El = inputSelectors.querySelector('#G8');
-    
+
 
     let K2El = inputSelectors.querySelector('#K2');
     let K3El = inputSelectors.querySelector('#K3');
@@ -35,7 +35,7 @@ const getFormdata = (event) => {
 
     G2El.value = ((B2 * (100 - B3) / 100 - B4) * B13).toFixed(2);
     let G2 = Number(G2El.value);
-    G3El.value = (G2 * B10 / B9).toFixed(2); 
+    G3El.value = (G2 * B10 / B9).toFixed(2);
     G4El.value = (G2 * B10 / B8).toFixed(2);
     G5El.value = (G2 * B10 / 100).toFixed(2);
     G6El.value = (B2 / (B2 - B4 - B2 * B3 / 100)).toFixed(2);
@@ -47,7 +47,6 @@ const getFormdata = (event) => {
     K4El.value = ((K2 * B10) / B8).toFixed(2);
     K5El.value = ((K2 * B10) / 100).toFixed(2);
     K6El.value = (B2 / (K2 / B13)).toFixed(2);
-
 }
 
 mainForm.addEventListener('submit', getFormdata);

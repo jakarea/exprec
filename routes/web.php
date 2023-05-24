@@ -18,6 +18,7 @@ use App\Http\Controllers\PaymentListController;
 use App\Http\Controllers\EmailCampingController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\CustomerSubscriptionController;
+use App\Http\Controllers\KpiCalculatorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +33,10 @@ use App\Http\Controllers\CustomerSubscriptionController;
 Auth::routes();
 
 // general page route
+Route::get('kpi-calculator', [KpiCalculatorController::class,'calculator'])->name('kpiCalculator');
+Route::get('kpi-calculator/projects', [KpiCalculatorController::class,'projects'])->name('kpiCalculatorProjects');
+Route::post('ajax-kpi-calculator', [KpiCalculatorController::class,'saveCalculateData'])->name('saveKpiCalculate');
+
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/personal-space', 'personalSpace')->name('personal.space');
@@ -69,7 +74,6 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/refund/{id}/show', [RefundController::class, 'show'])->name('refund.show');
 
     // api calculator route
-    Route::get('kpi/calculator', 'calculator')->name('kpiCalculator');
 
     // timeline page
     Route::get('/timeline', 'timeline');
@@ -108,11 +112,21 @@ Route::middleware(['auth', 'check.subscription'])->group(function (){
     // Customer Subscription routes
     Route::get('customer-subscriptions', [CustomerSubscriptionController::class, 'index'])->name('customer.subscriptions.index');
     // interest project route
+    
     Route::prefix('add-interest')->middleware(['auth'])->controller(ProjectController::class)->group(function () {
         Route::get('/projects', 'index')->name('projectlist');   
         Route::post('/projects', 'addprojectlist')->name('post_projectlist'); 
         Route::get('/projects/{id}', 'projectsingle')->name('project_single');   
         Route::get('/projects/{id}/delete', 'projectdelect')->name('project_delete');   
+    });
+
+    // Projects 
+    Route::prefix('projects')->middleware(['auth'])->group(function () {
+        Route::get('/', [ProjectController::class,'index'])->name('projectlist');   
+        Route::get('/{id}/interest', [ProjectController::class,'projectsingle'])->name('project_single');   
+        Route::get('/{id}/kpi-calculator', [KpiCalculatorController::class,'singleKPI'])->name('single_kpi_calculator');  
+        Route::get('/{id}/kpi-calculator/{kpiId}', [KpiCalculatorController::class,'singleKpiData'])->name('single_kpi_calculator_data');  
+        Route::get('/{id}/delete', [ProjectController::class,'projectdelect'])->name('project_delete');   
     });
 
     // interest search route 
