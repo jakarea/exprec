@@ -7,9 +7,10 @@
 /storage/framework/sessions/*
 /storage/framework/views/*
 /storage/framework/testing/*
-
+/storage/
 # Laravel generated files
-/vendor/
+/vendor/debugbar/
+
 /node_modules/
 /public/storage
 /public/hot
