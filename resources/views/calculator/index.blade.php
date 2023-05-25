@@ -481,24 +481,27 @@
             </div>
             <div class="modal-body">
                 <div class="saveto-modal-txt">
-                    <form action="" method="post">
+
+                    <form id="projectForm" name="projectForm" method="post">
                         <div class="form-group">
                             <label for="" class="mb-2">Save to an existing project</label>
-                            <select name="previous_project" id="" class="form-control">
+                            <select name="previous_project" id="project_id" class="form-control">
                                 <option value="">Select Below</option>
-                                <option value="12">Project One</option>
-                                <option value="12">Project Two</option>
-                                <option value="12">Project Three</option>
+                                @foreach($projects as $project) 
+                                <option name="project_id" value="{{$project['id']}}">{{$project['name']}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group my-3">
                             <label for="" class="mb-2">Save to a new project</label>
-                            <input type="text" placeholder="Name your project" name="name" class="form-control">
+                            <input type="text" placeholder="Name your project" name="project_name" id="project_name" class="form-control"> 
                         </div>
-                        <div class="form-groups text-end">
+                        <input type="hidden" name="adData" id="adData" value="">
+                        <div class="form-groups text-end"> 
+                            <button type="button" class="btn btn-closes" id="close-adspy-modal">Close</button>
                             <button type="submit" class="btn btn-submitss">Save</button>
                         </div>
-                    </form>
+                    </form> 
                 </div>
             </div>
         </div>

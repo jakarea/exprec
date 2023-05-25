@@ -7,6 +7,7 @@ use Stripe\Stripe;
 use Spatie\Permission\Models\Role;
 use App\Models\ProductResearch;
 use Illuminate\Support\Str;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -156,7 +157,8 @@ class HomeController extends Controller
 
     public function calculator()
     {
-        return view('calculator/index');
+        $projects = Project::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->get();
+        return view('calculator/index',compact('projects'));
     }
 
     public function personalSpace()
