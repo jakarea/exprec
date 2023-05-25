@@ -2,7 +2,8 @@
 @section('title','kpi Calculator ')
 @section('style')
 <link href="{{ asset('assets/css/product-researchs.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('assets/css/common.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/css/common.css') }}" rel="stylesheet" type="text/css" /> 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet" type="text/css" /> 
 @endsection
 @section('content')
 @role("Customer")
@@ -29,7 +30,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">$</span>
-                                                <input type="number" class="form-control" id="B2">
+                                                <input type="text" class="form-control" id="B2">
                                                 
                                             </div>
                                         </div>
@@ -51,7 +52,7 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="number" class="form-control" id="G2" disabled> 
+                                                        <input type="text" class="form-control" id="G2" disabled> 
                                                     </div>
                                                 </div>
                                             </div>
@@ -70,7 +71,7 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="number" class="form-control" disabled id="K2">
+                                                        <input type="text" class="form-control" disabled id="K2">
                                                         
                                                     </div>
                                                 </div>
@@ -97,7 +98,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">%</span>
-                                                <input type="number" class="form-control" id="B3">
+                                                <input type="text" class="form-control" id="B3">
                                                 
                                             </div>
                                         </div>
@@ -115,7 +116,7 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="number" class="form-control" id="G3" disabled> 
+                                                        <input type="text" class="form-control" id="G3" disabled> 
                                                         
                                                     </div>
                                                 </div>
@@ -131,7 +132,7 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="number" class="form-control" disabled id="K3">
+                                                        <input type="text" class="form-control" disabled id="K3">
                                                         
                                                     </div>
                                                 </div>
@@ -158,7 +159,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">$</span>
-                                                <input type="number" class="form-control" id="B4">
+                                                <input type="text" class="form-control" id="B4">
                                                 
                                             </div>
                                         </div>
@@ -176,7 +177,7 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="number" class="form-control" disabled id="G4">
+                                                        <input type="text" class="form-control" disabled id="G4">
                                                         
                                                     </div>
                                                 </div>
@@ -192,7 +193,7 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="number" class="form-control" disabled id="K4">
+                                                        <input type="text" class="form-control" disabled id="K4">
                                                         
                                                     </div>
                                                 </div>
@@ -219,7 +220,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">%</span>
-                                                <input type="number" class="form-control" id="B5">
+                                                <input type="text" class="form-control" id="B5">
                                                 
                                             </div>
                                         </div>
@@ -237,7 +238,7 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="number" class="form-control" disabled id="G5">
+                                                        <input type="text" class="form-control" disabled id="G5">
                                                         
                                                     </div>
                                                 </div>
@@ -253,7 +254,7 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="number" class="form-control" disabled id="K5">
+                                                        <input type="text" class="form-control" disabled id="K5">
                                                         
                                                     </div>
                                                 </div>
@@ -285,7 +286,7 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="number" class="form-control" disabled id="G6">
+                                                        <input type="text" class="form-control" disabled id="G6">
                                                         
                                                     </div>
                                                 </div>
@@ -301,7 +302,7 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="number" class="form-control" disabled id="K6">
+                                                        <input type="text" class="form-control" disabled id="K6">
                                                         
                                                     </div>
                                                 </div>
@@ -329,7 +330,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">%</span>
-                                                <input type="number" class="form-control" id="B8">
+                                                <input type="text" class="form-control" id="B8">
                                                 
                                             </div>
                                         </div>
@@ -347,7 +348,7 @@
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text">$</span>
-                                                        <input type="number" class="form-control" id="G8">
+                                                        <input type="text" class="form-control" id="G8" disabled>
                                                         
                                                     </div>
                                                 </div>
@@ -374,7 +375,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">%</span>
-                                                <input type="number" class="form-control" id="B9">
+                                                <input type="text" class="form-control" id="B9">
                                                 
                                             </div>
                                         </div>
@@ -412,7 +413,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-text">%</span>
-                                                <input type="number" class="form-control" id="B10">
+                                                <input type="text" class="form-control" id="B10">
                                                 
                                             </div>
                                         </div>
@@ -502,7 +503,7 @@
                             <button type="button" class="btn btn-closes" id="close-adspy-modal">Close</button>
                             <button type="submit" class="btn btn-submitss">Save</button>
                         </div>
-                    </form>
+                    </form> 
                 </div>
             </div>
         </div>
@@ -517,7 +518,8 @@
 
 @endsection
 
-@section('script') 
+@section('script')  
+<link src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" /> 
 <script src="{{asset('assets/js/calculator.js')}}" type="module"></script>
 <script type="text/javascript">
     // write javascriot code to submit a ajax form when save button is clicked
@@ -566,7 +568,7 @@
                         console.log(response);
                         
                         if(response.success ){
-                            $('#projectModal').modal('hide');
+                            $('#projectModal').modal('hide'); 
                             toastr["success"](response.message, "Success!")
                         }else{
                             toastr["error"](response.message, "Error!")

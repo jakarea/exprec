@@ -37,17 +37,17 @@
               </div>
             </td>  
             <td>
-              <div class="text-end">
+              <div class="text-center">
               <a href="{{ url('/projects/'.$project['id'].'/ads') }}"><i class="fas fa-eye text-primary"></i></a> 
               </div>
             </td>
             <td>
-              <div class="text-end">
+              <div class="text-center">
               <a href="{{ url('/projects/'.$project['id'].'/interest') }}"><i class="fas fa-eye text-primary"></i></a> 
               </div>
             </td>
             <td>
-              <div class="text-end">
+              <div class="text-center">
                 <a href="{{ url('/projects/'.$project['id'].'/kpi-calculator') }}"><i class="fas fa-eye text-primary"></i></a> 
               </div>
             </td>

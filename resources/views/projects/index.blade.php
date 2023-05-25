@@ -20,9 +20,9 @@
         <thead>
           <tr>
             <th>Name</th> 
-            <th>Ads</th>
-            <th>Interest</th> 
-            <th>KPI</th>
+            <th class="text-center">Ads</th>
+            <th class="text-center">Interest</th> 
+            <th class="text-center">KPI</th>
             <th class="text-end">Action</th> 
           </tr>
         </thead>
@@ -36,18 +36,18 @@
                 </label>
               </div>
             </td>  
-            <td>
-              <div class="text-end">
+            <td class="text-center">
+              <div class="text-center">
               <a href="{{ url('/projects/'.$project['id'].'/ads') }}"><i class="fas fa-eye text-primary"></i></a> 
               </div>
             </td>
             <td>
-              <div class="text-end">
+              <div class="text-center">
               <a href="{{ url('/projects/'.$project['id'].'/interest') }}"><i class="fas fa-eye text-primary"></i></a> 
               </div>
             </td>
             <td>
-              <div class="text-end">
+              <div class="text-center">
                 @foreach($project['kpis'] as $kpi)
                 <a href="{{ url('/projects/'.$project['id'].'/kpi-calculator/'.$kpi['id']) }}"><i class="fas fa-eye text-primary"></i></a> 
                 </a> 

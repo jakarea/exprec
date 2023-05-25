@@ -6,7 +6,7 @@ use Stripe\Stripe;
 use App\Models\User;
 use App\Models\Course; 
 use App\Models\Project;
-use Illuminate\Support\Str;
+use Illuminate\Support\Str; 
 use Illuminate\Http\Request;
 use App\Models\ProductResearch;
 use Spatie\Permission\Models\Role;
