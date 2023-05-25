@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Stripe\Stripe;
 use App\Models\User;
 use App\Models\Course; 
-use Stripe\Stripe;
-use Spatie\Permission\Models\Role;
-use App\Models\ProductResearch;
-use Illuminate\Support\Str;
 use App\Models\Project;
+use Illuminate\Support\Str; 
 use Illuminate\Http\Request;
+use App\Models\ProductResearch;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 class HomeController extends Controller
@@ -153,12 +154,6 @@ class HomeController extends Controller
     public function refundShow()
     {
         return view('refund/show');  
-    }
-
-    public function calculator()
-    {
-        $projects = Project::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->get();
-        return view('calculator/index',compact('projects'));
     }
 
     public function personalSpace()

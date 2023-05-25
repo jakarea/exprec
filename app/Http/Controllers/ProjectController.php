@@ -13,8 +13,8 @@ class ProjectController extends Controller
 
     public function index()
     {
-        $projects = Project::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->get();
-        return view('interest/projects-list', ['projects' => $projects]);
+        $projects = Project::with('kpis')->where('user_id',Auth::user()->id)->orderBy('id', 'desc')->get();
+        return view('projects/index', ['projects' => $projects]);
     }
 
     public function addprojectlist(Request $request)
@@ -49,16 +49,49 @@ class ProjectController extends Controller
         return redirect()->route('projectlist');
     }
 
+    public function addCalculatorToProject(Request $request)
+    {
+        $validated = $request->validate([
+            'previous_project' => 'required_without_all:name',
+            'name' => 'required_without_all:previous_project',
+            'project_details' => 'required',
+        ],[
+            'project_details.required' => 'Selection interest cant be empty',
+            'previous_project.required' => 'Please select or insert a new project name',
+        ]);
+        $old_data = [];
+        $newdata = json_decode($request->project_details);
+        $project_id = $request->previous_project;
+
+        if($project_id){
+            $project = Project::where(['id' => $project_id])->first();
+
+            if($project['details'])
+                $newdata = array_merge($old_data,json_decode($request->project_details));
+            $project->details = $newdata; 
+            $project->save();
+        }else{
+            $project = new Project();
+            $project->name = $request->name; 
+            $project->user_id = Auth()->user()->id; 
+            $project->details = $request->project_details; 
+            $project->save();
+        }
+        
+        return redirect()->route('projectlist');
+    }
+
+
     public function projectsingle($id)
     {  
         $results = [];
 
-       $all_results = Project::where(['id' => $id])->first();
+        $all_results = Project::where(['id' => $id])->first();
 
-      $results = $all_results['details'];
+        $results = $all_results['details'];
 
-      $results = json_decode($results, true);
-      
+        $results = json_decode($results, true);
+
         $audience_size_modified = [];
 
         if (is_array($results))

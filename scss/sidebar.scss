@@ -171,15 +171,14 @@
                         filter: invert(61%) sepia(28%) saturate(5968%) hue-rotate(355deg) brightness(99%) contrast(92%);
                     }
                 }
-
-                &:last-child {
-                    a {
-                        position: absolute;
-                        left: 0;
-                        bottom: 0;
-                        width: 100%;
-                        margin-bottom: 0;
-                    }
+            }
+            .last-menu {
+                a.menu-link {
+                    position: absolute;
+                    left: 0;
+                    bottom: 1rem;
+                    width: 100%;
+                    margin-bottom: 0;
                 }
             }
         }
@@ -358,6 +357,37 @@
         color: v.$fourth;
     }
 }
+
+// overflow scroll
+
+.overflow-menu{
+    // width: 100%;
+    // overflow-y: scroll; 
+    // overflow-x: hidden;
+}
+
+// .overflow-menu .menubar .menu-item{
+//     overflow: visible!important;
+// } 
+
+.overflow-menu::-webkit-scrollbar {
+    width: 1px;
+  }
+  
+  /* Track */
+.overflow-menu::-webkit-scrollbar-track {
+    background: v.$third; 
+  }
+   
+  /* Handle */
+.overflow-menu::-webkit-scrollbar-thumb {
+    background: v.$third; 
+  }
+  
+  /* Handle on hover */
+.overflow-menu::-webkit-scrollbar-thumb:hover {
+    background: v.$fourth; 
+  }
 
 
 // responsive css start

@@ -3,7 +3,7 @@
     <div class="row align-items-center">
       <div class="col-12 col-md-12 col-lg-6 px-0">
         <div class="header-left-part">
-          <!-- header logo @S -->
+          {{-- header logo @S --}}
           <div class="header-logo-wrap">
               <a href="{{url('/')}}">
                   <img src="{{ asset('assets/images/site-main-logo.svg') }}" alt="Logo" title="Giopio" class="img-fluid" /> 
@@ -14,19 +14,19 @@
                   </a> 
               </div>
           </div>
-          <!-- header logo @E -->
+          {{-- header logo @E --}}
 
-          <!-- header search @S -->
+          {{-- header search @S --}}
           <div class="header-search-wrap">
               <img src="{{ asset('assets/images/search-icon.svg') }}" alt="Search Icon" class="img-fluid" />
               <input type="text" placeholder="Search" />
           </div>
-          <!-- header search @E -->
+          {{-- header search @E --}}
         </div>
       </div>
       <div class="col-12 col-md-12 col-lg-6 px-0">
           <div class="header-start-menu-wrapper">
-            <!-- header navbar @S -->
+            {{-- header navbar @S --}}
             <div class="header-navbar-wrap">
                 <ul class="head-navbar">
                     <li class="link-item">
@@ -40,9 +40,9 @@
                     </li> 
                 </ul>
             </div>
-            <!-- header navbar @E -->
+            {{-- header navbar @E --}}
 
-            <!-- header right icon @S -->
+            {{-- header right icon @S --}}
             <div class="header-right-icon-wrap d-none d-sm-block">
                 <ul class="icon-nav">
                     <li>
@@ -65,11 +65,20 @@
                             <li><a href="{{ url('/customers') }}"><i class="fas fa-user"></i> Customers</a></li> 
                            @endrole
                            <li><a href="{{ url('/') }}"><i class="fas fa-gear"></i> Settings</a></li> 
+                           <li>
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                <span>{{ __('Logout') }}</span>
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none" style="display:none !important;">
+                                @csrf
+                            </form>
+                        </li>
                         </ul> 
                     </li>
                 </ul>
             </div>
-            <!-- header right icon @E -->
+            {{-- header right icon @E --}}
           </div>
       </div>
     </div>

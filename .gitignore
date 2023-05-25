@@ -1,16 +1,37 @@
-/node_modules
-/public/hot
-/public/storage
-/storage
+# Laravel storage files
 /storage/*.key
-/vendor
+/storage/*.env
+/storage/logs/*.log
+/storage/app/*.zip
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/framework/testing/*
+/storage/
+# Laravel generated files
+/vendor/debugbar/
+
+/node_modules/
+/public/storage
+/public/hot
+/public/*.js
+/public/*.css
+/public/mix-manifest.json
+/public/web.config
+
+# Environment files
 .env
-/.idea
-/.vscode
-database.sqlite
+.env.*
+
+# Testing files
+/phpunit.xml
+/tests/
+
+# Miscellaneous
+/.idea/
+/.vscode/
+/public/uploads/
+
+# OS generated files
 .DS_Store
-composer.lock
-/public/assets/images/product
-/public/assets/images/module
-/public/assets/images/lesson
-/public/assets/images/course
+Thumbs.db
