@@ -48,6 +48,8 @@ const getFormdata = (event) => {
     K5El.value = ((K2 * B10) / 100).toFixed(2);
     K6El.value = (B2 / (K2 / B13)).toFixed(2);
 
+    // console.log('Currency Value =' + B13);
+
 }
 
 mainForm.addEventListener('submit', getFormdata);
